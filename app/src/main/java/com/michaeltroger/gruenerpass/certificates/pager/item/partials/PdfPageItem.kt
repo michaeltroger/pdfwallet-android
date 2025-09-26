@@ -19,6 +19,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.core.graphics.scale
 
 private const val TAG_PDF_LOADED = "pdf_loaded"
 private const val TAG_BARCODE_LOADED = "barcode_loaded"
@@ -111,11 +112,10 @@ class PdfPageItem(
         if(!isActive()) return null
 
         pdf = if (tempPdf.width > context.screenWidth || tempPdf.height > context.screenHeight) {
-            Bitmap.createScaledBitmap(
-                tempPdf,
-                context.screenWidth,
-                (context.screenWidth.toFloat() / tempPdf.width * tempPdf.height).toInt(),
-                true
+            tempPdf.scale(
+                width = context.screenWidth,
+                height = (context.screenWidth.toFloat() / tempPdf.width * tempPdf.height).toInt(),
+                filter = true
             )
         } else {
             tempPdf
