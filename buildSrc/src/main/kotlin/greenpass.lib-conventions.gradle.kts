@@ -9,17 +9,13 @@ plugins {
 
 android {
     compileSdk = Versions.COMPILE_SDK
-
+    androidResources.enable = false
     buildFeatures {
-        androidResources = false
         buildConfig = false
         resValues = false
     }
     defaultConfig {
         minSdk = Versions.MIN_SDK
-    }
-    kotlinOptions {
-        allWarningsAsErrors = true
     }
     lint {
         warningsAsErrors = true
@@ -29,6 +25,10 @@ android {
 kotlin {
     explicitApi()
     jvmToolchain(Versions.JAVA)
+    compilerOptions {
+        allWarningsAsErrors = true
+        freeCompilerArgs.add("-Xannotation-default-target=param-property")
+    }
 }
 
 dependencies {
