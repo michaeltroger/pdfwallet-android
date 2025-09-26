@@ -13,16 +13,17 @@ adb shell rm -f -rR /sdcard/Pictures/error_screenshots
 adb shell mkdir /sdcard/testdata
 adb push testdata /sdcard/
 
-adb shell settings delete global policy_control
-sleep 2
-adb shell settings put global policy_control immersive.status=*
-echo "Policy control setting: $(adb shell settings get global policy_control)"
-adb shell cmd statusbar collapse
+adb shell settings put global sysui_demo_allowed 1
+sleep 1
+adb shell am broadcast -a com.android.systemui.demo -e command enter
 
 set +e # don't fail on errors
 
 ./gradlew :app:connectedDebugAndroidTest
 exit_code=$?
+
+adb shell am broadcast -a com.android.systemui.demo -e command exit
+adb shell settings put global sysui_demo_allowed 0
 
 adb pull /sdcard/Pictures/error_screenshots app/build
 set -e # fail on errors
