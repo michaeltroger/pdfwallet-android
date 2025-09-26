@@ -21,19 +21,17 @@ adb shell cmd statusbar enter-demo-mode
 
 echo "=== Demo Mode Status ==="
 echo "Demo mode allowed: $(adb shell settings get global sysui_demo_allowed)"
-echo "Status bar dump (demo related):"
-adb shell dumpsys statusbar | grep -E "(demo|Demo)"
 
 adb shell cmd statusbar clock --hour 12 --minute 00
-sleep 0.2
+sleep 0.5
 adb shell cmd statusbar battery level 100
-sleep 0.2
+sleep 0.5
 adb shell cmd statusbar battery plugged false
-sleep 0.2
+sleep 0.5
 adb shell cmd statusbar wifi show full
-sleep 0.2
+sleep 0.5
 adb shell cmd statusbar mobile show 5g full
-sleep 0.2
+sleep 0.5
 adb shell cmd statusbar notifications clear
 
 sleep 0.5
