@@ -11,6 +11,8 @@ import javax.inject.Inject
 
 
 private const val BARCODE_SIZE = 400
+private const val BARCODE_MARGIN = 4
+
 private val preferredPriority = listOf(
     ZxingCpp.BarcodeFormat.AZTEC,
     ZxingCpp.BarcodeFormat.DATA_MATRIX,
@@ -127,7 +129,8 @@ internal class BarcodeRendererImpl @Inject constructor(
             content = content,
             format = extractedCode.format,
             width = BARCODE_SIZE,
-            height = BARCODE_SIZE
+            height = BARCODE_SIZE,
+            margin = BARCODE_MARGIN,
         )
     }
 }
