@@ -26,12 +26,18 @@ screenRecord &
 ./gradlew :app:connectedDebugAndroidTest
 exit_code=$?
 
+adb shell "pkill screenrecord" 2>/dev/null || true
+sleep 2
+
 mkdir app/build/screenrecording
 
 for ((i=0;i<5;i++))
 do
-  adb shell kill -2 $(adb shell pidof screenrecord)
-  adb pull /sdcard/screen"$i".mp4 app/build/screenrecording/screen"$i".mp4
+  if adb shell "test -f /sdcard/screen$i.mp4"; then
+    adb pull /sdcard/screen"$i".mp4 app/build/screenrecording/screen"$i".mp4 2>/dev/null || echo "Failed to pull screen$i.mp4"
+  else
+    echo "screen$i.mp4 not found, skipping"
+  fi
 done
 
 adb pull /sdcard/Pictures/error_screenshots app/build
