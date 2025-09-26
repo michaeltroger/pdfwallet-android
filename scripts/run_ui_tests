@@ -14,15 +14,25 @@ adb shell mkdir /sdcard/testdata
 adb push testdata /sdcard/
 
 adb shell settings put global sysui_demo_allowed 1
-sleep 1
-adb shell am broadcast -a com.android.systemui.demo -e command enter
+adb shell cmd statusbar enable-demo-mode
+adb shell cmd statusbar enter-demo-mode
+
+adb shell cmd statusbar clock 12:00
+adb shell cmd statusbar battery level 100
+adb shell cmd statusbar battery plugged false
+adb shell cmd statusbar wifi show full
+adb shell cmd statusbar mobile show 5g full
+adb shell cmd statusbar notifications clear
+
+sleep 0.5
 
 set +e # don't fail on errors
 
 ./gradlew :app:connectedDebugAndroidTest
 exit_code=$?
 
-adb shell am broadcast -a com.android.systemui.demo -e command exit
+adb shell cmd statusbar exit-demo-mode
+adb shell cmd statusbar disable-demo-mode
 adb shell settings put global sysui_demo_allowed 0
 
 adb pull /sdcard/Pictures/error_screenshots app/build
