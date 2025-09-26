@@ -13,34 +13,16 @@ adb shell rm -f -rR /sdcard/Pictures/error_screenshots
 adb shell mkdir /sdcard/testdata
 adb push testdata /sdcard/
 
+adb shell settings delete global policy_control
+sleep 2
 adb shell settings put global policy_control immersive.status=*
+echo "Policy control setting: $(adb shell settings get global policy_control)"
+adb shell cmd statusbar collapse
 
 set +e # don't fail on errors
 
-screenRecord() {
-  for ((i=0;i<5;i++))
-  do
-    adb shell screenrecord --size 1024x768 /sdcard/screen"$i".mp4
-  done
-}
-screenRecord &
-
 ./gradlew :app:connectedDebugAndroidTest
 exit_code=$?
-
-adb shell "pkill screenrecord" 2>/dev/null || true
-sleep 2
-
-mkdir app/build/screenrecording
-
-for ((i=0;i<5;i++))
-do
-  if adb shell "test -f /sdcard/screen$i.mp4"; then
-    adb pull /sdcard/screen"$i".mp4 app/build/screenrecording/screen"$i".mp4 2>/dev/null || echo "Failed to pull screen$i.mp4"
-  else
-    echo "screen$i.mp4 not found, skipping"
-  fi
-done
 
 adb pull /sdcard/Pictures/error_screenshots app/build
 set -e # fail on errors
