@@ -37,7 +37,7 @@ jobs:
         with:
           api-level: 35
           arch: x86_64
-          target: aosp_atd
+          target: default
           profile: pixel_3
           emulator-boot-timeout: 1000
           disk-size: 8G
@@ -56,7 +56,7 @@ jobs:
 
       - name: Create screenshot pull request if on main branch
         uses: peter-evans/create-pull-request@v7
-      #  if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         with:
           branch: feature/update_screenshots
           title: Update of screenshots
