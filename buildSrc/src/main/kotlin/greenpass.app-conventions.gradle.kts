@@ -25,16 +25,8 @@ android {
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
 
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
-    }
-
-    kotlinOptions {
-        allWarningsAsErrors = true
     }
 
     lint {
@@ -70,7 +62,6 @@ android {
         }
     }
 
-    @Suppress("UnstableApiUsage")
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
@@ -81,6 +72,14 @@ android {
 
 kotlin {
     jvmToolchain(Versions.JAVA)
+    compilerOptions {
+        allWarningsAsErrors = true
+        freeCompilerArgs.add("-Xannotation-default-target=param-property")
+    }
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
 
 licenseReport {
