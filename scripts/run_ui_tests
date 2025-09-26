@@ -13,36 +13,12 @@ adb shell rm -f -rR /sdcard/Pictures/error_screenshots
 adb shell mkdir /sdcard/testdata
 adb push testdata /sdcard/
 
-for ((n=0;n<5;n++)) # setting those is very flaky on the emulator, running them multiple times
-do
- adb shell settings put global sysui_demo_allowed 1
- adb shell am broadcast -a com.android.systemui.demo -e command clock -e hhmm 1200
- adb shell am broadcast -a com.android.systemui.demo -e command notifications -e visible false
- adb shell am broadcast -a com.android.systemui.demo -e command network -e mobile hide
- adb shell am broadcast -a com.android.systemui.demo -e command network -e wifi hide
- adb shell am broadcast -a com.android.systemui.demo -e command battery -e level 100 -e plugged false
-done
+adb shell cmd statusbar send-disable-flag clock notification-icons quick-settings statusbar-expansion
 
 set +e # don't fail on errors
 
-screenRecord() {
-  for ((i=0;i<5;i++))
-  do
-    adb shell screenrecord --size 1024x768 /sdcard/screen"$i".mp4
-  done
-}
-screenRecord &
-
 ./gradlew :app:connectedDebugAndroidTest
 exit_code=$?
-
-mkdir app/build/screenrecording
-
-for ((i=0;i<5;i++))
-do
-  adb shell kill -2 $(adb shell pidof screenrecord)
-  adb pull /sdcard/screen"$i".mp4 app/build/screenrecording/screen"$i".mp4
-done
 
 adb pull /sdcard/Pictures/error_screenshots app/build
 set -e # fail on errors
