@@ -1,0 +1,39 @@
+Täielikult avatud lähtekoodil põhinev lihtsaltkasutatav PDF-failide kaarditasku, mille eesmärgiks on ühes kohas hallata sinu kõiki olulisi pileteid, pardakaarte, sertifikaate, tõendeid ja muud sarnast. Rakenduse sisuline osa on pdf-failis leiduva triipkoodi kuvamine eraldi komponendina põhvaate kohal.
+
+Lühijuhend
+- Ava „PDF Wallet“
+- Impordi pdf-fail
+- Valmis
+
+Alternatiivne lühijuhend
+- Ava oma failihaldur, e-posti klient, veebibrauser või pdf-failide näitaja
+- Klõpsi seal Ava või Jaga nuppu või linki ning vali rakenduseks „PDF Wallet“
+- Valmis
+
+Kirjeldus
+See on väga lihtne rakendus, mis mugavalt salvestab ja näitab pdf-faile. Sobib ühistranspordipiletite, arvete, lepingute, sertifikaatide ja paljude muude failide jaoks.
+Lihtsalt impordi vajalikud failid rakendusse. Kui failis leidub triipkood, siis seda kuvatakse pdf-faili kohal täisekraanilaiuses. Ja ongi kõik.
+
+Hetkel toetatud triipkoodid on:
+- Maatrikskoodid (2D): QR, Aztec, DataMatrix ja PDF417
+- Lineaarsed koodid (1D): UPC-A, UPC-E, EAN-8, EAN-13, CODE-39, CODE-93, CODE-128, ITF ja Codabar
+
+Lisavõimalused
+- Tuvastab ja eraldab failist triipkoodid
+- Sõrmejälgede põhine autentimine (kui vajad seda)
+- PDF-faile saad järjestada ja neile nimesid lisada
+- PDF-faile saad avada
+- PDF-faile saad teistest rakendustest jagada
+- PDF-faile saad teiste rakendustega jagada (kaudselt toetab trükkimist)
+- Tumeda kujunduse tugi
+- Saad kasutada ka salasõnaga kaitstud pdf-faile
+- Kaks failide paigutuse viisi
+
+Miks tundub suures vaates triipkood teistsugune, kui failis endas?
+Kuvamise algoritm on teine, aga koodilugejate jaoks on sisu ikka sama.
+
+Privaatsus
+See rakendus on privaatsuskeskne. Ta põhineb täielikult avatud lähtekoodil ning ei vaja tööks võrguühendust. Pole reklaame ega jälitajaid.
+
+Veahaldus
+See on üksiku arendaja vabal ajal tehtud projekt. Palun tõlgenda seda nii, et vastuste saamiseks võib kuluda aega.
