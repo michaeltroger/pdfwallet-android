@@ -41,10 +41,6 @@ set +e # don't fail on errors
 ./gradlew :app:connectedDebugAndroidTest
 exit_code=$?
 
-adb shell cmd statusbar exit-demo-mode
-adb shell cmd statusbar disable-demo-mode
-adb shell settings put global sysui_demo_allowed 0
-
 adb pull /sdcard/Pictures/error_screenshots app/build
 set -e # fail on errors
 adb pull /sdcard/Pictures/screenshots
