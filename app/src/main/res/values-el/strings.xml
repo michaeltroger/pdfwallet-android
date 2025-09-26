@@ -60,4 +60,10 @@
         <item quantity="one">Θέλετε πράγματι να διαγράψετε %d έγγραφο από την εφαρμογή;</item>
         <item quantity="other">Θέλετε πράγματι να διαγράψετε %d έγγραφα από την εφαρμογή;</item>
     </plurals>
+    <string name="preference_barcode">Εξαγωγή barcode</string>
+    <string name="preference_barcode_disabled">Απενεργοποιημένο</string>
+    <string name="preference_barcode_regular">Κανονική ένταση</string>
+    <string name="preference_barcode_extended">Εκτεταμένη (καλύτερη δυνατή ανίχνευση)</string>
+    <string name="preference_prevent_screenshots">Αποτροπή στιγμιοτύπων οθόνης</string>
+    <string name="preference_prevent_screenshots_description">Τα στιγμιότυπα οθόνης δεν επιτρέπονται ποτέ, σε περίπτωση που ενεργοποιήσετε τον έλεγχο ταυτότητας. Αυτό έχει λόγους ασφαλείας.</string>
 </resources>
