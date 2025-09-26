@@ -13,34 +13,7 @@ adb shell rm -f -rR /sdcard/Pictures/error_screenshots
 adb shell mkdir /sdcard/testdata
 adb push testdata /sdcard/
 
-adb shell settings put global sysui_demo_allowed 1
-sleep 0.5
-adb shell cmd statusbar enable-demo-mode
-sleep 0.5
-adb shell cmd statusbar enter-demo-mode
-
-echo "=== Demo Mode Status ==="
-echo "Demo mode allowed: $(adb shell settings get global sysui_demo_allowed)"
-
-for ((n=0;n<3;n++)) # setting those is very flaky on the emulator, running them multiple times
-do
-  adb shell cmd statusbar clock --hour 12 --minute 00
-  sleep 0.5
-  adb shell cmd statusbar battery level 100
-  sleep 0.5
-  adb shell cmd statusbar battery plugged false
-  sleep 0.5
-  adb shell cmd statusbar wifi show full
-  sleep 0.5
-  adb shell cmd statusbar mobile show 5g full
-  sleep 0.5
-  adb shell cmd statusbar notifications clear
-  sleep 0.5
-  adb shell cmd appops set com.android.systemui POST_NOTIFICATION ignore
-  sleep 0.5
-  adb shell cmd statusbar privacy hide
-  sleep 0.5
-done
+adb shell cmd statusbar send-disable-flag system-icons clock notification-icons quick-settings statusbar-expansion
 
 set +e # don't fail on errors
 
