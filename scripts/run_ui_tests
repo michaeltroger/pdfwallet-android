@@ -13,7 +13,7 @@ adb shell rm -f -rR /sdcard/Pictures/error_screenshots
 adb shell mkdir /sdcard/testdata
 adb push testdata /sdcard/
 
-adb shell cmd statusbar send-disable-flag clock notification-icons quick-settings statusbar-expansion
+adb shell cmd statusbar send-disable-flag clock mobile notification-icons quick-settings statusbar-expansion
 
 set +e # don't fail on errors
 
