@@ -13,7 +13,8 @@ adb shell rm -f -rR /sdcard/Pictures/error_screenshots
 adb shell mkdir /sdcard/testdata
 adb push testdata /sdcard/
 
-adb emu gsm signal 4
+adb shell settings put global airplane_mode_on 1
+adb shell am broadcast -a android.intent.action.AIRPLANE_MODE
 adb shell cmd statusbar send-disable-flag clock notification-icons quick-settings statusbar-expansion
 
 set +e # don't fail on errors
