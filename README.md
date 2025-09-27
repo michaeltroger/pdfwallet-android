@@ -20,11 +20,6 @@ Get it on:
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
     alt="Get it on F-Droid"
     height="80">](https://f-droid.org/packages/com.michaeltroger.gruenerpass)
-
-[<img src="https://images-na.ssl-images-amazon.com/images/G/01/mobile-apps/devportal2/res/images/amazon-appstore-badge-english-black.png"
-    alt="Available at Amazon Appstore" height="55">](http://www.amazon.com/gp/mas/dl/android?p=com.michaeltroger.gruenerpass)
-[<img src="https://developer.huawei.com/consumer/cn/service/josp/csp/activity/img/Badge-Black.9d53c6f4.png"
-    alt="Explore it on Huawei AppGallery" height="55">](https://appgallery.huawei.com/app/C108212859)
     
 __or directly from [GitHub Releases](https://github.com/michaeltroger/greenpass-android/releases)__
 

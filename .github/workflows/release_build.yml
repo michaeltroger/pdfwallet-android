@@ -8,19 +8,8 @@ on:
         required: true
         type: boolean
         default: true
-      upload_to_huawei:
-        description: "Upload to Huawei AppGallery"
-        required: true
-        type: boolean
-        default: true
-      upload_to_amazon:
-        description: "Upload to Amazon Appstore"
-        required: true
-        type: boolean
-        default: true
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     env:
@@ -76,7 +65,7 @@ jobs:
         artifactErrorsFailBuild: true
 
     - name: Setup Ruby
-      if: ${{ inputs.upload_to_amazon || inputs.upload_to_google || inputs.upload_to_huawei }}
+      if: ${{ inputs.upload_to_google }}
       uses: ruby/setup-ruby@v1
       with:
         bundler-cache: true
@@ -86,20 +75,6 @@ jobs:
       run: bundle exec fastlane google
       env:
         PLAY_STORE_CREDENTIALS: ${{ secrets.PLAY_STORE_CREDENTIALS }}
-
-    - name: Upload app to Huawei AppGallery
-      if: ${{ inputs.upload_to_huawei }}
-      run: bundle exec fastlane huawei
-      env:
-        HUAWEI_CLIENT_ID: ${{ secrets.HUAWEI_CLIENT_ID }}
-        HUAWEI_CLIENT_SECRET: ${{ secrets.HUAWEI_CLIENT_SECRET }}
-
-    - name: Upload app to Amazon Appstore
-      if: ${{ inputs.upload_to_amazon }}
-      run: bundle exec fastlane amazon
-      env:
-        AMAZON_CLIENT_ID: ${{ secrets.AMAZON_CLIENT_ID }}
-        AMAZON_CLIENT_SECRET: ${{ secrets.AMAZON_CLIENT_SECRET }}
 
     - name: Upload test reports
       uses: actions/upload-artifact@v4
