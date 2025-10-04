@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_purchases_title">Deine Einkäufe:</string>
+    <string name="billing_purchases_order_id">Auftrags-ID:</string>
+    <string name="billing_purchases_date">Auftrags-Datum:</string>
+    <string name="billing_purchases_item">Posten:</string>
+    <string name="billing_purchases_processing">Bearbeitung läuft...</string>
+    <string name="billing_product_buy">Kaufen</string>
+    <string name="billing_purchases_thanks">Herzlichen Dank! ♥️</string>
+    <string name="billing_products_title">Verfügbare Posten:</string>
+    <string name="billing_explanation">Diese App ist 100%% kostenlos, open-source, werbefrei und ohne Tracking. Du kannst dieses Projekt freiwillig unterstützen, indem du einen der folgenden Artikel kaufst. Bitte beachte, dass der Kauf der Artikel keine zusätzlichen Funktionen für dich freischaltet!</string>
+</resources>
