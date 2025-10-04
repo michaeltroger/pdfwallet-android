@@ -22,6 +22,12 @@
     </Preference>
     <Preference
         app:layout="@layout/preference_layout_with_icon"
+        android:title="@string/imprint">
+        <intent android:action="android.intent.action.VIEW"
+            android:data="@string/imprint_uri"/>
+    </Preference>
+    <Preference
+        app:layout="@layout/preference_layout_with_icon"
         android:title="@string/rate"
         android:summary="@string/rate_summary">
         <intent android:action="android.intent.action.VIEW"
@@ -61,6 +67,12 @@
         android:summary="@string/changelog_summary">
         <intent android:action="android.intent.action.VIEW"
             android:data="@string/changelog_uri"/>
+    </Preference>
+    <Preference
+        app:layout="@layout/preference_layout_with_icon"
+        android:title="@string/contact_developer">
+        <intent android:action="android.intent.action.SENDTO"
+            android:data="@string/contact_uri"/>
     </Preference>
     <Preference
         app:iconSpaceReserved="false"
