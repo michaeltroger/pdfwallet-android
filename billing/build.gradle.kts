@@ -7,6 +7,9 @@ android {
     namespace = "com.michaeltroger.gruenerpass.billing"
     buildFeatures.compose = true
     androidResources.enable = true
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
 }
 
 detekt {
