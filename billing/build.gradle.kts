@@ -17,7 +17,7 @@ dependencies {
     implementation(project(":coroutines"))
 
     implementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.android.billing.ktx)
+    implementation("com.android.billingclient:billing-ktx:8.0.0") // inline to avoid fdroid build issue
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.hilt.navigation.compose)

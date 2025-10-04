@@ -1,5 +1,4 @@
 [versions]
-android-billing-ktx = "8.0.0"
 android-desugar-jdk-libs = "2.1.5"
 android-gradle-plugin = "8.13.0"
 androidx-activity = "1.11.0"
@@ -38,7 +37,6 @@ org-jetbrains-kotlinx-coroutines = "1.10.2"
 org-robolectric = "4.16"
 
 [libraries]
-android-billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "android-billing-ktx" }
 android-desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "android-desugar-jdk-libs" }
 androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
