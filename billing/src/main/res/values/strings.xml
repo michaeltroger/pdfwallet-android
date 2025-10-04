@@ -7,5 +7,5 @@
     <string name="billing_product_buy">Buy</string>
     <string name="billing_purchases_thanks">Thanks a ton! ♥️</string>
     <string name="billing_products_title">Available items:</string>
-    <string name="billing_explanation">This app is 100% free, open-source, without ads and without tracking. You can voluntarily support this project by buying one of the following items. Please note that buying the items doesn\'t unlock anything for you!</string>
+    <string name="billing_explanation">This app is 100%% free, open-source, without ads and without tracking. You can voluntarily support this project by buying one of the following items. Please note that buying the items doesn\'t unlock anything for you!</string>
 </resources>
