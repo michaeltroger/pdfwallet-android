@@ -21,6 +21,10 @@ android {
         viewBinding = true
     }
 
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+    }
+
     defaultConfig {
         minSdk = Versions.MIN_SDK
         targetSdk = Versions.TARGET_SDK
@@ -48,7 +52,7 @@ android {
                     try {
                         val keystoreProperties = Properties()
                         keystoreProperties.load(ByteArrayInputStream(System.getenv("RELEASE_KEYSTORE_PROPERTIES").toByteArray()))
-
+                        // keystoreProperties.load(ByteArrayInputStream(rootProject.file("credentials/keystore.properties").readBytes()))
                         keyAlias = keystoreProperties.getProperty("KEY_ALIAS")
                         keyPassword = keystoreProperties.getProperty("KEY_PASSWORD")
                         storeFile = rootProject.file("credentials/keystore.jks")
@@ -59,6 +63,18 @@ android {
                 }
             }
             signingConfig = signingConfigs.getByName("release")
+        }
+
+        flavorDimensions += "variant"
+        productFlavors {
+            create("foss") {
+                dimension = "variant"
+                versionNameSuffix = "-foss"
+            }
+            create("play") {
+                dimension = "variant"
+                versionNameSuffix = "-play"
+            }
         }
     }
 
@@ -89,6 +105,7 @@ licenseReport {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.libDesugarJdkLibs)
     debugImplementation(libs.libLeakCanary)
 
     implementation(platform(libs.libKotlinBom))

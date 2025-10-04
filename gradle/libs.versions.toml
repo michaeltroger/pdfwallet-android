@@ -1,12 +1,16 @@
 [versions]
+android-billing-ktx = "8.0.0"
+android-desugar-jdk-libs = "2.1.5"
 android-gradle-plugin = "8.13.0"
-androidx-activity-ktx = "1.11.0"
+androidx-activity = "1.11.0"
 androidx-appcompat = "1.7.1"
+androidx-compose-bom = "2025.09.01"
 androidx-biometric = "1.4.0-alpha04"
 androidx-constraintlayout = "2.2.1"
 androidx-core-ktx = "1.17.0"
 androidx-datastore-preferences = "1.1.7"
 androidx-fragment-ktx = "1.8.9"
+androidx-hilt-navigation-compose = "1.2.0"
 androidx-lifecycle = "2.9.4"
 androidx-navigation = "2.9.5"
 androidx-preference-ktx = "1.2.1"
@@ -34,13 +38,20 @@ org-jetbrains-kotlinx-coroutines = "1.10.2"
 org-robolectric = "4.16"
 
 [libraries]
-androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity-ktx" }
+android-billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "android-billing-ktx" }
+android-desugar-jdk-libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "android-desugar-jdk-libs" }
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "androidx-activity" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "androidx-biometric" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref="androidx-compose-bom" }
+androidx-compose-material3 = { module = "androidx.compose.material3:material3"}
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling"}
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "androidx-constraintlayout" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core-ktx" }
 androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore-preferences" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment-ktx" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "androidx-hilt-navigation-compose" }
 androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "androidx-lifecycle" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androidx-navigation" }
@@ -81,3 +92,4 @@ plugin-com-google-dagger-hilt-android = { module = "com.google.dagger.hilt.andro
 plugin-com-google-devtools-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "com-google-devtools-ksp" }
 plugin-io-gitlab-arturbosch-detekt = { module = "io.gitlab.arturbosch.detekt:io.gitlab.arturbosch.detekt.gradle.plugin", version.ref = "io-gitlab-arturbosch-detekt" }
 plugin-org-jetbrains-kotlin-android = { module = "org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin", version.ref = "kotlin" }
+plugin-org-jetbrains-kotlin-compose = { module = "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin", version.ref = "kotlin" }

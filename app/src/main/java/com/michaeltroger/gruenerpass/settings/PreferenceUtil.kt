@@ -6,18 +6,20 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.view.WindowManager
 import com.michaeltroger.gruenerpass.R
+import com.michaeltroger.gruenerpass.coroutines.dispatcher.di.IoDispatcher
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PreferenceUtil @Inject constructor(
     @ApplicationContext private val context: Context,
+    @IoDispatcher private val dispatcher: CoroutineDispatcher,
     private val preferenceManager: SharedPreferences,
 ) {
 
     suspend fun updateScreenBrightness(activity: Activity) {
-        val fullBrightness = withContext(Dispatchers.IO) {
+        val fullBrightness = withContext(dispatcher) {
             preferenceManager.getBoolean(
                 context.getString(R.string.key_preference_full_brightness),
                 false
@@ -37,7 +39,7 @@ class PreferenceUtil @Inject constructor(
     }
 
     suspend fun updatePreventScreenshots(activity: Activity) {
-        val preventScreenshots = withContext(Dispatchers.IO) {
+        val preventScreenshots = withContext(dispatcher) {
             preferenceManager.getBoolean(
                 context.getString(R.string.key_preference_prevent_screenshots),
                 true
@@ -55,7 +57,7 @@ class PreferenceUtil @Inject constructor(
 
     suspend fun updateShowOnLockedScreen(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
-            val showOnLockedScreen = withContext(Dispatchers.IO) {
+            val showOnLockedScreen = withContext(dispatcher) {
                 preferenceManager.getBoolean(
                     context.getString(R.string.key_preference_show_on_locked_screen),
                     false

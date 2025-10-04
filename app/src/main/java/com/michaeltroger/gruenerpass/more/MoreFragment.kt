@@ -1,6 +1,8 @@
 package com.michaeltroger.gruenerpass.more
 
 import android.os.Bundle
+import androidx.core.net.toUri
+import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.michaeltroger.gruenerpass.R
@@ -13,7 +15,19 @@ class MoreFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.more, rootKey)
 
+        setupBilling()
         setVersionAndInstaller()
+    }
+
+    private fun setupBilling() {
+        val preferenceBilling = findPreference<Preference>(
+            getString(R.string.key_preference_billing)
+        ) ?: error("Preference is required")
+
+        preferenceBilling.setOnPreferenceClickListener {
+            findNavController().navigate(deepLink = "app://billing".toUri())
+            true
+        }
     }
 
     private fun setVersionAndInstaller() {

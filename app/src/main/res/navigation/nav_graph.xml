@@ -65,4 +65,10 @@
             android:name="id"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/billingFragment"
+        android:name="com.michaeltroger.gruenerpass.billing.BillingFragment"
+        android:label="@string/support_this_project">
+        <deepLink app:uri="app://billing" />
+    </fragment>
 </navigation>

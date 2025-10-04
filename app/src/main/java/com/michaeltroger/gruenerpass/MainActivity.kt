@@ -135,11 +135,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AddFile {
             GetAutoRedirectDestinationUseCase.Result.NavigateBack -> {
                 navController?.popBackStack()
             }
-
+            GetAutoRedirectDestinationUseCase.Result.NavigateBackTwice -> {
+                navController?.popBackStack()
+                navController?.popBackStack()
+            }
             is GetAutoRedirectDestinationUseCase.Result.NavigateTo -> {
                 navController?.navigate(navDestination.navDirections)
             }
-
             GetAutoRedirectDestinationUseCase.Result.NothingTodo -> {
                 // nothing to do
             }

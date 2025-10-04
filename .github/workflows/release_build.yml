@@ -15,8 +15,8 @@ jobs:
     env:
       JAVA_VERSION: '17'
       CREDENTIALS_DIR: 'credentials'
-      AAB_FILE: 'app/build/outputs/bundle/release/app-release.aab'
-      APK_FILE: 'app/build/outputs/apk/release/app-release.apk'
+      AAB_FILE: 'app/build/outputs/bundle/play/release/app-play-release.aab'
+      APK_FILE: 'app/build/outputs/apk/foss/release/app-foss-release.apk'
 
     steps:
     - name: Checkout repo
@@ -33,13 +33,13 @@ jobs:
     - name: Run Lint
       run: ./gradlew lintRelease
     - name: Run unit tests
-      run: ./gradlew testReleaseUnitTest
+      run: ./gradlew testPlayReleaseUnitTest
       
     - name: Build App Bundle and APK
       run: |
         mkdir "$CREDENTIALS_DIR"
         echo "$RELEASE_KEYSTORE" | base64 -d > "$CREDENTIALS_DIR/keystore.jks"
-        ./gradlew bundleRelease assembleRelease
+        ./gradlew bundlePlayRelease assembleFossRelease
       env:
         RELEASE_KEYSTORE_PROPERTIES: ${{ secrets.RELEASE_KEYSTORE_PROPERTIES }}
         RELEASE_KEYSTORE: ${{ secrets.RELEASE_KEYSTORE }}
@@ -84,4 +84,4 @@ jobs:
         path: |
           */build/reports/detekt/detekt.html
           */build/reports/lint-results-release.html
-          */build/reports/tests/testReleaseUnitTest/
+          */build/reports/tests/testPlayReleaseUnitTest/

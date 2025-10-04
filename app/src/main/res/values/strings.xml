@@ -65,4 +65,7 @@
     <string name="preference_barcode_extended">Extended (best possible detection)</string>
     <string name="preference_prevent_screenshots">Prevent screenshots</string>
     <string name="preference_prevent_screenshots_description">Screenshots are never allowed, in case you enabled authentication. This has security reasons.</string>
+    <string name="support_this_project">Support this project</string>
+    <string name="preference_support_this_project">Support this project</string>
+    <string name="preference_support_this_project_description">Your contribution helps cover development and maintenance costs.</string>
 </resources>

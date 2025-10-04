@@ -28,14 +28,14 @@ jobs:
     - name: Run Lint
       run: ./gradlew lintDebug
     - name: Run unit tests
-      run: ./gradlew testDebugUnitTest
+      run: ./gradlew testFossDebugUnitTest
     - name: Build APK
-      run: ./gradlew assembleDebug
+      run: ./gradlew assembleFossDebug
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: apk
-        path: app/build/outputs/apk/debug/app-debug.apk
+        path: app/build/outputs/apk/foss/debug/app-foss-debug.apk
     - name: Upload test reports
       uses: actions/upload-artifact@v4
       if: always()
@@ -44,4 +44,4 @@ jobs:
         path: |
           */build/reports/detekt/detekt.html
           */build/reports/lint-results-debug.html
-          */build/reports/tests/testDebugUnitTest/
+          */build/reports/tests/testFossDebugUnitTest/

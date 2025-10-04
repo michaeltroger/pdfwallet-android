@@ -32,6 +32,9 @@ More Features
 Why does the generated barcode look differently than the one in the PDF?
 The algorithm to display is different. For reading devices the code is identical.
 
+In-App Purchases
+The app can be used 100% for free. The app however allows voluntary financial contributions via in-app purchases.
+
 Privacy
 This app values your privacy by being fully open source and working offline. No ads, no tracking.
 

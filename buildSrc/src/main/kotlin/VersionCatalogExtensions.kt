@@ -17,6 +17,9 @@ internal val VersionCatalog.libHiltCompiler: Provider<MinimalExternalModuleDepen
 internal val VersionCatalog.libLeakCanary: Provider<MinimalExternalModuleDependency>
     get() = findLibraryOrThrow("com-squareup-leakcanary-android")
 
+internal val VersionCatalog.libDesugarJdkLibs: Provider<MinimalExternalModuleDependency>
+    get() = findLibraryOrThrow("android-desugar-jdk-libs")
+
 internal val VersionCatalog.libKotlinBom: Provider<MinimalExternalModuleDependency>
     get() = findLibraryOrThrow("org-jetbrains-kotlin-bom")
 
