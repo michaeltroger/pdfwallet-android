@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <Preference
+        app:isPreferenceVisible="@bool/has_billing"
+        tools:isPreferenceVisible="true"
+        android:key="@string/key_preference_billing"
+        android:icon="@drawable/credit_card_heart_24px"
+        android:summary="@string/preference_support_this_project_description"
+        android:title="@string/preference_support_this_project" />
+    <Preference
+        android:layout="@layout/preference_layout_divider"
+        app:isPreferenceVisible="@bool/has_billing"
+        android:selectable="false" />
     <Preference
         app:layout="@layout/preference_layout_with_icon"
         android:title="@string/privacy_policy">
@@ -11,17 +22,17 @@
     </Preference>
     <Preference
         app:layout="@layout/preference_layout_with_icon"
-        android:title="@string/report_issue"
-        android:summary="@string/report_issue_summary">
-        <intent android:action="android.intent.action.VIEW"
-            android:data="@string/issues_uri"/>
-    </Preference>
-    <Preference
-        app:layout="@layout/preference_layout_with_icon"
         android:title="@string/rate"
         android:summary="@string/rate_summary">
         <intent android:action="android.intent.action.VIEW"
             android:data="@string/rate_uri"/>
+    </Preference>
+    <Preference
+        app:layout="@layout/preference_layout_with_icon"
+        android:title="@string/report_issue"
+        android:summary="@string/report_issue_summary">
+        <intent android:action="android.intent.action.VIEW"
+            android:data="@string/issues_uri"/>
     </Preference>
     <Preference
         app:layout="@layout/preference_layout_with_icon"

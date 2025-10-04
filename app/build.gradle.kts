@@ -19,6 +19,8 @@ dependencies {
     implementation(project(":pdfimporter"))
     implementation(project(":pdfrenderer"))
 
+    playImplementation(project(":billing"))
+
     implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.biometric)

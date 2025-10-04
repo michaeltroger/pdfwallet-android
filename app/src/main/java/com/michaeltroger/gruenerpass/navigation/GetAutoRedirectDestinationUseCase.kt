@@ -80,6 +80,15 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
                     null
                 }
             }
+            currentDestinationId in listOf(
+                R.id.billingFragment,
+            ) -> {
+                if (hasPendingFile) {
+                    return Result.NavigateBackTwice
+                } else {
+                    null
+                }
+            }
             currentDestinationId == R.id.certificatesFragment && showListLayout-> {
                 NavGraphDirections.actionGlobalCertificatesListFragmentClearedBackstack()
             }
@@ -97,6 +106,7 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
     sealed class Result {
         data class NavigateTo(val navDirections: NavDirections): Result()
         data object NavigateBack: Result()
+        data object NavigateBackTwice: Result()
         data object NothingTodo: Result()
     }
 }

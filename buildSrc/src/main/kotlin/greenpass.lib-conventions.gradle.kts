@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
-    
     id("io.gitlab.arturbosch.detekt")
 }
 
@@ -13,6 +12,9 @@ android {
     buildFeatures {
         buildConfig = false
         resValues = false
+    }
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
     }
     defaultConfig {
         minSdk = Versions.MIN_SDK
@@ -32,6 +34,7 @@ kotlin {
 }
 
 dependencies {
+    coreLibraryDesugaring(libs.libDesugarJdkLibs)
     implementation(libs.libHiltAndroid)
     ksp(libs.libHiltCompiler)
 }

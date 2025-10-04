@@ -4,7 +4,9 @@ import android.os.Build
 import android.os.Bundle
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
+import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.preference.DropDownPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
@@ -29,11 +31,23 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preference, rootKey)
 
+        setupBilling()
         setupBiometricSetting()
         setupBarcodeSetting()
         setupLockscreenSetting()
         setupBrightnessSetting()
         setupPreventScreenshotsSetting()
+    }
+
+    private fun setupBilling() {
+        val preferenceBilling = findPreference<Preference>(
+            getString(R.string.key_preference_billing)
+        ) ?: error("Preference is required")
+
+        preferenceBilling.setOnPreferenceClickListener {
+            findNavController().navigate(deepLink = "app://billing".toUri())
+            true
+        }
     }
 
     private fun setupBarcodeSetting() {

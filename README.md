@@ -23,10 +23,11 @@ Get it on:
     
 __or directly from [GitHub Releases](https://github.com/michaeltroger/greenpass-android/releases)__
 
+# Difference between releases
+__The only difference__ between the Google Play release and the F-Droid/GitHub releases, is that the Google Play release allows you to __voluntarily__ provide financial support for the project, in form of Google in-app purchases.
+Note that neither variant of the app has internet access, so you're privacy is valued, independently of your choice! This repo holds the source code of all variants!
+
 <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.jpeg" width="200">
 
 Author:
 [Michael Troger](https://michaeltroger.com)
-
-*Kudos to:*
-- *[Sebastian Schmid](https://github.com/da5ebi) - for counseling in terms of UX*
