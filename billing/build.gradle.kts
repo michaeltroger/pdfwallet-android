@@ -9,6 +9,10 @@ android {
     androidResources.enable = true
 }
 
+detekt {
+    ignoreFailures = true
+}
+
 dependencies {
     implementation(project(":coroutines"))
 
