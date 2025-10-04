@@ -69,11 +69,9 @@ android {
         productFlavors {
             create("foss") {
                 dimension = "variant"
-                versionNameSuffix = "-foss"
             }
             create("play") {
                 dimension = "variant"
-                versionNameSuffix = "-play"
             }
         }
     }
