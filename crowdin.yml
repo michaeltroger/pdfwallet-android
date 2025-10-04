@@ -5,3 +5,5 @@ files:
     translation: /fastlane/metadata/android/%two_letters_code%/short_description.txt
   - source: /fastlane/metadata/android/en-US/full_description.txt
     translation: /fastlane/metadata/android/%two_letters_code%/full_description.txt
+  - source: /billing/src/main/res/values/strings.xml
+    translation: /billing/src/main/res/values-%two_letters_code%/strings.xml
