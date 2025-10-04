@@ -32,6 +32,9 @@ Mehr Funktionen
 Warum ist der generierte Barcode anders als der im PDF?
 Der Algorithmus zum Darstellen ist anders. Für Lesegeräte ist der Code identisch.
 
+In-App Käufe
+Die App kann zu 100% kostenlos genutzt werden. Sie ermöglicht jedoch freiwilligen finanziellen Support durch In-App-Käufe.
+
 Privatsphäre
 Diese App schätzt Ihre Privatsphäre, indem ihr Quellcode vollständig öffentlich ist und indem sie offline funktioniert. Keine Werbung, kein Tracking.
 
