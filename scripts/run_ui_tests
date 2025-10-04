@@ -19,7 +19,7 @@ adb shell cmd statusbar send-disable-flag clock notification-icons quick-setting
 
 set +e # don't fail on errors
 
-./gradlew :app:connectedDebugAndroidTest
+./gradlew :app:connectedFossDebugAndroidTest
 exit_code=$?
 
 adb pull /sdcard/Pictures/error_screenshots app/build
