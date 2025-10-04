@@ -100,7 +100,7 @@ ksp {
 
 licenseReport {
     outputDir = "$rootDir/docs/licenses"
-    configurations = arrayOf("releaseRuntimeClasspath")
+    configurations = arrayOf("playReleaseRuntimeClasspath")
     filters = arrayOf(LicenseBundleNormalizer())
 }
 
