@@ -15,7 +15,7 @@ jobs:
     env:
       JAVA_VERSION: '17'
       CREDENTIALS_DIR: 'credentials'
-      AAB_FILE: 'app/build/outputs/bundle/play/release/app-play-release.aab'
+      AAB_FILE: 'app/build/outputs/bundle/playRelease/app-play-release.aab'
       APK_FILE: 'app/build/outputs/apk/foss/release/app-foss-release.apk'
 
     steps:
