@@ -8,6 +8,11 @@ on:
         required: true
         type: boolean
         default: true
+      upload_to_github:
+        description: "Upload to GitHub and create version tag"
+        required: true
+        type: boolean
+        default: true
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -54,6 +59,7 @@ jobs:
         echo "VERSION_CODE="$(scripts/get_version_code)"" >> $GITHUB_ENV
 
     - name: Create tag and release on GitHub if not already done
+      if: ${{ inputs.upload_to_github }}
       uses: ncipollo/release-action@v1
       with:
         tag: ${{ env.VERSION_CODE }}
