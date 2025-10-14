@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_purchases_title">Sinu ostud:</string>
+    <string name="billing_purchases_order_id">Tellimuse number:</string>
+    <string name="billing_purchases_date">Tellimuse kuupäev:</string>
+    <string name="billing_purchases_item">Objekt:</string>
+    <string name="billing_purchases_processing">Töötlen…</string>
+    <string name="billing_product_buy">Osta</string>
+    <string name="billing_purchases_thanks">Väga suur tänu! ♥️</string>
+    <string name="billing_products_title">Saadaval objektid:</string>
+    <string name="billing_explanation">See rakendus on 100% vaba, avatud lähtekoodiga, ilma reklaamide ja jälitajateta. Küll aga saad mõne järgneva ostuga selle projekti tööd toetada. Palun arvesta, et sellega ei muutu rakenduses mitte midagi!</string>
+</resources>
