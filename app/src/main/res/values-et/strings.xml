@@ -20,9 +20,11 @@
     <string name="rate">Hinda seda rakendust</string>
     <string name="help_translating">Aita tõlkida</string>
     <string name="help_translating_summary">Aita seda rakendust tõlkida oma keelde</string>
+    <string name="contact_developer">Võta ühendust arendajaga</string>
     <string name="contributing">Kirjuta koodi</string>
     <string name="contributing_summary">See rakendus on avatud lähtekoodiga tarkvara. Kirjuta koodi ja osale arenduses!</string>
     <string name="more">Lisateave</string>
+    <string name="imprint">Projekti ametlikud andmed</string>
     <string name="privacy_policy">Privaatsuspoliitika</string>
     <string name="preference_max_brightness">100\u0025 eredus</string>
     <string name="preference_max_brightness_description">Selle rakenduse puhul kasuta alati ekraani maksimaalset eredust.</string>
@@ -66,4 +68,7 @@
     <string name="preference_barcode_extended">Laiendatud (parimad võimalused tuvastamiseks)</string>
     <string name="preference_prevent_screenshots">Keela ekraanitõmmiste tegemine</string>
     <string name="preference_prevent_screenshots_description">Kui sa autentimist ei kasuta, siis turvalisuse põhjustel ekraanitõmmiste tegemine pole kunagi lubatud.</string>
+    <string name="support_this_project">Toeta seda aredusprojekti</string>
+    <string name="preference_support_this_project">Toeta seda aredusprojekti</string>
+    <string name="preference_support_this_project_description">Sinu toest on võimalik katta arendus- ha halduskulusid.</string>
 </resources>
