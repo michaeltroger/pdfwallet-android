@@ -55,8 +55,8 @@ android {
                 create("release") {
                     try {
                         val keystoreProperties = Properties()
-                        //keystoreProperties.load(ByteArrayInputStream(System.getenv("RELEASE_KEYSTORE_PROPERTIES").toByteArray()))
-                        keystoreProperties.load(ByteArrayInputStream(rootProject.file("credentials/keystore.properties").readBytes()))
+                        keystoreProperties.load(ByteArrayInputStream(System.getenv("RELEASE_KEYSTORE_PROPERTIES").toByteArray()))
+                        // keystoreProperties.load(ByteArrayInputStream(rootProject.file("credentials/keystore.properties").readBytes()))
                         keyAlias = keystoreProperties.getProperty("KEY_ALIAS")
                         keyPassword = keystoreProperties.getProperty("KEY_PASSWORD")
                         storeFile = rootProject.file("credentials/keystore.jks")
