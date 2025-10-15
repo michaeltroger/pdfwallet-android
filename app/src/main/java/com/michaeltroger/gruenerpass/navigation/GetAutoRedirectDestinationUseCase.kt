@@ -81,13 +81,11 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
                 }
             }
             currentDestinationId in listOf(
+                // known issue: when on billing fragment and there is a pending file, then navigation to root view is not easily possible. therefore ignore and stay
+                // The pending file is added nevertheless
                 R.id.billingFragment,
             ) -> {
-                if (hasPendingFile) {
-                    return Result.NavigateBackTwice
-                } else {
-                    null
-                }
+                null
             }
             currentDestinationId == R.id.certificatesFragment && showListLayout-> {
                 NavGraphDirections.actionGlobalCertificatesListFragmentClearedBackstack()
@@ -106,7 +104,6 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
     sealed class Result {
         data class NavigateTo(val navDirections: NavDirections): Result()
         data object NavigateBack: Result()
-        data object NavigateBackTwice: Result()
         data object NothingTodo: Result()
     }
 }
