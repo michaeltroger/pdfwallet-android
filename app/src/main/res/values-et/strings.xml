@@ -20,9 +20,11 @@
     <string name="rate">Hinda seda rakendust</string>
     <string name="help_translating">Aita tõlkida</string>
     <string name="help_translating_summary">Aita seda rakendust tõlkida oma keelde</string>
+    <string name="contact_developer">Võta ühendust arendajaga</string>
     <string name="contributing">Kirjuta koodi</string>
     <string name="contributing_summary">See rakendus on avatud lähtekoodiga tarkvara. Kirjuta koodi ja osale arenduses!</string>
     <string name="more">Lisateave</string>
+    <string name="imprint">Projekti ametlikud andmed</string>
     <string name="privacy_policy">Privaatsuspoliitika</string>
     <string name="preference_max_brightness">100\u0025 eredus</string>
     <string name="preference_max_brightness_description">Selle rakenduse puhul kasuta alati ekraani maksimaalset eredust.</string>
@@ -66,4 +68,14 @@
     <string name="preference_barcode_extended">Laiendatud (parimad võimalused tuvastamiseks)</string>
     <string name="preference_prevent_screenshots">Keela ekraanitõmmiste tegemine</string>
     <string name="preference_prevent_screenshots_description">Kui sa autentimist ei kasuta, siis turvalisuse põhjustel ekraanitõmmiste tegemine pole kunagi lubatud.</string>
+    <string name="support_this_project">PDF Wallet Pro</string>
+    <string name="menu_support_this_project">Laadi alla PDF Wallet Pro</string>
+    <string name="preference_support_this_project">Laadi alla PDF Wallet Pro</string>
+    <string name="preference_support_this_project_description">Sa võid kasutada täiendavaid võimalusi.</string>
+    <string name="preference_invert_pdf_colors">Pööratud värvid PDF-failis</string>
+    <string name="preference_invert_pdf_colors_description">Pööratud värvid tumedas kujunduses.</string>
+    <string name="preference_force_theme">Määra kasutatav välimus arvestamata üldiste seadistustega</string>
+    <string name="preference_theme_system">Süsteemi kujundus</string>
+    <string name="preference_theme_light">Hele kujundus</string>
+    <string name="preference_theme_dark">Tume kujundus</string>
 </resources>

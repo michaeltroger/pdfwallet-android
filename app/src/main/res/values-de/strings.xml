@@ -68,7 +68,14 @@
     <string name="preference_barcode_extended">Erweitert (bestmögliche Erkennung)</string>
     <string name="preference_prevent_screenshots">Screenshots verhindern</string>
     <string name="preference_prevent_screenshots_description">Screenshots sind niemals erlaubt, falls du Authentifizieren aktiviert hast. Dies hat Sicherheitsgründe.</string>
-    <string name="support_this_project">Unterstütze dieses Projekt</string>
-    <string name="preference_support_this_project">Unterstütze dieses Projekt</string>
-    <string name="preference_support_this_project_description">Dein Beitrag hilft, die Entwicklungs- und Wartungskosten zu decken.</string>
+    <string name="support_this_project">PDF Wallet Pro</string>
+    <string name="menu_support_this_project">Hole dir PDF Wallet Pro</string>
+    <string name="preference_support_this_project">Hole dir PDF Wallet Pro</string>
+    <string name="preference_support_this_project_description">Zusätzliche Funktionen freischalten.</string>
+    <string name="preference_invert_pdf_colors">PDF-Farben invertieren</string>
+    <string name="preference_invert_pdf_colors_description">Dokumentfarben im dunklen Modus umkehren.</string>
+    <string name="preference_force_theme">Theme erzwingen</string>
+    <string name="preference_theme_system">System</string>
+    <string name="preference_theme_light">Hell</string>
+    <string name="preference_theme_dark">Dunkel</string>
 </resources>

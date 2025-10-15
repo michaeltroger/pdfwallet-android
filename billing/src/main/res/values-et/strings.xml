@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_purchases_title">Sinu ostud:</string>
+    <string name="billing_purchases_order_id">Tellimuse number:</string>
+    <string name="billing_purchases_date">Tellimuse kuupäev:</string>
+    <string name="billing_purchases_item">Objekt:</string>
+    <string name="billing_purchases_processing">Kontrollin ostukinnitust… Selleks võib kulida mõni hetk. Võid sellest ekraanivaatest ja/või rakendusest lahkuda.</string>
+    <string name="billing_product_buy">Osta</string>
+    <string name="billing_purchases_thanks">Väga suur tänu! ♥️</string>
+    <string name="billing_explanation">Kui võtad kasutusele PDF Wallet Pro, siis saad kasutada järgnevaid lisavõimalusi:\n• Eri vaadetest kaob „Laadi alla PDF Wallet Pro“ märge\n• Võimalus kasutada tumedas vaates pööratud värve\n•Võimalus kasutada tumedat või heledat kujundust sõltumata süsteemi üldistest seadistustest</string>
+</resources>
