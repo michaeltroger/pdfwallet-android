@@ -18,6 +18,7 @@ sealed class ViewEvent {
     data object ShowDeleteAllDialog : ViewEvent()
     data class ShowDeleteFilteredDialog(val documentCountToBeDeleted: Int) : ViewEvent()
     data object ShowWarningDialog : ViewEvent()
+    data object ShowGetPro : ViewEvent()
     data object ShowSettingsScreen : ViewEvent()
     data object ShowMoreScreen : ViewEvent()
     data class ShowChangeDocumentOrderDialog(val originalOrder: List<Certificate>) : ViewEvent()

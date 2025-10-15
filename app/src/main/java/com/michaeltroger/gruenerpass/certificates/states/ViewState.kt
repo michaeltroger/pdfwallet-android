@@ -10,6 +10,7 @@ sealed class ViewState {
     abstract val showDeleteAllMenuItem: Boolean
     abstract val showAddMenuItem: Boolean
     abstract val showSettingsMenuItem: Boolean
+    abstract val showGetProMenuItem: Boolean
     abstract val showExportFilteredMenuItem: Boolean
     abstract val showExportAllMenuItem: Boolean
     abstract val showAddButton: Boolean
@@ -36,6 +37,7 @@ sealed class ViewState {
         override val showMoreMenuItem = true
         override val showWarningButton = false
         override val showChangeOrderMenuItem = false
+        override val showGetProMenuItem = false
     }
 
     data class Empty(
@@ -47,6 +49,7 @@ sealed class ViewState {
         override val showDeleteAllMenuItem = false
         override val showAddMenuItem = false
         override val showSettingsMenuItem = true
+        override val showGetProMenuItem = false
         override val showExportAllMenuItem = false
         override val showExportFilteredMenuItem = false
         override val showAddButton = true
@@ -63,6 +66,7 @@ sealed class ViewState {
         val invertColors: Boolean,
         override val showChangeOrderMenuItem: Boolean,
         val filter: String,
+        override val showGetProMenuItem: Boolean,
         override val showLockMenuItem: Boolean,
         override val showScrollToFirstMenuItem: Boolean,
         override val showScrollToLastMenuItem: Boolean,

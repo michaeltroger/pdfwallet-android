@@ -20,6 +20,7 @@ import com.michaeltroger.gruenerpass.db.usecase.InsertIntoDatabaseUseCase
 import com.michaeltroger.gruenerpass.lock.AppLockedRepo
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImportResult
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImporter
+import com.michaeltroger.gruenerpass.pro.IsProUnlockedUseCase
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
@@ -55,6 +56,9 @@ class CertificatesViewModel @Inject constructor(
         ViewState.Initial
     )
     val viewState: StateFlow<ViewState> = _viewState
+
+    @Inject
+    lateinit var isProUnlocked: IsProUnlockedUseCase
 
     private val filter = MutableStateFlow("")
 
@@ -158,6 +162,7 @@ class CertificatesViewModel @Inject constructor(
                     showWarningButton = showOnLockedScreen,
                     showExportFilteredMenuItem = areDocumentsFilteredOut,
                     showDeleteFilteredMenuItem = areDocumentsFilteredOut,
+                    showGetProMenuItem = !isProUnlocked()
                 )
             )
         }
@@ -297,6 +302,12 @@ class CertificatesViewModel @Inject constructor(
     fun onShowWarningDialogSelected() = viewModelScope.launch {
         _viewEvent.emit(
             ViewEvent.ShowWarningDialog
+        )
+    }
+
+    fun onGetPro() = viewModelScope.launch {
+        _viewEvent.emit(
+            ViewEvent.ShowGetPro
         )
     }
 

@@ -6,6 +6,7 @@
         android:title="@string/search"
         android:icon="@drawable/search_24"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="collapseActionView|always"
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
@@ -14,14 +15,23 @@
         android:icon="@drawable/warning_24px"
         android:title="@string/warning"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
+
+    <item
+        android:id="@+id/pro"
+        android:title="@string/menu_support_this_project"
+        android:visible="false"
+        tools:visible="true"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/add"
         android:icon="@drawable/add_24"
         android:title="@string/add"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
 
@@ -29,65 +39,76 @@
         android:id="@+id/openSettings"
         android:title="@string/settings"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/openMore"
         android:title="@string/more"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/deleteFiltered"
         android:title="@string/delete_filtered"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/deleteAll"
         android:title="@string/delete_all"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/export_filtered"
         android:title="@string/export_filtered"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/export_all"
         android:title="@string/export_all"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/changeOrder"
         android:title="@string/change_order"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/scrollToFirst"
         android:title="@string/scroll_to_first"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/scrollToLast"
         android:title="@string/scroll_to_last"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/switchLayout"
         android:title="@string/switch_layout"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 
     <item
         android:id="@+id/lock"
         android:title="@string/lock"
         android:visible="false"
+        tools:visible="true"
         app:showAsAction="never"/>
 </menu>
