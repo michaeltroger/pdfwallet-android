@@ -19,6 +19,7 @@ private const val REGULAR_PDF_RESOLUTION_MULTIPLIER = 2
 private const val IMPROVED_PDF_RESOLUTION_MULTIPLIER = 4
 private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024
 
+@Suppress("MagicNumber")
 private val invertFilter = ColorMatrixColorFilter(
     ColorMatrix(
         floatArrayOf(
