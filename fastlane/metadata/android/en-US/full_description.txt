@@ -25,15 +25,17 @@ More Features
 - PDFs can be opened
 - PDFs can be shared from other apps
 - PDFs can be shared with other apps (indirectly allows printing)
-- Dark Mode support
+- Dark Mode support (Document stays in original color)
 - Supports also password protected PDFs
 - Two different layouts to choose from
 
+The "Pro" version brings additionally (requires In-App Purchase):
+- Removes "Get Pro" banner on various screens
+- Option to invert document colors in dark mode
+- Option to force light or dark theme by overwriting system settings
+
 Why does the generated barcode look differently than the one in the PDF?
 The algorithm to display is different. For reading devices the code is identical.
-
-In-App Purchases
-The app can be used 100% for free. The app however allows voluntary financial contributions via in-app purchases.
 
 Privacy
 This app values your privacy by being fully open source and working offline. No ads, no tracking.

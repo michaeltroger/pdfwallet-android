@@ -25,15 +25,17 @@ Mehr Funktionen
 - PDFs können geöffnet werden
 - PDFs aus anderen Apps teilen
 - PDFs mit anderen Apps teilen (ermöglicht indirekt Drucken)
-- Dark Mode
+- Dark Mode (Dokument bleibt in Originalfarbe)
 - Liest auch passwortgeschützte PDFs
 - Zwei verschiedene Layouts zum Auswählen
 
+Die "Pro" Version bringt darüber hinaus (erfordert In-App-Kauf):
+- Entfernt "Pro"-Banner auf mehreren Screens
+- Option um Dokumentenfarben zu invertieren im Dark Mode
+- Option um den hellen oder dunklen Theme-Mode zu erzwingen (überschreibt System-Einstellung)
+
 Warum ist der generierte Barcode anders als der im PDF?
 Der Algorithmus zum Darstellen ist anders. Für Lesegeräte ist der Code identisch.
-
-In-App Käufe
-Die App kann zu 100% kostenlos genutzt werden. Sie ermöglicht jedoch freiwilligen finanziellen Support durch In-App-Käufe.
 
 Privatsphäre
 Diese App schätzt Ihre Privatsphäre, indem ihr Quellcode vollständig öffentlich ist und indem sie offline funktioniert. Keine Werbung, kein Tracking.
