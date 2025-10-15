@@ -22,6 +22,8 @@ jobs:
       CREDENTIALS_DIR: 'credentials'
       AAB_FILE: 'app/build/outputs/bundle/playRelease/app-play-release.aab'
       APK_FILE: 'app/build/outputs/apk/foss/release/app-foss-release.apk'
+      MAPPING_FILE: 'app/build/outputs/mapping/playRelease/mapping.txt'
+      SYMBOLS_FILE: 'app/build/intermediates/merged_native_libs/playRelease/mergePlayReleaseNativeLibs/out/lib/archive.zip'
 
     steps:
     - name: Checkout repo
@@ -52,6 +54,10 @@ jobs:
     - name: Remove any credentials
       if: always()
       run: rm -rd "$CREDENTIALS_DIR"
+
+    - name: Create native symbols zip file
+      if: always()
+      run: cd app/build/intermediates/merged_native_libs/playRelease/mergePlayReleaseNativeLibs/out/lib && zip -r archive.zip */
 
     - name: Extract version code and version name
       run: |

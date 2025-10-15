@@ -6,6 +6,10 @@ lane :google do
     upload_to_play_store(
       json_key_data: Base64.decode64(ENV["PLAY_STORE_CREDENTIALS"]),
       aab: ENV["AAB_FILE"],
+      mapping_paths: [
+        ENV["MAPPING_FILE"],
+        ENV["SYMBOLS_FILE"]
+      ],
       track: "internal",
     )
 end
