@@ -35,4 +35,20 @@
     <string name="key_preference_barcodes_extended">extended</string>
     <string name="key_preference_prevent_screenshots">preventScreenshots</string>
     <string name="key_preference_billing">billing</string>
+    <string name="key_preference_billing_separator">billing_separator</string>
+    <string name="key_preference_invert_pdf_colors">invertPdfColors</string>
+    <string name="key_preference_force_theme">forceTheme</string>
+    <string name="key_preference_theme_system">system</string>
+    <string name="key_preference_theme_light">light</string>
+    <string name="key_preference_theme_dark">dark</string>
+    <string-array name="preference_theme_entries">
+        <item>@string/preference_theme_system</item>
+        <item>@string/preference_theme_light</item>
+        <item>@string/preference_theme_dark</item>
+    </string-array>
+    <string-array name="preference_theme_entry_values">
+        <item>@string/key_preference_theme_system</item>
+        <item>@string/key_preference_theme_light</item>
+        <item>@string/key_preference_theme_dark</item>
+    </string-array>
 </resources>

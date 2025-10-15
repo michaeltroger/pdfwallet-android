@@ -45,6 +45,11 @@ class CertificatesMenuProvider(
             true
         }
 
+        R.id.pro -> {
+            vm.onGetPro()
+            true
+        }
+
         R.id.openMore -> {
             vm.onShowMoreSelected()
             true
@@ -121,6 +126,7 @@ class CertificatesMenuProvider(
             findItem(R.id.add)?.isVisible = state.showAddMenuItem
             findItem(R.id.warning)?.isVisible = state.showWarningButton
             findItem(R.id.openSettings)?.isVisible = state.showSettingsMenuItem
+            findItem(R.id.pro)?.isVisible = state.showGetProMenuItem
             findItem(R.id.deleteAll)?.isVisible = state.showDeleteAllMenuItem
             findItem(R.id.deleteFiltered)?.isVisible = state.showDeleteFilteredMenuItem
             findItem(R.id.lock)?.isVisible = state.showLockMenuItem

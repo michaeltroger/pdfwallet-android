@@ -1,0 +1,4 @@
+ - Einführung von "PDF Wallet Pro" (alle existierenden Funktionen bleiben gratis)
+ - Kauf erlaubt die Entfernung von "Pro"-Bannern
+ - Kauf erlaubt das helle oder dunkle Theme zu erzwingen (überschreibt Systemeinstellungen)
+ - Kauf erlaubt das Invertieren der Dokumentenfarben im Dark Mode

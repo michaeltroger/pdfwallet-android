@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,9 +42,19 @@ private fun BillingComposableImpl(
     launchBillingFlow: (com.android.billingclient.api.ProductDetails) -> Unit,
 ) {
     LazyColumn(
-        Modifier.background(MaterialTheme.colorScheme.background)
+        Modifier
+            .background(MaterialTheme.colorScheme.background)
             .padding(AppPadding.m)
     ) {
+        if (state.processing) {
+            item {
+                Text(
+                    text = stringResource(R.string.billing_purchases_processing),
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = AppPadding.l),
+                )
+            }
+        }
         if (state.purchases.isNotEmpty()) {
             item {
                 Text(
@@ -58,8 +69,7 @@ private fun BillingComposableImpl(
         items(items = state.purchases) {
             Column(Modifier.padding(AppPadding.m)) {
                 Text(stringResource(R.string.billing_purchases_date)  + " ${it.purchaseTime}")
-                val orderId = it.orderId ?: stringResource(R.string.billing_purchases_processing)
-                Text(stringResource(R.string.billing_purchases_order_id) + " $orderId")
+                Text(stringResource(R.string.billing_purchases_order_id) + " ${it.orderId}")
                 Text(stringResource(R.string.billing_purchases_item) +" ${it.productName}")
             }
         }
@@ -74,34 +84,35 @@ private fun BillingComposableImpl(
                 Spacer(Modifier.height(AppPadding.l))
             }
         }
-        item {
-            Text(text = stringResource(R.string.billing_products_title))
-        }
         items(items = state.productDetails) {
-            Row(
-                Modifier.fillMaxWidth()
-                    .clickable(
-                        onClick = {
-                            launchBillingFlow(it.productDetails ?: return@clickable)
-                        },
-                    ).padding(AppPadding.m),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Column(
-                    Modifier.weight(1f)
+            Card {
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .clickable(
+                            onClick = {
+                                launchBillingFlow(it.productDetails ?: return@clickable)
+                            },
+                        )
+                        .padding(AppPadding.m),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
+                    Column(
+                        Modifier.weight(1f)
+                    ) {
+                        Text(
+                            text = it.name,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(it.description)
+                        Text(it.price ?: "")
+                    }
                     Text(
-                        text = it.name,
-                        fontWeight = FontWeight.Bold
+                        text = stringResource(R.string.billing_product_buy),
+                        modifier = Modifier.padding(start = AppPadding.m),
+                        fontWeight = FontWeight.Bold,
                     )
-                    Text(it.description)
-                    Text(it.price ?: "")
                 }
-                Text(
-                    text = stringResource(R.string.billing_product_buy),
-                    modifier = Modifier.padding(start = AppPadding.m),
-                    fontWeight = FontWeight.Bold,
-                )
             }
         }
     }
@@ -112,7 +123,7 @@ private fun BillingComposableImpl(
 private fun PreviewEmpty() {
     AppTheme {
         BillingComposableImpl(
-            state = BillingState(emptyList(), emptyList()),
+            state = BillingState(false, emptyList(), emptyList()),
             launchBillingFlow = {})
     }
 }
@@ -123,6 +134,7 @@ private fun PreviewNormal() {
     AppTheme {
         BillingComposableImpl(
             state = BillingState(
+                processing = true,
                 purchases = listOf(
                     Purchase(
                         orderId = "1saf23-23323-sffaf2",
