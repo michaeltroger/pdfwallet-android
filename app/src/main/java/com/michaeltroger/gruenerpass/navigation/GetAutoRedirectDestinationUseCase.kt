@@ -83,6 +83,7 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
             currentDestinationId in listOf(
                 // known issue: when on billing fragment and there is a pending file, then navigation to root view
                 // is not easily possible. therefore ignore and stay. The pending file is added nevertheless
+                // unless it's a password protected PDF
                 R.id.billingFragment,
             ) -> {
                 null
