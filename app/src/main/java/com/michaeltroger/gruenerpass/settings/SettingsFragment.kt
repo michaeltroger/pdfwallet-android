@@ -32,9 +32,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var isProUnlocked: IsProUnlockedUseCase
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.preference, rootKey)
+        setPreferencesFromResource(R.xml.settings, rootKey)
 
         setupBiometricSetting()
+        setupForceTheme()
         setupBarcodeSetting()
         setupLockscreenSetting()
         setupBrightnessSetting()
@@ -64,6 +65,41 @@ class SettingsFragment : PreferenceFragmentCompat() {
         preferenceBilling.setOnPreferenceClickListener {
             findNavController().navigate(deepLink = "app://billing".toUri())
             true
+        }
+    }
+
+    private fun setupForceTheme() {
+        val preference = findPreference<DropDownPreference>(
+            getString(R.string.key_preference_force_theme)
+        ) ?: error("Preference is required")
+
+        preference.setOnPreferenceChangeListener { _, newValue ->
+            val valueAsString = newValue as String
+            val system = getString(R.string.key_preference_theme_system)
+            val light = getString(R.string.key_preference_theme_light)
+            val dark = getString(R.string.key_preference_theme_dark)
+
+            lifecycleScope.launch {
+                val unlocked = isProUnlocked()
+                if (newValue != system && !unlocked) {
+                    findNavController().navigate(deepLink = "app://billing".toUri())
+                    return@launch
+                }
+
+                when (valueAsString) {
+                    system -> androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                    )
+                    light -> androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
+                    )
+                    dark -> androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(
+                        androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+                    )
+                }
+                preference.value = valueAsString
+            }
+            false
         }
     }
 

@@ -73,6 +73,15 @@
         android:defaultValue="true"
         android:enabled="false"/>
 
+    <DropDownPreference
+        android:key="@string/key_preference_force_theme"
+        android:icon="@drawable/contrast_24px"
+        android:title="@string/preference_force_theme"
+        app:useSimpleSummaryProvider="true"
+        android:defaultValue="@string/key_preference_theme_system"
+        android:entries="@array/preference_theme_entries"
+        android:entryValues="@array/preference_theme_entry_values"/>
+
     <com.michaeltroger.gruenerpass.settings.ValidateSwitchPreference
         android:key="@string/key_preference_invert_pdf_colors"
         android:title="@string/preference_invert_pdf_colors"
