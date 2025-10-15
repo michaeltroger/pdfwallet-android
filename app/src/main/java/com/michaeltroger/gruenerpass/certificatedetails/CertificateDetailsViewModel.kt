@@ -13,6 +13,7 @@ import com.michaeltroger.gruenerpass.db.usecase.ChangeCertificateNameUseCase
 import com.michaeltroger.gruenerpass.db.usecase.DeleteSingleCertificateUseCase
 import com.michaeltroger.gruenerpass.db.usecase.GetSingleCertificateFlowUseCase
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
+import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -53,11 +54,18 @@ class CertificateDetailsViewModel @Inject constructor(
             BarcodeSearchMode.fromPrefValue(value)
         }
 
+    private val invertColors =
+        sharedPrefs.getBooleanFlow(
+            context.getString(R.string.key_preference_invert_pdf_colors),
+            false
+        )
+
     init {
         viewModelScope.launch {
             combine(
                 getSingleCertificateFlowUseCase(id),
                 searchForBarcode,
+                invertColors,
                 ::updateState
             ).collect()
         }
@@ -66,6 +74,7 @@ class CertificateDetailsViewModel @Inject constructor(
     private suspend fun updateState(
         document: Certificate?,
         searchForBarcode: BarcodeSearchMode,
+        invertColors: Boolean,
     ) {
         if (document == null) {
             _viewState.emit(DetailsViewState.Deleted)
@@ -74,6 +83,7 @@ class CertificateDetailsViewModel @Inject constructor(
                 DetailsViewState.Normal(
                     document = document,
                     searchBarcode = searchForBarcode,
+                    invertColors = invertColors,
                 )
             )
         }

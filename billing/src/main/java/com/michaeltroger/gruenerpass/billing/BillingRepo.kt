@@ -25,6 +25,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
+internal const val PRO_PRODUCT_ID = "pro"
+
 internal interface BillingRepo {
     val refreshPurchases: SharedFlow<Unit>
     suspend fun queryPurchases(): List<Purchase>
@@ -34,32 +36,12 @@ internal interface BillingRepo {
 }
 
 internal val productOrderList = listOf(
-    "small_supporter",
-    "medium_supporter",
-    "big_supporter",
-    "mega_supporter",
-    "ultimate_supporter"
+    PRO_PRODUCT_ID,
 )
 
 private val productList = listOf(
     QueryProductDetailsParams.Product.newBuilder()
-        .setProductId("small_supporter")
-        .setProductType(BillingClient.ProductType.INAPP)
-        .build(),
-    QueryProductDetailsParams.Product.newBuilder()
-        .setProductId("medium_supporter")
-        .setProductType(BillingClient.ProductType.INAPP)
-        .build(),
-    QueryProductDetailsParams.Product.newBuilder()
-        .setProductId("big_supporter")
-        .setProductType(BillingClient.ProductType.INAPP)
-        .build(),
-    QueryProductDetailsParams.Product.newBuilder()
-        .setProductId("mega_supporter")
-        .setProductType(BillingClient.ProductType.INAPP)
-        .build(),
-    QueryProductDetailsParams.Product.newBuilder()
-        .setProductId("ultimate_supporter")
+        .setProductId(PRO_PRODUCT_ID)
         .setProductType(BillingClient.ProductType.INAPP)
         .build(),
 )

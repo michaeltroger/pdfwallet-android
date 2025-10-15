@@ -3,3 +3,4 @@
  - Fixt den Link zu den Lizenzen
  - Neue freiwillige In-App-Kauf-Option zur Projektunterstützung (die gesamte App-Funktionalität bleibt gratis)
  - Neue "Impressum" und "Entwickler kontaktieren" Menü-Optionen
+ - Abstand zum Rand bei Barcodes angepasst

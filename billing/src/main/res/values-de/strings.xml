@@ -7,6 +7,5 @@
     <string name="billing_purchases_processing">Bearbeitung läuft…</string>
     <string name="billing_product_buy">Kaufen</string>
     <string name="billing_purchases_thanks">Herzlichen Dank! ♥️</string>
-    <string name="billing_products_title">Verfügbare Posten:</string>
     <string name="billing_explanation">Diese App ist 100% kostenlos, open-source, werbefrei und ohne Tracking. Du kannst dieses Projekt freiwillig unterstützen, indem du einen der folgenden Artikel kaufst. Bitte beachte, dass der Kauf der Artikel keine zusätzlichen Funktionen für dich freischaltet!</string>
 </resources>

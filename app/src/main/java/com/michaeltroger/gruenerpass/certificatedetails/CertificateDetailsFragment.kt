@@ -128,6 +128,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             is DetailsViewState.Normal -> showCertificateState(
                 certificate = state.document,
                 searchBarcode = state.searchBarcode,
+                invertColors = state.invertColors,
             )
             is DetailsViewState.Deleted -> {
                 findNavController().popBackStack()
@@ -142,13 +143,16 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
     private fun showCertificateState(
         certificate: Certificate,
         searchBarcode: BarcodeSearchMode,
+        invertColors: Boolean,
     ) {
         val item = CertificateItem(
             requireContext().applicationContext,
             fileName = certificate.id,
+            isDetailView = true,
             barcodeRenderer = barcodeRenderer,
             documentName = certificate.name,
             searchBarcode = searchBarcode,
+            invertColors = invertColors,
             dispatcher = thread,
             onDeleteCalled = {
                 vm.onDeleteCalled(certificate.id)

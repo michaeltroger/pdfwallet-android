@@ -20,6 +20,7 @@ import com.michaeltroger.gruenerpass.db.usecase.InsertIntoDatabaseUseCase
 import com.michaeltroger.gruenerpass.lock.AppLockedRepo
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImportResult
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImporter
+import com.michaeltroger.gruenerpass.pro.IsProUnlockedUseCase
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
@@ -56,6 +57,9 @@ class CertificatesViewModel @Inject constructor(
     )
     val viewState: StateFlow<ViewState> = _viewState
 
+    @Inject
+    lateinit var isProUnlocked: IsProUnlockedUseCase
+
     private val filter = MutableStateFlow("")
 
     private val _viewEvent = MutableSharedFlow<ViewEvent>(extraBufferCapacity = 1)
@@ -73,6 +77,11 @@ class CertificatesViewModel @Inject constructor(
         ) { value: String ->
             BarcodeSearchMode.fromPrefValue(value)
         }
+    private val invertColors =
+        sharedPrefs.getBooleanFlow(
+            app.getString(R.string.key_preference_invert_pdf_colors),
+            false
+        )
     private val addDocumentsInFront =
         sharedPrefs.getBooleanFlow(
             app.getString(R.string.key_preference_add_documents_front),
@@ -87,13 +96,25 @@ class CertificatesViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             combine(
-                getCertificatesFlowUseCase(),
-                filter,
-                shouldAuthenticate,
-                searchForBarcode,
-                showOnLockedScreen,
-                ::updateState
-            ).collect()
+                listOf(
+                    getCertificatesFlowUseCase(),
+                    filter,
+                    shouldAuthenticate,
+                    searchForBarcode,
+                    invertColors,
+                    showOnLockedScreen,
+                )
+            ) { values ->
+                @Suppress("UNCHECKED_CAST")
+                updateState(
+                    docs = values[0] as List<Certificate>,
+                    filter = values[1] as String,
+                    shouldAuthenticate = values[2] as Boolean,
+                    searchForBarcode = values[3] as BarcodeSearchMode,
+                    invertColors = values[4] as Boolean,
+                    showOnLockedScreen = values[5] as Boolean
+                )
+            }.collect()
         }
         viewModelScope.launch {
             pdfImporter.hasPendingFile().filter { it }.collect {
@@ -109,6 +130,7 @@ class CertificatesViewModel @Inject constructor(
         filter: String,
         shouldAuthenticate: Boolean,
         searchForBarcode: BarcodeSearchMode,
+        invertColors: Boolean,
         showOnLockedScreen: Boolean,
     ) {
         if (docs.isEmpty()) {
@@ -130,6 +152,7 @@ class CertificatesViewModel @Inject constructor(
                 ViewState.Normal(
                     documents = filteredDocs,
                     searchBarcode = searchForBarcode,
+                    invertColors = invertColors,
                     showLockMenuItem = shouldAuthenticate,
                     showScrollToFirstMenuItem = filteredDocs.size > 1,
                     showScrollToLastMenuItem = filteredDocs.size > 1,
@@ -139,6 +162,7 @@ class CertificatesViewModel @Inject constructor(
                     showWarningButton = showOnLockedScreen,
                     showExportFilteredMenuItem = areDocumentsFilteredOut,
                     showDeleteFilteredMenuItem = areDocumentsFilteredOut,
+                    showGetProMenuItem = !isProUnlocked()
                 )
             )
         }
@@ -278,6 +302,12 @@ class CertificatesViewModel @Inject constructor(
     fun onShowWarningDialogSelected() = viewModelScope.launch {
         _viewEvent.emit(
             ViewEvent.ShowWarningDialog
+        )
+    }
+
+    fun onGetPro() = viewModelScope.launch {
+        _viewEvent.emit(
+            ViewEvent.ShowGetPro
         )
     }
 

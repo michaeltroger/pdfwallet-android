@@ -2,6 +2,7 @@ package com.michaeltroger.gruenerpass.certificateslist
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -131,6 +132,9 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates_list) {
             ViewEvent.ShowWarningDialog -> certificateDialogs.showWarningDialog(requireContext())
             ViewEvent.ShowSettingsScreen -> findNavController().navigate(
                 CertificatesListFragmentDirections.actionGlobalSettingsFragment()
+            )
+            ViewEvent.ShowGetPro -> findNavController().navigate(
+                deepLink = "app://billing".toUri()
             )
             ViewEvent.ShowMoreScreen -> findNavController().navigate(
                 CertificatesListFragmentDirections.actionGlobalMoreFragment()

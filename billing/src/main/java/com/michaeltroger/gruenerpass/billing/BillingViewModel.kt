@@ -19,24 +19,32 @@ import javax.inject.Inject
 internal class BillingViewModel @Inject constructor(
     private val billingRepo: BillingRepo
 ) : ViewModel() {
-    private val _state = MutableStateFlow(BillingState(emptyList(), emptyList()))
+    private val _state = MutableStateFlow(
+        BillingState(
+            processing = false,
+            purchases = emptyList(),
+            productDetails = emptyList()
+        )
+    )
     internal val state: StateFlow<BillingState> = _state
 
     init {
         viewModelScope.launch {
             billingRepo.refreshPurchases.onEach {
+                val purchases = billingRepo.queryPurchases().sortedByDescending { it.purchaseTime }.mapNotNull {
+                    val productId = it.products.firstOrNull() ?: return@mapNotNull null
+                    val productDetails = billingRepo.getProductDetails(productId) ?: return@mapNotNull null
+                    Purchase(
+                        orderId = it.orderId,
+                        productName = productDetails.name,
+                        purchaseTime = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
+                            .withZone(ZoneId.systemDefault())
+                            .format(Instant.ofEpochMilli(it.purchaseTime))
+                    )
+                }
                 val billingState = BillingState(
-                    purchases = billingRepo.queryPurchases().sortedByDescending { it.purchaseTime }.mapNotNull {
-                        val productId = it.products.firstOrNull() ?: return@mapNotNull null
-                        val productDetails = billingRepo.getProductDetails(productId) ?: return@mapNotNull null
-                        Purchase(
-                            orderId = it.orderId,
-                            productName = productDetails.name,
-                            purchaseTime = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
-                                .withZone(ZoneId.systemDefault())
-                                .format(Instant.ofEpochMilli(it.purchaseTime))
-                        )
-                    },
+                    processing = purchases.any { it.orderId == null },
+                    purchases = purchases.filter { it.orderId != null },
                     productDetails = billingRepo.getAvailableProducts().sortedBy { productDetail ->
                         productOrderList.indexOf(productDetail.productId)
                     }.map {
@@ -59,6 +67,7 @@ internal class BillingViewModel @Inject constructor(
 }
 
 internal data class BillingState(
+    val processing: Boolean,
     val purchases: List<Purchase>,
     val productDetails: List<ProductDetails>
 )

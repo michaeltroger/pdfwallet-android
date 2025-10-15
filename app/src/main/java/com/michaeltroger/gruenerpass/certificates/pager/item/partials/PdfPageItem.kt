@@ -1,8 +1,10 @@
 package com.michaeltroger.gruenerpass.certificates.pager.item.partials
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.view.View
+import androidx.core.graphics.scale
 import androidx.core.view.isVisible
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.barcode.BarcodeRenderer
@@ -19,7 +21,6 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import androidx.core.graphics.scale
 
 private const val TAG_PDF_LOADED = "pdf_loaded"
 private const val TAG_BARCODE_LOADED = "barcode_loaded"
@@ -30,6 +31,7 @@ class PdfPageItem(
     private val fileName: String,
     private val pageIndex: Int,
     private val searchBarcode: BarcodeSearchMode,
+    private val invertColors: Boolean,
     ) : BindableItem<ItemCertificatePartialPdfPageBinding>() {
 
     private val scope = CoroutineScope(
@@ -76,6 +78,12 @@ class PdfPageItem(
 
             withContext(Dispatchers.Main) {
                 if(!isActive) return@withContext
+                if (isDarkMode(context) && invertColors) {
+                    viewBinding.pdfPage.colorFilter = pdfRenderer.getInvertFilter()
+                } else {
+                    viewBinding.pdfPage.colorFilter = null
+                }
+
                 viewBinding.pdfPage.setImageBitmap(pdf)
                 viewBinding.pdfPage.tag = TAG_PDF_LOADED
 
@@ -133,6 +141,7 @@ class PdfPageItem(
         viewHolder.binding.barcode.setImageBitmap(null)
 
         viewHolder.binding.pdfPage.tag = null
+        viewHolder.binding.pdfPage.colorFilter = null
         viewHolder.binding.pdfPage.setImageBitmap(null)
 
         viewHolder.binding.progressIndicatorWrapper.isVisible = true
@@ -144,7 +153,7 @@ class PdfPageItem(
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? PdfPageItem)?.pageIndex == pageIndex &&
-                (other as? PdfPageItem)?.fileName == fileName
+                other.fileName == fileName
     }
 
     private val Context.screenWidth: Int
@@ -152,4 +161,9 @@ class PdfPageItem(
 
     private val Context.screenHeight: Int
         get() = resources.displayMetrics.heightPixels
+}
+
+private fun isDarkMode(context: Context): Boolean {
+    val uiMode = context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+    return uiMode == Configuration.UI_MODE_NIGHT_YES
 }

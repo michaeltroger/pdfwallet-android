@@ -2,6 +2,7 @@ package com.michaeltroger.gruenerpass.certificates
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -146,6 +147,9 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
             ViewEvent.ShowSettingsScreen -> findNavController().navigate(
                 CertificatesFragmentDirections.actionGlobalSettingsFragment()
             )
+            ViewEvent.ShowGetPro -> findNavController().navigate(
+                deepLink = "app://billing".toUri()
+            )
             ViewEvent.ShowMoreScreen -> findNavController().navigate(
                 CertificatesFragmentDirections.actionGlobalMoreFragment()
             )
@@ -193,6 +197,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
             is ViewState.Normal -> showCertificateState(
                 documents = state.documents,
                 searchBarcode = state.searchBarcode,
+                invertColors = state.invertColors
             )
         }
     }
@@ -206,6 +211,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
     private fun showCertificateState(
         documents: List<Certificate>,
         searchBarcode: BarcodeSearchMode,
+        invertColors: Boolean,
     ) {
         val items = documents.map { certificate ->
             CertificateItem(
@@ -214,6 +220,8 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 barcodeRenderer = barcodeRenderer,
                 documentName = certificate.name,
                 searchBarcode = searchBarcode,
+                invertColors = invertColors,
+                isDetailView = false,
                 dispatcher = thread,
                 onDeleteCalled = {
                     vm.onDeleteCalled(certificate.id)
