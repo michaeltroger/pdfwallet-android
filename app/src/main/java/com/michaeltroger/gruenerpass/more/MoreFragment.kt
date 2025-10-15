@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.michaeltroger.gruenerpass.BuildConfig
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.extensions.getInstallerPackageName
 import com.michaeltroger.gruenerpass.extensions.getPackageInfo
@@ -57,7 +58,9 @@ class MoreFragment : PreferenceFragmentCompat() {
             getString(R.string.key_preference_version)
         ) ?: error("Preference is required")
 
-        preference.title = getString(R.string.version, requireContext().getPackageInfo().versionName!!)
+        preference.title = getString(R.string.version,
+            "${requireContext().getPackageInfo().versionName!!}-${BuildConfig.FLAVOR}"
+        )
 
         preference.summary = when (requireContext().getInstallerPackageName()) {
             "com.android.vending" -> "Google Play Store"
