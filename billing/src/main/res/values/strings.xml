@@ -6,5 +6,5 @@
     <string name="billing_purchases_processing">Verifying purchase… This can take a while. You can leave this screen and the app.</string>
     <string name="billing_product_buy">Buy</string>
     <string name="billing_purchases_thanks">Thanks a ton! ♥️</string>
-    <string name="billing_explanation">Get PDF Wallet Pro to unlock following features:\n• Removes \"Get Pro\" banner in various screens\n• Option to invert document colors in dark mode\n• Force dark or light theme by overriding system settings</string>
+    <string name="billing_explanation">Get PDF Wallet Pro to unlock following features:\n• Removes \"Get Pro\" banner in various screens\n• Option to invert document colors in dark mode\n• Option to force dark or light theme by overriding system settings</string>
 </resources>
