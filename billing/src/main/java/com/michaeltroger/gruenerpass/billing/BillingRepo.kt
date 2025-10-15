@@ -79,7 +79,9 @@ internal class BillingRepoImpl @Inject constructor(
                 }
             }
             override fun onBillingServiceDisconnected() {
-                    // ignore
+                repositoryScope.launch {
+                    _refreshPurchases.emit(Unit)
+                }
             }
         })
     }

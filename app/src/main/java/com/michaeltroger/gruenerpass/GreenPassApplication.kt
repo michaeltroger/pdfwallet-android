@@ -6,6 +6,7 @@ import androidx.preference.PreferenceManager
 import com.michaeltroger.gruenerpass.cache.BitmapCache
 import com.michaeltroger.gruenerpass.migration.AppMigrator
 import com.michaeltroger.gruenerpass.pro.IsProUnlockedUseCase
+import com.michaeltroger.gruenerpass.pro.PurchaseUpdateUseCase
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -18,6 +19,8 @@ class GreenPassApplication : Application() {
     // make sure BillingClient is initiated on app start
     @Inject
     lateinit var isProUnlocked: IsProUnlockedUseCase
+    @Inject
+    lateinit var purchaseUpdateUseCase: PurchaseUpdateUseCase
 
     override fun onCreate() {
         super.onCreate()

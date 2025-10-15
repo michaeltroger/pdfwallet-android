@@ -21,11 +21,11 @@ import com.michaeltroger.gruenerpass.lock.AppLockedRepo
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImportResult
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImporter
 import com.michaeltroger.gruenerpass.pro.IsProUnlockedUseCase
+import com.michaeltroger.gruenerpass.pro.PurchaseUpdateUseCase
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -35,6 +35,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @Suppress("TooManyFunctions", "LongParameterList")
 @HiltViewModel
@@ -50,15 +51,14 @@ class CertificatesViewModel @Inject constructor(
     private val getCertificatesFlowUseCase: GetCertificatesFlowUseCase,
     private val lockedRepo: AppLockedRepo,
     private val sharedPrefs: SharedPreferences,
+    private val isProUnlocked: IsProUnlockedUseCase,
+    private val purchaseUpdateUseCase: PurchaseUpdateUseCase,
 ): AndroidViewModel(app) {
 
     private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(
         ViewState.Initial
     )
     val viewState: StateFlow<ViewState> = _viewState
-
-    @Inject
-    lateinit var isProUnlocked: IsProUnlockedUseCase
 
     private val filter = MutableStateFlow("")
 
@@ -103,6 +103,7 @@ class CertificatesViewModel @Inject constructor(
                     searchForBarcode,
                     invertColors,
                     showOnLockedScreen,
+                    purchaseUpdateUseCase(),
                 )
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
