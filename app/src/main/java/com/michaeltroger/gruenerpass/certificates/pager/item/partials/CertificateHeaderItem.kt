@@ -40,6 +40,6 @@ class CertificateHeaderItem(
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? CertificateHeaderItem)?.fileName == fileName
-            && (other as? CertificateHeaderItem)?.documentName == documentName
+            && other.documentName == documentName
     }
 }

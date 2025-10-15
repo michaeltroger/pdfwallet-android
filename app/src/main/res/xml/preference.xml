@@ -7,14 +7,16 @@
     <Preference
         android:icon="@drawable/credit_card_heart_24px"
         android:summary="@string/preference_support_this_project_description"
-        app:isPreferenceVisible="@bool/has_billing"
+        app:isPreferenceVisible="false"
         tools:isPreferenceVisible="true"
         android:key="@string/key_preference_billing"
         android:title="@string/preference_support_this_project"/>
 
     <Preference
         android:layout="@layout/preference_layout_divider"
-        app:isPreferenceVisible="@bool/has_billing"
+        android:key="@string/key_preference_billing_separator"
+        tools:isPreferenceVisible="true"
+        app:isPreferenceVisible="false"
         android:selectable="false" />
 
     <com.michaeltroger.gruenerpass.settings.ValidateSwitchPreference
@@ -70,4 +72,11 @@
         android:summary="@string/preference_prevent_screenshots_description"
         android:defaultValue="true"
         android:enabled="false"/>
+
+    <com.michaeltroger.gruenerpass.settings.ValidateSwitchPreference
+        android:key="@string/key_preference_invert_pdf_colors"
+        android:title="@string/preference_invert_pdf_colors"
+        android:summary="@string/preference_invert_pdf_colors_description"
+        android:icon="@drawable/invert_colors_24px"
+        android:defaultValue="false"/>
 </PreferenceScreen>

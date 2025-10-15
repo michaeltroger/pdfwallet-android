@@ -5,6 +5,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.pdf.PdfRenderer
 import android.os.ParcelFileDescriptor
 import java.io.File
@@ -15,6 +18,17 @@ import kotlinx.coroutines.withContext
 private const val REGULAR_PDF_RESOLUTION_MULTIPLIER = 2
 private const val IMPROVED_PDF_RESOLUTION_MULTIPLIER = 4
 private const val MAX_BITMAP_SIZE = 100 * 1024 * 1024
+
+private val invertFilter = ColorMatrixColorFilter(
+    ColorMatrix(
+        floatArrayOf(
+            -1f, 0f, 0f, 0f, 255f,
+            0f, -1f, 0f, 0f, 255f,
+            0f, 0f, -1f, 0f, 255f,
+            0f, 0f, 0f, 1f, 0f
+        )
+    )
+)
 
 public object PdfRendererBuilder {
     public fun create(
@@ -34,6 +48,7 @@ public interface PdfRenderer {
     public suspend fun getPageCount(): Int
     public fun close()
     public suspend fun renderPage(pageIndex: Int, highResolution: Boolean): Bitmap?
+    public fun getInvertFilter(): ColorFilter
 }
 
 private class PdfRendererImpl(
@@ -126,4 +141,7 @@ private class PdfRendererImpl(
         return bitmap
     }
 
+    override fun getInvertFilter(): ColorFilter {
+        return invertFilter
+    }
 }

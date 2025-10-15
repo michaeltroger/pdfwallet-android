@@ -22,14 +22,18 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
+private const val WIDTH_FACTOR_MULTIPLE_DOCS = 0.95
+
 @Suppress("LongParameterList")
 class CertificateItem(
     context: Context,
+    private val isDetailView: Boolean,
     private val fileName: String,
     private val barcodeRenderer: BarcodeRenderer,
     dispatcher: CoroutineDispatcher,
     private val documentName: String,
     private val searchBarcode: BarcodeSearchMode,
+    private val invertColors: Boolean,
     private val onDeleteCalled: () -> Unit,
     private val onDocumentNameClicked: () -> Unit,
     private val onShareCalled: () -> Unit,
@@ -55,6 +59,14 @@ class CertificateItem(
                       position: Int,
                       payloads: MutableList<Any>) {
         super.bind(viewHolder, position, payloads)
+
+        if (!isDetailView) {
+            val layoutParams = viewHolder.itemView.layoutParams
+            val displayMetrics = viewHolder.itemView.context.resources.displayMetrics
+            layoutParams.width = (displayMetrics.widthPixels * WIDTH_FACTOR_MULTIPLE_DOCS).toInt()
+            viewHolder.itemView.layoutParams = layoutParams
+        }
+
         viewHolder.binding.certificate.adapter = adapter
         job = scope.launch {
             val itemList = mutableListOf<Group>()
@@ -75,6 +87,7 @@ class CertificateItem(
                         pageIndex = pageIndex,
                         fileName = fileName,
                         searchBarcode = searchBarcode,
+                        invertColors = invertColors,
                     )
                 )
             }
@@ -93,6 +106,6 @@ class CertificateItem(
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? CertificateItem)?.fileName == fileName
-            && (other as? CertificateItem)?.documentName == documentName
+            && other.documentName == documentName
     }
 }

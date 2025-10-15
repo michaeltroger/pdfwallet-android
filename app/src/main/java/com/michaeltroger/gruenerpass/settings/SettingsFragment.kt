@@ -14,6 +14,7 @@ import androidx.preference.SwitchPreference
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.cache.BitmapCache
 import com.michaeltroger.gruenerpass.lock.AppLockedRepo
+import com.michaeltroger.gruenerpass.pro.IsProUnlockedUseCase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -27,22 +28,38 @@ class SettingsFragment : PreferenceFragmentCompat() {
     lateinit var preferenceUtil: PreferenceUtil
     @Inject
     lateinit var lockedRepo: AppLockedRepo
+    @Inject
+    lateinit var isProUnlocked: IsProUnlockedUseCase
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preference, rootKey)
 
-        setupBilling()
         setupBiometricSetting()
         setupBarcodeSetting()
         setupLockscreenSetting()
         setupBrightnessSetting()
         setupPreventScreenshotsSetting()
+        setupInvertPdfColorsSetting()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupBilling()
     }
 
     private fun setupBilling() {
         val preferenceBilling = findPreference<Preference>(
             getString(R.string.key_preference_billing)
         ) ?: error("Preference is required")
+        val preferenceBillingSeparator = findPreference<Preference>(
+            getString(R.string.key_preference_billing_separator)
+        ) ?: error("Preference is required")
+
+        lifecycleScope.launch {
+            val showUpselling = !isProUnlocked()
+            preferenceBilling.isVisible = showUpselling
+            preferenceBillingSeparator.isVisible = showUpselling
+        }
 
         preferenceBilling.setOnPreferenceClickListener {
             findNavController().navigate(deepLink = "app://billing".toUri())
@@ -57,6 +74,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         preferenceBarcode.setOnPreferenceClickListener {
             BitmapCache.memoryCache.evictAll()
+            true
+        }
+    }
+
+    private fun setupInvertPdfColorsSetting() {
+        val preference = findPreference<SwitchPreference>(
+            getString(R.string.key_preference_invert_pdf_colors)
+        ) ?: error("Preference is required")
+        preference.setOnPreferenceClickListener {
+            lifecycleScope.launch {
+                if (isProUnlocked()) {
+                    preference.isChecked = !preference.isChecked
+                } else if (preference.isChecked) {
+                    preference.isChecked = false
+                } else {
+                    findNavController().navigate(deepLink = "app://billing".toUri())
+                }
+            }
             true
         }
     }
