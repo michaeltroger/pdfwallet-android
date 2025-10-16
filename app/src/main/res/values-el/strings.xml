@@ -20,9 +20,11 @@
     <string name="rate">Βαθμολογήστε αυτή την εφαρμογή</string>
     <string name="help_translating">Βοηθήστε στη μετάφραση</string>
     <string name="help_translating_summary">Μεταφράστε την εφαρμογή στη μητρική σας γλώσσα</string>
+    <string name="contact_developer">Επικοινωνήστε με τον προγραμματιστή</string>
     <string name="contributing">Βοηθήστε στον προγραμματισμό</string>
     <string name="contributing_summary">Αυτή η εφαρμογή είναι ανοιχτού κώδικα. Συνεισφέρετε στον κώδικα!</string>
     <string name="more">Περισσότερα</string>
+    <string name="imprint">Νομικές πληροφορίες</string>
     <string name="privacy_policy">Πολιτική απορρήτου</string>
     <string name="preference_max_brightness">100\u0025 φωτεινότητα</string>
     <string name="preference_max_brightness_description">Να εμφανίζεται πάντα η εφαρμογή με πλήρη φωτεινότητα οθόνης.</string>
@@ -66,4 +68,14 @@
     <string name="preference_barcode_extended">Εκτεταμένη (καλύτερη δυνατή ανίχνευση)</string>
     <string name="preference_prevent_screenshots">Αποτροπή στιγμιοτύπων οθόνης</string>
     <string name="preference_prevent_screenshots_description">Τα στιγμιότυπα οθόνης δεν επιτρέπονται ποτέ, σε περίπτωση που ενεργοποιήσετε τον έλεγχο ταυτότητας. Αυτό έχει λόγους ασφαλείας.</string>
+    <string name="support_this_project">PDF Wallet Pro</string>
+    <string name="menu_support_this_project">Αποκτήστε PDF Wallet Pro</string>
+    <string name="preference_support_this_project">Αποκτήστε PDF Wallet Pro</string>
+    <string name="preference_support_this_project_description">Ξεκλείδωμα πρόσθετων χαρακτηριστικών.</string>
+    <string name="preference_invert_pdf_colors">Αντιστροφή χρωμάτων PDF</string>
+    <string name="preference_invert_pdf_colors_description">Αντιστροφή χρωμάτων εγγράφου σε σκοτεινή λειτουργία.</string>
+    <string name="preference_force_theme">Επιβολή θέματος εφαρμογής</string>
+    <string name="preference_theme_system">Σύστημα</string>
+    <string name="preference_theme_light">Ανοιχτό</string>
+    <string name="preference_theme_dark">Σκούρο</string>
 </resources>
