@@ -1,7 +1,7 @@
 Eine App, deren Quellcode vollständig öffentlich ist. Diese App ist ein einfach zu bedienendes PDF-Wallet. Sie übernimmt damit die Aufgabe Ihre wichtigsten PDF-Zertifikate aufzubewahren und anzuzeigen. Sie inkludiert eine bequeme, formatfüllende Barcode Anzeige, falls ein Barcode im PDF vorhanden ist.
 
 Kurzanleitung
-- "PDF Wallet" öffnen
+- "PDF Wallet" öffnen-
 - PDF importieren
 - Fertig
 
