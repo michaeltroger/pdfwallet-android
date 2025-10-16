@@ -7,5 +7,8 @@
     <string name="billing_purchases_processing">Kontrollin ostukinnitust… Selleks võib kulida mõni hetk. Võid sellest ekraanivaatest ja/või rakendusest lahkuda.</string>
     <string name="billing_product_buy">Osta</string>
     <string name="billing_purchases_thanks">Väga suur tänu! ♥️</string>
-    <string name="billing_explanation">Kui võtad kasutusele PDF Wallet Pro, siis saad kasutada järgnevaid lisavõimalusi:\n• Eri vaadetest kaob „Laadi alla PDF Wallet Pro“ märge\n• Võimalus kasutada tumedas vaates pööratud värve\n•Võimalus kasutada tumedat või heledat kujundust sõltumata süsteemi üldistest seadistustest</string>
+    <string name="billing_benefits_description">Kui võtad kasutusele PDF Wallet Pro, siis saad kasutada järgnevaid lisavõimalusi:</string>
+    <string name="billing_benefit_1">Eri vaadetest kaob „Laadi alla PDF Wallet Pro“ märge</string>
+    <string name="billing_benefit_2">Võimalus kasutada tumedas vaates pööratud värve</string>
+    <string name="billing_benefit_3">Võimalus kasutada tumedat või heledat kujundust sõltumata süsteemi üldistest seadistustest</string>
 </resources>
