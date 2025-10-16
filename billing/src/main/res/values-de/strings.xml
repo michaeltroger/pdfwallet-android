@@ -7,5 +7,8 @@
     <string name="billing_purchases_processing">Überprüfung des Kaufs… Dies kann eine Weile dauern. Sie können diesen Screen und die App verlassen.</string>
     <string name="billing_product_buy">Kaufen</string>
     <string name="billing_purchases_thanks">Herzlichen Dank! ♥️</string>
-    <string name="billing_explanation">Hole dir PDF Wallet Pro um folgende Funktionen freizuschalten:\n• Entfernt \"Pro\"-Banner auf verschiedenen Screens\n• Option die Dokumentenfarbe im dunklen Modus zu invertieren\n• Option den hellen oder dunklen Modus zu erzwingen, durch Überschreiben der Systemeinstellung</string>
+    <string name="billing_benefits_description">Hole dir PDF Wallet Pro um folgende Funktionen freizuschalten:</string>
+    <string name="billing_benefit_1">Entfernt \"Pro\"-Banner auf verschiedenen Screens</string>
+    <string name="billing_benefit_2">Option die Dokumentenfarbe im dunklen Modus zu invertieren</string>
+    <string name="billing_benefit_3">Option den hellen oder dunklen Modus zu erzwingen, durch Überschreiben der Systemeinstellung</string>
 </resources>
