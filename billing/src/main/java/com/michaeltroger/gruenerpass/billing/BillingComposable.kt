@@ -80,7 +80,10 @@ private fun BillingComposableImpl(
         }
         item {
             Column {
-                Text(stringResource(R.string.billing_explanation))
+                Text(stringResource(R.string.billing_benefits_description))
+                Text("• " + stringResource(R.string.billing_benefit_1))
+                Text("• " + stringResource(R.string.billing_benefit_2))
+                Text("• " + stringResource(R.string.billing_benefit_3))
                 Spacer(Modifier.height(AppPadding.l))
             }
         }
