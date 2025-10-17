@@ -1,6 +1,4 @@
 ---
-layout: default
-title: PDF Wallet Privacy Policy
 noindex: true
 ---
 ## [Deutsch]({{ "/privacy/de" | relative_url }})
