@@ -1,4 +1,4 @@
  - Introduction of "PDF Wallet Pro" (all existing functionality remains free)
  - Purchase allows the removal of "Get Pro" banners
- - Purchase allows to force the light or the dark theme (overwrites system settings)
+ - Purchase allows to force the light or the dark theme (overrides system settings)
  - Purchase allows to invert document colors in dark mode
