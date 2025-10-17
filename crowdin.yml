@@ -5,3 +5,5 @@ files:
     ignore:
       - '*/changelogs/*'
     translation: /fastlane/metadata/android/%locale%/**/%original_file_name%
+  - source: /docs/privacy/index.md
+    translation: /docs/privacy/%two_letters_code%/index.md
