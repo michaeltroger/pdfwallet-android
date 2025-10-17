@@ -1,0 +1,44 @@
+Una aplicación completamente de código abierto. Esta aplicación es una cartera de PDFs fácil de usar. Esto significa que se encarga de almacenar y mostrar tus certificados PDF más importantes. Incluye una cómoda visualización de códigos de barras a pantalla completa, si el PDF contiene uno.
+
+Instrucciones breves
+- Abre “PDF Wallet”
+- Importa el PDF
+- Listo
+
+Instrucciones alternativas
+- Abre tu explorador de archivos, correo electrónico, navegador web o aplicación lectora de PDF
+- Abre o comparte el PDF con “PDF Wallet”
+- Listo
+
+Descripción
+Aplicación muy sencilla que no hace más que almacenar y mostrar certificados PDF de manera práctica. Puedes usarla para billetes de transporte público, facturas, contratos, certificados o cualquier otro archivo PDF.
+El archivo PDF debe importarse a la aplicación. Después, el código de barras se mostrará a pantalla completa, junto con el propio documento PDF. Eso es todo.
+
+Formatos de código de barras compatibles actualmente:
+- Códigos matriciales (2D): QR, Aztec, DataMatrix y PDF417
+- Códigos lineales (1D): UPC-A, UPC-E, EAN-8, EAN-13, CODE-39, CODE-93, CODE-128, ITF y Codabar
+
+Más funciones
+- Puede detectar y extraer códigos de barras en PDFs
+- Autenticación por huella dactilar (opcional)
+- Los PDFs pueden ordenarse y nombrarse individualmente
+- Los PDFs pueden abrirse
+- Los PDFs pueden compartirse desde otras aplicaciones
+- Los PDFs pueden compartirse con otras aplicaciones (lo que permite la impresión indirectamente)
+- Compatibilidad con modo oscuro (el documento se mantiene en sus colores originales)
+- Soporte para PDFs protegidos con contraseña
+- Dos diseños diferentes para elegir
+
+La versión “Pro” incluye además (requiere compra dentro de la app):
+- Elimina el banner “Get Pro” en varias pantallas
+- Opción para invertir los colores del documento en modo oscuro
+- Opción para forzar el tema claro u oscuro, sobrescribiendo la configuración del sistema
+
+¿Por qué el código de barras generado se ve diferente al del PDF?
+El algoritmo de visualización es distinto. Para los dispositivos de lectura, el código es idéntico.
+
+Privacidad
+Esta aplicación valora tu privacidad siendo completamente de código abierto y funcionando sin conexión. Sin anuncios, sin seguimiento.
+
+Problemas
+Este es un proyecto realizado en el tiempo libre por un único desarrollador. Por lo tanto, por favor comprende que las respuestas pueden tardar un poco.
