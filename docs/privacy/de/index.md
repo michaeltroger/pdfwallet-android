@@ -77,4 +77,4 @@ Wenn du die App durch solch einen externen Link verlässt, dann kann ich nicht d
 ## Aktualität dieser Datenschutzerklärung
 
 Diese Datenschutzerklärung ist aktuell und wurde im September 2025 erstellt. Da die App von Zeit zu Zeit aktualisiert wird, könnte ich auch diese Erklärung aktualisieren.
-Die aktuelle Erklärung wird immer unter dieser URL verfügbar sein. Die Erklärung ist [Open-Source](https://github.com/michaeltroger/pdfwallet-android) wie der Rest der App, was es auch ermöglicht die Änderungshistorie einzusehen.
+Die aktuelle Erklärung wird immer unter dieser URL verfügbar sein. Die Erklärung ist [Open-Source]({{ site.website_source_root_url }}{{ page.path }}) wie der Rest der App, was es auch ermöglicht die Änderungshistorie einzusehen.
