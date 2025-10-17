@@ -3,7 +3,7 @@ layout: default
 title: PDF Wallet Privatsphäre und Datenschutz
 noindex: true
 ---
-## [English]({% link privacy/index.md %})
+## [English]({{ "/privacy/" | relative_url }})
 # PDF Wallet: Privatsphäre und Datenschutz
 
 ## Kontaktdaten
