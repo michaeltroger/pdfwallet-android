@@ -1,0 +1,44 @@
+Un’app completamente open source. Questa app è un semplice Portafoglio PDF. Pensato per memorizzare e visualizzare i tuoi certificati PDF più importanti. Include una comoda visualizzazione a schermo intero dei codici a barre, se presenti nel PDF.
+
+Breve Istruzione
+- Apri “PDF Wallet”
+- Importa un PDF
+- Fatto
+
+Istruzioni Alternative
+- Vai al tuo file browser, email, browser web o app di lettura PDF
+- Apri / Condividi il PDF con “PDF Wallet”
+- Fatto
+
+Descrizione
+Un’app molto semplice, che non fa altro che memorizzare e visualizzare comodamente i certificati PDF. Puoi usarla per biglietti di trasporto pubblico, fatture, contratti, certificati e qualsiasi altro file PDF.
+Il file PDF deve essere importato nell’app. Successivamente, se è presente un codice a barre, questo verrà mostrato a schermo intero insieme al documento PDF stesso. Tutto qui.
+
+Formati di codice a barre attualmente supportati:
+- Codici a matrice (2D): QR, Aztec, DataMatrix e PDF417
+- Codici lineari (1D): UPC-A, UPC-E, EAN-8, EAN-13, CODE-39, CODE-93, CODE-128, ITF e Codabar
+
+Altre Funzionalità
+- Rileva ed estrae i codici a barre dai PDF
+- (Opzionale) Autenticazione tramite impronta digitale
+- I PDF possono essere ordinati e rinominati individualmente
+- I PDF possono essere aperti
+- I PDF possono essere condivisi da altre app
+- I PDF possono essere condivisi con altre app (consente indirettamente la stampa)
+- Supporto per Modalità Scura (il documento rimane nei suoi colori originali)
+- Supporto anche per PDF protetti da password
+- Due diversi layout tra cui scegliere
+
+La versione “Pro” aggiunge inoltre (richiede acquisto in-app):
+- Rimozione del banner “Get Pro” in varie schermate
+- Opzione per invertire i colori del documento in modalità scura
+- Opzione per forzare il tema chiaro o scuro, ignorando le impostazioni di sistema
+
+Perché il codice a barre generato appare diverso da quello nel PDF?
+L’algoritmo di visualizzazione è diverso. Ma per i dispositivi di lettura il codice è identico.
+
+Privacy
+Questa app tutela la tua privacy essendo completamente open source e funzionando offline. Nessuna pubblicità, nessun tracciamento.
+
+Problemi
+Questo è un progetto sviluppato nel tempo libero da un singolo sviluppatore. Ti preghiamo quindi di comprendere che le risposte possono richiedere un po’ di tempo.
