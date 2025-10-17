@@ -2,7 +2,7 @@
 noindex: true
 ---
 
-## [EN]({{ "/privacy" | relative_url }}) | [DE]({{ "/privacy/de" | relative_url }})
+## [EN]({{ "/privacy" | relative_url }}) | [DE]({{ "/privacy/de" | relative_url }})  | [ES]({{ "/privacy/es" | relative_url }})  | [FR]({{ "/privacy/fr" | relative_url }})
 
 # PDF Wallet: Datenschutzrichtlinie
 
@@ -18,7 +18,7 @@ Austria
 
 ## Datenverarbeitung
 
-PDF Wallet funktioniert **ausschließlich auf deinem Gerät**.
+PDF Wallet arbeitet **ausschließlich auf deinem Gerät**.
 Alle Dokumente und zugehörigen Informationen bleiben lokal gespeichert und werden **niemals an uns oder an Dritte gesendet**.
 Wir haben **keinen Zugriff** auf deine Dateien, Passwörter oder Nutzungsdaten.
 
