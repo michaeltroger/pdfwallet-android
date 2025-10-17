@@ -3,7 +3,7 @@ layout: default
 title: PDF Wallet Privacy Policy
 noindex: true
 ---
-## [Deutsch]({% link privacy/de/index.md %})
+## [Deutsch]({{ "/privacy/de" | relative_url }})
 # PDF Wallet: Privacy Policy
 
 ## Contact Data
