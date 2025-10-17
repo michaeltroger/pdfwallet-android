@@ -29,6 +29,9 @@ jobs:
       run: |
         ./gradlew generateLicenseReport
         sed -i '/<p id="timestamp">/,/<\/p>/d' docs/licenses/index.html
+    - name: Add imprint
+      run: |
+        echo '<p><a href="https://michaeltroger.com/imprint">Imprint / Impressum / Aviso legal / Mentions légales</a></p>' >> docs/licenses/index.html
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v7
       with:
