@@ -1,7 +1,7 @@
 ---
 noindex: true
 ---
-## [Deutsch]({{ "/privacy/de" | relative_url }})
+## [EN]({{ "/privacy" | relative_url }}) [DE]({{ "/privacy/de" | relative_url }})
 # PDF Wallet: Privacy Policy
 
 **Last updated**: October 2025
