@@ -81,9 +81,11 @@ private fun BillingComposableImpl(
         item {
             Column {
                 Text(stringResource(R.string.billing_benefits_description))
-                Text("• " + stringResource(R.string.billing_benefit_1))
-                Text("• " + stringResource(R.string.billing_benefit_2))
-                Text("• " + stringResource(R.string.billing_benefit_3))
+                BulletedList(listOf(
+                    stringResource(R.string.billing_benefit_1),
+                    stringResource(R.string.billing_benefit_2),
+                    stringResource(R.string.billing_benefit_3)
+                ))
                 Spacer(Modifier.height(AppPadding.l))
             }
         }
