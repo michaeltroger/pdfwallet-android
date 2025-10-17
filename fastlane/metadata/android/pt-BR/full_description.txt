@@ -1,0 +1,44 @@
+Um aplicativo totalmente de código aberto. Este aplicativo é uma Carteira de PDFs simples de usar. Isso significa que ele assume a tarefa de guardar e exibir os seus certificados em PDF mais importantes. Inclui uma visualização prática em ecrã/ tela inteira do código de barras, se o PDF contiver um.
+
+Instruções rápidas
+- Abra o “PDF Wallet”
+- Importe o PDF
+- Pronto
+
+Instruções rápidas alternativas
+- Vá ao seu gestor de ficheiros/arquivos, e-mail, navegador ou app de leitura de PDF
+- Abra ou partilhe/envie o PDF com o “PDF Wallet”
+- Pronto
+
+Descrição
+Aplicativo muito simples, que serve apenas para guardar e exibir convenientemente certificados em PDF. Pode ser usado para bilhetes de transporte público, faturas/contas, contratos, certificados e qualquer outro ficheiro PDF.
+O ficheiro PDF precisa ser importado para o app. Depois disso, o código de barras é exibido em ecrã/tela cheia, bem como o próprio documento PDF. É só isso.
+
+Atualmente, os formatos de código de barras suportados são:
+- Códigos matriciais (2D): QR, Aztec, DataMatrix e PDF417
+- Códigos lineares (1D): UPC-A, UPC-E, EAN-8, EAN-13, CODE-39, CODE-93, CODE-128, ITF e Codabar
+
+Mais funcionalidades
+- Deteta e extrai códigos de barras em PDFs
+- (Opcional) Autenticação por impressão digital
+- PDFs podem ser nomeados e organizados individualmente
+- PDFs podem ser abertos diretamente
+- PDFs podem ser partilhados/enviados a partir de outras apps
+- PDFs podem ser partilhados com outras apps (permite impressão indireta)
+- Suporte a modo escuro (o documento mantém as cores originais)
+- Suporte a PDFs protegidos por palavra-passe/senha
+- Duas opções de layout disponíveis
+
+A versão “Pro” inclui adicionalmente (requer compra dentro do app):
+- Remove o banner “Obter Pro / Get Pro” de várias telas
+- Opção para inverter as cores do documento no modo escuro
+- Opção para forçar o tema claro ou escuro, ignorando as definições do sistema
+
+Por que o código de barras gerado parece diferente do que está no PDF?
+O algoritmo de exibição é diferente. Mas para os dispositivos de leitura o código é idêntico.
+
+Privacidade
+Este aplicativo respeita a sua privacidade por ser totalmente de código aberto e funcionar offline. Sem anúncios, sem rastreamento.
+
+Problemas ou dúvidas
+Este é um projeto de tempo livre desenvolvido por uma única pessoa. Portanto, pedimos compreensão caso as respostas demorem um pouco.
