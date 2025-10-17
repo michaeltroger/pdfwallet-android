@@ -1,0 +1,44 @@
+Une application entièrement open source. Cette application est un portefeuille PDF simple à utiliser. Cela signifie qu’elle prend en charge la tâche de stocker et d’afficher vos certificats PDF les plus importants. Elle inclut un affichage plein écran pratique des codes-barres, si un code-barres est présent dans le PDF.
+
+Brève instruction
+- Ouvrez « PDF Wallet »
+- Importez un PDF
+- Terminé
+
+Instruction alternative
+- Allez dans votre explorateur de fichiers, votre application d’e-mail, votre navigateur web ou votre lecteur PDF
+- Ouvrez / partagez le PDF avec « PDF Wallet »
+- Terminé
+
+Description
+Application très simple, qui ne fait rien d’autre que stocker et afficher commodément des certificats PDF. Vous pouvez l’utiliser pour des billets de transport, factures, contrats, certificats ou tout autre fichier PDF.
+Le fichier PDF doit être importé dans l’application. Ensuite, le code-barres (s’il existe) est affiché en plein écran, ainsi que le document PDF lui-même. Et c’est tout.
+
+Formats de codes-barres actuellement pris en charge
+- Codes matriciels (2D) : QR, Aztec, DataMatrix et PDF417
+- Codes linéaires (1D) : UPC-A, UPC-E, EAN-8, EAN-13, CODE-39, CODE-93, CODE-128, ITF et Codabar
+
+Fonctions supplémentaires
+- Détection et extraction des codes-barres dans les PDF
+- Authentification par empreinte digitale (optionnelle)
+- Les PDF peuvent être triés et renommés individuellement
+- Les PDF peuvent être ouverts
+- Les PDF peuvent être partagés depuis d’autres applications
+- Les PDF peuvent être partagés avec d’autres applications (permet indirectement l’impression)
+- Mode sombre pris en charge (le document reste dans sa couleur d’origine)
+- Compatibilité avec les PDF protégés par mot de passe
+- Deux mises en page différentes au choix
+
+La version « Pro » apporte en plus (achat intégré requis) :
+- Suppression de la bannière « Get Pro » sur divers écrans
+- Option pour inverser les couleurs du document en mode sombre
+- Option pour forcer le thème clair ou sombre, indépendamment des réglages du système
+
+Pourquoi le code-barres généré semble-t-il différent de celui du PDF ?
+L’algorithme d’affichage est différent. Pour les appareils de lecture, le code est identique.
+
+Confidentialité
+Cette application respecte votre vie privée : elle est entièrement open source et fonctionne hors ligne. Aucune publicité, aucun suivi.
+
+Problèmes / Support
+Il s’agit d’un projet personnel développé sur le temps libre d’un seul développeur. Merci donc de votre compréhension si les réponses peuvent prendre un certain temps.
