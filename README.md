@@ -3,8 +3,8 @@ An Android App - previously known as Green Pass PDF Wallet.
 
 [![Android CI](https://github.com/michaeltroger/pdfwallet-android/actions/workflows/android.yml/badge.svg)](https://github.com/michaeltroger/pdfwallet-android/actions/workflows/android.yml) [![UI tests](https://github.com/michaeltroger/pdfwallet-android/actions/workflows/ui_tests.yml/badge.svg)](https://github.com/michaeltroger/pdfwallet-android/actions/workflows/ui_tests.yml) [![Crowdin](https://badges.crowdin.net/green-pass/localized.svg)](https://crowdin.com/project/green-pass)
 
-An app that is fully open source. This app is a simple to use PDF Wallet.
-That means it takes over the task to store and display your most important PDF certificates.
+An app that is fully open-source. This app is a simple to use PDF Wallet.
+That means it takes over the task of storing and displaying your most important PDF certificates.
 It includes a convenient fullscreen barcode rendering, if a barcode is present in the PDF.
 Currently supported formats are:
 - Matrix (2D) codes: QR, Aztec, DataMatrix and PDF417
@@ -25,8 +25,8 @@ __or directly from [GitHub Releases](https://github.com/michaeltroger/greenpass-
 
 # Difference between releases
 The difference between the Google Play release and the F-Droid/GitHub releases, is that the Google Play release requires a Google in-app purchase to unlock all features ("PDF Wallet Pro"). Most features are free in all variants though.
-If you like the app then please consider buying "Pro" through the Google Play version. You can switch back to your preferred variant afterwards.
-Note that neither variant of the app has internet access, so you're privacy is valued - independently of your choice! This repo holds the source code of all variants!
+If you like the app, then please consider buying "Pro" through the Google Play version. You can switch back to your preferred variant afterward.
+Note that neither variant of the app has internet access, so your privacy is valued - independently of your choice! This repo holds the source code of all variants!
 
 <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.jpeg" width="200">
 
