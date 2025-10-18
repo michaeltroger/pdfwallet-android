@@ -1,3 +1,7 @@
 User-agent: *
 Disallow: /privacy/
 Disallow: /privacy/de/
+Disallow: /privacy/fr/
+Disallow: /privacy/pt/
+Disallow: /privacy/es/
+Disallow: /privacy/it/
