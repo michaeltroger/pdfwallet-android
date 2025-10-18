@@ -1,4 +1,4 @@
-An app that is fully open source. This app is a simple to use PDF Wallet. That means it takes over the task to store and display your most important PDF certificates. It includes a convenient fullscreen barcode rendering, if a barcode is present in the PDF.
+An app that is fully open source. This app is a simple to use PDF Wallet. That means it takes over the task of storing and displaying your most important PDF certificates. It includes a convenient fullscreen barcode rendering, if a barcode is present in the PDF.
 
 Brief Instruction
 - Open "PDF Wallet"
@@ -11,8 +11,8 @@ Alternative Brief Instruction
 - Done
 
 Description
-Very simple app, that does nothing more than conveniently storing and displaying PDF certificates. You can use it for public transport tickets, bills, contracts, certificates and any other PDF file.
-The PDF file has to be imported into the app. Following the barcode is displayed in fullscreen, as well as the PDF document itself. That's already it.
+A very simple app that does nothing more than conveniently store and display PDF certificates. You can use it for public transport tickets, bills, contracts, certificates and any other PDF file.
+The PDF file has to be imported into the app. Following that, the barcode is displayed in fullscreen, as well as the PDF document itself. That's already it.
 
 Currently supported barcode formats are:
 - Matrix (2D) codes: QR, Aztec, DataMatrix and PDF417
@@ -25,20 +25,20 @@ More Features
 - PDFs can be opened
 - PDFs can be shared from other apps
 - PDFs can be shared with other apps (indirectly allows printing)
-- Dark Mode support (Document stays in original color)
-- Supports also password protected PDFs
+- Dark Mode support (document stays in original color)
+- Also supports password protected PDFs
 - Two different layouts to choose from
 
-The "Pro" version brings additionally (requires In-App Purchase):
+The "Pro" version additionally brings (requires In-App Purchase):
 - Removes "Get Pro" banner on various screens
 - Option to invert document colors in dark mode
-- Option to force light or dark theme by overwriting system settings
+- Option to force light or dark theme by overriding system settings
 
-Why does the generated barcode look differently than the one in the PDF?
-The algorithm to display is different. For reading devices the code is identical.
+Why does the generated barcode look different from the one in the PDF?
+The algorithm used for display is different. For reading devices the code is identical.
 
 Privacy
 This app values your privacy by being fully open source and working offline. No ads, no tracking.
 
 Issues
-This is a free time project of a single developer. Therefore please understand that replies can take a little while.
+This is a free-time project of a single developer. Therefore please understand that replies can take a little while.
