@@ -31,7 +31,7 @@ jobs:
         sed -i '/<p id="timestamp">/,/<\/p>/d' docs/licenses/index.html
     - name: Add imprint
       run: |
-        sed -i '/<\/body>/i <p> <a href="https://michaeltroger.com/imprint">Imprint / Impressum / Aviso legal / Mentions légales / Informazioni legali / Informações legais</a></p>' docs/licenses/index.html
+        sed -i '/<\/body>/i <p><a href="https://michaeltroger.com/imprint">Imprint / Impressum / Aviso legal / Mentions légales / Informazioni legali / Informações legais</a></p><p><a href="https://michaeltroger.com/privacy">Privacy Policy / Datenschutzerklärung / Política de Privacidad / Politique de confidentialité / Informativa sulla Privacy / Política de Privacidade</a></p>' docs/licenses/index.html
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v7
       with:
