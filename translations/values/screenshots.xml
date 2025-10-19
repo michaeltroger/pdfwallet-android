@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screenshot_1">Store and display your most important PDF certificates.</string>
+    <string name="screenshot_2">If there is a barcode, it is extracted and displayed above in an enlarged view.</string>
+    <string name="screenshot_3">Choose an alternative layout.</string>
+    <string name="screenshot_4">Here’s how it works: Import the PDF. Done.</string>
+</resources>
