@@ -54,6 +54,21 @@ class ListScreenshotTest {
     }
 
     @Test
+    fun multipleDocuments() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder()
+            .openPdf(fileName = "demo.pdf")
+            .verifyDocumentLoaded(docName = "demo", expectedDocumentCount = 1, listLayout = true)
+            .selectAnotherDocument()
+            .goToPdfFolder()
+            .openPdf(fileName = "demo1.pdf")
+            .verifyDocumentLoaded(docName = "demo1", expectedDocumentCount = 2, listLayout = true)
+
+        ScreenshotUtil.recordScreenshot("list_layout_multiple")
+    }
+
+    @Test
     fun detail() {
         MainActivityRobot()
             .selectFirstDocument()
