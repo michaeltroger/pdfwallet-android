@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screenshot_1">Stockez et affichez vos principaux certificats PDF.</string>
+    <string name="screenshot_2">S\'il y a un code à barres, il est extrait et affiché ci-dessus dans une vue agrandie.</string>
+    <string name="screenshot_3">Choisir une disposition alternative.</string>
+    <string name="screenshot_4">Voici comment ça marche : Importez le PDF. Fait.</string>
+</resources>
