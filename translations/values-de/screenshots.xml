@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screenshot_1">Aufbewahrung und Anzeige Ihrer wichtigsten PDF-Zertifikate.</string>
+    <string name="screenshot_2">Falls ein Barcode vorhanden ist, wird er extrahiert &amp; vergrößert dargestellt.</string>
+    <string name="screenshot_3">Wählen Sie ein alternatives Layout.</string>
+    <string name="screenshot_4">Und so funktioniert\'s: PDF importieren. Fertig.</string>
+</resources>
