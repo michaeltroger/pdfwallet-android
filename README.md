@@ -24,9 +24,11 @@ Get it on:
 __or directly from [GitHub Releases](https://github.com/michaeltroger/greenpass-android/releases)__
 
 # Difference between releases
-The difference between the Google Play release and the F-Droid/GitHub releases, is that the Google Play release requires a Google in-app purchase to unlock all features ("PDF Wallet Pro"). Most features are free in all variants though.
-If you like the app, then please consider buying "Pro" through the Google Play version. You can switch back to your preferred variant afterward.
-Note that neither variant of the app has internet access, so your privacy is valued - independently of your choice! This repo holds the source code of all variants!
+| Aspect | Google Play | F-Droid / GitHub Release |
+|--------|----------------------|---------------------------|
+| **Feature Unlock** | Requires a Google in-app purchase (“PDF Wallet Pro”) to unlock all features | All features available |
+
+Consider buying “Pro” to support development — you can switch back to your preferred variant later.
 
 <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/1_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/2_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/3_en-US.jpeg" width="200"> <img src="/fastlane/metadata/android/en-US/images/phoneScreenshots/4_en-US.jpeg" width="200">
 
