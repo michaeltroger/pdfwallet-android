@@ -7,3 +7,5 @@ files:
     translation: /fastlane/metadata/android/%locale%/**/%original_file_name%
   - source: /docs/privacy/index.md
     translation: /docs/privacy/%two_letters_code%/index.md
+  - source: /translations/values/*.xml
+    translation: /translations/values-%two_letters_code%/%original_file_name%
