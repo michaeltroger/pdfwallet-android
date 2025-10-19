@@ -24,7 +24,7 @@ Get it on:
 __or directly from [GitHub Releases](https://github.com/michaeltroger/greenpass-android/releases)__
 
 # Difference between releases
-| Aspect | Google Play | F-Droid / GitHub Release |
+|  | Google Play | F-Droid / GitHub Release |
 |--------|----------------------|---------------------------|
 | **Feature Unlock** | Requires a Google in-app purchase (“PDF Wallet Pro”) to unlock all features | All features available |
 
