@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screenshot_1">Memorizza e visualizza i tuoi certificati PDF più importanti.</string>
+    <string name="screenshot_2">Se c\'è un codice a barre, viene estratto e visualizzato sopra in una vista allargata.</string>
+    <string name="screenshot_3">Scegli un layout alternativo.</string>
+    <string name="screenshot_4">Ecco come funziona: Importa il PDF. Fatto.</string>
+</resources>
