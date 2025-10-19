@@ -59,10 +59,18 @@ class ListScreenshotTest {
             .selectFirstDocument()
             .goToPdfFolder()
             .openPdf(fileName = "demo.pdf")
+
+        DetailViewRobot()
+            .verifyDocumentLoaded(docName = "demo")
+            .goBack()
             .verifyDocumentLoaded(docName = "demo", expectedDocumentCount = 1, listLayout = true)
             .selectAnotherDocument()
             .goToPdfFolder()
             .openPdf(fileName = "demo1.pdf")
+
+        DetailViewRobot()
+            .verifyDocumentLoaded(docName = "demo1")
+            .goBack()
             .verifyDocumentLoaded(docName = "demo1", expectedDocumentCount = 2, listLayout = true)
 
         ScreenshotUtil.recordScreenshot("list_layout_multiple")
