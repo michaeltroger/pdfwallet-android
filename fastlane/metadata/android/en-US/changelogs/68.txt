@@ -1,0 +1,1 @@
+- Fixes issue when purchasing PDF Wallet Pro
