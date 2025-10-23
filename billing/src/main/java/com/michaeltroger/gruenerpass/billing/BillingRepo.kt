@@ -2,6 +2,7 @@ package com.michaeltroger.gruenerpass.billing
 
 import android.app.Activity
 import android.content.Context
+import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
@@ -12,6 +13,7 @@ import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.QueryProductDetailsParams
 import com.android.billingclient.api.QueryPurchasesParams
+import com.android.billingclient.api.acknowledgePurchase
 import com.android.billingclient.api.queryProductDetails
 import com.android.billingclient.api.queryPurchasesAsync
 import com.michaeltroger.gruenerpass.coroutines.dispatcher.di.IoDispatcher
@@ -25,7 +27,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-internal const val PRO_PRODUCT_ID = "pro"
+internal const val PRO_PRODUCT_ID = "pro2"
 
 internal interface BillingRepo {
     val refreshPurchases: SharedFlow<Unit>
@@ -58,6 +60,7 @@ internal class BillingRepoImpl @Inject constructor(
     private val purchasesUpdatedListener: PurchasesUpdatedListener =
         PurchasesUpdatedListener { billingResult, purchases ->
             repositoryScope.launch {
+                purchases?.firstOrNull().acknowledgePurchase()
                 _refreshPurchases.emit(Unit)
             }
         }
@@ -93,8 +96,18 @@ internal class BillingRepoImpl @Inject constructor(
         val purchasesResult = withContext(ioDispatcher) {
             billingClient.queryPurchasesAsync(params.build())
         }
+        purchasesResult.purchasesList.firstOrNull().acknowledgePurchase()
 
         return purchasesResult.purchasesList
+    }
+
+    private suspend fun Purchase?.acknowledgePurchase() = withContext(ioDispatcher) {
+        if (this@acknowledgePurchase == null) return@withContext
+        if (purchaseState == Purchase.PurchaseState.PURCHASED && !isAcknowledged) {
+            val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
+                .setPurchaseToken(purchaseToken)
+            billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
+        }
     }
 
     public override suspend fun getAvailableProducts(): List<ProductDetails> {
