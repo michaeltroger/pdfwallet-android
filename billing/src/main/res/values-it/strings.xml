@@ -4,7 +4,7 @@
     <string name="billing_purchases_order_id">Id ordine:</string>
     <string name="billing_purchases_date">Data ordine:</string>
     <string name="billing_purchases_item">Articolo:</string>
-    <string name="billing_purchases_processing">Verifica dell\'acquisto… Questo può richiedere un po\' di tempo. Puoi lasciare questa schermata e l\'app.</string>
+    <string name="billing_purchases_processing">Verifica dell\'acquisto… Questo può richiedere un po\' di tempo.</string>
     <string name="billing_product_buy">Acquista</string>
     <string name="billing_purchases_thanks">Grazie mille! ♥️</string>
     <string name="billing_benefits_description">Ottieni PDF Wallet Pro per sbloccare le seguenti funzionalità:</string>
