@@ -78,4 +78,7 @@
     <string name="preference_theme_system">System</string>
     <string name="preference_theme_light">Hell</string>
     <string name="preference_theme_dark">Dunkel</string>
+    <string name="preference_half_size_barcodes">Barcodes in halber Größe anzeigen</string>
+    <string name="preference_half_size_barcodes_description">Dies kann die Lesbarkeit für einige Barcode-Scanner verbessern.</string>
+    <string name="menu_toggle_barcode_size">Barcode-Größe umschalten</string>
 </resources>
