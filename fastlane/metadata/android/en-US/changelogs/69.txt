@@ -1,0 +1,1 @@
+- Option to show barcodes in half size (requires in-app purchase)
