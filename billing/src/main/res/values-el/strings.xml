@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_purchases_title">Οι αγορές σας:</string>
     <string name="billing_purchases_order_id">Αριθμός παραγγελίας:</string>
     <string name="billing_purchases_date">Ημερομηνία παραγγελίας:</string>
-    <string name="billing_purchases_item">Αντικείμενο:</string>
     <string name="billing_purchases_processing">Επαλήθευση αγοράς… Αυτό μπορεί να διαρκέσει λίγο.</string>
     <string name="billing_product_buy">Αγορά</string>
     <string name="billing_purchases_thanks">Ευχαριστώ πολύ! ♥️</string>
