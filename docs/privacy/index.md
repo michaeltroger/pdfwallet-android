@@ -24,9 +24,12 @@ Passwords used to unlock encrypted PDFs are handled only in memory and are not s
 Because all processing happens locally on your device, **no personal data is collected or processed** by the developer under the meaning of the EU GDPR.
 
 ## In-App Purchases
-Optional in-app purchases are processed securely by **Google Play**.
-We do not receive or store any payment data.
-For details about how Google handles purchase information, please refer to [Google’s Privacy Policy](https://policies.google.com/privacy).
+Our app may offer optional in-app purchases.
+All transactions are processed securely through **Google Play Billing**.
+We do not have access to, nor do we collect or store, any personal payment information such as your name, credit card number, or billing address.
+Google provides us only with anonymized transaction identifiers and status information (e.g., confirmation of purchase or refund) to deliver the purchased content.
+
+For more information about how Google processes your payment data, please refer to [Google’s Privacy Policy](https://policies.google.com/privacy).
 
 ### Ads & Tracking
 The app contains **no ads** and performs **no tracking or analytics**.

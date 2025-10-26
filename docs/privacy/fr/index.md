@@ -27,11 +27,13 @@ Les mots de passe utilisés pour déverrouiller les PDF chiffrés sont traités 
 
 Puisque tout le traitement s’effectue localement sur votre appareil, **aucune donnée personnelle n’est collectée ni traitée** par le développeur au sens du RGPD de l’UE.
 
-## Achats intégrés
+## Achats Intégrés
+Notre application peut proposer des achats intégrés optionnels.  
+Toutes les transactions sont traitées de manière sécurisée via **Google Play Billing**.  
+Nous n’avons pas accès à vos informations de paiement personnelles et nous ne les collectons ni ne les stockons, telles que votre nom, votre numéro de carte bancaire ou votre adresse de facturation.  
+Google ne nous fournit que des identifiants de transaction anonymisés et des informations sur l’état de la transaction (par exemple, confirmation d’achat ou remboursement) afin de livrer le contenu acheté.  
 
-Les achats intégrés optionnels sont traités en toute sécurité par **Google Play**.
-Nous ne recevons ni ne stockons aucune donnée de paiement.
-Pour plus d’informations sur la manière dont Google traite les informations d’achat, veuillez consulter la [Politique de confidentialité de Google](https://policies.google.com/privacy).
+Pour plus d’informations sur la manière dont Google traite vos données de paiement, veuillez consulter la [Politique de confidentialité de Google](https://policies.google.com/privacy).
 
 ### Publicités et suivi
 

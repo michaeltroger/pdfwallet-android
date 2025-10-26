@@ -27,11 +27,13 @@ Le password utilizzate per sbloccare i PDF crittografati vengono gestite solo in
 
 Poiché tutto l’elaborazione avviene localmente sul tuo dispositivo, **nessun dato personale viene raccolto o trattato** dallo sviluppatore ai sensi del GDPR dell’UE.
 
-## Acquisti In-App
+## Acquisti in-App  
+La nostra app può offrire acquisti in-app opzionali.  
+Tutte le transazioni vengono elaborate in modo sicuro tramite **Google Play Billing**.  
+Non abbiamo accesso né raccogliamo o memorizziamo alcuna informazione personale di pagamento, come il tuo nome, numero di carta di credito o indirizzo di fatturazione.  
+Google ci fornisce solo identificatori di transazione anonimizzati e informazioni sullo stato (ad esempio, conferma dell’acquisto o rimborso) per consentirci di fornire il contenuto acquistato.  
 
-Gli acquisti in-app opzionali vengono elaborati in modo sicuro da **Google Play**.
-Non riceviamo né memorizziamo alcun dato di pagamento.
-Per ulteriori dettagli su come Google gestisce le informazioni sugli acquisti, consulta l’[Informativa sulla Privacy di Google](https://policies.google.com/privacy).
+Per ulteriori informazioni su come Google elabora i tuoi dati di pagamento, consulta l’[Informativa sulla privacy di Google](https://policies.google.com/privacy).
 
 ### Pubblicità e Tracciamento
 
