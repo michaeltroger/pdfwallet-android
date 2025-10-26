@@ -78,4 +78,7 @@
     <string name="preference_theme_system">Sistema</string>
     <string name="preference_theme_light">Claro</string>
     <string name="preference_theme_dark">Escuro</string>
+    <string name="preference_half_size_barcodes">Exibir códigos de barras em tamanho médio</string>
+    <string name="preference_half_size_barcodes_description">Isso pode melhorar a legibilidade de alguns scanners de código de barras.</string>
+    <string name="menu_toggle_barcode_size">Tamanho do código de barras</string>
 </resources>
