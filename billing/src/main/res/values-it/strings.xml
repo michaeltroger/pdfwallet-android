@@ -9,4 +9,5 @@
     <string name="billing_benefit_1">Rimozione del banner “Ottieni Pro” in varie schermate</string>
     <string name="billing_benefit_2">Opzione per invertire i colori del documento in modalità scura</string>
     <string name="billing_benefit_3">Opzione per forzare il tema scuro o chiaro sovrascrivendo le impostazioni di sistema</string>
+    <string name="billing_benefit_4">Opzione per mostrare codici a barre di metà dimensione</string>
 </resources>
