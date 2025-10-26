@@ -9,4 +9,5 @@
     <string name="billing_benefit_1">Eri vaadetest kaob „Laadi alla PDF Wallet Pro“ märge</string>
     <string name="billing_benefit_2">Võimalus kasutada tumedas vaates pööratud värve</string>
     <string name="billing_benefit_3">Võimalus kasutada tumedat või heledat kujundust sõltumata süsteemi üldistest seadistustest</string>
+    <string name="billing_benefit_4">Võimalus kuvada triipkoode poole väiksemana</string>
 </resources>
