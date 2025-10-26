@@ -9,4 +9,5 @@
     <string name="billing_benefit_1">Entfernt \"Pro\"-Banner auf verschiedenen Screens</string>
     <string name="billing_benefit_2">Option die Dokumentenfarbe im dunklen Modus zu invertieren</string>
     <string name="billing_benefit_3">Option den hellen oder dunklen Modus zu erzwingen, durch Überschreiben der Systemeinstellung</string>
+    <string name="billing_benefit_4">Option um Barcodes in halber Größe anzuzeigen</string>
 </resources>
