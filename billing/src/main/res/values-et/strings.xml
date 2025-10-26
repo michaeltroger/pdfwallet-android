@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_purchases_title">Sinu ostud:</string>
     <string name="billing_purchases_order_id">Tellimuse number:</string>
     <string name="billing_purchases_date">Tellimuse kuupäev:</string>
-    <string name="billing_purchases_item">Objekt:</string>
     <string name="billing_purchases_processing">Ostu kinnitamine… See võib võtta veidi aega.</string>
     <string name="billing_product_buy">Osta</string>
     <string name="billing_purchases_thanks">Suur aitäh! ♥️</string>
