@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_purchases_title">Tus compras:</string>
     <string name="billing_purchases_order_id">Id pedido:</string>
     <string name="billing_purchases_date">Fecha de orden:</string>
-    <string name="billing_purchases_item">Artículo:</string>
     <string name="billing_purchases_processing">Verificando compra… Esto puede tardar un tiempo.</string>
     <string name="billing_product_buy">Comprar</string>
     <string name="billing_purchases_thanks">¡Muchas gracias! ♥️</string>
@@ -11,4 +9,5 @@
     <string name="billing_benefit_1">Elimina el banner “Get Pro” en varias pantallas</string>
     <string name="billing_benefit_2">Opción para invertir colores de documentos en modo oscuro</string>
     <string name="billing_benefit_3">Opción para forzar tema oscuro o claro anulando los ajustes del sistema</string>
+    <string name="billing_benefit_4">Opción para mostrar códigos de barras en medio tamaño</string>
 </resources>

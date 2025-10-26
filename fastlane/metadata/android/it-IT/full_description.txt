@@ -32,7 +32,8 @@ Altre Funzionalità
 La versione “Pro” aggiunge inoltre (richiede acquisto in-app):
 - Rimozione del banner “Get Pro” in varie schermate
 - Opzione per invertire i colori del documento in modalità scura
-- Opzione per forzare il tema chiaro o scuro, ignorando le impostazioni di sistema
+- Opzione per forzare il tema scuro o chiaro sovrascrivendo le impostazioni di sistema
+- Opzione per mostrare codici a barre di metà dimensione
 
 Perché il codice a barre generato appare diverso da quello nel PDF?
 L’algoritmo di visualizzazione è diverso. Ma per i dispositivi di lettura il codice è identico.

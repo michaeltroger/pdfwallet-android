@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_purchases_title">Suas compras:</string>
     <string name="billing_purchases_order_id">Id do pedido:</string>
     <string name="billing_purchases_date">Data do pedido:</string>
-    <string name="billing_purchases_item">Produto:</string>
     <string name="billing_purchases_processing">Verificando a compra… Isso pode demorar um pouco.</string>
     <string name="billing_product_buy">Comprar</string>
     <string name="billing_purchases_thanks">Muito obrigado! ♥️</string>
@@ -11,4 +9,5 @@
     <string name="billing_benefit_1">Remove o banner “Obter Pro” de várias telas</string>
     <string name="billing_benefit_2">Opção para inverter as cores do documento no modo escuro</string>
     <string name="billing_benefit_3">Opção para forçar tema escuro ou claro substituindo as configurações do sistema</string>
+    <string name="billing_benefit_4">Opção para mostrar códigos de barras no tamanho médio</string>
 </resources>

@@ -78,4 +78,7 @@
     <string name="preference_theme_system">Σύστημα</string>
     <string name="preference_theme_light">Ανοιχτό</string>
     <string name="preference_theme_dark">Σκούρο</string>
+    <string name="preference_half_size_barcodes">Εμφάνιση barcodes στο μισό μέγεθος</string>
+    <string name="preference_half_size_barcodes_description">Αυτό μπορεί να βελτιώσει την αναγνωσιμότητα για μερικούς σαρωτές barcode.</string>
+    <string name="menu_toggle_barcode_size">Εναλλαγή μεγέθους barcode</string>
 </resources>

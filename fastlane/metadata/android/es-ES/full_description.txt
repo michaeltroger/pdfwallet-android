@@ -32,7 +32,8 @@ Más funciones
 La versión “Pro” incluye además (requiere compra dentro de la app):
 - Elimina el banner “Get Pro” en varias pantallas
 - Opción para invertir los colores del documento en modo oscuro
-- Opción para forzar el tema claro u oscuro, sobrescribiendo la configuración del sistema
+- Opción para forzar tema oscuro o claro anulando los ajustes del sistema
+- Opción para mostrar códigos de barras en medio tamaño
 
 ¿Por qué el código de barras generado se ve diferente al del PDF?
 El algoritmo de visualización es distinto. Para los dispositivos de lectura, el código es idéntico.

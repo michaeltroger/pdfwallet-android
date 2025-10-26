@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_purchases_title">Deine Einkäufe:</string>
     <string name="billing_purchases_order_id">Auftrags-ID:</string>
     <string name="billing_purchases_date">Auftrags-Datum:</string>
-    <string name="billing_purchases_item">Posten:</string>
     <string name="billing_purchases_processing">Überprüfung des Kaufs… Dies kann eine Weile dauern.</string>
     <string name="billing_product_buy">Kaufen</string>
     <string name="billing_purchases_thanks">Herzlichen Dank! ♥️</string>
@@ -11,4 +9,5 @@
     <string name="billing_benefit_1">Entfernt \"Pro\"-Banner auf verschiedenen Screens</string>
     <string name="billing_benefit_2">Option die Dokumentenfarbe im dunklen Modus zu invertieren</string>
     <string name="billing_benefit_3">Option den hellen oder dunklen Modus zu erzwingen, durch Überschreiben der Systemeinstellung</string>
+    <string name="billing_benefit_4">Option um Barcodes in halber Größe anzuzeigen</string>
 </resources>

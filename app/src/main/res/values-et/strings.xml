@@ -78,4 +78,7 @@
     <string name="preference_theme_system">Süsteemi kujundus</string>
     <string name="preference_theme_light">Hele kujundus</string>
     <string name="preference_theme_dark">Tume kujundus</string>
+    <string name="preference_half_size_barcodes">Kuva triipkoodid poole väiksemana</string>
+    <string name="preference_half_size_barcodes_description">See võib parandada mõnede vöötkoodiskannerite loetavust.</string>
+    <string name="menu_toggle_barcode_size">Vöötkoodi suuruse vahetamine</string>
 </resources>

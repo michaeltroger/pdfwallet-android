@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_purchases_title">I tuoi acquisti:</string>
     <string name="billing_purchases_order_id">Id ordine:</string>
     <string name="billing_purchases_date">Data ordine:</string>
-    <string name="billing_purchases_item">Articolo:</string>
     <string name="billing_purchases_processing">Verifica dell\'acquisto… Questo può richiedere un po\' di tempo.</string>
     <string name="billing_product_buy">Acquista</string>
     <string name="billing_purchases_thanks">Grazie mille! ♥️</string>
@@ -11,4 +9,5 @@
     <string name="billing_benefit_1">Rimozione del banner “Ottieni Pro” in varie schermate</string>
     <string name="billing_benefit_2">Opzione per invertire i colori del documento in modalità scura</string>
     <string name="billing_benefit_3">Opzione per forzare il tema scuro o chiaro sovrascrivendo le impostazioni di sistema</string>
+    <string name="billing_benefit_4">Opzione per mostrare codici a barre di metà dimensione</string>
 </resources>
