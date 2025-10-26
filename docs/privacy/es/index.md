@@ -27,11 +27,12 @@ Las contraseñas utilizadas para desbloquear archivos PDF cifrados se gestionan 
 
 Dado que todo el procesamiento ocurre localmente en tu dispositivo, **no se recopilan ni procesan datos personales** por parte del desarrollador en el sentido del RGPD de la UE.
 
-## Compras dentro de la aplicación  
-Nuestra aplicación puede ofrecer compras opcionales dentro de la aplicación.  
-Todas las transacciones se procesan de forma segura a través de **Google Play Billing**.  
-No tenemos acceso, ni recopilamos ni almacenamos, ninguna información personal de pago, como su nombre, número de tarjeta de crédito o dirección de facturación.  
-Google solo nos proporciona identificadores de transacción anonimizados e información sobre el estado (por ejemplo, confirmación de compra o reembolso) para poder entregar el contenido adquirido.  
+## Compras dentro de la aplicación
+
+Nuestra aplicación puede ofrecer compras opcionales dentro de la aplicación.
+Todas las transacciones se procesan de forma segura a través de **Google Play Billing**.
+No tenemos acceso, ni recopilamos ni almacenamos, ninguna información personal de pago, como su nombre, número de tarjeta de crédito o dirección de facturación.
+Google solo nos proporciona identificadores de transacción anonimizados e información sobre el estado (por ejemplo, confirmación de compra o reembolso) para poder entregar el contenido adquirido.
 
 Para obtener más información sobre cómo Google procesa sus datos de pago, consulte la [Política de Privacidad de Google](https://policies.google.com/privacy).
 
