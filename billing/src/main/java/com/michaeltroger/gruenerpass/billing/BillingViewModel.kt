@@ -22,37 +22,35 @@ internal class BillingViewModel @Inject constructor(
     private val _state = MutableStateFlow(
         BillingState(
             processing = false,
-            purchases = emptyList(),
-            productDetails = emptyList()
+            purchase = null,
+            productDetails = null,
         )
     )
     internal val state: StateFlow<BillingState> = _state
 
     init {
         viewModelScope.launch {
-            billingRepo.refreshPurchases.onEach {
-                val purchases = billingRepo.queryPurchases().sortedByDescending { it.purchaseTime }.mapNotNull {
-                    val productId = it.products.firstOrNull() ?: return@mapNotNull null
-                    val productDetails = billingRepo.getProductDetails(productId) ?: return@mapNotNull null
+            billingRepo.refreshPurchases.onEach { unit: Unit ->
+                val viewPurchase = billingRepo.queryPurchase()?.let { purchase: com.android.billingclient.api.Purchase ->
                     Purchase(
-                        orderId = it.orderId,
-                        productName = productDetails.name,
+                        orderId = purchase.orderId,
                         purchaseTime = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
                             .withZone(ZoneId.systemDefault())
-                            .format(Instant.ofEpochMilli(it.purchaseTime))
+                            .format(Instant.ofEpochMilli(purchase.purchaseTime))
                     )
                 }
+                val productDetails = billingRepo.getProductDetails()
                 val billingState = BillingState(
-                    processing = purchases.any { it.orderId == null },
-                    purchases = purchases.filter { it.orderId != null },
-                    productDetails = billingRepo.getAvailableProducts().sortedBy { productDetail ->
-                        productOrderList.indexOf(productDetail.productId)
-                    }.map {
+                    processing = viewPurchase != null && viewPurchase.orderId == null,
+                    purchase = viewPurchase.takeIf { it?.orderId != null },
+                    productDetails = if (productDetails  == null) {
+                        null
+                    } else {
                         ProductDetails(
-                            productDetails = it,
-                            name = it.name,
-                            description = it.description,
-                            price = it.oneTimePurchaseOfferDetails?.formattedPrice
+                            productDetails = productDetails,
+                            name = productDetails.name,
+                            description = productDetails.description,
+                            price = productDetails.oneTimePurchaseOfferDetails?.formattedPrice
                         )
                     }
                 )
@@ -68,13 +66,12 @@ internal class BillingViewModel @Inject constructor(
 
 internal data class BillingState(
     val processing: Boolean,
-    val purchases: List<Purchase>,
-    val productDetails: List<ProductDetails>
+    val purchase: Purchase?,
+    val productDetails: ProductDetails?
 )
 
 internal data class Purchase(
     val orderId: String?,
-    val productName: String?,
     val purchaseTime: String,
 )
 

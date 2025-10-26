@@ -12,7 +12,7 @@ internal class HasBoughtProUseCaseImpl @Inject constructor(
 ) : HasBoughtProUseCase {
 
     override suspend operator fun invoke(): Boolean {
-        val purchase = billingRepo.queryPurchases().firstOrNull() ?: return false
+        val purchase = billingRepo.queryPurchase() ?: return false
         val product = purchase.products.firstOrNull() ?: return false
         return purchase.purchaseState == Purchase.PurchaseState.PURCHASED &&
                 product == PRO_PRODUCT_ID

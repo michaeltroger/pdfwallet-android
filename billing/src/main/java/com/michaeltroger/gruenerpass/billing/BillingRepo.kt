@@ -31,22 +31,10 @@ internal const val PRO_PRODUCT_ID = "pro2"
 
 internal interface BillingRepo {
     val refreshPurchases: SharedFlow<Unit>
-    suspend fun queryPurchases(): List<Purchase>
-    suspend fun getAvailableProducts(): List<ProductDetails>
-    suspend fun getProductDetails(productId: String): ProductDetails?
+    suspend fun queryPurchase(): Purchase?
+    suspend fun getProductDetails(): ProductDetails?
     fun launchBillingFlow(activity: Activity, productDetails: ProductDetails)
 }
-
-internal val productOrderList = listOf(
-    PRO_PRODUCT_ID,
-)
-
-private val productList = listOf(
-    QueryProductDetailsParams.Product.newBuilder()
-        .setProductId(PRO_PRODUCT_ID)
-        .setProductType(BillingClient.ProductType.INAPP)
-        .build(),
-)
 
 internal class BillingRepoImpl @Inject constructor(
     @ApplicationContext private val context: Context,
@@ -89,7 +77,7 @@ internal class BillingRepoImpl @Inject constructor(
         })
     }
 
-    public override suspend fun queryPurchases(): List<Purchase> {
+    override suspend fun queryPurchase(): Purchase? {
         val params = QueryPurchasesParams.newBuilder()
             .setProductType(BillingClient.ProductType.INAPP)
 
@@ -98,7 +86,7 @@ internal class BillingRepoImpl @Inject constructor(
         }
         purchasesResult.purchasesList.firstOrNull().acknowledgePurchase()
 
-        return purchasesResult.purchasesList
+        return purchasesResult.purchasesList.firstOrNull()
     }
 
     private suspend fun Purchase?.acknowledgePurchase() = withContext(ioDispatcher) {
@@ -110,22 +98,11 @@ internal class BillingRepoImpl @Inject constructor(
         }
     }
 
-    public override suspend fun getAvailableProducts(): List<ProductDetails> {
-        val params = QueryProductDetailsParams.newBuilder()
-            .setProductList(productList)
-
-        val productDetailsResult = withContext(ioDispatcher) {
-            billingClient.queryProductDetails(params.build())
-        }
-
-        return productDetailsResult.productDetailsList ?: emptyList()
-    }
-
-    override suspend fun getProductDetails(productId: String): ProductDetails? {
+    override suspend fun getProductDetails(): ProductDetails? {
         val params = QueryProductDetailsParams.newBuilder()
         params.setProductList(listOf(
             QueryProductDetailsParams.Product.newBuilder()
-                .setProductId(productId)
+                .setProductId(PRO_PRODUCT_ID)
                 .setProductType(BillingClient.ProductType.INAPP)
                 .build()
         ))
@@ -137,7 +114,7 @@ internal class BillingRepoImpl @Inject constructor(
         return productDetailsResult.productDetailsList?.firstOrNull()
     }
 
-    public override fun launchBillingFlow(activity: Activity, productDetails: ProductDetails) {
+    override fun launchBillingFlow(activity: Activity, productDetails: ProductDetails) {
         val productDetailsParamsList = listOf(
             BillingFlowParams.ProductDetailsParams.newBuilder()
                 .setProductDetails(productDetails)
