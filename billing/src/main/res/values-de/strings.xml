@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="billing_purchases_title">Deine Einkäufe:</string>
     <string name="billing_purchases_order_id">Auftrags-ID:</string>
     <string name="billing_purchases_date">Auftrags-Datum:</string>
-    <string name="billing_purchases_item">Posten:</string>
     <string name="billing_purchases_processing">Überprüfung des Kaufs… Dies kann eine Weile dauern.</string>
     <string name="billing_product_buy">Kaufen</string>
     <string name="billing_purchases_thanks">Herzlichen Dank! ♥️</string>
