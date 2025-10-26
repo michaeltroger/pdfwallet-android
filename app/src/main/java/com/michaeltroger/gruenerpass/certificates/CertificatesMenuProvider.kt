@@ -33,7 +33,7 @@ class CertificatesMenuProvider(
         updateMenuState(vm.viewState.value)
     }
 
-    @Suppress("CyclomaticComplexMethod")
+    @Suppress("CyclomaticComplexMethod", "LongMethod")
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
         R.id.add -> {
             vm.onAddFileSelected()

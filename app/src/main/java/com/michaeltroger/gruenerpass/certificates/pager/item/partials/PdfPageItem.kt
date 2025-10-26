@@ -24,7 +24,10 @@ import kotlinx.coroutines.withContext
 
 private const val TAG_PDF_LOADED = "pdf_loaded"
 private const val TAG_BARCODE_LOADED = "barcode_loaded"
+private const val SCALE_FULL = 1f
+private const val SCALE_HALF = 0.5f
 
+@Suppress("LongParameterList")
 class PdfPageItem(
     private val pdfRenderer: com.michaeltroger.gruenerpass.pdfrenderer.PdfRenderer,
     private val barcodeRenderer: BarcodeRenderer,
@@ -59,11 +62,11 @@ class PdfPageItem(
             if(!isActive) return@launch
 
             if (showBarcodesInHalfSize) {
-                viewBinding.barcode.scaleX = 0.5f
-                viewBinding.barcode.scaleY = 0.5f
+                viewBinding.barcode.scaleX = SCALE_HALF
+                viewBinding.barcode.scaleY = SCALE_HALF
             } else {
-                viewBinding.barcode.scaleX = 1f
-                viewBinding.barcode.scaleY = 1f
+                viewBinding.barcode.scaleX = SCALE_FULL
+                viewBinding.barcode.scaleY = SCALE_FULL
             }
 
             if (pdf == null) {

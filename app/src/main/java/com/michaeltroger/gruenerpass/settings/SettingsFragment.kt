@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 @AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
