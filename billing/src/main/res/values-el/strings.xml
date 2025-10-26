@@ -9,4 +9,5 @@
     <string name="billing_benefit_1">Αφαιρεί το \"Pro banner\" σε διάφορες οθόνες</string>
     <string name="billing_benefit_2">Αντιστροφή χρωμάτων εγγράφου σε σκοτεινή λειτουργία</string>
     <string name="billing_benefit_3">Επιλογή εξαναγκασμού σκοτεινού ή φωτεινού θέματος παρακάμπτοντας τις ρυθμίσεις του συστήματος</string>
+    <string name="billing_benefit_4">Επιλογή εμφάνισης barcodes στο μισό μέγεθος</string>
 </resources>
