@@ -28,10 +28,11 @@ Passwörter zum Entsperren verschlüsselter PDFs werden ausschließlich im Arbei
 Da die gesamte Verarbeitung lokal auf deinem Gerät erfolgt, werden vom Entwickler **keine personenbezogenen Daten im Sinne der EU-DSGVO erhoben oder verarbeitet**.
 
 ## In-App-Käufe
-Unsere App kann optionale In-App-Käufe anbieten.  
-Alle Transaktionen werden sicher über **Google Play Billing** abgewickelt.  
-Wir haben keinen Zugriff auf und erfassen oder speichern keine persönlichen Zahlungsinformationen wie Ihren Namen, Ihre Kreditkartennummer oder Ihre Rechnungsadresse.  
-Google stellt uns lediglich anonymisierte Transaktionskennungen und Statusinformationen (z. B. Bestätigung eines Kaufs oder einer Rückerstattung) zur Verfügung, um die gekauften Inhalte bereitzustellen.  
+
+Unsere App kann optionale In-App-Käufe anbieten.
+Alle Transaktionen werden sicher über **Google Play Billing** abgewickelt.
+Wir haben keinen Zugriff auf und erfassen oder speichern keine persönlichen Zahlungsinformationen wie Ihren Namen, Ihre Kreditkartennummer oder Ihre Rechnungsadresse.
+Google stellt uns lediglich anonymisierte Transaktionskennungen und Statusinformationen (z. B. Bestätigung eines Kaufs oder einer Rückerstattung) zur Verfügung, um die gekauften Inhalte bereitzustellen.
 
 Weitere Informationen darüber, wie Google Ihre Zahlungsdaten verarbeitet, finden Sie in der [Datenschutzerklärung von Google](https://policies.google.com/privacy).
 
