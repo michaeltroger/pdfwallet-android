@@ -377,13 +377,25 @@ class CertificatesViewModel @Inject constructor(
 
     fun toggleBarcodeSize() = viewModelScope.launch {
         sharedPrefs.edit {
-            putBoolean(
+            val isCurrentlyEnabled = (sharedPrefs.getBoolean(
                 getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
-                !(sharedPrefs.getBoolean(
+                false
+            ))
+            if (isProUnlocked()) {
+                putBoolean(
+                    getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
+                    !isCurrentlyEnabled
+                )
+            } else if (isCurrentlyEnabled) {
+                putBoolean(
                     getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
                     false
-                ))
-            )
+                )
+            } else {
+                _viewEvent.emit(
+                    ViewEvent.ShowGetPro
+                )
+            }
         }
     }
 }
