@@ -24,7 +24,10 @@ import kotlinx.coroutines.withContext
 
 private const val TAG_PDF_LOADED = "pdf_loaded"
 private const val TAG_BARCODE_LOADED = "barcode_loaded"
+private const val SCALE_FULL = 1f
+private const val SCALE_HALF = 0.5f
 
+@Suppress("LongParameterList")
 class PdfPageItem(
     private val pdfRenderer: com.michaeltroger.gruenerpass.pdfrenderer.PdfRenderer,
     private val barcodeRenderer: BarcodeRenderer,
@@ -32,6 +35,7 @@ class PdfPageItem(
     private val pageIndex: Int,
     private val searchBarcode: BarcodeSearchMode,
     private val invertColors: Boolean,
+    private val showBarcodesInHalfSize: Boolean,
     ) : BindableItem<ItemCertificatePartialPdfPageBinding>() {
 
     private val scope = CoroutineScope(
@@ -56,6 +60,14 @@ class PdfPageItem(
             if(!isActive) return@launch
             var barcode: Bitmap? = BitmapCache.memoryCache.get(barcodeCacheKey)
             if(!isActive) return@launch
+
+            if (showBarcodesInHalfSize) {
+                viewBinding.barcode.scaleX = SCALE_HALF
+                viewBinding.barcode.scaleY = SCALE_HALF
+            } else {
+                viewBinding.barcode.scaleX = SCALE_FULL
+                viewBinding.barcode.scaleY = SCALE_FULL
+            }
 
             if (pdf == null) {
                 val bitmaps = generateBitmaps(context) { isActive } ?: return@launch
@@ -153,7 +165,8 @@ class PdfPageItem(
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? PdfPageItem)?.pageIndex == pageIndex &&
-                other.fileName == fileName
+                other.fileName == fileName &&
+                other.showBarcodesInHalfSize == showBarcodesInHalfSize
     }
 
     private val Context.screenWidth: Int

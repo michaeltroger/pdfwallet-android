@@ -75,7 +75,8 @@ private fun BillingComposableImpl(
                 BulletedList(listOf(
                     stringResource(R.string.billing_benefit_1),
                     stringResource(R.string.billing_benefit_2),
-                    stringResource(R.string.billing_benefit_3)
+                    stringResource(R.string.billing_benefit_3),
+                    stringResource(R.string.billing_benefit_4)
                 ))
                 Spacer(Modifier.height(AppPadding.l))
             }

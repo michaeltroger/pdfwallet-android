@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 @AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat() {
 
@@ -37,6 +38,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setupBiometricSetting()
         setupForceTheme()
         setupBarcodeSetting()
+        setupHalfSizeBarcodeSetting()
         setupLockscreenSetting()
         setupBrightnessSetting()
         setupPreventScreenshotsSetting()
@@ -110,6 +112,24 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
         preferenceBarcode.setOnPreferenceClickListener {
             BitmapCache.memoryCache.evictAll()
+            true
+        }
+    }
+
+    private fun setupHalfSizeBarcodeSetting() {
+        val preference = findPreference<SwitchPreference>(
+            getString(R.string.key_preference_half_size_barcodes)
+        ) ?: error("Preference is required")
+        preference.setOnPreferenceClickListener {
+            lifecycleScope.launch {
+                if (isProUnlocked()) {
+                    preference.isChecked = !preference.isChecked
+                } else if (preference.isChecked) {
+                    preference.isChecked = false
+                } else {
+                    findNavController().navigate(deepLink = "app://billing".toUri())
+                }
+            }
             true
         }
     }

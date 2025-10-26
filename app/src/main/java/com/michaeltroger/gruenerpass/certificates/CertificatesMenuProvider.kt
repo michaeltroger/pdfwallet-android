@@ -13,7 +13,7 @@ import com.michaeltroger.gruenerpass.certificates.states.ViewState
 class CertificatesMenuProvider(
     private val context: Context,
     private val vm: CertificatesViewModel,
-    private val forceHiddenScrollButtons: Boolean = false,
+    private val isListLayout: Boolean = false,
 ) : MenuProvider {
     private var searchView: SearchView? = null
     private var menu: Menu? = null
@@ -33,7 +33,7 @@ class CertificatesMenuProvider(
         updateMenuState(vm.viewState.value)
     }
 
-    @Suppress("CyclomaticComplexMethod")
+    @Suppress("CyclomaticComplexMethod", "LongMethod")
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
         R.id.add -> {
             vm.onAddFileSelected()
@@ -77,6 +77,11 @@ class CertificatesMenuProvider(
 
         R.id.export_filtered -> {
             vm.onExportFilteredSelected()
+            true
+        }
+
+        R.id.toggleBarcodeSize -> {
+            vm.toggleBarcodeSize()
             true
         }
 
@@ -133,12 +138,12 @@ class CertificatesMenuProvider(
             findItem(R.id.export_all)?.isVisible = state.showExportAllMenuItem
             findItem(R.id.export_filtered)?.isVisible = state.showExportFilteredMenuItem
             findItem(R.id.changeOrder)?.isVisible = state.showChangeOrderMenuItem
-            findItem(R.id.scrollToFirst)?.isVisible = if (forceHiddenScrollButtons) {
+            findItem(R.id.scrollToFirst)?.isVisible = if (isListLayout) {
                 false
             } else {
                 state.showScrollToFirstMenuItem
             }
-            findItem(R.id.scrollToLast)?.isVisible = if (forceHiddenScrollButtons) {
+            findItem(R.id.scrollToLast)?.isVisible = if (isListLayout) {
                 false
             } else {
                 state.showScrollToLastMenuItem
@@ -151,6 +156,11 @@ class CertificatesMenuProvider(
             }
             findItem(R.id.openMore)?.isVisible = state.showMoreMenuItem
             findItem(R.id.switchLayout)?.isVisible = state.showSwitchLayoutMenuItem
+            findItem(R.id.toggleBarcodeSize)?.isVisible = if (isListLayout) {
+                false
+            } else {
+                state.showToggleBarcodeSizeMenuItem
+            }
         }
     }
 }

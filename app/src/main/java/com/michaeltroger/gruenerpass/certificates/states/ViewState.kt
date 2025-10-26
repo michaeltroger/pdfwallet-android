@@ -20,9 +20,11 @@ sealed class ViewState {
     abstract val showMoreMenuItem: Boolean
     abstract val showWarningButton: Boolean
     abstract val showChangeOrderMenuItem: Boolean
+    abstract val showToggleBarcodeSizeMenuItem: Boolean
 
     data object Initial : ViewState() {
         override val showSwitchLayoutMenuItem = false
+        override val showToggleBarcodeSizeMenuItem = false
         override val showSearchMenuItem = false
         override val showLockMenuItem = false
         override val showDeleteAllMenuItem = false
@@ -44,6 +46,7 @@ sealed class ViewState {
         override val showLockMenuItem: Boolean,
     ) : ViewState() {
         override val showSearchMenuItem = false
+        override val showToggleBarcodeSizeMenuItem = false
         override val showSwitchLayoutMenuItem = false
         override val showDeleteFilteredMenuItem = false
         override val showDeleteAllMenuItem = false
@@ -74,8 +77,10 @@ sealed class ViewState {
         override val showWarningButton: Boolean,
         override val showDeleteFilteredMenuItem: Boolean,
         override val showExportFilteredMenuItem: Boolean,
+        val showBarcodesInHalfSize: Boolean,
     ) : ViewState() {
         override val showSwitchLayoutMenuItem = true
+        override val showToggleBarcodeSizeMenuItem = true
         override val showDeleteAllMenuItem = true
         override val showAddMenuItem = true
         override val showSettingsMenuItem = true

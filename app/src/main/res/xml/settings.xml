@@ -35,6 +35,13 @@
         android:entries="@array/preference_barcode_entries"
         android:entryValues="@array/preference_barcode_entry_values"/>
 
+    <com.michaeltroger.gruenerpass.settings.ValidateSwitchPreference
+        android:key="@string/key_preference_half_size_barcodes"
+        android:icon="@drawable/barcode_reader_24px"
+        android:title="@string/preference_half_size_barcodes"
+        android:summary="@string/preference_half_size_barcodes_description"
+        android:defaultValue="false"/>
+
     <SwitchPreference
         android:key="@string/key_preference_show_list_layout"
         android:icon="@drawable/list_24px"

@@ -129,6 +129,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
                 certificate = state.document,
                 searchBarcode = state.searchBarcode,
                 invertColors = state.invertColors,
+                showBarcodesHalfSize = state.showBarcodesHalfSize,
             )
             is DetailsViewState.Deleted -> {
                 findNavController().popBackStack()
@@ -144,6 +145,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
         certificate: Certificate,
         searchBarcode: BarcodeSearchMode,
         invertColors: Boolean,
+        showBarcodesHalfSize: Boolean,
     ) {
         val item = CertificateItem(
             requireContext().applicationContext,
@@ -163,6 +165,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             onShareCalled = {
                 vm.onShareSelected(certificate)
             },
+            showBarcodesInHalfSize = showBarcodesHalfSize,
         )
 
         adapter.update(listOf(item))

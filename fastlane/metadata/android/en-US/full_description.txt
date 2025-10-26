@@ -32,7 +32,8 @@ More Features
 The "Pro" version additionally brings (requires In-App Purchase):
 - Removes "Get Pro" banner on various screens
 - Option to invert document colors in dark mode
-- Option to force light or dark theme by overriding system settings
+- Option to force dark or light theme by overriding system settings
+- Option to show barcodes in half size
 
 Why does the generated barcode look different from the one in the PDF?
 The algorithm used for display is different. For reading devices the code is identical.

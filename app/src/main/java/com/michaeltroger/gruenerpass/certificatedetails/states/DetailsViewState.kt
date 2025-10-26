@@ -13,5 +13,6 @@ sealed class DetailsViewState {
         val document: Certificate,
         val searchBarcode: BarcodeSearchMode,
         val invertColors: Boolean,
+        val showBarcodesHalfSize: Boolean,
     ) : DetailsViewState()
 }
