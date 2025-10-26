@@ -60,12 +60,19 @@ class CertificateDetailsViewModel @Inject constructor(
             false
         )
 
+    private val showBarcodesHalfSize =
+        sharedPrefs.getBooleanFlow(
+            context.getString(R.string.key_preference_half_size_barcodes),
+            false
+        )
+
     init {
         viewModelScope.launch {
             combine(
                 getSingleCertificateFlowUseCase(id),
                 searchForBarcode,
                 invertColors,
+                showBarcodesHalfSize,
                 ::updateState
             ).collect()
         }
@@ -75,6 +82,7 @@ class CertificateDetailsViewModel @Inject constructor(
         document: Certificate?,
         searchForBarcode: BarcodeSearchMode,
         invertColors: Boolean,
+        showBarcodesHalfSize: Boolean,
     ) {
         if (document == null) {
             _viewState.emit(DetailsViewState.Deleted)
@@ -84,6 +92,7 @@ class CertificateDetailsViewModel @Inject constructor(
                     document = document,
                     searchBarcode = searchForBarcode,
                     invertColors = invertColors,
+                    showBarcodesHalfSize = showBarcodesHalfSize,
                 )
             )
         }

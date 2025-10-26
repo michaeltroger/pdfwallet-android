@@ -106,6 +106,13 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/toggleBarcodeSize"
+        android:title="@string/menu_toggle_barcode_size"
+        android:visible="false"
+        tools:visible="true"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/lock"
         android:title="@string/lock"
         android:visible="false"

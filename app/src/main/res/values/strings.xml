@@ -77,4 +77,7 @@
     <string name="preference_theme_system">System</string>
     <string name="preference_theme_light">Light</string>
     <string name="preference_theme_dark">Dark</string>
+    <string name="preference_half_size_barcodes">Display barcodes in half size</string>
+    <string name="preference_half_size_barcodes_description">This can improve readability for some barcode scanners.</string>
+    <string name="menu_toggle_barcode_size">Toggle barcode size</string>
 </resources>

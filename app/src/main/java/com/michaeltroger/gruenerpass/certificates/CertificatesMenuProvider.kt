@@ -80,6 +80,11 @@ class CertificatesMenuProvider(
             true
         }
 
+        R.id.toggleBarcodeSize -> {
+            vm.toggleBarcodeSize()
+            true
+        }
+
         R.id.export_all -> {
             vm.onExportAllSelected()
             true
@@ -151,6 +156,7 @@ class CertificatesMenuProvider(
             }
             findItem(R.id.openMore)?.isVisible = state.showMoreMenuItem
             findItem(R.id.switchLayout)?.isVisible = state.showSwitchLayoutMenuItem
+            findItem(R.id.toggleBarcodeSize)?.isVisible = state.showToggleBarcodeSizeMenuItem
         }
     }
 }

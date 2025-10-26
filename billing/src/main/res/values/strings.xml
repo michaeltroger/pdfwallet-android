@@ -8,4 +8,5 @@
     <string name="billing_benefit_1">Removes \"Get Pro\" banner in various screens</string>
     <string name="billing_benefit_2">Option to invert document colors in dark mode</string>
     <string name="billing_benefit_3">Option to force dark or light theme by overriding system settings</string>
+    <string name="billing_benefit_4">Option to show barcodes in half size</string>
 </resources>

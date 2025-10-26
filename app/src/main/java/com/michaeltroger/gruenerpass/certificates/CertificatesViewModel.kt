@@ -93,6 +93,12 @@ class CertificatesViewModel @Inject constructor(
             false
         )
 
+    private val showBarcodesHalfSize =
+        sharedPrefs.getBooleanFlow(
+            app.getString(R.string.key_preference_half_size_barcodes),
+            false
+        )
+
     init {
         viewModelScope.launch {
             combine(
@@ -103,6 +109,7 @@ class CertificatesViewModel @Inject constructor(
                     searchForBarcode,
                     invertColors,
                     showOnLockedScreen,
+                    showBarcodesHalfSize,
                     purchaseUpdateUseCase(),
                 )
             ) { values ->
@@ -113,7 +120,8 @@ class CertificatesViewModel @Inject constructor(
                     shouldAuthenticate = values[2] as Boolean,
                     searchForBarcode = values[3] as BarcodeSearchMode,
                     invertColors = values[4] as Boolean,
-                    showOnLockedScreen = values[5] as Boolean
+                    showOnLockedScreen = values[5] as Boolean,
+                    showBarcodesInHalfSize = values[6] as Boolean
                 )
             }.collect()
         }
@@ -133,6 +141,7 @@ class CertificatesViewModel @Inject constructor(
         searchForBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showOnLockedScreen: Boolean,
+        showBarcodesInHalfSize: Boolean,
     ) {
         if (docs.isEmpty()) {
             _viewState.emit(
@@ -163,7 +172,8 @@ class CertificatesViewModel @Inject constructor(
                     showWarningButton = showOnLockedScreen,
                     showExportFilteredMenuItem = areDocumentsFilteredOut,
                     showDeleteFilteredMenuItem = areDocumentsFilteredOut,
-                    showGetProMenuItem = !isProUnlocked()
+                    showGetProMenuItem = !isProUnlocked(),
+                    showBarcodesInHalfSize = showBarcodesInHalfSize,
                 )
             )
         }
@@ -359,6 +369,18 @@ class CertificatesViewModel @Inject constructor(
                 getApplication<Application>().getString(R.string.key_preference_show_list_layout),
                 !(sharedPrefs.getBoolean(
                     getApplication<Application>().getString(R.string.key_preference_show_list_layout),
+                    false
+                ))
+            )
+        }
+    }
+
+    fun toggleBarcodeSize() = viewModelScope.launch {
+        sharedPrefs.edit {
+            putBoolean(
+                getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
+                !(sharedPrefs.getBoolean(
+                    getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
                     false
                 ))
             )

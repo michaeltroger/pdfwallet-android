@@ -32,6 +32,7 @@ class PdfPageItem(
     private val pageIndex: Int,
     private val searchBarcode: BarcodeSearchMode,
     private val invertColors: Boolean,
+    private val showBarcodesInHalfSize: Boolean,
     ) : BindableItem<ItemCertificatePartialPdfPageBinding>() {
 
     private val scope = CoroutineScope(
@@ -56,6 +57,14 @@ class PdfPageItem(
             if(!isActive) return@launch
             var barcode: Bitmap? = BitmapCache.memoryCache.get(barcodeCacheKey)
             if(!isActive) return@launch
+
+            if (showBarcodesInHalfSize) {
+                viewBinding.barcode.scaleX = 0.5f
+                viewBinding.barcode.scaleY = 0.5f
+            } else {
+                viewBinding.barcode.scaleX = 1f
+                viewBinding.barcode.scaleY = 1f
+            }
 
             if (pdf == null) {
                 val bitmaps = generateBitmaps(context) { isActive } ?: return@launch
@@ -153,7 +162,8 @@ class PdfPageItem(
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? PdfPageItem)?.pageIndex == pageIndex &&
-                other.fileName == fileName
+                other.fileName == fileName &&
+                other.showBarcodesInHalfSize == showBarcodesInHalfSize
     }
 
     private val Context.screenWidth: Int
