@@ -1,9 +1,10 @@
 package com.michaeltroger.gruenerpass.certificatedetails
 
-import android.content.Context
+import android.app.Application
 import android.content.SharedPreferences
+import androidx.core.content.edit
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.certificatedetails.states.DetailsViewState
@@ -12,12 +13,12 @@ import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.db.usecase.ChangeCertificateNameUseCase
 import com.michaeltroger.gruenerpass.db.usecase.DeleteSingleCertificateUseCase
 import com.michaeltroger.gruenerpass.db.usecase.GetSingleCertificateFlowUseCase
+import com.michaeltroger.gruenerpass.pro.IsProUnlockedUseCase
+import com.michaeltroger.gruenerpass.pro.PurchaseUpdateUseCase
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -25,16 +26,20 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@Suppress("LongParameterList")
 @HiltViewModel
 class CertificateDetailsViewModel @Inject constructor(
-    @ApplicationContext context: Context,
+    app: Application,
     private val deleteSingleCertificateUseCase: DeleteSingleCertificateUseCase,
     private val changeCertificateNameUseCase: ChangeCertificateNameUseCase,
     private val getSingleCertificateFlowUseCase: GetSingleCertificateFlowUseCase,
-    sharedPrefs: SharedPreferences,
+    private val isProUnlocked: IsProUnlockedUseCase,
+    private val sharedPrefs: SharedPreferences,
+    private val purchaseUpdateUseCase: PurchaseUpdateUseCase,
     savedStateHandle: SavedStateHandle,
-): ViewModel() {
+): AndroidViewModel(app) {
 
     private val _viewState: MutableStateFlow<DetailsViewState> = MutableStateFlow(
         DetailsViewState.Initial
@@ -48,21 +53,21 @@ class CertificateDetailsViewModel @Inject constructor(
 
     private val searchForBarcode =
         sharedPrefs.getFlow(
-            context.getString(R.string.key_preference_extract_barcodes),
-            context.getString(R.string.key_preference_barcodes_extended)
+            app.getString(R.string.key_preference_extract_barcodes),
+            app.getString(R.string.key_preference_barcodes_extended)
         ) { value: String ->
             BarcodeSearchMode.fromPrefValue(value)
         }
 
     private val invertColors =
         sharedPrefs.getBooleanFlow(
-            context.getString(R.string.key_preference_invert_pdf_colors),
+            app.getString(R.string.key_preference_invert_pdf_colors),
             false
         )
 
     private val showBarcodesHalfSize =
         sharedPrefs.getBooleanFlow(
-            context.getString(R.string.key_preference_half_size_barcodes),
+            app.getString(R.string.key_preference_half_size_barcodes),
             false
         )
 
@@ -73,16 +78,19 @@ class CertificateDetailsViewModel @Inject constructor(
                 searchForBarcode,
                 invertColors,
                 showBarcodesHalfSize,
+                purchaseUpdateUseCase(),
                 ::updateState
             ).collect()
         }
     }
 
+    @Suppress("UnusedParameter")
     private suspend fun updateState(
         document: Certificate?,
         searchForBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showBarcodesHalfSize: Boolean,
+        purchaseUpdate: Unit,
     ) {
         if (document == null) {
             _viewState.emit(DetailsViewState.Deleted)
@@ -93,6 +101,7 @@ class CertificateDetailsViewModel @Inject constructor(
                     searchBarcode = searchForBarcode,
                     invertColors = invertColors,
                     showBarcodesHalfSize = showBarcodesHalfSize,
+                    showGetProMenuItem = !isProUnlocked(),
                 )
             )
         }
@@ -127,5 +136,35 @@ class CertificateDetailsViewModel @Inject constructor(
         _viewEvent.emit(
             ViewEvent.Share(certificate)
         )
+    }
+
+    fun onGetPro() = viewModelScope.launch {
+        _viewEvent.emit(
+            ViewEvent.ShowGetPro
+        )
+    }
+
+    fun toggleBarcodeSize() = viewModelScope.launch {
+        sharedPrefs.edit {
+            val isCurrentlyEnabled = (sharedPrefs.getBoolean(
+                getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
+                false
+            ))
+            if (isProUnlocked()) {
+                putBoolean(
+                    getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
+                    !isCurrentlyEnabled
+                )
+            } else if (isCurrentlyEnabled) {
+                putBoolean(
+                    getApplication<Application>().getString(R.string.key_preference_half_size_barcodes),
+                    false
+                )
+            } else {
+                _viewEvent.emit(
+                    ViewEvent.ShowGetPro
+                )
+            }
+        }
     }
 }
