@@ -3,10 +3,10 @@ package com.michaeltroger.gruenerpass.pdfdecryptor
 import com.michaeltroger.gruenerpass.coroutines.dispatcher.di.IoDispatcher
 import com.tom_roush.pdfbox.pdmodel.PDDocument
 import com.tom_roush.pdfbox.pdmodel.encryption.InvalidPasswordException
-import java.io.File
-import java.io.FileOutputStream
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import java.io.File
+import java.io.FileOutputStream
 import javax.inject.Inject
 
 public interface PdfDecryptor {
@@ -24,7 +24,8 @@ internal class PdfDecryptorImpl @Inject constructor(
     @Throws(Exception::class, OutOfMemoryError::class)
     override suspend fun isPdfPasswordProtected(file: File): Boolean = withContext(dispatcher) {
         try {
-            return@withContext PDDocument.load(file).checkIfPasswordProtectedAndClose()
+            PDDocument.load(file)
+            return@withContext false
         } catch (e: InvalidPasswordException) {
             return@withContext true
         }
@@ -45,9 +46,5 @@ internal class PdfDecryptorImpl @Inject constructor(
         FileOutputStream(file).use { outputStream ->
             save(outputStream)
         }
-    }
-
-    private fun PDDocument.checkIfPasswordProtectedAndClose(): Boolean = use {
-        return isEncrypted
     }
 }
