@@ -2,6 +2,8 @@ package com.michaeltroger.gruenerpass.billing
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
@@ -28,6 +30,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 internal const val PRO_PRODUCT_ID = "pro2"
+internal const val PREF_KEY_HAS_BOUGHT_PRO = "hasBoughtPro"
 
 internal interface BillingRepo {
     val refreshPurchases: SharedFlow<Unit>
@@ -39,6 +42,7 @@ internal interface BillingRepo {
 internal class BillingRepoImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+    private val sharedPrefs: SharedPreferences,
 ) : BillingRepo {
     private val repositoryScope = CoroutineScope(SupervisorJob() + ioDispatcher)
 
@@ -95,6 +99,7 @@ internal class BillingRepoImpl @Inject constructor(
             val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
                 .setPurchaseToken(purchaseToken)
             billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
+            persistPurchase()
         }
     }
 
@@ -126,5 +131,11 @@ internal class BillingRepoImpl @Inject constructor(
             .build()
 
         billingClient.launchBillingFlow(activity, billingFlowParams)
+    }
+
+    private fun persistPurchase() {
+        sharedPrefs.edit {
+            putBoolean(PREF_KEY_HAS_BOUGHT_PRO, true)
+        }
     }
 }
