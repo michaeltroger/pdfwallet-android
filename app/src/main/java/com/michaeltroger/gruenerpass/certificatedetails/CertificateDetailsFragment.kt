@@ -1,7 +1,12 @@
 package com.michaeltroger.gruenerpass.certificatedetails
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.net.toUri
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -22,14 +27,14 @@ import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_details) {
+class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_details), MenuProvider {
 
     private val vm by viewModels<CertificateDetailsViewModel>()
 
@@ -46,9 +51,12 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
     lateinit var certificateDialogs: CertificateDialogs
     @Inject
     lateinit var barcodeRenderer: BarcodeRenderer
+    private var menu: Menu? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         binding = FragmentCertificateDetailsBinding.bind(view)
         val binding = binding!!
@@ -111,6 +119,9 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
                     certificate = it.certificate,
                 )
             }
+            ViewEvent.ShowGetPro -> findNavController().navigate(
+                deepLink = "app://billing".toUri()
+            )
             else -> {
                 // do nothing
             }
@@ -124,6 +135,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
     }
 
     private fun updateState(state: DetailsViewState) {
+        updateMenuState(state)
         when (state) {
             is DetailsViewState.Normal -> showCertificateState(
                 certificate = state.document,
@@ -169,5 +181,31 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
         )
 
         adapter.update(listOf(item))
+    }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu, menu)
+        this.menu = menu
+
+        updateMenuState(vm.viewState.value)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
+        R.id.pro -> {
+            vm.onGetPro()
+            true
+        }
+        R.id.toggleBarcodeSize -> {
+            vm.toggleBarcodeSize()
+            true
+        }
+        else -> false
+    }
+
+    private fun updateMenuState(state: DetailsViewState) {
+        menu?.apply {
+            findItem(R.id.pro)?.isVisible = state.showGetProMenuItem
+            findItem(R.id.toggleBarcodeSize)?.isVisible = state.showToggleBarcodeSizeMenuItem
+        }
     }
 }
