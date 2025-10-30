@@ -1,0 +1,3 @@
+- Fixes an issue, where the password dialog was shown for PDFs without password
+- Allows to switch the barcode size from the alternative layout (Detail-Screen). Requires In-App Purchase.
+- Quicker and more resilient check if in-app purchase was already done

@@ -1,0 +1,3 @@
+- Behebt einen Fehler, bei dem der Passwortdialog angezeigt wurde bei PDFs ohne Passwort
+- Erlaubt die Barcode-Größe vom alternativen Layout (Detail-Screen) aus zu wechseln (erfordert In-App-Kauf)
+- Schnellere und verlässlichere Überprüfung, ob In-App-Kauf bereits getätigt wurde
