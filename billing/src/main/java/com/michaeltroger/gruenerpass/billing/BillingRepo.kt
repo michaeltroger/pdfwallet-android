@@ -99,7 +99,9 @@ internal class BillingRepoImpl @Inject constructor(
             val acknowledgePurchaseParams = AcknowledgePurchaseParams.newBuilder()
                 .setPurchaseToken(purchaseToken)
             billingClient.acknowledgePurchase(acknowledgePurchaseParams.build())
-            persistPurchase()
+            sharedPrefs.edit {
+                putBoolean(PREF_KEY_HAS_BOUGHT_PRO, true)
+            }
         }
     }
 
@@ -131,11 +133,5 @@ internal class BillingRepoImpl @Inject constructor(
             .build()
 
         billingClient.launchBillingFlow(activity, billingFlowParams)
-    }
-
-    private fun persistPurchase() {
-        sharedPrefs.edit {
-            putBoolean(PREF_KEY_HAS_BOUGHT_PRO, true)
-        }
     }
 }
