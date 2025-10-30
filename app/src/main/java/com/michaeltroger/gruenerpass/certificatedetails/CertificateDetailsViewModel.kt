@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("LongParameterList")
 @HiltViewModel
 class CertificateDetailsViewModel @Inject constructor(
     app: Application,
@@ -83,6 +84,7 @@ class CertificateDetailsViewModel @Inject constructor(
         }
     }
 
+    @Suppress("UnusedParameter")
     private suspend fun updateState(
         document: Certificate?,
         searchForBarcode: BarcodeSearchMode,
