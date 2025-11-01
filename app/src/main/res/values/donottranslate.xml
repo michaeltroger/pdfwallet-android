@@ -7,13 +7,13 @@
     <string name="rate_uri">https://play.google.com/store/apps/details?id=com.michaeltroger.gruenerpass</string>
     <string name="help_translating_uri">https://crowdin.com/project/green-pass</string>
     <string name="contributing_uri">https://github.com/michaeltroger/pdfwallet-android</string>
-    <string name="privacy_policy_uri">https://michaeltroger.github.io/pdfwallet-android/privacy</string>
+    <string name="privacy_policy_uri">https://pdfwallet.troger.app/privacy/</string>
     <string name="key_preference_biometric">shouldAuthenticate</string>
     <string name="key_preference_full_brightness">fullBrightness</string>
     <string name="key_preference_show_list_layout">showListLayout</string>
     <string name="key_preference_show_on_locked_screen">showOnLockedScreen</string>
     <string name="key_preference_version">version</string>
-    <string name="licenses_uri">https://michaeltroger.github.io/pdfwallet-android/licenses</string>
+    <string name="licenses_uri">https://pdfwallet.troger.app/licenses/</string>
     <string name="pdf_file_provider_authority">com.michaeltroger.gruenerpass.pdffileprovider</string>
     <string name="changelog_uri">https://github.com/michaeltroger/pdfwallet-android/releases</string>
     <string name="key_preference_add_documents_front">addDocumentsFront</string>
