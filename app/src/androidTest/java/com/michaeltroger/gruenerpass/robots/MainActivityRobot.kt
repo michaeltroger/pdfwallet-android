@@ -15,8 +15,8 @@ import com.michaeltroger.gruenerpass.utils.verifyIsDisplayed
 import com.michaeltroger.gruenerpass.utils.verifyDoesNotExist
 import com.michaeltroger.gruenerpass.utils.waitUntilIdle
 import com.michaeltroger.gruenerpass.utils.waitUntilNoException
-import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers.`is`
 import org.hamcrest.TypeSafeMatcher
 
 private const val filesApp = "com.android.documentsui"

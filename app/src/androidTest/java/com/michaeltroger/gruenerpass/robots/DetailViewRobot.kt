@@ -11,8 +11,8 @@ import com.michaeltroger.gruenerpass.utils.NullableViewTypeSafeMatcher
 import com.michaeltroger.gruenerpass.utils.click
 import com.michaeltroger.gruenerpass.utils.verifyIsDisplayed
 import com.michaeltroger.gruenerpass.utils.waitUntilNoException
-import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.Matcher
+import org.hamcrest.Matchers.`is`
 import org.hamcrest.TypeSafeMatcher
 
 class DetailViewRobot {

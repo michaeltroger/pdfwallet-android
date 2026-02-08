@@ -13,8 +13,8 @@ import androidx.test.uiautomator.Until
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.utils.click
 import com.michaeltroger.gruenerpass.utils.verifyIsDisplayed
-import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.CoreMatchers.endsWith
+import org.hamcrest.Matchers.allOf
+import org.hamcrest.Matchers.endsWith
 
 private const val TIMEOUT = 5000L
 
