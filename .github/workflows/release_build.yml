@@ -40,7 +40,7 @@ jobs:
     - name: Run Lint
       run: ./gradlew lintRelease
     - name: Run unit tests
-      run: ./gradlew testPlayReleaseUnitTest
+      run: ./gradlew testPlayDebugUnitTest
       
     - name: Build App Bundle and APK
       run: |
