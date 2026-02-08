@@ -1,6 +1,6 @@
 [versions]
 android-desugar-jdk-libs = "2.1.5"
-android-gradle-plugin = "8.11.2" #8.12 and 8.13 are not allowed by fdroid
+android-gradle-plugin = "9.0.0"
 androidx-activity = "1.12.3"
 androidx-appcompat = "1.7.1"
 androidx-compose-bom = "2026.01.01"
@@ -23,8 +23,8 @@ com-github-jk1-dependency-license-report = "3.0.1"
 com-github-lisawray-groupie = "2.10.1"
 com-github-markusfisch-zxing-cpp = "v2.3.0.4"
 com-google-android-material = "1.13.0"
-com-google-dagger-hilt-android = "2.58"
-com-google-devtools-ksp = "2.2.20-2.0.3"
+com-google-dagger-hilt-android = "2.59.1"
+com-google-devtools-ksp = "2.3.5"
 com-squareup-leakcanary-android = "2.14"
 com-tom-roush-pdfbox-android = "2.0.27.0"
 io-gitlab-arturbosch-detekt = "1.23.8"
@@ -89,5 +89,4 @@ plugin-com-github-jk1-dependency-license-report = { module = "com.github.jk1.dep
 plugin-com-google-dagger-hilt-android = { module = "com.google.dagger.hilt.android:com.google.dagger.hilt.android.gradle.plugin", version.ref = "com-google-dagger-hilt-android" }
 plugin-com-google-devtools-ksp = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin", version.ref = "com-google-devtools-ksp" }
 plugin-io-gitlab-arturbosch-detekt = { module = "io.gitlab.arturbosch.detekt:io.gitlab.arturbosch.detekt.gradle.plugin", version.ref = "io-gitlab-arturbosch-detekt" }
-plugin-org-jetbrains-kotlin-android = { module = "org.jetbrains.kotlin.android:org.jetbrains.kotlin.android.gradle.plugin", version.ref = "kotlin" }
 plugin-org-jetbrains-kotlin-compose = { module = "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin", version.ref = "kotlin" }

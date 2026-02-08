@@ -5,7 +5,6 @@ plugins {
 dependencies {
     implementation(libs.plugin.com.android.library)
     implementation(libs.plugin.com.android.application)
-    implementation(libs.plugin.org.jetbrains.kotlin.android)
     implementation(libs.plugin.com.google.dagger.hilt.android)
     implementation(libs.plugin.org.jetbrains.kotlin.compose)
     implementation(libs.plugin.com.google.devtools.ksp)
