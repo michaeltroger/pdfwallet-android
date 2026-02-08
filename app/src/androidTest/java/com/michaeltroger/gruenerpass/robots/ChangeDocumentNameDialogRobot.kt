@@ -10,7 +10,8 @@ import androidx.test.uiautomator.Until
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.utils.click
 import com.michaeltroger.gruenerpass.utils.verifyIsDisplayed
-import org.hamcrest.CoreMatchers
+import org.hamcrest.Matchers.allOf
+import org.hamcrest.Matchers.endsWith
 
 private const val TIMEOUT = 5000L
 
@@ -27,9 +28,9 @@ class ChangeDocumentNameDialogRobot {
 
     fun changeDocumentNameAndConfirm(newDocumentName: String): MainActivityRobot {
         Espresso.onView(
-            CoreMatchers.allOf(
+            allOf(
                 ViewMatchers.isDescendantOfA(ViewMatchers.withId(R.id.document_name_text_field)),
-                ViewMatchers.withClassName(CoreMatchers.endsWith("EditText"))
+                ViewMatchers.withClassName(endsWith("EditText"))
             )
         ).perform(ViewActions.replaceText(newDocumentName))
 
