@@ -44,6 +44,6 @@ class DocumentOrderItem(
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? DocumentOrderItem)?.fileName == fileName
-            && (other as? DocumentOrderItem)?.documentName == documentName
+            && other.documentName == documentName
     }
 }

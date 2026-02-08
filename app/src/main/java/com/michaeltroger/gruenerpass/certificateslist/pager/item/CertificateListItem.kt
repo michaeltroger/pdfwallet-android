@@ -52,7 +52,7 @@ class CertificateListItem(
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? CertificateListItem)?.fileName == fileName
-            && (other as? CertificateListItem)?.documentName == documentName
-            && (other as? CertificateListItem)?.searchBarcode == searchBarcode
+            && other.documentName == documentName
+            && other.searchBarcode == searchBarcode
     }
 }
