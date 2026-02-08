@@ -1,0 +1,2 @@
+- Update of dependencies
+- Minimum Android version is now version 6

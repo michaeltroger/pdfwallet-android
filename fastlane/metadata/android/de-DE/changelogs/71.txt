@@ -1,0 +1,2 @@
+- Aktualisierung von Bibliotheken
+- Mindeste Android Version ist nun Version 6
