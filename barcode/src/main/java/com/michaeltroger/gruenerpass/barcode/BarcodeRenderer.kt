@@ -119,14 +119,8 @@ internal class BarcodeRendererImpl @Inject constructor(
     }
 
     private fun encodeBarcodeAsBitmap(extractedCode: ZxingCpp.Result): Bitmap {
-        val content = if (extractedCode.contentType == ZxingCpp.ContentType.BINARY) {
-            extractedCode.rawBytes
-        } else {
-            extractedCode.text
-        }
-
         return ZxingCpp.encodeAsBitmap(
-            content = content,
+            content = extractedCode.rawBytes,
             format = extractedCode.format,
             width = BARCODE_SIZE,
             height = BARCODE_SIZE,
