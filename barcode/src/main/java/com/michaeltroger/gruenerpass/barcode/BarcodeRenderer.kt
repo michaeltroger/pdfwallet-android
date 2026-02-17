@@ -2,8 +2,10 @@ package com.michaeltroger.gruenerpass.barcode
 
 import android.graphics.Bitmap
 import android.graphics.Rect
+import androidx.core.graphics.scale
 import com.michaeltroger.gruenerpass.coroutines.dispatcher.di.IoDispatcher
 import de.markusfisch.android.zxingcpp.ZxingCpp
+import de.markusfisch.android.zxingcpp.ZxingCpp.toBitmap
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
@@ -11,7 +13,9 @@ import javax.inject.Inject
 
 
 private const val BARCODE_SIZE = 400
-private const val BARCODE_MARGIN = 4
+private const val RENDER_MULTIPLIER = 10
+private const val BARCODE_FOREGROUND_COLOR = 0xff000000.toInt()
+private const val BARCODE_BACKGROUND_COLOR = 0xffffffff.toInt()
 
 private val preferredPriority = listOf(
     ZxingCpp.BarcodeFormat.AZTEC,
@@ -119,18 +123,41 @@ internal class BarcodeRendererImpl @Inject constructor(
     }
 
     private fun encodeBarcodeAsBitmap(extractedCode: ZxingCpp.Result): Bitmap {
-        val content = if (extractedCode.contentType == ZxingCpp.ContentType.TEXT) {
-            extractedCode.text
+        val bitMatrix = extractedCode.symbol
+        return if (bitMatrix == null || bitMatrix.data.isEmpty() || bitMatrix.width == 0 || bitMatrix.height == 0) {
+            createNewBarcode(extractedCode)
         } else {
-            extractedCode.rawBytes
+            extractOriginalBarcode(bitMatrix)
+        }
+    }
+
+    private fun extractOriginalBarcode(bitMatrix: ZxingCpp.BitMatrix): Bitmap {
+        val src = bitMatrix.toBitmap(
+            setColor = BARCODE_FOREGROUND_COLOR,
+            unsetColor = BARCODE_BACKGROUND_COLOR,
+        )
+
+        val dstWidth = src.width * RENDER_MULTIPLIER
+        val dstHeight = src.height * RENDER_MULTIPLIER
+
+        return src.scale(dstWidth, dstHeight, false)
+    }
+
+    private fun createNewBarcode(originalCode: ZxingCpp.Result): Bitmap {
+        val content = if (originalCode.contentType == ZxingCpp.ContentType.TEXT) {
+            originalCode.text
+        } else {
+            originalCode.rawBytes
         }
 
         return ZxingCpp.encodeAsBitmap(
             content = content,
-            format = extractedCode.format,
+            format = originalCode.format,
             width = BARCODE_SIZE,
             height = BARCODE_SIZE,
-            margin = BARCODE_MARGIN,
+            setColor = BARCODE_FOREGROUND_COLOR,
+            unsetColor = BARCODE_BACKGROUND_COLOR,
+            margin = 0,
         )
     }
 }

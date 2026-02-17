@@ -97,6 +97,17 @@ class ScreenshotTest {
     }
 
     @Test
+    fun dataMatrixErezept() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder()
+            .openPdf(fileName = "datamatrix_erezept.pdf")
+            .verifyDocumentLoaded(docName = "datamatrix_erezept", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("data_matrix_erezept")
+    }
+
+    @Test
     fun pdf417Code() {
         MainActivityRobot()
             .selectFirstDocument()
