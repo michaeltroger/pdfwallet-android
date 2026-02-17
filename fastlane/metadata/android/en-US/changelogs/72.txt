@@ -1,1 +1,1 @@
-- Improves barcode generation
+- Improves barcode generation by amongst others updating ZXing

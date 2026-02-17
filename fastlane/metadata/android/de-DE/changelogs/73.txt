@@ -1,0 +1,2 @@
+Verbessert die Barcode-Erstellung.
+Wann immer möglich vergrößert die App nun den originalen Barcode, anstatt einen neuen zu erstellen.

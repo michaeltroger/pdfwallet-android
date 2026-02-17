@@ -1,1 +1,1 @@
-- Verbessert die Barcode-Erstellung
+- Verbessert die Barcode-Erstellung u.a. durch Update von ZXing
