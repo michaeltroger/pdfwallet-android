@@ -122,6 +122,7 @@ internal class BarcodeRendererImpl @Inject constructor(
         return cropRectList
     }
 
+    @Suppress("ComplexCondition")
     private fun encodeBarcodeAsBitmap(extractedCode: ZxingCpp.Result): Bitmap {
         val bitMatrix = extractedCode.symbol
         return if (bitMatrix == null || bitMatrix.data.isEmpty() || bitMatrix.width == 0 || bitMatrix.height == 0) {
