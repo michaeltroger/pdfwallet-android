@@ -1,2 +1,2 @@
 Improves barcode generation.
-Whenever possible the app enlarges now the original barcode instead of generating a new one.
+Whenever possible the app tries to re-draw the barcode 1:1
