@@ -33,6 +33,10 @@ android {
         testInstrumentationRunnerArguments["clearPackageData"] = "true"
     }
 
+    androidResources {
+        generateLocaleConfig = true
+    }
+
     lint {
         warningsAsErrors = true
         checkDependencies = true
