@@ -99,19 +99,24 @@ class CertificatesViewModel @Inject constructor(
             false
         )
 
+    private val generateNewBarcode =
+        sharedPrefs.getBooleanFlow(
+            app.getString(R.string.key_preference_new_barcode_generation),
+            false
+        )
+
     init {
         viewModelScope.launch {
             combine(
-                listOf(
-                    getCertificatesFlowUseCase(),
-                    filter,
-                    shouldAuthenticate,
-                    searchForBarcode,
-                    invertColors,
-                    showOnLockedScreen,
-                    showBarcodesHalfSize,
-                    purchaseUpdateUseCase(),
-                )
+                getCertificatesFlowUseCase(),
+                filter,
+                shouldAuthenticate,
+                searchForBarcode,
+                invertColors,
+                showOnLockedScreen,
+                showBarcodesHalfSize,
+                generateNewBarcode,
+                purchaseUpdateUseCase(),
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
                 updateState(
@@ -121,7 +126,8 @@ class CertificatesViewModel @Inject constructor(
                     searchForBarcode = values[3] as BarcodeSearchMode,
                     invertColors = values[4] as Boolean,
                     showOnLockedScreen = values[5] as Boolean,
-                    showBarcodesInHalfSize = values[6] as Boolean
+                    showBarcodesInHalfSize = values[6] as Boolean,
+                    generateNewBarcode = values[7] as Boolean
                 )
             }.collect()
         }
@@ -142,6 +148,7 @@ class CertificatesViewModel @Inject constructor(
         invertColors: Boolean,
         showOnLockedScreen: Boolean,
         showBarcodesInHalfSize: Boolean,
+        generateNewBarcode: Boolean,
     ) {
         if (docs.isEmpty()) {
             _viewState.emit(
@@ -174,6 +181,7 @@ class CertificatesViewModel @Inject constructor(
                     showDeleteFilteredMenuItem = areDocumentsFilteredOut,
                     showGetProMenuItem = !isProUnlocked(),
                     showBarcodesInHalfSize = showBarcodesInHalfSize,
+                    generateNewBarcode = generateNewBarcode,
                 )
             )
         }

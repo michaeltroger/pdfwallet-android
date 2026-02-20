@@ -199,6 +199,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 searchBarcode = state.searchBarcode,
                 invertColors = state.invertColors,
                 showBarcodesInHalfSize = state.showBarcodesInHalfSize,
+                generateNewBarcode = state.generateNewBarcode,
             )
         }
     }
@@ -214,6 +215,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         searchBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showBarcodesInHalfSize: Boolean,
+        generateNewBarcode: Boolean,
     ) {
         val items = documents.map { certificate ->
             CertificateItem(
@@ -235,6 +237,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                     vm.onShareSelected(certificate)
                 },
                 showBarcodesInHalfSize = showBarcodesInHalfSize,
+                generateNewBarcode = generateNewBarcode,
             )
         }
         adapter.update(items)
