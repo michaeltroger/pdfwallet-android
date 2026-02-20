@@ -124,7 +124,8 @@ class PdfPageItem(
         barcode = if (searchBarcode != BarcodeSearchMode.DISABLED) {
             barcodeRenderer.getBarcodeIfPresent(
                 document = tempPdf,
-                tryExtraHard = searchBarcode == BarcodeSearchMode.EXTENDED
+                tryExtraHard = searchBarcode == BarcodeSearchMode.EXTENDED,
+                generateNewBarcode = false,
             )
         } else {
             null

@@ -47,7 +47,11 @@ private data class BarcodeHit(
 )
 
 public interface BarcodeRenderer {
-    public suspend fun getBarcodeIfPresent(document: Bitmap?, tryExtraHard: Boolean): Bitmap?
+    public suspend fun getBarcodeIfPresent(
+        document: Bitmap?,
+        tryExtraHard: Boolean,
+        generateNewBarcode: Boolean
+    ): Bitmap?
 }
 
 internal class BarcodeRendererImpl @Inject constructor(
@@ -57,10 +61,15 @@ internal class BarcodeRendererImpl @Inject constructor(
     override suspend fun getBarcodeIfPresent(
         document: Bitmap?,
         tryExtraHard: Boolean,
+        generateNewBarcode: Boolean,
     ): Bitmap? = withContext(dispatcher) {
         val hit: BarcodeHit = document?.extractBarcode(tryExtraHard) ?: return@withContext null
         if (!isActive) return@withContext null
-        encodeBarcodeAsBitmap(extractedCode = hit.result)
+        encodeBarcodeAsBitmap(
+            hit = hit,
+            source = document,
+            generateNewBarcode = generateNewBarcode
+        )
     }
 
     private suspend fun Bitmap.extractBarcode(
@@ -133,23 +142,24 @@ internal class BarcodeRendererImpl @Inject constructor(
     }
 
     @Suppress("ComplexCondition")
-    private fun encodeBarcodeAsBitmap(extractedCode: ZxingCpp.Result): Bitmap {
-        val bitMatrix = extractedCode.symbol
-        return if (bitMatrix == null || bitMatrix.data.isEmpty() || bitMatrix.width == 0 || bitMatrix.height == 0) {
-            createNewBarcode(extractedCode)
+    private fun encodeBarcodeAsBitmap(
+        source: Bitmap,
+        hit: BarcodeHit,
+        generateNewBarcode: Boolean,
+    ): Bitmap? {
+        return if (generateNewBarcode) {
+            val bitMatrix = hit.result.symbol
+             if (bitMatrix == null || bitMatrix.data.isEmpty() || bitMatrix.width == 0 || bitMatrix.height == 0) {
+                createBarcodeFromBytesOrText(hit.result)
+            } else {
+                createBarcodeFromBitMatrix(bitMatrix)
+            }
         } else {
-            extractOriginalBarcode(bitMatrix)
+            cropBarcodeBoundingBox(source, hit)
         }
     }
 
-    private fun encodeBarcodeAsBitmapNew(
-        source: Bitmap,
-        hit: BarcodeHit
-    ): Bitmap {
-        return cropBarcodeBoundingBox(source, hit)!!
-    }
-
-    private fun extractOriginalBarcode(bitMatrix: ZxingCpp.BitMatrix): Bitmap {
+    private fun createBarcodeFromBitMatrix(bitMatrix: ZxingCpp.BitMatrix): Bitmap {
         val src = bitMatrix.toBitmap(
             setColor = BARCODE_FOREGROUND_COLOR,
             unsetColor = BARCODE_BACKGROUND_COLOR,
@@ -161,7 +171,7 @@ internal class BarcodeRendererImpl @Inject constructor(
         return src.scale(dstWidth, dstHeight, false)
     }
 
-    private fun createNewBarcode(originalCode: ZxingCpp.Result): Bitmap {
+    private fun createBarcodeFromBytesOrText(originalCode: ZxingCpp.Result): Bitmap {
         val content = if (originalCode.contentType == ZxingCpp.ContentType.TEXT) {
             originalCode.text
         } else {
