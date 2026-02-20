@@ -46,7 +46,7 @@ class PdfPageItem(
     private var job: Job? = null
 
     private val barcodeCacheKey = "barcode-$fileName-$pageIndex-$generateNewBarcode"
-    private val pdfCacheKey = "pdf-$fileName-$pageIndex"
+    private val pdfCacheKey = "pdf-$fileName-$pageIndex-$generateNewBarcode"
 
     override fun initializeViewBinding(view: View): ItemCertificatePartialPdfPageBinding
         = ItemCertificatePartialPdfPageBinding.bind(view)
