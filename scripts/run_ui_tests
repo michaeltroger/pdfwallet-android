@@ -10,8 +10,14 @@ adb wait-for-device
 adb shell rm -f -rR /sdcard/Pictures/screenshots
 adb shell rm -f -rR /sdcard/Pictures/error_screenshots
 
-adb shell mkdir /sdcard/testdata
-adb push testdata /sdcard/
+adb shell mkdir /sdcard/testdata_generic
+adb push testdata_generic /sdcard/
+
+adb shell mkdir /sdcard/testdata_1d
+adb push testdata_1d /sdcard/
+
+adb shell mkdir /sdcard/testdata_2d
+adb push testdata_2d /sdcard/
 
 adb shell settings put global airplane_mode_on 1
 adb shell am broadcast -a android.intent.action.AIRPLANE_MODE

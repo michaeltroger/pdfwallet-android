@@ -35,6 +35,7 @@ class CertificateItem(
     private val searchBarcode: BarcodeSearchMode,
     private val invertColors: Boolean,
     private val showBarcodesInHalfSize: Boolean,
+    private val generateNewBarcode: Boolean,
     private val onDeleteCalled: () -> Unit,
     private val onDocumentNameClicked: () -> Unit,
     private val onShareCalled: () -> Unit,
@@ -90,6 +91,7 @@ class CertificateItem(
                         searchBarcode = searchBarcode,
                         invertColors = invertColors,
                         showBarcodesInHalfSize = showBarcodesInHalfSize,
+                        generateNewBarcode = generateNewBarcode,
                     )
                 )
             }
@@ -110,5 +112,6 @@ class CertificateItem(
         return (other as? CertificateItem)?.fileName == fileName
             && other.documentName == documentName
                 && other.showBarcodesInHalfSize == showBarcodesInHalfSize
+                && other.generateNewBarcode == generateNewBarcode
     }
 }

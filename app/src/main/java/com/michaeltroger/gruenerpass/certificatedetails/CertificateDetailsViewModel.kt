@@ -71,6 +71,12 @@ class CertificateDetailsViewModel @Inject constructor(
             false
         )
 
+    private val generateNewBarcode =
+        sharedPrefs.getBooleanFlow(
+            app.getString(R.string.key_preference_new_barcode_generation),
+            false
+        )
+
     init {
         viewModelScope.launch {
             combine(
@@ -78,9 +84,18 @@ class CertificateDetailsViewModel @Inject constructor(
                 searchForBarcode,
                 invertColors,
                 showBarcodesHalfSize,
+                generateNewBarcode,
                 purchaseUpdateUseCase(),
-                ::updateState
-            ).collect()
+            ) { values ->
+                @Suppress("UNCHECKED_CAST")
+                updateState(
+                    document = values[0] as? Certificate,
+                    searchForBarcode = values[1] as BarcodeSearchMode,
+                    invertColors = values[2] as Boolean,
+                    showBarcodesHalfSize = values[3] as Boolean,
+                    generateNewBarcode = values[4] as Boolean
+                )
+            }.collect()
         }
     }
 
@@ -90,7 +105,7 @@ class CertificateDetailsViewModel @Inject constructor(
         searchForBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showBarcodesHalfSize: Boolean,
-        purchaseUpdate: Unit,
+        generateNewBarcode: Boolean,
     ) {
         if (document == null) {
             _viewState.emit(DetailsViewState.Deleted)
@@ -102,6 +117,7 @@ class CertificateDetailsViewModel @Inject constructor(
                     invertColors = invertColors,
                     showBarcodesHalfSize = showBarcodesHalfSize,
                     showGetProMenuItem = !isProUnlocked(),
+                    generateNewBarcode = generateNewBarcode
                 )
             )
         }

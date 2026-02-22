@@ -35,9 +35,6 @@ La version « Pro » apporte en plus (achat intégré requis) :
 - Option pour forcer le thème sombre ou clair en écrasant les paramètres système
 - Possibilité d'afficher les codes-barres en demi-taille
 
-Pourquoi le code-barres généré semble-t-il différent de celui du PDF ?
-L’algorithme d’affichage est différent. Pour les appareils de lecture, le code est identique.
-
 Confidentialité
 Cette application respecte votre vie privée : elle est entièrement open source et fonctionne hors ligne. Aucune publicité, aucun suivi.
 

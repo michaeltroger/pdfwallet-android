@@ -17,8 +17,8 @@ class UiTest {
     fun passwordProtected() {
         MainActivityRobot()
             .selectFirstDocument()
-            .goToPdfFolder()
-            .openPasswordProtectedPdf(fileName = "password.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPasswordProtectedPdf(fileName = "password.pdf", folderName = TestFolders.TEST_GENERIC)
             .verifyPasswordDialogShown()
             .enterPasswordAndConfirm(password = "test")
             .verifyDocumentLoaded(docName = "password")
@@ -28,8 +28,8 @@ class UiTest {
     fun deleteDocument() {
         MainActivityRobot()
             .selectFirstDocument()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
             .verifyDocumentLoaded(docName = "demo")
             .clickDeleteDocument()
             .verifyDeleteDialogShown()
@@ -44,8 +44,8 @@ class UiTest {
     fun shareDocument() {
         MainActivityRobot()
             .selectFirstDocument()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
             .verifyDocumentLoaded(docName = "demo")
             .clickShareDocument()
             .verifyShareDialogShown()
@@ -57,8 +57,8 @@ class UiTest {
     fun changeDocumentName() {
         MainActivityRobot()
             .selectFirstDocument()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
             .verifyDocumentLoaded(docName = "demo")
             .clickRenameDocument()
             .verifyChangeDocumentNameDialogShown()

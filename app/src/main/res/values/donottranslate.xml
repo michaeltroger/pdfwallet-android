@@ -10,6 +10,7 @@
     <string name="privacy_policy_uri">https://pdfwallet.troger.app/privacy/</string>
     <string name="key_preference_biometric">shouldAuthenticate</string>
     <string name="key_preference_full_brightness">fullBrightness</string>
+    <string name="key_preference_new_barcode_generation">newBarcodeGeneration</string>
     <string name="key_preference_show_list_layout">showListLayout</string>
     <string name="key_preference_show_on_locked_screen">showOnLockedScreen</string>
     <string name="key_preference_version">version</string>

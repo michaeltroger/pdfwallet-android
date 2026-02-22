@@ -2,7 +2,7 @@ name: UI tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, 'feature/*' ]
   workflow_dispatch:
   
 concurrency:
@@ -58,11 +58,24 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         if: github.ref == 'refs/heads/main'
         with:
-          branch: feature/update_screenshots
+          branch: update_screenshots
           title: Update of screenshots
           commit-message: Update of screenshots
           add-paths: |
             screenshots/*
+
+      - name: Commit and push changes if on feature branch
+        if: startsWith(github.ref, 'refs/heads/feature/')
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add screenshots/*
+          if git diff --staged --quiet; then
+            echo "No changes in screenshots"
+          else
+            git commit -m "Update screenshots"
+            git push origin ${{ github.ref_name }}
+          fi
 
       - name: Upload test report
         uses: actions/upload-artifact@v4

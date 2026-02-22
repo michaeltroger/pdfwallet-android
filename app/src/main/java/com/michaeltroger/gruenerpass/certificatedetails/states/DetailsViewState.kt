@@ -22,6 +22,7 @@ sealed class DetailsViewState {
         val searchBarcode: BarcodeSearchMode,
         val invertColors: Boolean,
         val showBarcodesHalfSize: Boolean,
+        val generateNewBarcode: Boolean,
         override val showGetProMenuItem: Boolean,
     ) : DetailsViewState() {
         override val showToggleBarcodeSizeMenuItem = true

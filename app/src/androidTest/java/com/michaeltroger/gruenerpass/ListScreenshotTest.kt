@@ -42,8 +42,8 @@ class ListScreenshotTest {
     fun normal() {
         MainActivityRobot()
             .selectFirstDocument()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
 
         DetailViewRobot()
             .verifyDocumentLoaded(docName = "demo")
@@ -57,16 +57,16 @@ class ListScreenshotTest {
     fun multipleDocuments() {
         MainActivityRobot()
             .selectFirstDocument()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
 
         DetailViewRobot()
             .verifyDocumentLoaded(docName = "demo")
             .goBack()
             .verifyDocumentLoaded(docName = "demo", expectedDocumentCount = 1, listLayout = true)
             .selectAnotherDocument()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo1.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo1.pdf", folderName = TestFolders.TEST_GENERIC)
 
         DetailViewRobot()
             .verifyDocumentLoaded(docName = "demo1")
@@ -80,8 +80,8 @@ class ListScreenshotTest {
     fun detail() {
         MainActivityRobot()
             .selectFirstDocument()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
 
         DetailViewRobot()
             .verifyDocumentLoaded(docName = "demo")

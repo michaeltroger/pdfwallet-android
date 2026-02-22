@@ -11,7 +11,6 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-
 private const val BARCODE_SIZE = 400
 private const val RENDER_MULTIPLIER = 10
 private const val BARCODE_FOREGROUND_COLOR = 0xff000000.toInt()
@@ -32,6 +31,7 @@ private val preferredPriority = listOf(
     ZxingCpp.BarcodeFormat.CODABAR,
     ZxingCpp.BarcodeFormat.ITF,
 )
+
 private val readerOptions = ZxingCpp.ReaderOptions(
     formats = preferredPriority.toSet(),
     tryHarder = true,
@@ -41,8 +41,17 @@ private val readerOptions = ZxingCpp.ReaderOptions(
     maxNumberOfSymbols = 2,
 )
 
+private data class BarcodeHit(
+    val result: ZxingCpp.Result,
+    val cropRect: Rect
+)
+
 public interface BarcodeRenderer {
-    public suspend fun getBarcodeIfPresent(document: Bitmap?, tryExtraHard: Boolean): Bitmap?
+    public suspend fun getBarcodeIfPresent(
+        document: Bitmap?,
+        tryExtraHard: Boolean,
+        generateNewBarcode: Boolean
+    ): Bitmap?
 }
 
 internal class BarcodeRendererImpl @Inject constructor(
@@ -52,52 +61,62 @@ internal class BarcodeRendererImpl @Inject constructor(
     override suspend fun getBarcodeIfPresent(
         document: Bitmap?,
         tryExtraHard: Boolean,
+        generateNewBarcode: Boolean,
     ): Bitmap? = withContext(dispatcher) {
-        val extractedCode = document?.extractBarcode(tryExtraHard) ?: return@withContext null
+        val hit: BarcodeHit = document?.extractBarcode(tryExtraHard) ?: return@withContext null
         if (!isActive) return@withContext null
-        encodeBarcodeAsBitmap(extractedCode)
+        encodeBarcodeAsBitmap(
+            hit = hit,
+            source = document,
+            generateNewBarcode = generateNewBarcode
+        )
     }
 
-    private suspend fun Bitmap.extractBarcode(tryExtraHard: Boolean): ZxingCpp.Result? = withContext(dispatcher) {
+    private suspend fun Bitmap.extractBarcode(
+        tryExtraHard: Boolean
+    ): BarcodeHit? = withContext(dispatcher) {
+
         val resultSet = try {
-            getCropRectangles(tryExtraHard)
-                .onEach {
-                    if (!isActive) return@withContext null
-                }.flatMap { cropRect ->
-                    ZxingCpp.readBitmap(
-                        bitmap = this@extractBarcode,
-                        cropRect = cropRect,
-                        rotation = 0,
-                        options = readerOptions,
-                    )?: emptyList()
-                }
-        } catch (ignore: Exception) {
+            getCropRectangles(tryExtraHard).flatMap { cropRect ->
+                if (!isActive) return@withContext null
+
+                ZxingCpp.readBitmap(
+                    bitmap = this@extractBarcode,
+                    cropRect = cropRect,
+                    rotation = 0,
+                    options = readerOptions,
+                )?.map { BarcodeHit(it, cropRect) } ?: emptyList()
+            }
+        } catch (_: Exception) {
             emptyList()
-        } catch (ignore: OutOfMemoryError) {
+        } catch (_: OutOfMemoryError) {
             emptyList()
         }
 
         if (resultSet.isEmpty()) return@withContext null
-        val resultsMap = resultSet.associateBy { it.format }
+
+        val resultsMap = resultSet.associateBy { it.result.format }
         preferredPriority.firstNotNullOfOrNull { resultsMap[it] }
     }
 
+    @Suppress("MagicNumber")
     private fun Bitmap.getCropRectangles(tryExtraHard: Boolean): List<Rect> {
-        val cropRectList = mutableListOf(
-            Rect(0, 0, width, height),
-        )
+        val list = mutableListOf(Rect(0, 0, width, height))
         if (tryExtraHard) {
-            cropRectList += getCropRectangles(divisorLongerSize = 3, divisorShorterSize = 1)
-            cropRectList += getCropRectangles(divisorLongerSize = 4, divisorShorterSize = 1)
-            cropRectList += getCropRectangles(divisorLongerSize = 5, divisorShorterSize = 1)
+            list += getCropRectangles(3, 1)
+            list += getCropRectangles(4, 1)
+            list += getCropRectangles(5, 1)
         }
-
-        return cropRectList
+        return list
     }
 
-    private fun Bitmap.getCropRectangles(divisorLongerSize: Int, divisorShorterSize: Int): List<Rect> {
+    private fun Bitmap.getCropRectangles(
+        divisorLongerSize: Int,
+        divisorShorterSize: Int
+    ): List<Rect> {
         val divisorX: Int
         val divisorY: Int
+
         if (width > height) {
             divisorX = divisorLongerSize
             divisorY = divisorShorterSize
@@ -108,31 +127,40 @@ internal class BarcodeRendererImpl @Inject constructor(
 
         val tempX = width / divisorX
         val tempY = height / divisorY
-        val cropRectList = mutableListOf<Rect>()
-        for (multiplierX in 0 until divisorX) {
-            for (multiplierY in 0 until divisorY) {
-                cropRectList += Rect(
-                    tempX * multiplierX,
-                    tempY * multiplierY,
-                    tempX * (multiplierX + 1),
-                    tempY * (multiplierY + 1)
+
+        val rects = mutableListOf<Rect>()
+        for (x in 0 until divisorX) {
+            for (y in 0 until divisorY) {
+                rects += Rect(
+                    tempX * x,
+                    tempY * y,
+                    tempX * (x + 1),
+                    tempY * (y + 1)
                 )
             }
         }
-        return cropRectList
+        return rects
     }
 
     @Suppress("ComplexCondition")
-    private fun encodeBarcodeAsBitmap(extractedCode: ZxingCpp.Result): Bitmap {
-        val bitMatrix = extractedCode.symbol
-        return if (bitMatrix == null || bitMatrix.data.isEmpty() || bitMatrix.width == 0 || bitMatrix.height == 0) {
-            createNewBarcode(extractedCode)
+    private fun encodeBarcodeAsBitmap(
+        source: Bitmap,
+        hit: BarcodeHit,
+        generateNewBarcode: Boolean,
+    ): Bitmap? {
+        return if (generateNewBarcode) {
+            val bitMatrix = hit.result.symbol
+             if (bitMatrix == null || bitMatrix.data.isEmpty() || bitMatrix.width == 0 || bitMatrix.height == 0) {
+                createBarcodeFromBytesOrText(hit.result)
+            } else {
+                createBarcodeFromBitMatrix(bitMatrix)
+            }
         } else {
-            extractOriginalBarcode(bitMatrix)
+            cropBarcodeBoundingBox(source, hit)
         }
     }
 
-    private fun extractOriginalBarcode(bitMatrix: ZxingCpp.BitMatrix): Bitmap {
+    private fun createBarcodeFromBitMatrix(bitMatrix: ZxingCpp.BitMatrix): Bitmap {
         val src = bitMatrix.toBitmap(
             setColor = BARCODE_FOREGROUND_COLOR,
             unsetColor = BARCODE_BACKGROUND_COLOR,
@@ -144,7 +172,7 @@ internal class BarcodeRendererImpl @Inject constructor(
         return src.scale(dstWidth, dstHeight, false)
     }
 
-    private fun createNewBarcode(originalCode: ZxingCpp.Result): Bitmap {
+    private fun createBarcodeFromBytesOrText(originalCode: ZxingCpp.Result): Bitmap {
         val content = if (originalCode.contentType == ZxingCpp.ContentType.TEXT) {
             originalCode.text
         } else {
@@ -160,5 +188,49 @@ internal class BarcodeRendererImpl @Inject constructor(
             unsetColor = BARCODE_BACKGROUND_COLOR,
             margin = 0,
         )
+    }
+
+    @Suppress("ReturnCount")
+    private fun cropBarcodeBoundingBox(
+        source: Bitmap,
+        hit: BarcodeHit
+    ): Bitmap? {
+        val pos = hit.result.position
+        val cropRect = hit.cropRect
+
+        val xs = intArrayOf(
+            pos.topLeft.x + cropRect.left,
+            pos.topRight.x + cropRect.left,
+            pos.bottomLeft.x + cropRect.left,
+            pos.bottomRight.x + cropRect.left
+        )
+
+        val ys = intArrayOf(
+            pos.topLeft.y + cropRect.top,
+            pos.topRight.y + cropRect.top,
+            pos.bottomLeft.y + cropRect.top,
+            pos.bottomRight.y + cropRect.top
+        )
+
+        val minX = xs.min()
+        val maxX = xs.max()
+        val minY = ys.min()
+        val maxY = ys.max()
+
+        if (minX >= maxX || minY >= maxY) return null
+
+        val padX = ((maxX - minX) * 0.1f).toInt()
+        val padY = ((maxY - minY) * 0.1f).toInt()
+
+        val left = (minX - padX).coerceAtLeast(0)
+        val top = (minY - padY).coerceAtLeast(0)
+        val right = (maxX + padX).coerceAtMost(source.width)
+        val bottom = (maxY + padY).coerceAtMost(source.height)
+
+        val width = right - left
+        val height = bottom - top
+        if (width <= 0 || height <= 0) return null
+
+        return Bitmap.createBitmap(source, left, top, width, height)
     }
 }

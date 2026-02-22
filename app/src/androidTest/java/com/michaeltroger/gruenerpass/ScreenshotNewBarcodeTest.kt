@@ -1,6 +1,5 @@
 package com.michaeltroger.gruenerpass
 
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ActivityScenario
@@ -13,7 +12,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
-class ScreenshotTest {
+class ScreenshotNewBarcodeTest {
 
     private lateinit var scenario: ActivityScenario<MainActivity>
 
@@ -28,40 +27,9 @@ class ScreenshotTest {
     fun startUp() {
         PreferenceManager.getDefaultSharedPreferences(context).edit {
             putBoolean(context.getString(R.string.key_preference_prevent_screenshots), false)
+            putBoolean(context.getString(R.string.key_preference_new_barcode_generation), true)
         }
         scenario = ActivityScenario.launch(MainActivity::class.java)
-    }
-
-    @Test
-    fun emptyState() {
-        MainActivityRobot().verifyEmptyState()
-        ScreenshotUtil.recordScreenshot("empty_state")
-    }
-
-    @Test
-    fun normalState() {
-        MainActivityRobot()
-            .selectFirstDocument()
-            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
-            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
-            .verifyDocumentLoaded(docName = "demo")
-
-        ScreenshotUtil.recordScreenshot("normal_state")
-    }
-
-    @Test
-    fun multipleDocuments() {
-        MainActivityRobot()
-            .selectFirstDocument()
-            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
-            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
-            .verifyDocumentLoaded(docName = "demo", expectedDocumentCount = 1)
-            .selectAnotherDocument()
-            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
-            .openPdf(fileName = "demo1.pdf", folderName = TestFolders.TEST_GENERIC)
-            .verifyDocumentLoaded(docName = "demo1", expectedDocumentCount = 2)
-
-        ScreenshotUtil.recordScreenshot("multiple_documents")
     }
 
     @Test
@@ -72,7 +40,7 @@ class ScreenshotTest {
             .openPdf(fileName = "qr.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "qr", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("qr_code_crop")
+        ScreenshotUtil.recordScreenshot("qr_code")
     }
 
     @Test
@@ -83,7 +51,7 @@ class ScreenshotTest {
             .openPdf(fileName = "aztec.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "aztec", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("aztec_code_crop")
+        ScreenshotUtil.recordScreenshot("aztec_code")
     }
 
     @Test
@@ -94,7 +62,7 @@ class ScreenshotTest {
             .openPdf(fileName = "datamatrix.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "datamatrix", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("data_matrix_crop")
+        ScreenshotUtil.recordScreenshot("data_matrix")
     }
 
     @Test
@@ -105,7 +73,7 @@ class ScreenshotTest {
             .openPdf(fileName = "datamatrix_erezept.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "datamatrix_erezept", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("data_matrix_erezept_crop")
+        ScreenshotUtil.recordScreenshot("data_matrix_erezept")
     }
 
     @Test
@@ -116,7 +84,7 @@ class ScreenshotTest {
             .openPdf(fileName = "pdf417.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "pdf417", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("pdf417_crop")
+        ScreenshotUtil.recordScreenshot("pdf417")
     }
 
     @Test
@@ -127,7 +95,7 @@ class ScreenshotTest {
             .openPdf(fileName = "qr_logo.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "qr_logo", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("qr_logo_crop")
+        ScreenshotUtil.recordScreenshot("qr_logo")
     }
 
     @Ignore
@@ -139,7 +107,7 @@ class ScreenshotTest {
             .openPdf(fileName = "codabar.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "codabar", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("codabar_crop")
+        ScreenshotUtil.recordScreenshot("codabar")
     }
 
     @Ignore
@@ -151,7 +119,7 @@ class ScreenshotTest {
             .openPdf(fileName = "code39.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "code39", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("code39_crop")
+        ScreenshotUtil.recordScreenshot("code39")
     }
 
     @Ignore
@@ -163,7 +131,7 @@ class ScreenshotTest {
             .openPdf(fileName = "code93.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "code93", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("code93_crop")
+        ScreenshotUtil.recordScreenshot("code93")
     }
 
     @Ignore
@@ -175,7 +143,7 @@ class ScreenshotTest {
             .openPdf(fileName = "code128.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "code128", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("code128_crop")
+        ScreenshotUtil.recordScreenshot("code128")
     }
 
     @Ignore
@@ -187,7 +155,7 @@ class ScreenshotTest {
             .openPdf(fileName = "ean8.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "ean8", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("ean8_crop")
+        ScreenshotUtil.recordScreenshot("ean8")
     }
 
     @Ignore
@@ -199,7 +167,7 @@ class ScreenshotTest {
             .openPdf(fileName = "ean13.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "ean13", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("ean13_crop")
+        ScreenshotUtil.recordScreenshot("ean13")
     }
 
     @Ignore
@@ -211,7 +179,7 @@ class ScreenshotTest {
             .openPdf(fileName = "itf.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "itf", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("itf_crop")
+        ScreenshotUtil.recordScreenshot("itf")
     }
 
     @Ignore
@@ -223,7 +191,7 @@ class ScreenshotTest {
             .openPdf(fileName = "usbca.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "usbca", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("usbca_crop")
+        ScreenshotUtil.recordScreenshot("usbca")
     }
 
     @Ignore
@@ -235,22 +203,6 @@ class ScreenshotTest {
             .openPdf(fileName = "usbce.pdf", folderName = TestFolders.TEST_1D)
             .verifyDocumentLoaded(docName = "usbce", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("usbce_crop")
-    }
-
-    @Test
-    fun darkMode() {
-        enableDarkMode()
-        MainActivityRobot().verifyEmptyState()
-
-        ScreenshotUtil.recordScreenshot("dark_mode")
-    }
-
-    private fun enableDarkMode() {
-        scenario.onActivity {
-            AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_YES
-            )
-        }
+        ScreenshotUtil.recordScreenshot("usbce")
     }
 }

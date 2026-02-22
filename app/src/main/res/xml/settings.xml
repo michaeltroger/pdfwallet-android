@@ -43,6 +43,13 @@
         android:defaultValue="false"/>
 
     <SwitchPreference
+        android:key="@string/key_preference_new_barcode_generation"
+        android:icon="@drawable/construction_24px"
+        android:title="@string/preference_barcode_generation"
+        android:summary="@string/preference_barcode_generation_description"
+        android:defaultValue="false"/>
+
+    <SwitchPreference
         android:key="@string/key_preference_show_list_layout"
         android:icon="@drawable/list_24px"
         android:title="@string/preference_show_list_layout"

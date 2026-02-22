@@ -78,6 +78,7 @@ sealed class ViewState {
         override val showDeleteFilteredMenuItem: Boolean,
         override val showExportFilteredMenuItem: Boolean,
         val showBarcodesInHalfSize: Boolean,
+        val generateNewBarcode: Boolean,
     ) : ViewState() {
         override val showSwitchLayoutMenuItem = true
         override val showToggleBarcodeSizeMenuItem = true
