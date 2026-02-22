@@ -119,6 +119,107 @@ class ScreenshotTest {
     }
 
     @Test
+    fun qrSpecial() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_2D)
+            .openPdf(fileName = "qr_logo.pdf", folderName = TestFolders.TEST_2D)
+            .verifyDocumentLoaded(docName = "qr_logo", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("qr_logo_crop")
+    }
+
+    fun codabar() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "codabar.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "codabar", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("codabar_crop")
+    }
+
+    fun code39() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "code39.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "code39", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("code39_crop")
+    }
+
+    fun code93() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "code93.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "code93", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("code93_crop")
+    }
+
+    fun code128() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "code128.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "code128", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("code128_crop")
+    }
+
+    fun ean8() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "ean8.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "ean8", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("ean8_crop")
+    }
+
+    fun ean13() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "ean13.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "ean13", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("ean13_crop")
+    }
+
+    fun itf() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "itf.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "itf", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("itf_crop")
+    }
+
+    fun usbca() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "usbca.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "usbca", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("usbca_crop")
+    }
+
+    fun usbce() {
+        MainActivityRobot()
+            .selectFirstDocument()
+            .goToPdfFolder(folderName = TestFolders.TEST_1D)
+            .openPdf(fileName = "usbce.pdf", folderName = TestFolders.TEST_1D)
+            .verifyDocumentLoaded(docName = "usbce", expectBarcode = true)
+
+        ScreenshotUtil.recordScreenshot("usbce_crop")
+    }
+
+    @Test
     fun darkMode() {
         enableDarkMode()
         MainActivityRobot().verifyEmptyState()
