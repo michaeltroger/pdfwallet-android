@@ -81,4 +81,6 @@
     <string name="preference_half_size_barcodes">Barcodes in halber Größe anzeigen</string>
     <string name="preference_half_size_barcodes_description">Dies kann die Lesbarkeit für einige Barcode-Scanner verbessern.</string>
     <string name="menu_toggle_barcode_size">Barcode-Größe umschalten</string>
+    <string name="preference_barcode_generation">Neuen Barcode erstellen</string>
+    <string name="preference_barcode_generation_description">Wenn deaktiviert (empfohlen), schneidet die App den ursprünglichen Barcode aus, was für Ticketkontrollen am besten ist. Wenn aktiviert, erstellt die App stattdessen einen neuen, scharfen Barcode.</string>
 </resources>
