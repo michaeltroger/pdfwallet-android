@@ -1,0 +1,3 @@
+- The app now by default crops out the original barcode (improves ticket checks)
+- There is a new app setting, that allows to generate a new barcode instead - like in earlier app versions
+- Allow the app to run in a different language than the system (>= Android 14 only)

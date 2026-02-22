@@ -1,0 +1,3 @@
+- Die App schneidet nun standardmäßig den original Barcode aus (verbessert Ticket-Checks)
+- Es gibt eine neue App-Einstellung, die es stattdessen erlaubt einen neuen Barcode zu generieren - wie in früheren App-Versionen
+- Erlaubt es der App in einer anderen Sprache als das System zu laufen (nur >= Android 14)
