@@ -9,7 +9,6 @@ import androidx.test.uiautomator.UiSelector
 import androidx.test.uiautomator.Until
 
 private const val TIMEOUT = 5000L
-private const val testFolder = "testdata"
 private const val filesApp = "com.android.documentsui"
 
 class AndroidFileAppRobot {
@@ -19,7 +18,6 @@ class AndroidFileAppRobot {
 
     private val hamburgerSelector = By.desc("Show roots")
     private val rootDirSelector = By.textStartsWith("Android SDK")
-    private val testDataDirSelector = By.text(testFolder)
     private val pdfSelector = By.textEndsWith(".pdf")
     private val greenPassAppSelector = By.text("PDF Wallet")
     private val shareButtonSelector = By.desc("Share")
@@ -31,9 +29,10 @@ class AndroidFileAppRobot {
         context.startActivity(intent)
     }
 
-    fun goToPdfFolder() = apply {
+    fun goToPdfFolder(folderName: String) = apply {
         val uiScrollable = UiScrollable(UiSelector().scrollable(true))
         try {
+            val testDataDirSelector = By.text(folderName)
             uiDevice.wait(Until.hasObject(hamburgerSelector), TIMEOUT)
             uiDevice.findObject(hamburgerSelector).click()
             uiDevice.waitForIdle()
@@ -42,7 +41,7 @@ class AndroidFileAppRobot {
             uiDevice.findObject(rootDirSelector).click()
             uiDevice.waitForIdle()
 
-            uiScrollable.scrollTextIntoView(testFolder)
+            uiScrollable.scrollTextIntoView(folderName)
             uiDevice.wait(Until.hasObject(testDataDirSelector), TIMEOUT)
             uiDevice.findObject(testDataDirSelector).click()
             uiDevice.waitForIdle()
@@ -56,25 +55,26 @@ class AndroidFileAppRobot {
         }
     }
 
-    fun openPdf(fileName: String): MainActivityRobot {
-        selectFile(fileName = fileName, longClick = false)
+    fun openPdf(fileName: String, folderName: String): MainActivityRobot {
+        selectFile(fileName = fileName, folderName = folderName, longClick = false)
         return MainActivityRobot()
     }
 
-    fun selectPdf(fileName: String) = apply {
-        selectFile(fileName = fileName, longClick = true)
+    fun selectPdf(fileName: String, folderName: String) = apply {
+        selectFile(fileName = fileName, folderName = folderName, longClick = true)
     }
 
-    fun openPasswordProtectedPdf(fileName: String): PasswordDialogRobot {
-        selectFile(fileName = fileName, longClick = false)
+    fun openPasswordProtectedPdf(fileName: String, folderName: String): PasswordDialogRobot {
+        selectFile(fileName = fileName, folderName = folderName, longClick = false)
         return PasswordDialogRobot()
     }
 
-    private fun selectFile(fileName: String, longClick: Boolean = false) {
+    private fun selectFile(fileName: String, folderName: String, longClick: Boolean = false) {
+        val testDataDirSelector = By.text(folderName)
         uiDevice.wait(Until.hasObject(pdfSelector), TIMEOUT)
         uiDevice.wait(Until.hasObject(testDataDirSelector), TIMEOUT)
         if (!uiDevice.hasObject(pdfSelector) || !uiDevice.hasObject(testDataDirSelector)) {
-            goToPdfFolder()
+            goToPdfFolder(folderName = folderName)
         }
         uiDevice.wait(Until.hasObject(pdfSelector), TIMEOUT)
         uiDevice.wait(Until.hasObject(testDataDirSelector), TIMEOUT)

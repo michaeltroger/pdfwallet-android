@@ -14,8 +14,8 @@ class OpenFromFileAppTest {
     fun fileOpenedFromFileManager() {
         AndroidFileAppRobot()
             .openFileManagerApp()
-            .goToPdfFolder()
-            .openPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
             .verifyDocumentLoaded(docName = "demo")
     }
 
@@ -23,8 +23,8 @@ class OpenFromFileAppTest {
     fun fileSharedFromFileManager() {
         AndroidFileAppRobot()
             .openFileManagerApp()
-            .goToPdfFolder()
-            .selectPdf(fileName = "demo.pdf")
+            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
+            .selectPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
             .selectShare()
             .selectGreenPass()
             .verifyDocumentLoaded(docName = "demo")
