@@ -81,4 +81,6 @@
     <string name="preference_half_size_barcodes">Afficher les codes-barres en demi-taille</string>
     <string name="preference_half_size_barcodes_description">Cela peut améliorer la lisibilité de certains scanners de codes-barres.</string>
     <string name="menu_toggle_barcode_size">Basculer la taille du code-barres</string>
+    <string name="preference_barcode_generation">Créer un nouveau code-barres</string>
+    <string name="preference_barcode_generation_description">Lorsqu’il est désactivé (recommandé), l’application supprime le code-barres original, ce qui est idéal pour le contrôle des billets. Lorsqu’il est activé, l’application crée un nouveau code-barres net.</string>
 </resources>
