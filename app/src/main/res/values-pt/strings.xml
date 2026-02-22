@@ -81,4 +81,6 @@
     <string name="preference_half_size_barcodes">Exibir códigos de barras em tamanho médio</string>
     <string name="preference_half_size_barcodes_description">Isso pode melhorar a legibilidade de alguns scanners de código de barras.</string>
     <string name="menu_toggle_barcode_size">Tamanho do código de barras</string>
+    <string name="preference_barcode_generation">Criar novo código de barras</string>
+    <string name="preference_barcode_generation_description">Quando desativado (recomendado), o app recorta o código de barras original, o que é melhor para a verificação de bilhetes. Quando ativado, o app cria um novo código de barras nítido.</string>
 </resources>
