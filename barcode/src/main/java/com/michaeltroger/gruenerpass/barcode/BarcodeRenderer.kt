@@ -217,13 +217,10 @@ internal class BarcodeRendererImpl @Inject constructor(
 
         if (minX >= maxX || minY >= maxY) return null
 
-        val padX = ((maxX - minX) * 0.1f).toInt()
-        val padY = ((maxY - minY) * 0.1f).toInt()
-
-        val left = (minX - padX).coerceAtLeast(0)
-        val top = (minY - padY).coerceAtLeast(0)
-        val right = (maxX + padX).coerceAtMost(source.width)
-        val bottom = (maxY + padY).coerceAtMost(source.height)
+        val left = minX.coerceAtLeast(0)
+        val top = minY.coerceAtLeast(0)
+        val right = maxX.coerceAtMost(source.width)
+        val bottom = maxY.coerceAtMost(source.height)
 
         val width = right - left
         val height = bottom - top

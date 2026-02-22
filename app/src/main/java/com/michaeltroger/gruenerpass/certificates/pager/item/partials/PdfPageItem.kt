@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.graphics.scale
 import androidx.core.view.isVisible
-import androidx.core.view.setMargins
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.barcode.BarcodeRenderer
 import com.michaeltroger.gruenerpass.cache.BitmapCache
@@ -70,12 +68,6 @@ class PdfPageItem(
             } else {
                 viewBinding.barcode.scaleX = SCALE_FULL
                 viewBinding.barcode.scaleY = SCALE_FULL
-            }
-
-            if (generateNewBarcode) {
-                (viewBinding.barcode.layoutParams as? ViewGroup.MarginLayoutParams)?.setMargins(30.dpToPx(context))
-            } else {
-                (viewBinding.barcode.layoutParams as? ViewGroup.MarginLayoutParams)?.setMargins(0.dpToPx(context))
             }
 
             if (pdf == null) {
@@ -185,10 +177,6 @@ class PdfPageItem(
 
     private val Context.screenHeight: Int
         get() = resources.displayMetrics.heightPixels
-}
-
-private fun Int.dpToPx(context: Context): Int {
-    return (this * context.resources.displayMetrics.density).toInt()
 }
 
 private fun isDarkMode(context: Context): Boolean {
