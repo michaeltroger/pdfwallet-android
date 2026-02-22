@@ -21,7 +21,7 @@
             android:id="@+id/barcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
+            android:layout_margin="24dp"
             android:contentDescription="@string/barcode"
             android:adjustViewBounds="true"/>
 
