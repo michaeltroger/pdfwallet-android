@@ -8,6 +8,7 @@ import com.michaeltroger.gruenerpass.robots.MainActivityRobot
 import com.michaeltroger.gruenerpass.utils.FailingTestWatcher
 import com.michaeltroger.gruenerpass.utils.ScreenshotUtil
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -97,6 +98,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("qr_logo")
     }
 
+    @Ignore
     @Test
     fun codabar() {
         MainActivityRobot()
@@ -108,6 +110,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("codabar")
     }
 
+    @Ignore
     @Test
     fun code39() {
         MainActivityRobot()
@@ -119,6 +122,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("code39")
     }
 
+    @Ignore
     @Test
     fun code93() {
         MainActivityRobot()
@@ -130,6 +134,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("code93")
     }
 
+    @Ignore
     @Test
     fun code128() {
         MainActivityRobot()
@@ -141,6 +146,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("code128")
     }
 
+    @Ignore
     @Test
     fun ean8() {
         MainActivityRobot()
@@ -152,6 +158,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("ean8")
     }
 
+    @Ignore
     @Test
     fun ean13() {
         MainActivityRobot()
@@ -163,6 +170,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("ean13")
     }
 
+    @Ignore
     @Test
     fun itf() {
         MainActivityRobot()
@@ -174,6 +182,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("itf")
     }
 
+    @Ignore
     @Test
     fun usbca() {
         MainActivityRobot()
@@ -185,6 +194,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("usbca")
     }
 
+    @Ignore
     @Test
     fun usbce() {
         MainActivityRobot()

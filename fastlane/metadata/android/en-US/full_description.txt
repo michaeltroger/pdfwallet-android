@@ -35,9 +35,6 @@ The "Pro" version additionally brings (requires In-App Purchase):
 - Option to force dark or light theme by overriding system settings
 - Option to show barcodes in half size
 
-Why does the generated barcode look different from the one in the PDF?
-The algorithm used for display is different. For reading devices the code is identical.
-
 Privacy
 This app values your privacy by being fully open source and working offline. No ads, no tracking.
 

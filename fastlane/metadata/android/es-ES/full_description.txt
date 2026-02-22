@@ -35,9 +35,6 @@ La versión “Pro” incluye además (requiere compra dentro de la app):
 - Opción para forzar tema oscuro o claro anulando los ajustes del sistema
 - Opción para mostrar códigos de barras en medio tamaño
 
-¿Por qué el código de barras generado se ve diferente al del PDF?
-El algoritmo de visualización es distinto. Para los dispositivos de lectura, el código es idéntico.
-
 Privacidad
 Esta aplicación valora tu privacidad siendo completamente de código abierto y funcionando sin conexión. Sin anuncios, sin seguimiento.
 

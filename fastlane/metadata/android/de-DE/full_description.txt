@@ -35,9 +35,6 @@ Die "Pro" Version bringt darüber hinaus (erfordert In-App-Kauf):
 - Option um den dunklen oder hellen Theme-Mode zu erzwingen (überschreibt System-Einstellung)
 - Option um Barcodes in halber Größe anzuzeigen
 
-Warum ist der generierte Barcode anders als der im PDF?
-Der Algorithmus zum Darstellen ist anders. Für Lesegeräte ist der Code identisch.
-
 Privatsphäre
 Diese App schätzt Ihre Privatsphäre, indem ihr Quellcode vollständig öffentlich ist und indem sie offline funktioniert. Keine Werbung, kein Tracking.
 

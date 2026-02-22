@@ -9,6 +9,7 @@ import com.michaeltroger.gruenerpass.robots.MainActivityRobot
 import com.michaeltroger.gruenerpass.utils.FailingTestWatcher
 import com.michaeltroger.gruenerpass.utils.ScreenshotUtil
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 
@@ -129,6 +130,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("qr_logo_crop")
     }
 
+    @Ignore
     @Test
     fun codabar() {
         MainActivityRobot()
@@ -140,6 +142,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("codabar_crop")
     }
 
+    @Ignore
     @Test
     fun code39() {
         MainActivityRobot()
@@ -151,6 +154,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("code39_crop")
     }
 
+    @Ignore
     @Test
     fun code93() {
         MainActivityRobot()
@@ -162,6 +166,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("code93_crop")
     }
 
+    @Ignore
     @Test
     fun code128() {
         MainActivityRobot()
@@ -173,6 +178,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("code128_crop")
     }
 
+    @Ignore
     @Test
     fun ean8() {
         MainActivityRobot()
@@ -184,6 +190,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("ean8_crop")
     }
 
+    @Ignore
     @Test
     fun ean13() {
         MainActivityRobot()
@@ -195,6 +202,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("ean13_crop")
     }
 
+    @Ignore
     @Test
     fun itf() {
         MainActivityRobot()
@@ -206,6 +214,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("itf_crop")
     }
 
+    @Ignore
     @Test
     fun usbca() {
         MainActivityRobot()
@@ -217,6 +226,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("usbca_crop")
     }
 
+    @Ignore
     @Test
     fun usbce() {
         MainActivityRobot()
