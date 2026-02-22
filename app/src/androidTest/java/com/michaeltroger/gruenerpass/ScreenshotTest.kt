@@ -27,6 +27,7 @@ class ScreenshotTest {
     fun startUp() {
         PreferenceManager.getDefaultSharedPreferences(context).edit {
             putBoolean(context.getString(R.string.key_preference_prevent_screenshots), false)
+            putBoolean(context.getString(R.string.key_preference_new_barcode_generation), true)
         }
         scenario = ActivityScenario.launch(MainActivity::class.java)
     }
