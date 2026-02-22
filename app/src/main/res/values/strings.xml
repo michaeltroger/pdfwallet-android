@@ -81,5 +81,5 @@
     <string name="preference_half_size_barcodes_description">This can improve readability for some barcode scanners.</string>
     <string name="menu_toggle_barcode_size">Toggle barcode size</string>
     <string name="preference_barcode_generation">Create new barcode</string>
-    <string name="preference_barcode_generation_description">When disabled (recommended), the app crops out the original barcode. Which is best for ticket checks. When enabled, the app instead creates a new barcode with the same content (as much as possible). This brings a cleaner/sharper barcode, but worse performance for ticket checks.</string>
+    <string name="preference_barcode_generation_description">When disabled (recommended), the app crops out the original barcode, which is best for ticket checks. When enabled, the app instead creates a fresh and sharp new barcode.</string>
 </resources>
