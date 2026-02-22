@@ -81,4 +81,6 @@
     <string name="preference_half_size_barcodes">Kuva triipkoodid poole väiksemana</string>
     <string name="preference_half_size_barcodes_description">See võib parandada mõnede vöötkoodiskannerite loetavust.</string>
     <string name="menu_toggle_barcode_size">Vöötkoodi suuruse vahetamine</string>
+    <string name="preference_barcode_generation">Loo uus vöötkood</string>
+    <string name="preference_barcode_generation_description">Kui see on välja lülitatud (soovitatav), lõikab rakendus algse vöötkoodi välja, mis sobib kõige paremini piletikontrolliks. Kui see on sisse lülitatud, loob rakendus uue ja terava vöötkoodi.</string>
 </resources>
