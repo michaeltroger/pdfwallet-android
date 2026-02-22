@@ -97,6 +97,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("qr_logo")
     }
 
+    @Test
     fun codabar() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -107,6 +108,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("codabar")
     }
 
+    @Test
     fun code39() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -117,6 +119,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("code39")
     }
 
+    @Test
     fun code93() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -127,6 +130,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("code93")
     }
 
+    @Test
     fun code128() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -137,6 +141,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("code128")
     }
 
+    @Test
     fun ean8() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -147,6 +152,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("ean8")
     }
 
+    @Test
     fun ean13() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -157,6 +163,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("ean13")
     }
 
+    @Test
     fun itf() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -167,6 +174,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("itf")
     }
 
+    @Test
     fun usbca() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -177,6 +185,7 @@ class ScreenshotNewBarcodeTest {
         ScreenshotUtil.recordScreenshot("usbca")
     }
 
+    @Test
     fun usbce() {
         MainActivityRobot()
             .selectFirstDocument()

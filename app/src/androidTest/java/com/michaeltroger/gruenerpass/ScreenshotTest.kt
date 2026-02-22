@@ -129,6 +129,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("qr_logo_crop")
     }
 
+    @Test
     fun codabar() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -139,6 +140,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("codabar_crop")
     }
 
+    @Test
     fun code39() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -149,6 +151,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("code39_crop")
     }
 
+    @Test
     fun code93() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -159,6 +162,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("code93_crop")
     }
 
+    @Test
     fun code128() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -169,6 +173,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("code128_crop")
     }
 
+    @Test
     fun ean8() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -179,6 +184,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("ean8_crop")
     }
 
+    @Test
     fun ean13() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -189,6 +195,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("ean13_crop")
     }
 
+    @Test
     fun itf() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -199,6 +206,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("itf_crop")
     }
 
+    @Test
     fun usbca() {
         MainActivityRobot()
             .selectFirstDocument()
@@ -209,6 +217,7 @@ class ScreenshotTest {
         ScreenshotUtil.recordScreenshot("usbca_crop")
     }
 
+    @Test
     fun usbce() {
         MainActivityRobot()
             .selectFirstDocument()
