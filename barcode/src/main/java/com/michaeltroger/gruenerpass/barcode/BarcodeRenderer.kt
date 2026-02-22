@@ -190,7 +190,7 @@ internal class BarcodeRendererImpl @Inject constructor(
         )
     }
 
-    @Suppress("ReturnCount")
+    @Suppress("ReturnCount", "MagicNumber")
     private fun cropBarcodeBoundingBox(
         source: Bitmap,
         hit: BarcodeHit
