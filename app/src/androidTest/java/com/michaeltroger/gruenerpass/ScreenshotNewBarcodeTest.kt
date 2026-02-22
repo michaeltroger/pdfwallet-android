@@ -1,6 +1,5 @@
 package com.michaeltroger.gruenerpass
 
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.test.core.app.ActivityScenario
@@ -12,7 +11,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class ScreenshotTest {
+class ScreenshotNewBarcodeTest {
 
     private lateinit var scenario: ActivityScenario<MainActivity>
 
@@ -27,40 +26,9 @@ class ScreenshotTest {
     fun startUp() {
         PreferenceManager.getDefaultSharedPreferences(context).edit {
             putBoolean(context.getString(R.string.key_preference_prevent_screenshots), false)
+            putBoolean(context.getString(R.string.key_preference_new_barcode_generation), true)
         }
         scenario = ActivityScenario.launch(MainActivity::class.java)
-    }
-
-    @Test
-    fun emptyState() {
-        MainActivityRobot().verifyEmptyState()
-        ScreenshotUtil.recordScreenshot("empty_state")
-    }
-
-    @Test
-    fun normalState() {
-        MainActivityRobot()
-            .selectFirstDocument()
-            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
-            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
-            .verifyDocumentLoaded(docName = "demo")
-
-        ScreenshotUtil.recordScreenshot("normal_state")
-    }
-
-    @Test
-    fun multipleDocuments() {
-        MainActivityRobot()
-            .selectFirstDocument()
-            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
-            .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
-            .verifyDocumentLoaded(docName = "demo", expectedDocumentCount = 1)
-            .selectAnotherDocument()
-            .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
-            .openPdf(fileName = "demo1.pdf", folderName = TestFolders.TEST_GENERIC)
-            .verifyDocumentLoaded(docName = "demo1", expectedDocumentCount = 2)
-
-        ScreenshotUtil.recordScreenshot("multiple_documents")
     }
 
     @Test
@@ -71,7 +39,7 @@ class ScreenshotTest {
             .openPdf(fileName = "qr.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "qr", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("qr_code_crop")
+        ScreenshotUtil.recordScreenshot("qr_code")
     }
 
     @Test
@@ -82,7 +50,7 @@ class ScreenshotTest {
             .openPdf(fileName = "aztec.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "aztec", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("aztec_code_crop")
+        ScreenshotUtil.recordScreenshot("aztec_code")
     }
 
     @Test
@@ -93,7 +61,7 @@ class ScreenshotTest {
             .openPdf(fileName = "datamatrix.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "datamatrix", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("data_matrix_crop")
+        ScreenshotUtil.recordScreenshot("data_matrix")
     }
 
     @Test
@@ -104,7 +72,7 @@ class ScreenshotTest {
             .openPdf(fileName = "datamatrix_erezept.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "datamatrix_erezept", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("data_matrix_erezept_crop")
+        ScreenshotUtil.recordScreenshot("data_matrix_erezept")
     }
 
     @Test
@@ -115,22 +83,6 @@ class ScreenshotTest {
             .openPdf(fileName = "pdf417.pdf", folderName = TestFolders.TEST_2D)
             .verifyDocumentLoaded(docName = "pdf417", expectBarcode = true)
 
-        ScreenshotUtil.recordScreenshot("pdf417_crop")
-    }
-
-    @Test
-    fun darkMode() {
-        enableDarkMode()
-        MainActivityRobot().verifyEmptyState()
-
-        ScreenshotUtil.recordScreenshot("dark_mode")
-    }
-
-    private fun enableDarkMode() {
-        scenario.onActivity {
-            AppCompatDelegate.setDefaultNightMode(
-                AppCompatDelegate.MODE_NIGHT_YES
-            )
-        }
+        ScreenshotUtil.recordScreenshot("pdf417")
     }
 }

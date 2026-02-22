@@ -26,7 +26,6 @@ class ListScreenshotTest {
         PreferenceManager.getDefaultSharedPreferences(context).edit {
             putBoolean(context.getString(R.string.key_preference_prevent_screenshots), false)
             putBoolean(context.getString(R.string.key_preference_show_list_layout), true)
-            putBoolean(context.getString(R.string.key_preference_new_barcode_generation), true)
         }
         ActivityScenario.launch(MainActivity::class.java)
     }
