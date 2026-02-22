@@ -81,4 +81,6 @@
     <string name="preference_half_size_barcodes">Εμφάνιση barcodes στο μισό μέγεθος</string>
     <string name="preference_half_size_barcodes_description">Αυτό μπορεί να βελτιώσει την αναγνωσιμότητα για μερικούς σαρωτές barcode.</string>
     <string name="menu_toggle_barcode_size">Εναλλαγή μεγέθους barcode</string>
+    <string name="preference_barcode_generation">Δημιουργία νέου barcode</string>
+    <string name="preference_barcode_generation_description">Όταν είναι απενεργοποιημένο (συνιστάται), η εφαρμογή αφαιρεί το αρχικό barcode, κάτι που είναι καλύτερο για έλεγχο εισιτηρίων. Όταν είναι ενεργοποιημένο, η εφαρμογή δημιουργεί ένα νέο και καθαρό barcode.</string>
 </resources>
