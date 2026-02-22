@@ -73,7 +73,7 @@ class PdfPageItem(
             }
 
             if (generateNewBarcode) {
-                (viewBinding.barcode.layoutParams as? ViewGroup.MarginLayoutParams)?.setMargins(24.dpToPx(context))
+                (viewBinding.barcode.layoutParams as? ViewGroup.MarginLayoutParams)?.setMargins(30.dpToPx(context))
             } else {
                 (viewBinding.barcode.layoutParams as? ViewGroup.MarginLayoutParams)?.setMargins(0.dpToPx(context))
             }
