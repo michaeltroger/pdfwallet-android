@@ -5,8 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:background="?colorSecondaryVariant"
-    android:paddingTop="@dimen/space_small"
-    android:paddingStart="@dimen/space_small"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="Overdraw,RtlSymmetry">
@@ -26,8 +24,6 @@
         android:id="@+id/certificates"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        app:layoutManager=".certificates.pager.CertificateLinearLayoutManager"
         android:contentDescription="@string/pdfs"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
