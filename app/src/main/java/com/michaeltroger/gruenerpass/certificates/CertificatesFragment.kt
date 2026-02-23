@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.michaeltroger.gruenerpass.AddFile
@@ -77,6 +78,11 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
             touchSlopField.set(binding.certificates, touchSlop * TOUCH_SLOP_FACTOR)
         } catch (ignore: Exception) {}
 
+        binding.certificates.layoutManager = LinearLayoutManager(
+                requireContext(),
+                RecyclerView.HORIZONTAL,
+                false
+        )
         binding.certificates.adapter = adapter
 
         binding.addButton.setOnClickListener {

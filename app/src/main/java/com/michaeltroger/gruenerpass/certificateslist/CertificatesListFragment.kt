@@ -12,6 +12,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.withStarted
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.michaeltroger.gruenerpass.AddFile
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.certificates.CertificatesMenuProvider
@@ -22,22 +24,22 @@ import com.michaeltroger.gruenerpass.certificates.sharing.PdfSharing
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.certificates.states.ViewState
 import com.michaeltroger.gruenerpass.certificateslist.pager.item.CertificateListItem
-import com.michaeltroger.gruenerpass.databinding.FragmentCertificatesListBinding
+import com.michaeltroger.gruenerpass.databinding.FragmentCertificatesBinding
 import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class CertificatesListFragment : Fragment(R.layout.fragment_certificates_list) {
+class CertificatesListFragment : Fragment(R.layout.fragment_certificates) {
 
     private val vm by viewModels<CertificatesViewModel>()
 
     private val adapter = GroupieAdapter()
 
-    private var binding: FragmentCertificatesListBinding? = null
+    private var binding: FragmentCertificatesBinding? = null
 
     @Inject
     lateinit var pdfSharing: PdfSharing
@@ -54,9 +56,14 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates_list) {
         menuProvider = CertificatesMenuProvider(requireContext(), vm, isListLayout = true)
         requireActivity().addMenuProvider(menuProvider, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        binding = FragmentCertificatesListBinding.bind(view)
+        binding = FragmentCertificatesBinding.bind(view)
         val binding = binding!!
 
+        binding.certificates.layoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.VERTICAL,
+            false
+        )
         binding.certificates.adapter = adapter
 
         binding.certificates.addItemDecoration(
