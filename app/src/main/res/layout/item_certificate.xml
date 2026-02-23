@@ -5,5 +5,4 @@
     android:id="@+id/certificate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/space_small"
     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />

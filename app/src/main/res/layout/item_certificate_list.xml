@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?colorOnPrimary"
     android:id="@+id/certificate_list_item_root"
-    android:layout_marginHorizontal="@dimen/space_small"
+    android:layout_marginEnd="@dimen/space_small"
     android:paddingHorizontal="@dimen/space_medium">
 
     <TextView
