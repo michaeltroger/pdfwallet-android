@@ -59,6 +59,13 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates) {
         binding = FragmentCertificatesBinding.bind(view)
         val binding = binding!!
 
+        binding.root.setPaddingRelative(
+            resources.getDimensionPixelSize(R.dimen.space_small),
+            resources.getDimensionPixelSize(R.dimen.space_small),
+            resources.getDimensionPixelSize(R.dimen.space_small),
+            0,
+        )
+
         binding.certificates.layoutManager = LinearLayoutManager(
             requireContext(),
             RecyclerView.VERTICAL,

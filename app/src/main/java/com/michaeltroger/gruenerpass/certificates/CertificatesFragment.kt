@@ -69,6 +69,13 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         binding = FragmentCertificatesBinding.bind(view)
         val binding = binding!!
 
+        binding.root.setPaddingRelative(
+            resources.getDimensionPixelSize(R.dimen.space_small),
+            resources.getDimensionPixelSize(R.dimen.space_small),
+            0,
+            0,
+        )
+
         PagerSnapHelper().attachToRecyclerView(binding.certificates)
 
         try { // reduce scroll sensitivity for horizontal scrolling to improve vertical scrolling
