@@ -116,7 +116,8 @@ class CertificateItem(
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? CertificateItem)?.fileName == fileName
             && other.documentName == documentName
-                && other.showBarcodesInHalfSize == showBarcodesInHalfSize
-                && other.generateNewBarcode == generateNewBarcode
+            && other.tags == tags
+            && other.showBarcodesInHalfSize == showBarcodesInHalfSize
+            && other.generateNewBarcode == generateNewBarcode
     }
 }
