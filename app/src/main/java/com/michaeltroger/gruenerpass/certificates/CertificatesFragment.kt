@@ -25,6 +25,7 @@ import com.michaeltroger.gruenerpass.certificates.states.ViewState
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificatesBinding
 import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.db.CertificateWithTags
+import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -130,9 +131,9 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 }
             }
             is ViewEvent.GoToCertificate -> goToCertificate(it)
-            ViewEvent.ShowManageTagsDialog -> {}
-            ViewEvent.ShowFilterTagsDialog -> {}
-            is ViewEvent.ShowAssignTagsDialog -> {}
+            ViewEvent.ShowManageTagsDialog -> showManageTagsDialog()
+            ViewEvent.ShowFilterTagsDialog -> showFilterTagsDialog()
+            is ViewEvent.ShowAssignTagsDialog -> showAssignTagsDialog(it.certificateId)
             is ViewEvent.ShareMultiple -> {
                 pdfSharing.openShareAllFilePicker(
                     context = requireContext(),
@@ -272,5 +273,81 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
             }
             binding?.certificates?.smoothScrollToPosition(event.position)
         }
+    }
+
+    private fun showFilterTagsDialog() {
+        val currentState = vm.viewState.value as? ViewState.Normal ?: return
+        val availableTags = currentState.availableTags
+        val activeTagIds = currentState.activeTagIds
+
+        certificateDialogs.showFilterTagsDialog(
+            context = requireContext(),
+            availableTags = availableTags,
+            activeTagIds = activeTagIds,
+            onTagFilterToggled = vm::onToggleTagFilter,
+            onManageTagsClicked = vm::onManageTagsSelected
+        )
+    }
+
+    private fun showAssignTagsDialog(certificateId: String) {
+        val currentState = vm.viewState.value as? ViewState.Normal ?: return
+        val availableTags = currentState.availableTags
+        val certTags = currentState.documents.find { it.certificate.id == certificateId }?.tags?.map { it.id }?.toSet() ?: emptySet()
+
+        certificateDialogs.showAssignTagsDialog(
+            context = requireContext(),
+            certificateId = certificateId,
+            availableTags = availableTags,
+            assignedTagIds = certTags,
+            onManageTagsClicked = vm::onManageTagsSelected,
+            onTagsAssigned = vm::onUpdateCertificateTags
+        )
+    }
+
+    private fun showManageTagsDialog() {
+        val currentState = vm.viewState.value as? ViewState.Normal ?: return
+        val availableTags = currentState.availableTags
+
+        certificateDialogs.showManageTagsDialog(
+            context = requireContext(),
+            availableTags = availableTags,
+            onEditTagClicked = { showEditTagDialog(it) },
+            onCreateTagClicked = { showCreateTagDialog() }
+        )
+    }
+
+    private fun showCreateTagDialog() {
+        certificateDialogs.showCreateTagDialog(
+            context = requireContext(),
+            onTagCreated = vm::onCreateTag,
+            onCancel = vm::onManageTagsSelected
+        )
+    }
+
+    private fun showEditTagDialog(tag: Tag) {
+        certificateDialogs.showEditTagDialog(
+            context = requireContext(),
+            tag = tag,
+            onTagRenamed = { id, name ->
+                vm.onRenameTag(id, name)
+                vm.onManageTagsSelected()
+            },
+            onDeleteTagClicked = {
+                showDeleteTagConfirmationDialog(tag)
+            },
+            onCancel = vm::onManageTagsSelected
+        )
+    }
+
+    private fun showDeleteTagConfirmationDialog(tag: Tag) {
+        certificateDialogs.showDeleteTagConfirmationDialog(
+            context = requireContext(),
+            tag = tag,
+            onDeleteTagConfirmed = { id ->
+                vm.onDeleteTag(id)
+                vm.onManageTagsSelected()
+            },
+            onCancel = { showEditTagDialog(tag) }
+        )
     }
 }
