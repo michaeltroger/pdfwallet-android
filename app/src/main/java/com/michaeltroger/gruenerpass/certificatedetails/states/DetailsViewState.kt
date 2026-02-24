@@ -1,6 +1,7 @@
 package com.michaeltroger.gruenerpass.certificatedetails.states
 
-import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.CertificateWithTags
+import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 
 sealed class DetailsViewState {
@@ -18,7 +19,8 @@ sealed class DetailsViewState {
     }
 
     data class Normal(
-        val document: Certificate,
+        val document: CertificateWithTags,
+        val availableTags: List<Tag>,
         val searchBarcode: BarcodeSearchMode,
         val invertColors: Boolean,
         val showBarcodesHalfSize: Boolean,

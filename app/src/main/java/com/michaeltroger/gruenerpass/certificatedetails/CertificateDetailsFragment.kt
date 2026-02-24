@@ -5,6 +5,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.core.net.toUri
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -15,6 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.barcode.BarcodeRenderer
 import com.michaeltroger.gruenerpass.certificatedetails.states.DetailsViewState
@@ -24,6 +27,8 @@ import com.michaeltroger.gruenerpass.certificates.sharing.PdfSharing
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificateDetailsBinding
 import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.CertificateWithTags
+import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -122,6 +127,8 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             ViewEvent.ShowGetPro -> findNavController().navigate(
                 deepLink = "app://billing".toUri()
             )
+            is ViewEvent.ShowAssignTagsDialog -> showAssignTagsDialog(it.certificateId)
+            ViewEvent.ShowManageTagsDialog -> showManageTagsDialog()
             else -> {
                 // do nothing
             }
@@ -138,7 +145,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
         updateMenuState(state)
         when (state) {
             is DetailsViewState.Normal -> showCertificateState(
-                certificate = state.document,
+                certificateWithTags = state.document,
                 searchBarcode = state.searchBarcode,
                 invertColors = state.invertColors,
                 showBarcodesHalfSize = state.showBarcodesHalfSize,
@@ -155,18 +162,20 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun showCertificateState(
-        certificate: Certificate,
+        certificateWithTags: CertificateWithTags,
         searchBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showBarcodesHalfSize: Boolean,
         generateNewBarcode: Boolean,
     ) {
+        val certificate = certificateWithTags.certificate
         val item = CertificateItem(
             requireContext().applicationContext,
             fileName = certificate.id,
             isDetailView = true,
             barcodeRenderer = barcodeRenderer,
             documentName = certificate.name,
+            tags = certificateWithTags.tags,
             searchBarcode = searchBarcode,
             invertColors = invertColors,
             dispatcher = thread,
@@ -178,6 +187,9 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             },
             onShareCalled = {
                 vm.onShareSelected(certificate)
+            },
+            onAssignTagsClicked = {
+                vm.onAssignTagsSelected(certificate.id)
             },
             showBarcodesInHalfSize = showBarcodesHalfSize,
             generateNewBarcode = generateNewBarcode,
@@ -203,6 +215,121 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             true
         }
         else -> false
+    }
+
+    private fun showAssignTagsDialog(certificateId: String) {
+        val currentState = vm.viewState.value as? DetailsViewState.Normal ?: return
+        val availableTags = currentState.availableTags
+        val certTags = currentState.document.tags.map { it.id }.toSet()
+
+        val tagNames = availableTags.map { it.name }.toTypedArray()
+        val checkedItems = availableTags.map { it.id in certTags }.toBooleanArray()
+        val selectedTagIds = certTags.toMutableSet()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.assign_tags)
+            .setMultiChoiceItems(tagNames, checkedItems) { _, which, isChecked ->
+                if (isChecked) {
+                    selectedTagIds.add(availableTags[which].id)
+                } else {
+                    selectedTagIds.remove(availableTags[which].id)
+                }
+            }
+            .setNeutralButton(R.string.manage_tags) { _, _ ->
+                vm.onManageTagsSelected()
+            }
+            .setPositiveButton(R.string.ok) { _, _ ->
+                vm.onUpdateCertificateTags(certificateId, selectedTagIds.toList())
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
+    }
+
+    private fun showManageTagsDialog() {
+        val currentState = vm.viewState.value as? DetailsViewState.Normal ?: return
+        val availableTags = currentState.availableTags
+
+        val tagNames = availableTags.map { it.name }.toTypedArray()
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.manage_tags)
+            .setItems(tagNames) { _, which ->
+                showEditTagDialog(availableTags[which])
+            }
+            .setPositiveButton(R.string.add_tag) { _, _ ->
+                showCreateTagDialog()
+            }
+            .setNegativeButton(R.string.ok, null)
+            .show()
+    }
+
+    private fun showCreateTagDialog() {
+        val input = EditText(requireContext())
+        val container = FrameLayout(requireContext())
+        val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+        params.leftMargin = resources.getDimensionPixelSize(R.dimen.space_medium)
+        params.rightMargin = resources.getDimensionPixelSize(R.dimen.space_medium)
+        input.layoutParams = params
+        input.hint = getString(R.string.tag_name_hint)
+        container.addView(input)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.add_tag)
+            .setView(container)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                val name = input.text.toString()
+                if (name.isNotBlank()) {
+                    vm.onCreateTag(name)
+                }
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                vm.onManageTagsSelected()
+            }
+            .show()
+    }
+
+    private fun showEditTagDialog(tag: Tag) {
+        val input = EditText(requireContext())
+        input.setText(tag.name)
+        val container = FrameLayout(requireContext())
+        val params = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
+        params.leftMargin = resources.getDimensionPixelSize(R.dimen.space_medium)
+        params.rightMargin = resources.getDimensionPixelSize(R.dimen.space_medium)
+        input.layoutParams = params
+        input.hint = getString(R.string.tag_name_hint)
+        container.addView(input)
+
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.rename_tag)
+            .setView(container)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                val name = input.text.toString()
+                if (name.isNotBlank() && name != tag.name) {
+                    vm.onRenameTag(tag.id, name)
+                }
+                vm.onManageTagsSelected()
+            }
+            .setNeutralButton(R.string.delete) { _, _ ->
+                 showDeleteTagConfirmationDialog(tag)
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                vm.onManageTagsSelected()
+            }
+            .show()
+    }
+
+    private fun showDeleteTagConfirmationDialog(tag: Tag) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.warning)
+            .setMessage(R.string.delete_tag_confirmation)
+            .setPositiveButton(R.string.delete) { _, _ ->
+                vm.onDeleteTag(tag.id)
+                vm.onManageTagsSelected()
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                showEditTagDialog(tag)
+            }
+            .show()
     }
 
     private fun updateMenuState(state: DetailsViewState) {

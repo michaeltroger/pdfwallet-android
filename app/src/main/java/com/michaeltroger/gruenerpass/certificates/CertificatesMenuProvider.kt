@@ -110,6 +110,11 @@ class CertificatesMenuProvider(
             true
         }
 
+        R.id.filter_tags -> {
+            vm.onFilterTagsSelected()
+            true
+        }
+
         else -> false
     }
 
@@ -154,6 +159,7 @@ class CertificatesMenuProvider(
                     collapseActionView()
                 }
             }
+            findItem(R.id.filter_tags)?.isVisible = state.showSearchMenuItem || state.showAddMenuItem // Show if search or add is allowed (likely docs present)
             findItem(R.id.openMore)?.isVisible = state.showMoreMenuItem
             findItem(R.id.switchLayout)?.isVisible = state.showSwitchLayoutMenuItem
             findItem(R.id.toggleBarcodeSize)?.isVisible = if (isListLayout) {

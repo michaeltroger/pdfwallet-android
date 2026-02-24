@@ -24,6 +24,7 @@ import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.certificates.states.ViewState
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificatesBinding
 import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.CertificateWithTags
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -129,6 +130,9 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 }
             }
             is ViewEvent.GoToCertificate -> goToCertificate(it)
+            ViewEvent.ShowManageTagsDialog -> {}
+            ViewEvent.ShowFilterTagsDialog -> {}
+            is ViewEvent.ShowAssignTagsDialog -> {}
             is ViewEvent.ShareMultiple -> {
                 pdfSharing.openShareAllFilePicker(
                     context = requireContext(),
@@ -224,18 +228,20 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun showCertificateState(
-        documents: List<Certificate>,
+        documents: List<CertificateWithTags>,
         searchBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showBarcodesInHalfSize: Boolean,
         generateNewBarcode: Boolean,
     ) {
-        val items = documents.map { certificate ->
+        val items = documents.map { certWithTags ->
+            val certificate = certWithTags.certificate
             CertificateItem(
                 requireContext().applicationContext,
                 fileName = certificate.id,
                 barcodeRenderer = barcodeRenderer,
                 documentName = certificate.name,
+                tags = certWithTags.tags,
                 searchBarcode = searchBarcode,
                 invertColors = invertColors,
                 isDetailView = false,
@@ -248,6 +254,9 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 },
                 onShareCalled = {
                     vm.onShareSelected(certificate)
+                },
+                onAssignTagsClicked = {
+                    vm.onAssignTagsSelected(certificate.id)
                 },
                 showBarcodesInHalfSize = showBarcodesInHalfSize,
                 generateNewBarcode = generateNewBarcode,

@@ -82,4 +82,12 @@
     <string name="menu_toggle_barcode_size">Toggle barcode size</string>
     <string name="preference_barcode_generation">Create new barcode</string>
     <string name="preference_barcode_generation_description">When disabled (recommended), the app crops out the original barcode, which is best for ticket checks. When enabled, the app instead creates a fresh and sharp new barcode.</string>
+    <string name="tags">Tags</string>
+    <string name="manage_tags">Manage tags</string>
+    <string name="add_tag">Add tag</string>
+    <string name="rename_tag">Rename tag</string>
+    <string name="delete_tag_confirmation">Do you really want to delete this tag?</string>
+    <string name="tag_name_hint">Tag name</string>
+    <string name="filter_by_tags">Filter by tags</string>
+    <string name="assign_tags">Assign tags</string>
 </resources>
