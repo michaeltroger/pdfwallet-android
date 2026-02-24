@@ -178,9 +178,12 @@ class CertificatesViewModel @Inject constructor(
             )
         } else {
             val filteredDocs = docs.filter { certWithTags ->
-                val matchesName = if (filter.isEmpty()) true else certWithTags.certificate.name.contains(filter, ignoreCase = true)
+                val matchesNameOrTag = if (filter.isEmpty()) true else {
+                    certWithTags.certificate.name.contains(filter, ignoreCase = true) ||
+                        certWithTags.tags.any { it.name.contains(filter, ignoreCase = true) }
+                }
                 val matchesTags = if (activeTagIds.isEmpty()) true else certWithTags.tags.any { it.id in activeTagIds }
-                matchesName && matchesTags
+                matchesNameOrTag && matchesTags
             }
             val areDocumentsFilteredOut = filteredDocs.size != docs.size
             _viewState.emit(
