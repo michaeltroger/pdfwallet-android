@@ -15,7 +15,7 @@
         android:title="@string/tags"
         android:visible="false"
         tools:visible="true"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/warning"
