@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="?colorOnPrimary"
     android:layout_marginEnd="@dimen/space_small"
+    android:paddingHorizontal="@dimen/space_medium"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,7 +13,7 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/space_small"
+        android:paddingVertical="@dimen/space_medium"
         android:textSize="18sp"
         android:singleLine="true"
         android:textColor="?colorOnSecondary"
@@ -27,9 +28,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scrollbars="none"
-        android:paddingStart="@dimen/space_small"
-        android:paddingEnd="@dimen/space_small"
-        android:paddingBottom="@dimen/space_small"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -71,7 +69,6 @@
         android:layout_height="0dp"
         android:src="@drawable/share_24px"
         android:paddingStart="@dimen/space_small"
-        android:paddingEnd="@dimen/space_small"
         android:contentDescription="@string/share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/name"
