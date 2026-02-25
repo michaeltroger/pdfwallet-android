@@ -215,6 +215,8 @@ class CertificateDetailsViewModel @Inject constructor(
 
     fun onCreateTag(name: String) = viewModelScope.launch {
         createTagUseCase(name)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 
     fun onRenameTag(id: Long, newName: String) = viewModelScope.launch {
