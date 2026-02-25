@@ -23,7 +23,6 @@ import com.michaeltroger.gruenerpass.certificates.sharing.PdfSharing
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.certificates.states.ViewState
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificatesBinding
-import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.db.CertificateWithTags
 import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
@@ -96,6 +95,10 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
 
         binding.addButton.setOnClickListener {
             vm.onAddFileSelected()
+        }
+
+        binding.resetFiltersButton.setOnClickListener {
+            vm.onClearFilters()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -207,6 +210,16 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
     private fun updateState(state: ViewState) {
         menuProvider.updateMenuState(state)
         binding?.addButton?.isVisible = state.showAddButton
+        val isFiltered = (state as? ViewState.Normal)?.isFiltered == true
+        binding?.filterContainer?.isVisible = isFiltered
+        if (isFiltered) {
+             val filters = mutableListOf<String>()
+             if (state.filterSearchText.isNotEmpty()) {
+                 filters.add("\"${state.filterSearchText}\"")
+             }
+             filters.addAll(state.filterTagNames)
+             binding?.filterInfoText?.text = getString(R.string.search_results_format, filters.joinToString(", "))
+        }
         when (state) {
             is ViewState.Initial -> {} // nothing to do
             is ViewState.Empty -> {

@@ -72,7 +72,8 @@ class CertificatesViewModel @Inject constructor(
     )
     val viewState: StateFlow<ViewState> = _viewState
 
-    private val filter = MutableStateFlow("")
+    private val filterSearchText = MutableStateFlow("")
+    private val filterTags = MutableStateFlow<Set<Long>>(emptySet())
 
     private val _viewEvent = MutableSharedFlow<ViewEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<ViewEvent> = _viewEvent
@@ -117,13 +118,11 @@ class CertificatesViewModel @Inject constructor(
             false
         )
 
-    private val tagFilter = MutableStateFlow<Set<Long>>(emptySet())
-
     init {
         viewModelScope.launch {
             combine(
                 getCertificatesFlowUseCase(),
-                filter,
+                filterSearchText,
                 shouldAuthenticate,
                 searchForBarcode,
                 invertColors,
@@ -132,12 +131,12 @@ class CertificatesViewModel @Inject constructor(
                 generateNewBarcode,
                 purchaseUpdateUseCase(),
                 getTagsUseCase(),
-                tagFilter,
+                filterTags,
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
                 updateState(
                     docs = values[0] as List<CertificateWithTags>,
-                    filter = values[1] as String,
+                    filterSearchText = values[1] as String,
                     shouldAuthenticate = values[2] as Boolean,
                     searchForBarcode = values[3] as BarcodeSearchMode,
                     invertColors = values[4] as Boolean,
@@ -145,7 +144,7 @@ class CertificatesViewModel @Inject constructor(
                     showBarcodesInHalfSize = values[6] as Boolean,
                     generateNewBarcode = values[7] as Boolean,
                     availableTags = values[9] as List<Tag>,
-                    activeTagIds = values[10] as Set<Long>,
+                    filterTags = values[10] as Set<Long>,
                 )
             }.collect()
         }
@@ -160,7 +159,7 @@ class CertificatesViewModel @Inject constructor(
     @Suppress("MagicNumber")
     private suspend fun updateState(
         docs: List<CertificateWithTags>,
-        filter: String,
+        filterSearchText: String,
         shouldAuthenticate: Boolean,
         searchForBarcode: BarcodeSearchMode,
         invertColors: Boolean,
@@ -168,7 +167,7 @@ class CertificatesViewModel @Inject constructor(
         showBarcodesInHalfSize: Boolean,
         generateNewBarcode: Boolean,
         availableTags: List<Tag>,
-        activeTagIds: Set<Long>,
+        filterTags: Set<Long>,
     ) {
         if (docs.isEmpty()) {
             _viewState.emit(
@@ -178,36 +177,44 @@ class CertificatesViewModel @Inject constructor(
             )
         } else {
             val filteredDocs = docs.filter { certWithTags ->
-                val matchesNameOrTag = if (filter.isEmpty()) true else {
-                    certWithTags.certificate.name.contains(filter, ignoreCase = true) ||
-                        certWithTags.tags.any { it.name.contains(filter, ignoreCase = true) }
+                val matchesNameOrTag = if (filterSearchText.isEmpty()) true else {
+                    certWithTags.certificate.name.contains(filterSearchText, ignoreCase = true) ||
+                        certWithTags.tags.any { it.name.contains(filterSearchText, ignoreCase = true) }
                 }
-                val matchesTags = if (activeTagIds.isEmpty()) true else certWithTags.tags.any { it.id in activeTagIds }
+                val matchesTags = if (filterTags.isEmpty()) true else certWithTags.tags.any { it.id in filterTags }
                 matchesNameOrTag && matchesTags
             }
             val areDocumentsFilteredOut = filteredDocs.size != docs.size
+            val filterTagNames = availableTags.filter { it.id in filterTags }.map { it.name }
             _viewState.emit(
                 ViewState.Normal(
                     documents = filteredDocs,
                     searchBarcode = searchForBarcode,
                     invertColors = invertColors,
                     availableTags = availableTags,
-                    activeTagIds = activeTagIds,
+                    activeTagIds = filterTags,
                     showLockMenuItem = shouldAuthenticate,
                     showScrollToFirstMenuItem = filteredDocs.size > 1,
                     showScrollToLastMenuItem = filteredDocs.size > 1,
-                    showChangeOrderMenuItem = !areDocumentsFilteredOut && filter.isEmpty() && activeTagIds.isEmpty() && docs.size > 1,
+                    showChangeOrderMenuItem = !areDocumentsFilteredOut && filterSearchText.isEmpty() && filterTags.isEmpty() && docs.size > 1,
                     showSearchMenuItem = docs.size > 1,
-                    filter = filter,
+                    filterSearchText = filterSearchText,
+                    filterTagNames = filterTagNames,
                     showWarningButton = showOnLockedScreen,
                     showExportFilteredMenuItem = areDocumentsFilteredOut,
                     showDeleteFilteredMenuItem = areDocumentsFilteredOut,
                     showGetProMenuItem = !isProUnlocked(),
                     showBarcodesInHalfSize = showBarcodesInHalfSize,
                     generateNewBarcode = generateNewBarcode,
+                    isFiltered = filterSearchText.isNotEmpty() || filterTags.isNotEmpty(),
                 )
             )
         }
+    }
+
+    fun onClearFilters() {
+        filterSearchText.value = ""
+        filterTags.value = emptySet()
     }
 
     private suspend fun processPendingFile(password: String? = null) {
@@ -281,7 +288,7 @@ class CertificatesViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) = viewModelScope.launch {
-        filter.value = query.trim()
+        filterSearchText.value = query.trim()
     }
 
     fun onExportFilteredSelected() = viewModelScope.launch {
@@ -351,18 +358,18 @@ class CertificatesViewModel @Inject constructor(
 
     fun onDeleteTag(id: Long) = viewModelScope.launch {
         deleteTagUseCase(id)
-        val currentFilter = tagFilter.value
+        val currentFilter = filterTags.value
         if (id in currentFilter) {
-            tagFilter.value = currentFilter - id
+            filterTags.value = currentFilter - id
         }
     }
 
     fun onToggleTagFilter(id: Long) = viewModelScope.launch {
-        val currentFilter = tagFilter.value
+        val currentFilter = filterTags.value
         if (id in currentFilter) {
-            tagFilter.value = currentFilter - id
+            filterTags.value = currentFilter - id
         } else {
-            tagFilter.value = currentFilter + id
+            filterTags.value = currentFilter + id
         }
     }
     

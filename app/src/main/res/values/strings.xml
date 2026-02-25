@@ -90,4 +90,6 @@
     <string name="tag_name_hint">Tag name</string>
     <string name="filter_by_tags">Filter by tags</string>
     <string name="assign_tags">Assign tags</string>
+    <string name="search_results_format">Search results for %1$s</string>
+    <string name="reset_filters">Reset all filters</string>
 </resources>

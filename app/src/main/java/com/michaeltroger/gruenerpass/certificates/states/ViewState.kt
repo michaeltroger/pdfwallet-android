@@ -71,7 +71,8 @@ sealed class ViewState {
         val availableTags: List<Tag>,
         val activeTagIds: Set<Long>,
         override val showChangeOrderMenuItem: Boolean,
-        val filter: String,
+        val filterSearchText: String,
+        val filterTagNames: List<String>,
         override val showGetProMenuItem: Boolean,
         override val showLockMenuItem: Boolean,
         override val showScrollToFirstMenuItem: Boolean,
@@ -82,6 +83,7 @@ sealed class ViewState {
         override val showExportFilteredMenuItem: Boolean,
         val showBarcodesInHalfSize: Boolean,
         val generateNewBarcode: Boolean,
+        val isFiltered: Boolean,
     ) : ViewState() {
         override val showSwitchLayoutMenuItem = true
         override val showToggleBarcodeSizeMenuItem = true

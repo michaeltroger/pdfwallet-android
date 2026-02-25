@@ -11,13 +11,6 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView" />
 
     <item
-        android:id="@+id/filter_tags"
-        android:title="@string/tags"
-        android:visible="false"
-        tools:visible="true"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/warning"
         android:icon="@drawable/warning_24px"
         android:title="@string/warning"
@@ -41,6 +34,13 @@
         tools:visible="true"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
+
+    <item
+        android:id="@+id/filter_tags"
+        android:title="@string/tags"
+        android:visible="false"
+        tools:visible="true"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/openSettings"

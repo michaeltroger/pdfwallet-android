@@ -123,7 +123,7 @@ class CertificatesMenuProvider(
     }
 
     private fun restorePendingSearchQueryFilter(searchMenuItem: MenuItem) {
-        val pendingFilter = (vm.viewState.value as? ViewState.Normal)?.filter ?: return
+        val pendingFilter = (vm.viewState.value as? ViewState.Normal)?.filterSearchText ?: return
         if (pendingFilter.isNotEmpty()) {
             searchMenuItem.expandActionView()
             searchView?.setQuery(pendingFilter, false)
@@ -157,6 +157,11 @@ class CertificatesMenuProvider(
                 isVisible = state.showSearchMenuItem
                 if (!state.showSearchMenuItem) {
                     collapseActionView()
+                }
+                if (state is ViewState.Normal) {
+                    if (state.filterSearchText.isEmpty() && state.filterTagNames.isEmpty()) {
+                        collapseActionView()
+                    }
                 }
             }
             findItem(R.id.filter_tags)?.isVisible = state.showSearchMenuItem || state.showAddMenuItem // Show if search or add is allowed (likely docs present)
