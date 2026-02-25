@@ -23,7 +23,6 @@ import com.michaeltroger.gruenerpass.certificates.pager.item.CertificateItem
 import com.michaeltroger.gruenerpass.certificates.sharing.PdfSharing
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificateDetailsBinding
-import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.db.CertificateWithTags
 import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
@@ -211,6 +210,10 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             vm.toggleBarcodeSize()
             true
         }
+        R.id.tags -> {
+            vm.onManageTagsSelected()
+            true
+        }
         else -> false
     }
 
@@ -255,7 +258,6 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             tag = tag,
             onTagRenamed = { id, name ->
                 vm.onRenameTag(id, name)
-                vm.onManageTagsSelected()
             },
             onDeleteTagClicked = {
                 showDeleteTagConfirmationDialog(tag)
@@ -270,7 +272,6 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             tag = tag,
             onDeleteTagConfirmed = { id ->
                 vm.onDeleteTag(id)
-                vm.onManageTagsSelected()
             },
             onCancel = { showEditTagDialog(tag) }
         )
@@ -280,6 +281,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
         menu?.apply {
             findItem(R.id.pro)?.isVisible = state.showGetProMenuItem
             findItem(R.id.toggleBarcodeSize)?.isVisible = state.showToggleBarcodeSizeMenuItem
+            findItem(R.id.tags)?.isVisible = state.showTagMenuItem
         }
     }
 }

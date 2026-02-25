@@ -36,7 +36,7 @@
         tools:ignore="AlwaysShowAction" />
 
     <item
-        android:id="@+id/filter_tags"
+        android:id="@+id/tags"
         android:title="@string/tags"
         android:visible="false"
         tools:visible="true"

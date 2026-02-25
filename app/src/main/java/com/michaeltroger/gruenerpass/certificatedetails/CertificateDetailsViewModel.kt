@@ -26,6 +26,7 @@ import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -218,9 +219,13 @@ class CertificateDetailsViewModel @Inject constructor(
 
     fun onRenameTag(id: Long, newName: String) = viewModelScope.launch {
         renameTagUseCase(id, newName)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 
     fun onDeleteTag(id: Long) = viewModelScope.launch {
         deleteTagUseCase(id)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 }

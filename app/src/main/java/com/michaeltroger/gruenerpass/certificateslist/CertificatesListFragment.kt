@@ -309,7 +309,6 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates) {
             tag = tag,
             onTagRenamed = { id, name ->
                 vm.onRenameTag(id, name)
-                vm.onManageTagsSelected()
             },
             onDeleteTagClicked = {
                 showDeleteTagConfirmationDialog(tag)
@@ -324,7 +323,6 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates) {
             tag = tag,
             onDeleteTagConfirmed = { id ->
                 vm.onDeleteTag(id)
-                vm.onManageTagsSelected()
             },
             onCancel = { showEditTagDialog(tag) }
         )
