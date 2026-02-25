@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.michaeltroger.gruenerpass.R
+import com.michaeltroger.gruenerpass.certificates.documentorder.DocumentOrderItem
 import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.db.Tag
-import com.michaeltroger.gruenerpass.certificates.documentorder.DocumentOrderItem
 import com.xwray.groupie.GroupieAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
