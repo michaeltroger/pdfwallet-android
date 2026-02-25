@@ -8,6 +8,7 @@
     <!--suppress AndroidLintUnusedResources -->
     <color name="secondaryLightColor">#4c8c4a</color>
     <color name="secondaryDarkColor">#003300</color>
+    <color name="secondaryDarkColorNight">#1B1B1B</color>
     <!--suppress AndroidLintUnusedResources -->
     <color name="primaryTextColor">#000000</color>
     <!--suppress AndroidLintUnusedResources -->
