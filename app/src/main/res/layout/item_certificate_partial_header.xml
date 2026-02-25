@@ -27,6 +27,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:scrollbars="none"
+        android:paddingStart="@dimen/space_small"
+        android:paddingEnd="@dimen/space_small"
         android:paddingBottom="@dimen/space_small"
         app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
