@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/search_results_format"
-            android:textAppearance="?attr/textAppearanceBody1"/>
+            android:textColor="@color/white"/>
 
         <Button
             android:id="@+id/reset_filters_button"
