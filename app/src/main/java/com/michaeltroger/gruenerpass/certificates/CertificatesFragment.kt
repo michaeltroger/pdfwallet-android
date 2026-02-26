@@ -20,6 +20,7 @@ import com.michaeltroger.gruenerpass.certificates.dialogs.CertificateDialogs
 import com.michaeltroger.gruenerpass.certificates.dialogs.CertificateErrors
 import com.michaeltroger.gruenerpass.certificates.pager.item.CertificateItem
 import com.michaeltroger.gruenerpass.certificates.sharing.PdfSharing
+import com.michaeltroger.gruenerpass.certificates.states.TagFilterType
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.certificates.states.ViewState
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificatesBinding
@@ -99,6 +100,10 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
 
         binding.resetFiltersButton.setOnClickListener {
             vm.onClearFilters()
+        }
+
+        binding.toggleFilterTypeButton.setOnClickListener {
+            vm.onToggleTagFilterType()
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -210,16 +215,25 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
     private fun updateState(state: ViewState) {
         menuProvider.updateMenuState(state)
         binding?.addButton?.isVisible = state.showAddButton
-        val isFiltered = (state as? ViewState.Normal)?.isFiltered == true
+
+        val normalState = state as? ViewState.Normal
+
+        val isFiltered = normalState?.isFiltered == true
         binding?.filterContainer?.isVisible = isFiltered
         if (isFiltered) {
              val filters = mutableListOf<String>()
-             if (state.filterSearchText.isNotEmpty()) {
-                 filters.add("\"${state.filterSearchText}\"")
+             if (normalState.filterSearchText.isNotEmpty()) {
+                 filters.add("\"${normalState.filterSearchText}\"")
              }
-             filters.addAll(state.filterTagNames)
+             filters.addAll(normalState.filterTagNames)
              binding?.filterInfoText?.text = getString(R.string.search_results_format, filters.joinToString(", "))
+
+             binding?.toggleFilterTypeButton?.isVisible = normalState.filterTagIds.isNotEmpty()
+             binding?.toggleFilterTypeButton?.text = getString(
+                 if (normalState.tagFilterType == TagFilterType.AND) R.string.filter_and else R.string.filter_or
+             )
         }
+
         when (state) {
             is ViewState.Initial -> {} // nothing to do
             is ViewState.Empty -> {
@@ -291,7 +305,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
     private fun showFilterTagsDialog() {
         val currentState = vm.viewState.value as? ViewState.Normal ?: return
         val availableTags = currentState.availableTags
-        val activeTagIds = currentState.activeTagIds
+        val activeTagIds = currentState.filterTagIds
 
         certificateDialogs.showFilterTagsDialog(
             context = requireContext(),

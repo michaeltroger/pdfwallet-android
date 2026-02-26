@@ -4,6 +4,10 @@ import com.michaeltroger.gruenerpass.db.CertificateWithTags
 import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 
+enum class TagFilterType {
+    AND, OR
+}
+
 sealed class ViewState {
     abstract val showSwitchLayoutMenuItem: Boolean
     abstract val showLockMenuItem: Boolean
@@ -72,7 +76,7 @@ sealed class ViewState {
         val searchBarcode: BarcodeSearchMode,
         val invertColors: Boolean,
         val availableTags: List<Tag>,
-        val activeTagIds: Set<Long>,
+        val filterTagIds: Set<Long>,
         override val showChangeOrderMenuItem: Boolean,
         val filterSearchText: String,
         val filterTagNames: List<String>,
@@ -87,6 +91,7 @@ sealed class ViewState {
         val showBarcodesInHalfSize: Boolean,
         val generateNewBarcode: Boolean,
         val isFiltered: Boolean,
+        val tagFilterType: TagFilterType,
     ) : ViewState() {
         override val showSwitchLayoutMenuItem = true
         override val showToggleBarcodeSizeMenuItem = true

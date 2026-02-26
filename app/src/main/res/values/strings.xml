@@ -92,4 +92,6 @@
     <string name="assign_tags">Assign tags</string>
     <string name="search_results_format">Search results for %1$s</string>
     <string name="reset_filters">Reset all filters</string>
+    <string name="filter_and">AND</string>
+    <string name="filter_or">OR</string>
 </resources>

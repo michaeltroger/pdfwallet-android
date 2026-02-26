@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.certificates.mapper.toCertificate
+import com.michaeltroger.gruenerpass.certificates.states.TagFilterType
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.certificates.states.ViewState
 import com.michaeltroger.gruenerpass.db.Certificate
@@ -75,6 +76,7 @@ class CertificatesViewModel @Inject constructor(
 
     private val filterSearchText = MutableStateFlow("")
     private val filterTags = MutableStateFlow<Set<Long>>(emptySet())
+    private val filterTagType = MutableStateFlow(TagFilterType.AND)
 
     private val _viewEvent = MutableSharedFlow<ViewEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<ViewEvent> = _viewEvent
@@ -133,6 +135,7 @@ class CertificatesViewModel @Inject constructor(
                 purchaseUpdateUseCase(),
                 getTagsUseCase(),
                 filterTags,
+                filterTagType,
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
                 updateState(
@@ -145,7 +148,8 @@ class CertificatesViewModel @Inject constructor(
                     showBarcodesInHalfSize = values[6] as Boolean,
                     generateNewBarcode = values[7] as Boolean,
                     availableTags = values[9] as List<Tag>,
-                    filterTags = values[10] as Set<Long>,
+                    filterTagIds = values[10] as Set<Long>,
+                    tagFilterType = values[11] as TagFilterType,
                 )
             }.collect()
         }
@@ -168,7 +172,8 @@ class CertificatesViewModel @Inject constructor(
         showBarcodesInHalfSize: Boolean,
         generateNewBarcode: Boolean,
         availableTags: List<Tag>,
-        filterTags: Set<Long>,
+        filterTagIds: Set<Long>,
+        tagFilterType: TagFilterType,
     ) {
         if (docs.isEmpty()) {
             _viewState.emit(
@@ -184,28 +189,34 @@ class CertificatesViewModel @Inject constructor(
                     certWithTags.certificate.name.contains(filterSearchText, ignoreCase = true) ||
                         certWithTags.tags.any { it.name.contains(filterSearchText, ignoreCase = true) }
                 }
-                val matchesTags = if (filterTags.isEmpty()) {
+                val matchesTags = if (filterTagIds.isEmpty()) {
                     true
                 } else {
-                    filterTags.all { tagId ->
-                        certWithTags.tags.any { it.id == tagId }
+                    if (tagFilterType == TagFilterType.AND) {
+                        filterTagIds.all { tagId ->
+                            certWithTags.tags.any { it.id == tagId }
+                        }
+                    } else {
+                        filterTagIds.any { tagId ->
+                            certWithTags.tags.any { it.id == tagId }
+                        }
                     }
                 }
                 matchesNameOrTag && matchesTags
             }
             val areDocumentsFilteredOut = filteredDocs.size != docs.size
-            val filterTagNames = availableTags.filter { it.id in filterTags }.map { it.name }
+            val filterTagNames = availableTags.filter { it.id in filterTagIds }.map { it.name }
             _viewState.emit(
                 ViewState.Normal(
                     documents = filteredDocs,
                     searchBarcode = searchForBarcode,
                     invertColors = invertColors,
                     availableTags = availableTags,
-                    activeTagIds = filterTags,
+                    filterTagIds = filterTagIds,
                     showLockMenuItem = shouldAuthenticate,
                     showScrollToFirstMenuItem = filteredDocs.size > 1,
                     showScrollToLastMenuItem = filteredDocs.size > 1,
-                    showChangeOrderMenuItem = !areDocumentsFilteredOut && filterSearchText.isEmpty() && filterTags.isEmpty() && docs.size > 1,
+                    showChangeOrderMenuItem = !areDocumentsFilteredOut && filterSearchText.isEmpty() && filterTagIds.isEmpty() && docs.size > 1,
                     showSearchMenuItem = docs.size > 1,
                     filterSearchText = filterSearchText,
                     filterTagNames = filterTagNames,
@@ -215,7 +226,8 @@ class CertificatesViewModel @Inject constructor(
                     showGetProMenuItem = !isProUnlocked(),
                     showBarcodesInHalfSize = showBarcodesInHalfSize,
                     generateNewBarcode = generateNewBarcode,
-                    isFiltered = filterSearchText.isNotEmpty() || filterTags.isNotEmpty(),
+                    isFiltered = filterSearchText.isNotEmpty() || filterTagIds.isNotEmpty(),
+                    tagFilterType = tagFilterType,
                 )
             )
         }
@@ -224,6 +236,7 @@ class CertificatesViewModel @Inject constructor(
     fun onClearFilters() {
         filterSearchText.value = ""
         filterTags.value = emptySet()
+        filterTagType.value = TagFilterType.AND
     }
 
     private suspend fun processPendingFile(password: String? = null) {
@@ -386,6 +399,11 @@ class CertificatesViewModel @Inject constructor(
         } else {
             filterTags.value = currentFilter + id
         }
+    }
+
+    fun onToggleTagFilterType() = viewModelScope.launch {
+        val current = filterTagType.value
+        filterTagType.value = if (current == TagFilterType.AND) TagFilterType.OR else TagFilterType.AND
     }
     
     fun onUpdateCertificateTags(certificateId: String, tagIds: List<Long>) = viewModelScope.launch {
