@@ -1,0 +1,6 @@
+- Assign tags to documents (requires in-app purchase)
+- Filter documents by tags (requires in-app purchase)
+- New search results view
+- Improve dark theme contrast
+- Fix delete/export filtered offered in menu when there are no search results
+- Slightly improve UI layout
