@@ -39,6 +39,7 @@ import javax.inject.Inject
 private const val TOUCH_SLOP_FACTOR = 8
 private const val SCROLL_TO_DELAY_MS = 500L
 
+@Suppress("TooManyFunctions")
 @AndroidEntryPoint
 class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
 
@@ -241,6 +242,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         }
     }
 
+    @Suppress("MagicNumber")
     private fun updateSearchResults(normalState: ViewState) {
         if (normalState !is ViewState.Normal) return
         binding?.filterContainer?.isVisible = normalState.isFiltered
@@ -266,7 +268,11 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
 
             binding?.filterTagModeWrapper?.isVisible = normalState.filterTagNames.isNotEmpty()
             binding?.toggleFilterTypeButton?.text = getString(
-                if (normalState.tagFilterType == TagFilterType.AND) R.string.filter_tag_and_mode else R.string.filter_tag_or_mode
+                if (normalState.tagFilterType == TagFilterType.AND) {
+                    R.string.filter_tag_and_mode
+                } else {
+                    R.string.filter_tag_or_mode
+                }
             )
             binding?.filterControls?.isVisible = normalState.isFilterExpanded
             binding?.filterExpandIcon?.rotation = if (normalState.isFilterExpanded) 180f else 0f
@@ -343,7 +349,9 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
     private fun showAssignTagsDialog(certificateId: String) {
         val currentState = vm.viewState.value as? ViewState.Normal ?: return
         val availableTags = currentState.availableTags
-        val certTags = currentState.documents.find { it.certificate.id == certificateId }?.tags?.map { it.id }?.toSet() ?: emptySet()
+        val certTags = currentState.documents.find {
+            it.certificate.id == certificateId
+        }?.tags?.map { it.id }?.toSet() ?: emptySet()
 
         certificateDialogs.showAssignTagsDialog(
             context = requireContext(),

@@ -136,6 +136,7 @@ class CertificatesMenuProvider(
         }
     }
 
+    @Suppress("NestedBlockDepth")
     fun updateMenuState(state: ViewState) {
         menu?.apply {
             findItem(R.id.add)?.isVisible = state.showAddMenuItem

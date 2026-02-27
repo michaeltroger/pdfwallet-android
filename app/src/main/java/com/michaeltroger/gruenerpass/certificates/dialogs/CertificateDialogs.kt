@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 interface CertificateDialogs {
     fun closeAllDialogs()
     fun showEnterPasswordDialog(
@@ -48,6 +49,7 @@ interface CertificateDialogs {
         onTagFilterToggled: (Long) -> Unit,
         onManageTagsClicked: () -> Unit
     )
+    @Suppress("LongParameterList")
     fun showAssignTagsDialog(
         context: Context,
         certificateId: String,
@@ -82,6 +84,7 @@ interface CertificateDialogs {
     )
 }
 
+@Suppress("TooManyFunctions")
 class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
 
     private var dialog: Dialog? = null
@@ -296,6 +299,7 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
         dialog.show()
     }
 
+    @Suppress("LongParameterList")
     override fun showAssignTagsDialog(
         context: Context,
         certificateId: String,

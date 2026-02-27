@@ -36,7 +36,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@Suppress("LongParameterList")
+@Suppress("LongParameterList", "TooManyFunctions")
 @HiltViewModel
 class CertificateDetailsViewModel @Inject constructor(
     app: Application,
@@ -221,18 +221,21 @@ class CertificateDetailsViewModel @Inject constructor(
         updateCertificateTagsUseCase(certificateId, tagIds)
     }
 
+    @Suppress("MagicNumber")
     fun onCreateTag(name: String) = viewModelScope.launch {
         createTagUseCase(name)
         delay(500)
         _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 
+    @Suppress("MagicNumber")
     fun onRenameTag(id: Long, newName: String) = viewModelScope.launch {
         renameTagUseCase(id, newName)
         delay(500)
         _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 
+    @Suppress("MagicNumber")
     fun onDeleteTag(id: Long) = viewModelScope.launch {
         deleteTagUseCase(id)
         delay(500)

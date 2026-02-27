@@ -83,7 +83,7 @@ class CertificatesViewModel @Inject constructor(
         ) { value: String ->
             try {
                 TagFilterType.valueOf(value)
-            } catch (e: IllegalArgumentException) {
+            } catch (@Suppress("SwallowedException") e: IllegalArgumentException) {
                 TagFilterType.AND
             }
         }
@@ -388,18 +388,21 @@ class CertificatesViewModel @Inject constructor(
         )
     }
 
+    @Suppress("MagicNumber")
     fun onCreateTag(name: String) = viewModelScope.launch {
         createTagUseCase(name)
         delay(500)
         _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 
+    @Suppress("MagicNumber")
     fun onRenameTag(id: Long, newName: String) = viewModelScope.launch {
         renameTagUseCase(id, newName)
         delay(500)
         _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 
+    @Suppress("MagicNumber")
     fun onDeleteTag(id: Long) = viewModelScope.launch {
         deleteTagUseCase(id)
         val currentFilter = filterTags.value

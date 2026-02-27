@@ -34,6 +34,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.newSingleThreadContext
 import javax.inject.Inject
 
+@Suppress("TooManyFunctions")
 @AndroidEntryPoint
 class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_details), MenuProvider {
 

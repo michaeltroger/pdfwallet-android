@@ -74,6 +74,8 @@ private fun BillingComposableImpl(
                 Text(stringResource(R.string.billing_benefits_description))
                 BulletedList(listOf(
                     stringResource(R.string.billing_benefit_1),
+                    stringResource(R.string.billing_benefit_5),
+                    stringResource(R.string.billing_benefit_6),
                     stringResource(R.string.billing_benefit_2),
                     stringResource(R.string.billing_benefit_3),
                     stringResource(R.string.billing_benefit_4)
@@ -113,6 +115,12 @@ private fun BillingComposableImpl(
                     }
                 }
             }
+        }
+        item {
+            Spacer(Modifier.height(AppPadding.l))
+            Text(
+                text = stringResource(R.string.billing_hint_one_time_purchase),
+            )
         }
     }
 }
