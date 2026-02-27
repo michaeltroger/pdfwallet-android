@@ -95,8 +95,8 @@
     <string name="search_results_overview_query">Results for %1$s in all documents</string>
     <string name="search_results_overview_query_and_tags">Results for %1$s in tagged documents (%2$s)</string>
     <string name="reset_filters">Reset all filters</string>
-    <string name="filter_by_tags_cta">Filter by Tags</string>
-    <string name="filter_and">All Tags</string>
-    <string name="filter_or">Any Tag</string>
-    <string name="tag_filter_mode_description">Tag filter mode:</string>
+    <string name="filter_by_tags_cta">Select Tags</string>
+    <string name="filter_and">All Selected Tags</string>
+    <string name="filter_or">Any Selected Tag</string>
+    <string name="tag_filter_mode_description">Show results that match:</string>
 </resources>

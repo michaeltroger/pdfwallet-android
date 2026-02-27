@@ -27,7 +27,6 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
-        android:paddingBottom="@dimen/space_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -37,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/space_small"
+            android:layout_marginBottom="@dimen/space_small"
             android:orientation="horizontal"
             android:gravity="center_vertical"
             android:clickable="true"
@@ -63,6 +63,7 @@
             android:id="@+id/filter_controls"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="@dimen/space_small"
             android:orientation="vertical"
             android:gravity="center">
 
@@ -70,6 +71,9 @@
                 android:id="@+id/filter_tag_mode_wrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                style="?android:attr/buttonBarStyle"
+
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,21 +83,33 @@
                     android:text="@string/tag_filter_mode_description"/>
                 <Button
                     android:id="@+id/toggle_filter_type_button"
+                    style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/filter_by_tags_button"
+            <LinearLayout
+                style="?android:attr/buttonBarStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/filter_by_tags"/>
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/reset_filters_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reset_filters"/>
+                <Button
+                    android:id="@+id/filter_by_tags_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/space_medium"
+                    android:text="@string/filter_by_tags_cta" />
+
+                <Button
+                    android:id="@+id/reset_filters_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset_filters"/>
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 
