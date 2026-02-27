@@ -36,14 +36,23 @@
             android:id="@+id/filter_info_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/search_results_format"
             android:textColor="@color/white"/>
 
-        <Button
-            android:id="@+id/toggle_filter_type_button"
+        <LinearLayout
+            android:id="@+id/filter_tag_mode_wrapper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/filter_and"/>
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/space_small"
+                android:text="@string/tag_filter_mode_description"/>
+            <Button
+                android:id="@+id/toggle_filter_type_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/filter_by_tags_button"

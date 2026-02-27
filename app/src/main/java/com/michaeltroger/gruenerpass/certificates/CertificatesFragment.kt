@@ -220,23 +220,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         menuProvider.updateMenuState(state)
         binding?.addButton?.isVisible = state.showAddButton
 
-        val normalState = state as? ViewState.Normal
-
-        val isFiltered = normalState?.isFiltered == true
-        binding?.filterContainer?.isVisible = isFiltered
-        if (isFiltered) {
-             val filters = mutableListOf<String>()
-             if (normalState.filterSearchText.isNotEmpty()) {
-                 filters.add("\"${normalState.filterSearchText}\"")
-             }
-             filters.addAll(normalState.filterTagNames)
-             binding?.filterInfoText?.text = getString(R.string.search_results_format, filters.joinToString(", "))
-
-             binding?.toggleFilterTypeButton?.isVisible = normalState.filterTagIds.isNotEmpty()
-             binding?.toggleFilterTypeButton?.text = getString(
-                 if (normalState.tagFilterType == TagFilterType.AND) R.string.filter_and else R.string.filter_or
-             )
-        }
+        updateSearchResults(state)
 
         when (state) {
             is ViewState.Initial -> {} // nothing to do
@@ -249,6 +233,36 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 invertColors = state.invertColors,
                 showBarcodesInHalfSize = state.showBarcodesInHalfSize,
                 generateNewBarcode = state.generateNewBarcode,
+            )
+        }
+    }
+
+    private fun updateSearchResults(normalState: ViewState) {
+        if (normalState !is ViewState.Normal) return
+        binding?.filterContainer?.isVisible = normalState.isFiltered
+        val queryText = "\"${normalState.filterSearchText}\""
+        val tagsText = "\"${normalState.filterTagNames.joinToString()}\""
+        if (normalState.isFiltered) {
+            binding?.filterInfoText?.text = when {
+                normalState.filterTagNames.isNotEmpty() && normalState.filterSearchText.isEmpty()
+                    -> getString(R.string.search_results_overview_tags, tagsText)
+
+                normalState.filterTagNames.isEmpty() && normalState.filterSearchText.isNotEmpty()
+                    -> getString(R.string.search_results_overview_query, queryText)
+
+                normalState.filterTagNames.isNotEmpty() && normalState.filterSearchText.isNotEmpty()
+                    -> getString(
+                    R.string.search_results_overview_query_and_tags,
+                    queryText,
+                    tagsText
+                )
+
+                else -> ""
+            }
+
+            binding?.filterTagModeWrapper?.isVisible = normalState.filterTagNames.isNotEmpty()
+            binding?.toggleFilterTypeButton?.text = getString(
+                if (normalState.tagFilterType == TagFilterType.AND) R.string.filter_and else R.string.filter_or
             )
         }
     }

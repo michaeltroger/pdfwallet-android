@@ -91,9 +91,12 @@
     <string name="tag_name_hint">Tag name</string>
     <string name="filter_by_tags">Filter by tags</string>
     <string name="assign_tags">Assign tags</string>
-    <string name="search_results_format">Search results for %1$s</string>
+    <string name="search_results_overview_tags">Results in documents tagged %1$s</string>
+    <string name="search_results_overview_query">Results for %1$s in all documents</string>
+    <string name="search_results_overview_query_and_tags">Results for %1$s in tagged documents (%2$s)</string>
     <string name="reset_filters">Reset all filters</string>
     <string name="filter_by_tags_cta">Filter by Tags</string>
-    <string name="filter_and">AND</string>
-    <string name="filter_or">OR</string>
+    <string name="filter_and">All Tags</string>
+    <string name="filter_or">Any Tag</string>
+    <string name="tag_filter_mode_description">Tag filter mode:</string>
 </resources>
