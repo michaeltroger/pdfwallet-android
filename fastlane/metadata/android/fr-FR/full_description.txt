@@ -31,6 +31,8 @@ Fonctions supplémentaires
 
 La version « Pro » apporte en plus (achat intégré requis) :
 - Suppression de la bannière « Get Pro » sur divers écrans
+- Assigner des tags aux documents
+- Filtrer les documents par tags
 - Option pour inverser les couleurs du document en mode sombre
 - Option pour forcer le thème sombre ou clair en écrasant les paramètres système
 - Possibilité d'afficher les codes-barres en demi-taille

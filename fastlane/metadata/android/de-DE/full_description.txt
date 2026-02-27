@@ -31,6 +31,8 @@ Mehr Funktionen
 
 Die "Pro" Version bringt darüber hinaus (erfordert In-App-Kauf):
 - Entfernt "Pro"-Banner auf mehreren Screens
+- Tags zu Dokumenten hinzufügen
+- Dokumente nach Tags filtern
 - Option um Dokumentenfarben zu invertieren im Dark Mode
 - Option um den dunklen oder hellen Theme-Mode zu erzwingen (überschreibt System-Einstellung)
 - Option um Barcodes in halber Größe anzuzeigen

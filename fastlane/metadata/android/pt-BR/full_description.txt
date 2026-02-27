@@ -31,6 +31,8 @@ Mais funcionalidades
 
 A versão “Pro” inclui adicionalmente (requer compra dentro do app):
 - Remove o banner “Obter Pro / Get Pro” de várias telas
+- Atribuir etiquetas a documentos
+- Filtrar documentos por etiquetas
 - Opção para inverter as cores do documento no modo escuro
 - Opção para forçar tema escuro ou claro substituindo as configurações do sistema
 - Opção para mostrar códigos de barras no tamanho médio

@@ -31,6 +31,8 @@ Más funciones
 
 La versión “Pro” incluye además (requiere compra dentro de la app):
 - Elimina el banner “Get Pro” en varias pantallas
+- Asignar etiquetas a documentos
+- Filtrar documentos por etiquetas
 - Opción para invertir los colores del documento en modo oscuro
 - Opción para forzar tema oscuro o claro anulando los ajustes del sistema
 - Opción para mostrar códigos de barras en medio tamaño
