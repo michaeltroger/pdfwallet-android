@@ -10,4 +10,7 @@
     <string name="billing_benefit_2">Opção para inverter as cores do documento no modo escuro</string>
     <string name="billing_benefit_3">Opção para forçar tema escuro ou claro substituindo as configurações do sistema</string>
     <string name="billing_benefit_4">Opção para mostrar códigos de barras no tamanho médio</string>
+    <string name="billing_benefit_5">Atribuir etiquetas aos documentos</string>
+    <string name="billing_benefit_6">Filtrar documentos por etiquetas</string>
+    <string name="billing_hint_one_time_purchase">Pagamento único. Sem assinatura.</string>
 </resources>

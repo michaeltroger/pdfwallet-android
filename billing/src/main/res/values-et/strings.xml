@@ -10,4 +10,7 @@
     <string name="billing_benefit_2">Võimalus kasutada tumedas vaates pööratud värve</string>
     <string name="billing_benefit_3">Võimalus kasutada tumedat või heledat kujundust sõltumata süsteemi üldistest seadistustest</string>
     <string name="billing_benefit_4">Võimalus kuvada triipkoode poole väiksemana</string>
+    <string name="billing_benefit_5">Määra dokumentidele sildid</string>
+    <string name="billing_benefit_6">Filtreeri dokumente siltide järgi</string>
+    <string name="billing_hint_one_time_purchase">Ühekordne ost. Tellimust pole.</string>
 </resources>

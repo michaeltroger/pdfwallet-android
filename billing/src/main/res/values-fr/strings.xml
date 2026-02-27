@@ -10,4 +10,7 @@
     <string name="billing_benefit_2">Option pour inverser les couleurs du document en mode sombre</string>
     <string name="billing_benefit_3">Option pour forcer le thème sombre ou clair en écrasant les paramètres système</string>
     <string name="billing_benefit_4">Possibilité d\'afficher les codes-barres en demi-taille</string>
+    <string name="billing_benefit_5">Attribuer des étiquettes aux documents</string>
+    <string name="billing_benefit_6">Filtrer les documents par étiquettes</string>
+    <string name="billing_hint_one_time_purchase">Paiement unique. Aucun abonnement.</string>
 </resources>

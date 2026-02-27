@@ -10,4 +10,7 @@
     <string name="billing_benefit_2">Αντιστροφή χρωμάτων εγγράφου σε σκοτεινή λειτουργία</string>
     <string name="billing_benefit_3">Επιλογή εξαναγκασμού σκοτεινού ή φωτεινού θέματος παρακάμπτοντας τις ρυθμίσεις του συστήματος</string>
     <string name="billing_benefit_4">Επιλογή εμφάνισης barcodes στο μισό μέγεθος</string>
+    <string name="billing_benefit_5">Ανάθεση ετικετών σε έγγραφα</string>
+    <string name="billing_benefit_6">Φιλτράρισμα εγγράφων κατά ετικέτες</string>
+    <string name="billing_hint_one_time_purchase">Εφάπαξ αγορά. Χωρίς συνδρομή.</string>
 </resources>

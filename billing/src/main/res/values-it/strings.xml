@@ -10,4 +10,7 @@
     <string name="billing_benefit_2">Opzione per invertire i colori del documento in modalità scura</string>
     <string name="billing_benefit_3">Opzione per forzare il tema scuro o chiaro sovrascrivendo le impostazioni di sistema</string>
     <string name="billing_benefit_4">Opzione per mostrare codici a barre di metà dimensione</string>
+    <string name="billing_benefit_5">Assegna tag ai documenti</string>
+    <string name="billing_benefit_6">Filtra documenti per tag</string>
+    <string name="billing_hint_one_time_purchase">Pagamento una tantum. Nessun abbonamento.</string>
 </resources>
