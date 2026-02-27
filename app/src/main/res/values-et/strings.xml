@@ -83,4 +83,21 @@
     <string name="menu_toggle_barcode_size">Vöötkoodi suuruse vahetamine</string>
     <string name="preference_barcode_generation">Loo uus vöötkood</string>
     <string name="preference_barcode_generation_description">Kui see on välja lülitatud (soovitatav), lõikab rakendus algse vöötkoodi välja, mis sobib kõige paremini piletikontrolliks. Kui see on sisse lülitatud, loob rakendus uue ja terava vöötkoodi.</string>
+    <string name="menu_item_filter_by_tags">Filtreeri siltide järgi</string>
+    <string name="menu_item_manage_tags">Halda silte</string>
+    <string name="manage_tags_dialog_text">Halda silte</string>
+    <string name="add_tag_dialog_text">Lisa silt</string>
+    <string name="rename_tag_dialog_text">Nimeta silt ümber</string>
+    <string name="delete_tag_confirmation">Kas soovid selle sildi tõesti kustutada?</string>
+    <string name="dialog_tag_name_hint">Sildi nimi</string>
+    <string name="dialog_filter_by_tags_title">Filtreeri siltide järgi</string>
+    <string name="dialog_assign_tags_title">Määra sildid</string>
+    <string name="search_results_overview_tags">Tulemused dokumentides sildiga %1$s</string>
+    <string name="search_results_overview_query">Tulemused päringule %1$s kõigis dokumentides</string>
+    <string name="search_results_overview_query_and_tags">Tulemused päringule %1$s sildistatud dokumentides (%2$s)</string>
+    <string name="search_results_reset_filters_cta">Lähtesta kõik filtrid</string>
+    <string name="filter_by_tags_cta">Vali sildid</string>
+    <string name="filter_tag_and_mode">Kõik valitud sildid</string>
+    <string name="filter_tag_or_mode">Ükskõik milline valitud silt</string>
+    <string name="tag_filter_mode_description">Kuva tulemused, mis vastavad:</string>
 </resources>

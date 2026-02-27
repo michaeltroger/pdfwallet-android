@@ -83,4 +83,21 @@
     <string name="menu_toggle_barcode_size">Εναλλαγή μεγέθους barcode</string>
     <string name="preference_barcode_generation">Δημιουργία νέου barcode</string>
     <string name="preference_barcode_generation_description">Όταν είναι απενεργοποιημένο (συνιστάται), η εφαρμογή αφαιρεί το αρχικό barcode, κάτι που είναι καλύτερο για έλεγχο εισιτηρίων. Όταν είναι ενεργοποιημένο, η εφαρμογή δημιουργεί ένα νέο και καθαρό barcode.</string>
+    <string name="menu_item_filter_by_tags">Φιλτράρισμα κατά ετικέτες</string>
+    <string name="menu_item_manage_tags">Διαχείριση ετικετών</string>
+    <string name="manage_tags_dialog_text">Διαχείριση ετικετών</string>
+    <string name="add_tag_dialog_text">Προσθήκη ετικέτας</string>
+    <string name="rename_tag_dialog_text">Μετονομασία ετικέτας</string>
+    <string name="delete_tag_confirmation">Θέλετε πραγματικά να διαγράψετε αυτήν την ετικέτα;</string>
+    <string name="dialog_tag_name_hint">Όνομα ετικέτας</string>
+    <string name="dialog_filter_by_tags_title">Φιλτράρισμα κατά ετικέτες</string>
+    <string name="dialog_assign_tags_title">Ανάθεση ετικετών</string>
+    <string name="search_results_overview_tags">Αποτελέσματα σε έγγραφα με ετικέτα %1$s</string>
+    <string name="search_results_overview_query">Αποτελέσματα για %1$s σε όλα τα έγγραφα</string>
+    <string name="search_results_overview_query_and_tags">Αποτελέσματα για %1$s σε έγγραφα με ετικέτες (%2$s)</string>
+    <string name="search_results_reset_filters_cta">Επαναφορά όλων των φίλτρων</string>
+    <string name="filter_by_tags_cta">Επιλογή ετικετών</string>
+    <string name="filter_tag_and_mode">Όλες οι επιλεγμένες ετικέτες</string>
+    <string name="filter_tag_or_mode">Οποιαδήποτε επιλεγμένη ετικέτα</string>
+    <string name="tag_filter_mode_description">Εμφάνιση αποτελεσμάτων που αντιστοιχούν σε:</string>
 </resources>

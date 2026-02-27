@@ -83,4 +83,21 @@
     <string name="menu_toggle_barcode_size">Basculer la taille du code-barres</string>
     <string name="preference_barcode_generation">Créer un nouveau code-barres</string>
     <string name="preference_barcode_generation_description">Lorsqu’il est désactivé (recommandé), l’application supprime le code-barres original, ce qui est idéal pour le contrôle des billets. Lorsqu’il est activé, l’application crée un nouveau code-barres net.</string>
+    <string name="menu_item_filter_by_tags">Filtrer par étiquettes</string>
+    <string name="menu_item_manage_tags">Gérer les étiquettes</string>
+    <string name="manage_tags_dialog_text">Gérer les étiquettes</string>
+    <string name="add_tag_dialog_text">Ajouter une étiquette</string>
+    <string name="rename_tag_dialog_text">Renommer l’étiquette</string>
+    <string name="delete_tag_confirmation">Voulez-vous vraiment supprimer cette étiquette ?</string>
+    <string name="dialog_tag_name_hint">Nom de l’étiquette</string>
+    <string name="dialog_filter_by_tags_title">Filtrer par étiquettes</string>
+    <string name="dialog_assign_tags_title">Attribuer des étiquettes</string>
+    <string name="search_results_overview_tags">Résultats dans les documents étiquetés %1$s</string>
+    <string name="search_results_overview_query">Résultats pour %1$s dans tous les documents</string>
+    <string name="search_results_overview_query_and_tags">Résultats pour %1$s dans les documents étiquetés (%2$s)</string>
+    <string name="search_results_reset_filters_cta">Réinitialiser tous les filtres</string>
+    <string name="filter_by_tags_cta">Sélectionner des étiquettes</string>
+    <string name="filter_tag_and_mode">Toutes les étiquettes sélectionnées</string>
+    <string name="filter_tag_or_mode">N’importe quelle étiquette sélectionnée</string>
+    <string name="tag_filter_mode_description">Afficher les résultats correspondant à :</string>
 </resources>

@@ -83,4 +83,21 @@
     <string name="menu_toggle_barcode_size">Cambiar tamaño del código de barras</string>
     <string name="preference_barcode_generation">Crear nuevo código de barras</string>
     <string name="preference_barcode_generation_description">Cuando está desactivado (recomendado), la app recorta el código de barras original, lo que es ideal para la verificación de boletos. Cuando está activado, la app crea un nuevo código de barras nítido.</string>
+    <string name="menu_item_filter_by_tags">Filtrar por etiquetas</string>
+    <string name="menu_item_manage_tags">Administrar etiquetas</string>
+    <string name="manage_tags_dialog_text">Administrar etiquetas</string>
+    <string name="add_tag_dialog_text">Agregar etiqueta</string>
+    <string name="rename_tag_dialog_text">Renombrar etiqueta</string>
+    <string name="delete_tag_confirmation">¿Realmente deseas eliminar esta etiqueta?</string>
+    <string name="dialog_tag_name_hint">Nombre de la etiqueta</string>
+    <string name="dialog_filter_by_tags_title">Filtrar por etiquetas</string>
+    <string name="dialog_assign_tags_title">Asignar etiquetas</string>
+    <string name="search_results_overview_tags">Resultados en documentos etiquetados con %1$s</string>
+    <string name="search_results_overview_query">Resultados para %1$s en todos los documentos</string>
+    <string name="search_results_overview_query_and_tags">Resultados para %1$s en documentos etiquetados (%2$s)</string>
+    <string name="search_results_reset_filters_cta">Restablecer todos los filtros</string>
+    <string name="filter_by_tags_cta">Seleccionar etiquetas</string>
+    <string name="filter_tag_and_mode">Todas las etiquetas seleccionadas</string>
+    <string name="filter_tag_or_mode">Cualquier etiqueta seleccionada</string>
+    <string name="tag_filter_mode_description">Mostrar resultados que coincidan con:</string>
 </resources>

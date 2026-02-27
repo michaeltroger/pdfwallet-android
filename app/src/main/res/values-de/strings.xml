@@ -83,4 +83,21 @@
     <string name="menu_toggle_barcode_size">Barcode-Größe umschalten</string>
     <string name="preference_barcode_generation">Neuen Barcode erstellen</string>
     <string name="preference_barcode_generation_description">Wenn deaktiviert (empfohlen), schneidet die App den ursprünglichen Barcode aus, was für Ticketkontrollen am besten ist. Wenn aktiviert, erstellt die App stattdessen einen neuen, scharfen Barcode.</string>
+    <string name="menu_item_filter_by_tags">Nach Tags filtern</string>
+    <string name="menu_item_manage_tags">Tags verwalten</string>
+    <string name="manage_tags_dialog_text">Tags verwalten</string>
+    <string name="add_tag_dialog_text">Tag hinzufügen</string>
+    <string name="rename_tag_dialog_text">Tag umbenennen</string>
+    <string name="delete_tag_confirmation">Möchten Sie diesen Tag wirklich löschen?</string>
+    <string name="dialog_tag_name_hint">Tag-Name</string>
+    <string name="dialog_filter_by_tags_title">Nach Tags filtern</string>
+    <string name="dialog_assign_tags_title">Tags zuweisen</string>
+    <string name="search_results_overview_tags">Ergebnisse in Dokumenten mit dem Tag %1$s</string>
+    <string name="search_results_overview_query">Ergebnisse für %1$s in allen Dokumenten</string>
+    <string name="search_results_overview_query_and_tags">Ergebnisse für %1$s in Dokumenten mit Tags (%2$s)</string>
+    <string name="search_results_reset_filters_cta">Alle Filter zurücksetzen</string>
+    <string name="filter_by_tags_cta">Tags auswählen</string>
+    <string name="filter_tag_and_mode">Alle ausgewählten Tags</string>
+    <string name="filter_tag_or_mode">Beliebiger ausgewählter Tag</string>
+    <string name="tag_filter_mode_description">Ergebnisse anzeigen, die entsprechen:</string>
 </resources>

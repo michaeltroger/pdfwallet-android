@@ -83,4 +83,21 @@
     <string name="menu_toggle_barcode_size">Commuta dimensione codice a barre</string>
     <string name="preference_barcode_generation">Crea nuovo barcode</string>
     <string name="preference_barcode_generation_description">Quando disattivato (consigliato), l’app rimuove il barcode originale, il che è migliore per i controlli dei biglietti. Quando attivato, l’app crea un nuovo barcode nitido.</string>
+    <string name="menu_item_filter_by_tags">Filtra per tag</string>
+    <string name="menu_item_manage_tags">Gestisci tag</string>
+    <string name="manage_tags_dialog_text">Gestisci tag</string>
+    <string name="add_tag_dialog_text">Aggiungi tag</string>
+    <string name="rename_tag_dialog_text">Rinomina tag</string>
+    <string name="delete_tag_confirmation">Vuoi davvero eliminare questo tag?</string>
+    <string name="dialog_tag_name_hint">Nome del tag</string>
+    <string name="dialog_filter_by_tags_title">Filtra per tag</string>
+    <string name="dialog_assign_tags_title">Assegna tag</string>
+    <string name="search_results_overview_tags">Risultati nei documenti con tag %1$s</string>
+    <string name="search_results_overview_query">Risultati per %1$s in tutti i documenti</string>
+    <string name="search_results_overview_query_and_tags">Risultati per %1$s nei documenti con tag (%2$s)</string>
+    <string name="search_results_reset_filters_cta">Reimposta tutti i filtri</string>
+    <string name="filter_by_tags_cta">Seleziona tag</string>
+    <string name="filter_tag_and_mode">Tutti i tag selezionati</string>
+    <string name="filter_tag_or_mode">Qualsiasi tag selezionato</string>
+    <string name="tag_filter_mode_description">Mostra risultati che corrispondono a:</string>
 </resources>
