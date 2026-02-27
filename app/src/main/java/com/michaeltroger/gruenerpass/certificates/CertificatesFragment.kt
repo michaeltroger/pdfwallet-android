@@ -102,6 +102,10 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
             vm.onClearFilters()
         }
 
+        binding.filterByTagsButton.setOnClickListener {
+            vm.onFilterTagsSelected()
+        }
+
         binding.toggleFilterTypeButton.setOnClickListener {
             vm.onToggleTagFilterType()
         }

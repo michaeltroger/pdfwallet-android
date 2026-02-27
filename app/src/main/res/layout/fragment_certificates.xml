@@ -46,6 +46,12 @@
             android:text="@string/filter_and"/>
 
         <Button
+            android:id="@+id/filter_by_tags_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_by_tags"/>
+
+        <Button
             android:id="@+id/reset_filters_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
