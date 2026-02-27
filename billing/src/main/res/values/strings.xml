@@ -11,4 +11,5 @@
     <string name="billing_benefit_4">Option to show barcodes in half size</string>
     <string name="billing_benefit_5">Assign tags to documents</string>
     <string name="billing_benefit_6">Filter documents by tags</string>
+    <string name="billing_hint_one_time_purchase">One-time purchase. No subscription.</string>
 </resources>

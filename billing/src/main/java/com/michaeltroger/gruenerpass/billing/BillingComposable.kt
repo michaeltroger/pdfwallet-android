@@ -116,6 +116,12 @@ private fun BillingComposableImpl(
                 }
             }
         }
+        item {
+            Spacer(Modifier.height(AppPadding.l))
+            Text(
+                text = stringResource(R.string.billing_hint_one_time_purchase),
+            )
+        }
     }
 }
 
