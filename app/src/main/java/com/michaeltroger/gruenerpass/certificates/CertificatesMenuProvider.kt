@@ -110,6 +110,16 @@ class CertificatesMenuProvider(
             true
         }
 
+        R.id.filter_by_tags -> {
+            vm.onFilterTagsSelected()
+            true
+        }
+
+        R.id.manage_tags -> {
+            vm.onManageTagsSelected()
+            true
+        }
+
         else -> false
     }
 
@@ -118,7 +128,7 @@ class CertificatesMenuProvider(
     }
 
     private fun restorePendingSearchQueryFilter(searchMenuItem: MenuItem) {
-        val pendingFilter = (vm.viewState.value as? ViewState.Normal)?.filter ?: return
+        val pendingFilter = (vm.viewState.value as? ViewState.Normal)?.filterSearchText ?: return
         if (pendingFilter.isNotEmpty()) {
             searchMenuItem.expandActionView()
             searchView?.setQuery(pendingFilter, false)
@@ -153,7 +163,14 @@ class CertificatesMenuProvider(
                 if (!state.showSearchMenuItem) {
                     collapseActionView()
                 }
+                if (state is ViewState.Normal) {
+                    if (state.filterSearchText.isEmpty()) {
+                        collapseActionView()
+                    }
+                }
             }
+            findItem(R.id.filter_by_tags)?.isVisible = state.showFilterByTagMenuItem
+            findItem(R.id.manage_tags)?.isVisible = state.showManageTagMenuItem
             findItem(R.id.openMore)?.isVisible = state.showMoreMenuItem
             findItem(R.id.switchLayout)?.isVisible = state.showSwitchLayoutMenuItem
             findItem(R.id.toggleBarcodeSize)?.isVisible = if (isListLayout) {

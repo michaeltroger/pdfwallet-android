@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="?colorOnPrimary"
     android:layout_marginEnd="@dimen/space_small"
+    android:paddingHorizontal="@dimen/space_medium"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -12,15 +13,44 @@
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:padding="@dimen/space_small"
+        android:paddingVertical="@dimen/space_medium"
         android:textSize="18sp"
         android:singleLine="true"
         android:textColor="?colorOnSecondary"
         android:ellipsize="marquee"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/deleteIcon"
+        app:layout_constraintEnd_toStartOf="@id/tagIcon"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Document name with very very very long text"/>
+
+    <HorizontalScrollView
+        android:id="@+id/tagsScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingBottom="@dimen/space_small"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tagsChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true" />
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/tagIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/tag_24"
+        android:paddingStart="@dimen/space_small"
+        android:paddingEnd="@dimen/space_small"
+        android:contentDescription="@string/dialog_assign_tags_title"
+        app:layout_constraintEnd_toStartOf="@id/deleteIcon"
+        app:layout_constraintTop_toTopOf="@id/name"
+        app:layout_constraintBottom_toBottomOf="@id/name"/>
 
     <ImageView
         android:id="@+id/deleteIcon"
@@ -40,7 +70,6 @@
         android:layout_height="0dp"
         android:src="@drawable/share_24px"
         android:paddingStart="@dimen/space_small"
-        android:paddingEnd="@dimen/space_small"
         android:contentDescription="@string/share"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/name"

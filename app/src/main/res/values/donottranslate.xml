@@ -53,4 +53,5 @@
         <item>@string/key_preference_theme_dark</item>
     </string-array>
     <string name="key_preference_half_size_barcodes">halfSizeBarcodes</string>
+    <string name="preference_tag_filter_type">tag_filter_type</string>
 </resources>

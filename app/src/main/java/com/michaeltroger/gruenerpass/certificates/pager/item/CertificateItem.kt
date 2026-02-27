@@ -21,6 +21,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import com.michaeltroger.gruenerpass.db.Tag
 
 private const val WIDTH_FACTOR_MULTIPLE_DOCS = 0.95
 
@@ -32,6 +33,7 @@ class CertificateItem(
     private val barcodeRenderer: BarcodeRenderer,
     dispatcher: CoroutineDispatcher,
     private val documentName: String,
+    private val tags: List<Tag>,
     private val searchBarcode: BarcodeSearchMode,
     private val invertColors: Boolean,
     private val showBarcodesInHalfSize: Boolean,
@@ -39,6 +41,7 @@ class CertificateItem(
     private val onDeleteCalled: () -> Unit,
     private val onDocumentNameClicked: () -> Unit,
     private val onShareCalled: () -> Unit,
+    private val onAssignTagsClicked: () -> Unit,
 ) : BindableItem<ItemCertificateBinding>() {
 
     private val renderer: PdfRenderer = PdfRendererBuilder.create(context, fileName = fileName, dispatcher)
@@ -76,9 +79,11 @@ class CertificateItem(
                 CertificateHeaderItem(
                     documentName = documentName,
                     fileName = fileName,
+                    tags = tags,
                     onDeleteCalled = onDeleteCalled,
                     onDocumentNameClicked = onDocumentNameClicked,
                     onShareCalled = onShareCalled,
+                    onAssignTagsClicked = onAssignTagsClicked,
                 )
             )
             for (pageIndex in 0 until renderer.getPageCount()) {
@@ -111,7 +116,8 @@ class CertificateItem(
     override fun hasSameContentAs(other: Item<*>): Boolean {
         return (other as? CertificateItem)?.fileName == fileName
             && other.documentName == documentName
-                && other.showBarcodesInHalfSize == showBarcodesInHalfSize
-                && other.generateNewBarcode == generateNewBarcode
+            && other.tags == tags
+            && other.showBarcodesInHalfSize == showBarcodesInHalfSize
+            && other.generateNewBarcode == generateNewBarcode
     }
 }

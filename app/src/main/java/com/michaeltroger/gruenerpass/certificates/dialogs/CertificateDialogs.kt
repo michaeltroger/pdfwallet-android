@@ -3,12 +3,15 @@ package com.michaeltroger.gruenerpass.certificates.dialogs
 import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
+import android.widget.EditText
+import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import com.michaeltroger.gruenerpass.R
-import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.certificates.documentorder.DocumentOrderItem
+import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.Tag
 import com.xwray.groupie.GroupieAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -38,6 +41,45 @@ interface CertificateDialogs {
         originalOrder: List<Certificate>,
         onOrderChanged: (List<String>) -> Unit
     ): Job
+    fun showFilterTagsDialog(
+        context: Context,
+        availableTags: List<Tag>,
+        activeTagIds: Set<Long>,
+        onTagFilterToggled: (Long) -> Unit,
+        onManageTagsClicked: () -> Unit
+    )
+    fun showAssignTagsDialog(
+        context: Context,
+        certificateId: String,
+        availableTags: List<Tag>,
+        assignedTagIds: Set<Long>,
+        onManageTagsClicked: () -> Unit,
+        onTagsAssigned: (String, List<Long>) -> Unit
+    )
+    fun showManageTagsDialog(
+        context: Context,
+        availableTags: List<Tag>,
+        onEditTagClicked: (Tag) -> Unit,
+        onCreateTagClicked: () -> Unit
+    )
+    fun showCreateTagDialog(
+        context: Context,
+        onTagCreated: (String) -> Unit,
+        onCancel: () -> Unit
+    )
+    fun showEditTagDialog(
+        context: Context,
+        tag: Tag,
+        onTagRenamed: (Long, String) -> Unit,
+        onDeleteTagClicked: (Long) -> Unit,
+        onCancel: () -> Unit
+    )
+    fun showDeleteTagConfirmationDialog(
+        context: Context,
+        tag: Tag,
+        onDeleteTagConfirmed: (Long) -> Unit,
+        onCancel: () -> Unit
+    )
 }
 
 class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
@@ -218,6 +260,199 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
             }
             .setOnCancelListener {
                 onCancelled()
+            }
+            .setOnDismissListener {
+                this.dialog = null
+            }
+            .create()
+        this.dialog = dialog
+        dialog.show()
+    }
+
+    override fun showFilterTagsDialog(
+        context: Context,
+        availableTags: List<Tag>,
+        activeTagIds: Set<Long>,
+        onTagFilterToggled: (Long) -> Unit,
+        onManageTagsClicked: () -> Unit
+    ) {
+        val tagNames = availableTags.map { it.name }.toTypedArray()
+        val checkedItems = availableTags.map { it.id in activeTagIds }.toBooleanArray()
+
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.dialog_filter_by_tags_title)
+            .setMultiChoiceItems(tagNames, checkedItems) { _, which, isChecked ->
+                onTagFilterToggled(availableTags[which].id)
+            }
+            .setNeutralButton(R.string.manage_tags_dialog_text) { _, _ ->
+                onManageTagsClicked()
+            }
+            .setPositiveButton(R.string.ok, null)
+            .setOnDismissListener {
+                this.dialog = null
+            }
+            .create()
+        this.dialog = dialog
+        dialog.show()
+    }
+
+    override fun showAssignTagsDialog(
+        context: Context,
+        certificateId: String,
+        availableTags: List<Tag>,
+        assignedTagIds: Set<Long>,
+        onManageTagsClicked: () -> Unit,
+        onTagsAssigned: (String, List<Long>) -> Unit
+    ) {
+        val tagNames = availableTags.map { it.name }.toTypedArray()
+        val checkedItems = availableTags.map { it.id in assignedTagIds }.toBooleanArray()
+        val selectedTagIds = assignedTagIds.toMutableSet()
+
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.dialog_assign_tags_title)
+            .setMultiChoiceItems(tagNames, checkedItems) { _, which, isChecked ->
+                if (isChecked) {
+                    selectedTagIds.add(availableTags[which].id)
+                } else {
+                    selectedTagIds.remove(availableTags[which].id)
+                }
+            }
+            .setNeutralButton(R.string.manage_tags_dialog_text) { _, _ ->
+                onManageTagsClicked()
+            }
+            .setPositiveButton(R.string.ok) { _, _ ->
+                onTagsAssigned(certificateId, selectedTagIds.toList())
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .setOnDismissListener {
+                this.dialog = null
+            }
+            .create()
+        this.dialog = dialog
+        dialog.show()
+    }
+
+    override fun showManageTagsDialog(
+        context: Context,
+        availableTags: List<Tag>,
+        onEditTagClicked: (Tag) -> Unit,
+        onCreateTagClicked: () -> Unit
+    ) {
+        val tagNames = availableTags.map { it.name }.toTypedArray()
+
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.manage_tags_dialog_text)
+            .setItems(tagNames) { _, which ->
+                onEditTagClicked(availableTags[which])
+            }
+            .setPositiveButton(R.string.add_tag_dialog_text) { _, _ ->
+                onCreateTagClicked()
+            }
+            .setNegativeButton(R.string.ok, null)
+            .setOnDismissListener {
+                this.dialog = null
+            }
+            .create()
+        this.dialog = dialog
+        dialog.show()
+    }
+
+    override fun showCreateTagDialog(
+        context: Context,
+        onTagCreated: (String) -> Unit,
+        onCancel: () -> Unit
+    ) {
+        val input = EditText(context)
+        val container = FrameLayout(context)
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        val margin = context.resources.getDimensionPixelSize(R.dimen.space_medium)
+        params.leftMargin = margin
+        params.rightMargin = margin
+        input.layoutParams = params
+        input.hint = context.getString(R.string.dialog_tag_name_hint)
+        container.addView(input)
+
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.add_tag_dialog_text)
+            .setView(container)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                val name = input.text.toString()
+                if (name.isNotBlank()) {
+                    onTagCreated(name)
+                }
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                onCancel()
+            }
+            .setOnDismissListener {
+                this.dialog = null
+            }
+            .create()
+        this.dialog = dialog
+        dialog.show()
+    }
+
+    override fun showEditTagDialog(
+        context: Context,
+        tag: Tag,
+        onTagRenamed: (Long, String) -> Unit,
+        onDeleteTagClicked: (Long) -> Unit,
+        onCancel: () -> Unit
+    ) {
+        val input = EditText(context)
+        input.setText(tag.name)
+        val container = FrameLayout(context)
+        val params = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        val margin = context.resources.getDimensionPixelSize(R.dimen.space_medium)
+        params.leftMargin = margin
+        params.rightMargin = margin
+        input.layoutParams = params
+        input.hint = context.getString(R.string.dialog_tag_name_hint)
+        container.addView(input)
+
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.rename_tag_dialog_text)
+            .setView(container)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                val name = input.text.toString()
+                if (name.isNotBlank() && name != tag.name) {
+                    onTagRenamed(tag.id, name)
+                }
+            }
+            .setNeutralButton(R.string.delete) { _, _ ->
+                onDeleteTagClicked(tag.id)
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                onCancel()
+            }
+            .setOnDismissListener {
+                this.dialog = null
+            }
+            .create()
+        this.dialog = dialog
+        dialog.show()
+    }
+
+    override fun showDeleteTagConfirmationDialog(
+        context: Context,
+        tag: Tag,
+        onDeleteTagConfirmed: (Long) -> Unit,
+        onCancel: () -> Unit
+    ) {
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.warning)
+            .setMessage(R.string.delete_tag_confirmation)
+            .setPositiveButton(R.string.delete) { _, _ ->
+                onDeleteTagConfirmed(tag.id)
+            }
+            .setNegativeButton(R.string.cancel) { _, _ ->
+                onCancel()
             }
             .setOnDismissListener {
                 this.dialog = null

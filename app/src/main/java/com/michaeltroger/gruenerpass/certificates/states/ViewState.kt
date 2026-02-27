@@ -1,7 +1,15 @@
 package com.michaeltroger.gruenerpass.certificates.states
 
-import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.CertificateWithTags
+import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
+
+/**
+ * used for persisting setting, be careful with renaming
+ */
+enum class TagFilterType {
+    AND, OR
+}
 
 sealed class ViewState {
     abstract val showSwitchLayoutMenuItem: Boolean
@@ -21,6 +29,8 @@ sealed class ViewState {
     abstract val showWarningButton: Boolean
     abstract val showChangeOrderMenuItem: Boolean
     abstract val showToggleBarcodeSizeMenuItem: Boolean
+    abstract val showManageTagMenuItem: Boolean
+    abstract val showFilterByTagMenuItem: Boolean
 
     data object Initial : ViewState() {
         override val showSwitchLayoutMenuItem = false
@@ -40,6 +50,8 @@ sealed class ViewState {
         override val showWarningButton = false
         override val showChangeOrderMenuItem = false
         override val showGetProMenuItem = false
+        override val showManageTagMenuItem = false
+        override val showFilterByTagMenuItem = false
     }
 
     data class Empty(
@@ -61,14 +73,19 @@ sealed class ViewState {
         override val showMoreMenuItem = true
         override val showWarningButton = false
         override val showChangeOrderMenuItem = false
+        override val showManageTagMenuItem = false
+        override val showFilterByTagMenuItem = false
     }
 
     data class Normal(
-        val documents: List<Certificate>,
+        val documents: List<CertificateWithTags>,
         val searchBarcode: BarcodeSearchMode,
         val invertColors: Boolean,
+        val availableTags: List<Tag>,
+        val filterTagIds: Set<Long>,
         override val showChangeOrderMenuItem: Boolean,
-        val filter: String,
+        val filterSearchText: String,
+        val filterTagNames: List<String>,
         override val showGetProMenuItem: Boolean,
         override val showLockMenuItem: Boolean,
         override val showScrollToFirstMenuItem: Boolean,
@@ -79,6 +96,9 @@ sealed class ViewState {
         override val showExportFilteredMenuItem: Boolean,
         val showBarcodesInHalfSize: Boolean,
         val generateNewBarcode: Boolean,
+        val isFiltered: Boolean,
+        val tagFilterType: TagFilterType,
+        val isFilterExpanded: Boolean,
     ) : ViewState() {
         override val showSwitchLayoutMenuItem = true
         override val showToggleBarcodeSizeMenuItem = true
@@ -88,5 +108,7 @@ sealed class ViewState {
         override val showExportAllMenuItem = true
         override val showAddButton = false
         override val showMoreMenuItem = true
+        override val showManageTagMenuItem = true
+        override val showFilterByTagMenuItem = true
     }
 }

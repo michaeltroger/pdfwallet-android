@@ -7,16 +7,24 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.certificates.mapper.toCertificate
+import com.michaeltroger.gruenerpass.certificates.states.TagFilterType
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.certificates.states.ViewState
 import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.CertificateWithTags
+import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.db.usecase.ChangeCertificateNameUseCase
 import com.michaeltroger.gruenerpass.db.usecase.ChangeCertificateOrderUseCase
+import com.michaeltroger.gruenerpass.db.usecase.CreateTagUseCase
 import com.michaeltroger.gruenerpass.db.usecase.DeleteAllCertificatesUseCase
 import com.michaeltroger.gruenerpass.db.usecase.DeleteSelectedCertificatesUseCase
 import com.michaeltroger.gruenerpass.db.usecase.DeleteSingleCertificateUseCase
+import com.michaeltroger.gruenerpass.db.usecase.DeleteTagUseCase
 import com.michaeltroger.gruenerpass.db.usecase.GetCertificatesFlowUseCase
+import com.michaeltroger.gruenerpass.db.usecase.GetTagsUseCase
 import com.michaeltroger.gruenerpass.db.usecase.InsertIntoDatabaseUseCase
+import com.michaeltroger.gruenerpass.db.usecase.RenameTagUseCase
+import com.michaeltroger.gruenerpass.db.usecase.UpdateCertificateTagsUseCase
 import com.michaeltroger.gruenerpass.lock.AppLockedRepo
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImportResult
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImporter
@@ -26,6 +34,7 @@ import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -53,6 +62,11 @@ class CertificatesViewModel @Inject constructor(
     private val sharedPrefs: SharedPreferences,
     private val isProUnlocked: IsProUnlockedUseCase,
     private val purchaseUpdateUseCase: PurchaseUpdateUseCase,
+    private val createTagUseCase: CreateTagUseCase,
+    private val deleteTagUseCase: DeleteTagUseCase,
+    private val getTagsUseCase: GetTagsUseCase,
+    private val renameTagUseCase: RenameTagUseCase,
+    private val updateCertificateTagsUseCase: UpdateCertificateTagsUseCase,
 ): AndroidViewModel(app) {
 
     private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(
@@ -60,7 +74,20 @@ class CertificatesViewModel @Inject constructor(
     )
     val viewState: StateFlow<ViewState> = _viewState
 
-    private val filter = MutableStateFlow("")
+    private val filterSearchText = MutableStateFlow("")
+    private val filterTags = MutableStateFlow<Set<Long>>(emptySet())
+    private val filterTagType =
+        sharedPrefs.getFlow(
+            app.getString(R.string.preference_tag_filter_type),
+            TagFilterType.AND.name
+        ) { value: String ->
+            try {
+                TagFilterType.valueOf(value)
+            } catch (e: IllegalArgumentException) {
+                TagFilterType.AND
+            }
+        }
+    private val isFilterExpanded = MutableStateFlow(true)
 
     private val _viewEvent = MutableSharedFlow<ViewEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<ViewEvent> = _viewEvent
@@ -109,7 +136,7 @@ class CertificatesViewModel @Inject constructor(
         viewModelScope.launch {
             combine(
                 getCertificatesFlowUseCase(),
-                filter,
+                filterSearchText,
                 shouldAuthenticate,
                 searchForBarcode,
                 invertColors,
@@ -117,17 +144,25 @@ class CertificatesViewModel @Inject constructor(
                 showBarcodesHalfSize,
                 generateNewBarcode,
                 purchaseUpdateUseCase(),
+                getTagsUseCase(),
+                filterTags,
+                filterTagType,
+                isFilterExpanded,
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
                 updateState(
-                    docs = values[0] as List<Certificate>,
-                    filter = values[1] as String,
+                    docs = values[0] as List<CertificateWithTags>,
+                    filterSearchText = values[1] as String,
                     shouldAuthenticate = values[2] as Boolean,
                     searchForBarcode = values[3] as BarcodeSearchMode,
                     invertColors = values[4] as Boolean,
                     showOnLockedScreen = values[5] as Boolean,
                     showBarcodesInHalfSize = values[6] as Boolean,
-                    generateNewBarcode = values[7] as Boolean
+                    generateNewBarcode = values[7] as Boolean,
+                    availableTags = values[9] as List<Tag>,
+                    filterTagIds = values[10] as Set<Long>,
+                    tagFilterType = values[11] as TagFilterType,
+                    isFilterExpanded = values[12] as Boolean,
                 )
             }.collect()
         }
@@ -141,14 +176,18 @@ class CertificatesViewModel @Inject constructor(
 
     @Suppress("MagicNumber")
     private suspend fun updateState(
-        docs: List<Certificate>,
-        filter: String,
+        docs: List<CertificateWithTags>,
+        filterSearchText: String,
         shouldAuthenticate: Boolean,
         searchForBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showOnLockedScreen: Boolean,
         showBarcodesInHalfSize: Boolean,
         generateNewBarcode: Boolean,
+        availableTags: List<Tag>,
+        filterTagIds: Set<Long>,
+        tagFilterType: TagFilterType,
+        isFilterExpanded: Boolean,
     ) {
         if (docs.isEmpty()) {
             _viewState.emit(
@@ -157,34 +196,61 @@ class CertificatesViewModel @Inject constructor(
                 )
             )
         } else {
-            val filteredDocs = docs.filter {
-                if (filter.isEmpty()) {
+            val filteredDocs = docs.filter { certWithTags ->
+                val matchesNameOrTag = if (filterSearchText.isEmpty()) {
                     true
                 } else {
-                    it.name.contains(filter, ignoreCase = true)
+                    certWithTags.certificate.name.contains(filterSearchText, ignoreCase = true)
                 }
+                val matchesTags = if (filterTagIds.isEmpty()) {
+                    true
+                } else {
+                    if (tagFilterType == TagFilterType.AND) {
+                        filterTagIds.all { tagId ->
+                            certWithTags.tags.any { it.id == tagId }
+                        }
+                    } else {
+                        filterTagIds.any { tagId ->
+                            certWithTags.tags.any { it.id == tagId }
+                        }
+                    }
+                }
+                matchesNameOrTag && matchesTags
             }
             val areDocumentsFilteredOut = filteredDocs.size != docs.size
+            val filterTagNames = availableTags.filter { it.id in filterTagIds }.map { it.name }
             _viewState.emit(
                 ViewState.Normal(
                     documents = filteredDocs,
                     searchBarcode = searchForBarcode,
                     invertColors = invertColors,
+                    availableTags = availableTags,
+                    filterTagIds = filterTagIds,
                     showLockMenuItem = shouldAuthenticate,
                     showScrollToFirstMenuItem = filteredDocs.size > 1,
                     showScrollToLastMenuItem = filteredDocs.size > 1,
                     showChangeOrderMenuItem = !areDocumentsFilteredOut && docs.size > 1,
                     showSearchMenuItem = docs.size > 1,
-                    filter = filter,
+                    filterSearchText = filterSearchText,
+                    filterTagNames = filterTagNames,
                     showWarningButton = showOnLockedScreen,
-                    showExportFilteredMenuItem = areDocumentsFilteredOut,
-                    showDeleteFilteredMenuItem = areDocumentsFilteredOut,
+                    showExportFilteredMenuItem = areDocumentsFilteredOut && filteredDocs.isNotEmpty(),
+                    showDeleteFilteredMenuItem = areDocumentsFilteredOut && filteredDocs.isNotEmpty(),
                     showGetProMenuItem = !isProUnlocked(),
                     showBarcodesInHalfSize = showBarcodesInHalfSize,
                     generateNewBarcode = generateNewBarcode,
+                    isFiltered = filterSearchText.isNotEmpty() || filterTagIds.isNotEmpty(),
+                    tagFilterType = tagFilterType,
+                    isFilterExpanded = isFilterExpanded,
                 )
             )
         }
+    }
+
+    fun onClearFilters() {
+        filterSearchText.value = ""
+        filterTags.value = emptySet()
+        isFilterExpanded.value = true
     }
 
     private suspend fun processPendingFile(password: String? = null) {
@@ -241,7 +307,7 @@ class CertificatesViewModel @Inject constructor(
 
     fun onDeleteFilteredConfirmed() = viewModelScope.launch {
         val docs = (viewState.value as? ViewState.Normal)?.documents ?: return@launch
-        deleteSelectedCertificatesUseCase(docs)
+        deleteSelectedCertificatesUseCase(docs.map { it.certificate })
     }
 
     @Suppress("SpreadOperator")
@@ -258,19 +324,23 @@ class CertificatesViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) = viewModelScope.launch {
-        filter.value = query.trim()
+        val newQuery = query.trim()
+        if (filterSearchText.value != newQuery) {
+            filterSearchText.value = newQuery
+            isFilterExpanded.value = true
+        }
     }
 
     fun onExportFilteredSelected() = viewModelScope.launch {
         val docs = (viewState.value as? ViewState.Normal)?.documents ?: return@launch
         _viewEvent.emit(
-            ViewEvent.ShareMultiple(docs)
+            ViewEvent.ShareMultiple(docs.map { it.certificate })
         )
     }
 
     fun onExportAllSelected() = viewModelScope.launch {
         _viewEvent.emit(
-            ViewEvent.ShareMultiple(getCertificatesFlowUseCase().first())
+            ViewEvent.ShareMultiple(getCertificatesFlowUseCase().first().map { it.certificate })
         )
     }
 
@@ -292,7 +362,7 @@ class CertificatesViewModel @Inject constructor(
         _viewEvent.emit(
             ViewEvent.GoToCertificate(
                 position = 0,
-                id = docs[0].id,
+                id = docs[0].certificate.id,
                 isNewDocument = false,
             )
         )
@@ -304,7 +374,7 @@ class CertificatesViewModel @Inject constructor(
         _viewEvent.emit(
             ViewEvent.GoToCertificate(
                 position = indexLast,
-                docs[indexLast].id,
+                id = docs[indexLast].certificate.id,
                 isNewDocument = false,
             )
         )
@@ -313,9 +383,81 @@ class CertificatesViewModel @Inject constructor(
     fun onChangeOrderSelected() = viewModelScope.launch {
         _viewEvent.emit(
             ViewEvent.ShowChangeDocumentOrderDialog(
-                originalOrder = getCertificatesFlowUseCase().first()
+                originalOrder = getCertificatesFlowUseCase().first().map { it.certificate }
             )
         )
+    }
+
+    fun onCreateTag(name: String) = viewModelScope.launch {
+        createTagUseCase(name)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+    }
+
+    fun onRenameTag(id: Long, newName: String) = viewModelScope.launch {
+        renameTagUseCase(id, newName)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+    }
+
+    fun onDeleteTag(id: Long) = viewModelScope.launch {
+        deleteTagUseCase(id)
+        val currentFilter = filterTags.value
+        if (id in currentFilter) {
+            filterTags.value = currentFilter - id
+        }
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+    }
+
+    fun onToggleTagFilter(id: Long) = viewModelScope.launch {
+        val currentFilter = filterTags.value
+        if (id in currentFilter) {
+            filterTags.value = currentFilter - id
+        } else {
+            filterTags.value = currentFilter + id
+        }
+        isFilterExpanded.value = true
+    }
+
+    fun onToggleFilterExpanded() {
+        isFilterExpanded.value = !isFilterExpanded.value
+    }
+
+    fun onToggleTagFilterType() = viewModelScope.launch {
+        val current = filterTagType.first()
+        val next = if (current == TagFilterType.AND) TagFilterType.OR else TagFilterType.AND
+        sharedPrefs.edit {
+            putString(getApplication<Application>().getString(R.string.preference_tag_filter_type), next.name)
+        }
+    }
+    
+    fun onUpdateCertificateTags(certificateId: String, tagIds: List<Long>) = viewModelScope.launch {
+        updateCertificateTagsUseCase(certificateId, tagIds)
+    }
+
+    fun onFilterTagsSelected() = viewModelScope.launch {
+        if (isProUnlocked()) {
+            _viewEvent.emit(ViewEvent.ShowFilterTagsDialog)
+        } else {
+            _viewEvent.emit(ViewEvent.ShowGetPro)
+        }
+    }
+
+    fun onAssignTagsSelected(certificateId: String) = viewModelScope.launch {
+        if (isProUnlocked()) {
+            _viewEvent.emit(ViewEvent.ShowAssignTagsDialog(certificateId))
+        } else {
+            _viewEvent.emit(ViewEvent.ShowGetPro)
+        }
+    }
+
+    fun onManageTagsSelected() = viewModelScope.launch {
+        if (isProUnlocked()) {
+            _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+        } else {
+            _viewEvent.emit(ViewEvent.ShowGetPro)
+        }
     }
 
     fun onShowWarningDialogSelected() = viewModelScope.launch {

@@ -10,15 +10,23 @@ import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.certificatedetails.states.DetailsViewState
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.CertificateWithTags
+import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.db.usecase.ChangeCertificateNameUseCase
+import com.michaeltroger.gruenerpass.db.usecase.CreateTagUseCase
 import com.michaeltroger.gruenerpass.db.usecase.DeleteSingleCertificateUseCase
+import com.michaeltroger.gruenerpass.db.usecase.DeleteTagUseCase
 import com.michaeltroger.gruenerpass.db.usecase.GetSingleCertificateFlowUseCase
+import com.michaeltroger.gruenerpass.db.usecase.GetTagsUseCase
+import com.michaeltroger.gruenerpass.db.usecase.RenameTagUseCase
+import com.michaeltroger.gruenerpass.db.usecase.UpdateCertificateTagsUseCase
 import com.michaeltroger.gruenerpass.pro.IsProUnlockedUseCase
 import com.michaeltroger.gruenerpass.pro.PurchaseUpdateUseCase
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import com.michaeltroger.gruenerpass.settings.getFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -38,6 +46,11 @@ class CertificateDetailsViewModel @Inject constructor(
     private val isProUnlocked: IsProUnlockedUseCase,
     private val sharedPrefs: SharedPreferences,
     private val purchaseUpdateUseCase: PurchaseUpdateUseCase,
+    private val createTagUseCase: CreateTagUseCase,
+    private val deleteTagUseCase: DeleteTagUseCase,
+    private val getTagsUseCase: GetTagsUseCase,
+    private val renameTagUseCase: RenameTagUseCase,
+    private val updateCertificateTagsUseCase: UpdateCertificateTagsUseCase,
     savedStateHandle: SavedStateHandle,
 ): AndroidViewModel(app) {
 
@@ -86,14 +99,16 @@ class CertificateDetailsViewModel @Inject constructor(
                 showBarcodesHalfSize,
                 generateNewBarcode,
                 purchaseUpdateUseCase(),
+                getTagsUseCase(),
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
                 updateState(
-                    document = values[0] as? Certificate,
+                    document = values[0] as? CertificateWithTags,
                     searchForBarcode = values[1] as BarcodeSearchMode,
                     invertColors = values[2] as Boolean,
                     showBarcodesHalfSize = values[3] as Boolean,
-                    generateNewBarcode = values[4] as Boolean
+                    generateNewBarcode = values[4] as Boolean,
+                    availableTags = values[6] as List<Tag>,
                 )
             }.collect()
         }
@@ -101,11 +116,12 @@ class CertificateDetailsViewModel @Inject constructor(
 
     @Suppress("UnusedParameter")
     private suspend fun updateState(
-        document: Certificate?,
+        document: CertificateWithTags?,
         searchForBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showBarcodesHalfSize: Boolean,
         generateNewBarcode: Boolean,
+        availableTags: List<Tag>,
     ) {
         if (document == null) {
             _viewState.emit(DetailsViewState.Deleted)
@@ -113,6 +129,7 @@ class CertificateDetailsViewModel @Inject constructor(
             _viewState.emit(
                 DetailsViewState.Normal(
                     document = document,
+                    availableTags = availableTags,
                     searchBarcode = searchForBarcode,
                     invertColors = invertColors,
                     showBarcodesHalfSize = showBarcodesHalfSize,
@@ -182,5 +199,43 @@ class CertificateDetailsViewModel @Inject constructor(
                 )
             }
         }
+    }
+
+    fun onAssignTagsSelected(certificateId: String) = viewModelScope.launch {
+        if (isProUnlocked()) {
+            _viewEvent.emit(ViewEvent.ShowAssignTagsDialog(certificateId))
+        } else {
+            _viewEvent.emit(ViewEvent.ShowGetPro)
+        }
+    }
+
+    fun onManageTagsSelected() = viewModelScope.launch {
+        if (isProUnlocked()) {
+            _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+        } else {
+            _viewEvent.emit(ViewEvent.ShowGetPro)
+        }
+    }
+
+    fun onUpdateCertificateTags(certificateId: String, tagIds: List<Long>) = viewModelScope.launch {
+        updateCertificateTagsUseCase(certificateId, tagIds)
+    }
+
+    fun onCreateTag(name: String) = viewModelScope.launch {
+        createTagUseCase(name)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+    }
+
+    fun onRenameTag(id: Long, newName: String) = viewModelScope.launch {
+        renameTagUseCase(id, newName)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+    }
+
+    fun onDeleteTag(id: Long) = viewModelScope.launch {
+        deleteTagUseCase(id)
+        delay(500)
+        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
     }
 }

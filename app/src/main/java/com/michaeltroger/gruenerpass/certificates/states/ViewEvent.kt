@@ -23,4 +23,7 @@ sealed class ViewEvent {
     data object ShowMoreScreen : ViewEvent()
     data class ShowChangeDocumentOrderDialog(val originalOrder: List<Certificate>) : ViewEvent()
     data class ShowChangeDocumentNameDialog(val id: String, val originalName: String) : ViewEvent()
+    data object ShowFilterTagsDialog : ViewEvent()
+    data class ShowAssignTagsDialog(val certificateId: String) : ViewEvent()
+    data object ShowManageTagsDialog : ViewEvent()
 }

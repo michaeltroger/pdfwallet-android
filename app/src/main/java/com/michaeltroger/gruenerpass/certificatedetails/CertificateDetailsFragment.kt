@@ -23,7 +23,8 @@ import com.michaeltroger.gruenerpass.certificates.pager.item.CertificateItem
 import com.michaeltroger.gruenerpass.certificates.sharing.PdfSharing
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificateDetailsBinding
-import com.michaeltroger.gruenerpass.db.Certificate
+import com.michaeltroger.gruenerpass.db.CertificateWithTags
+import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 import com.xwray.groupie.GroupieAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -122,6 +123,8 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             ViewEvent.ShowGetPro -> findNavController().navigate(
                 deepLink = "app://billing".toUri()
             )
+            is ViewEvent.ShowAssignTagsDialog -> showAssignTagsDialog(it.certificateId)
+            ViewEvent.ShowManageTagsDialog -> showManageTagsDialog()
             else -> {
                 // do nothing
             }
@@ -138,7 +141,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
         updateMenuState(state)
         when (state) {
             is DetailsViewState.Normal -> showCertificateState(
-                certificate = state.document,
+                certificateWithTags = state.document,
                 searchBarcode = state.searchBarcode,
                 invertColors = state.invertColors,
                 showBarcodesHalfSize = state.showBarcodesHalfSize,
@@ -155,18 +158,20 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
 
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun showCertificateState(
-        certificate: Certificate,
+        certificateWithTags: CertificateWithTags,
         searchBarcode: BarcodeSearchMode,
         invertColors: Boolean,
         showBarcodesHalfSize: Boolean,
         generateNewBarcode: Boolean,
     ) {
+        val certificate = certificateWithTags.certificate
         val item = CertificateItem(
             requireContext().applicationContext,
             fileName = certificate.id,
             isDetailView = true,
             barcodeRenderer = barcodeRenderer,
             documentName = certificate.name,
+            tags = certificateWithTags.tags,
             searchBarcode = searchBarcode,
             invertColors = invertColors,
             dispatcher = thread,
@@ -178,6 +183,9 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             },
             onShareCalled = {
                 vm.onShareSelected(certificate)
+            },
+            onAssignTagsClicked = {
+                vm.onAssignTagsSelected(certificate.id)
             },
             showBarcodesInHalfSize = showBarcodesHalfSize,
             generateNewBarcode = generateNewBarcode,
@@ -202,13 +210,78 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             vm.toggleBarcodeSize()
             true
         }
+        R.id.manage_tags -> {
+            vm.onManageTagsSelected()
+            true
+        }
         else -> false
+    }
+
+    private fun showAssignTagsDialog(certificateId: String) {
+        val currentState = vm.viewState.value as? DetailsViewState.Normal ?: return
+        val availableTags = currentState.availableTags
+        val certTags = currentState.document.tags.map { it.id }.toSet()
+
+        certificateDialogs.showAssignTagsDialog(
+            context = requireContext(),
+            certificateId = certificateId,
+            availableTags = availableTags,
+            assignedTagIds = certTags,
+            onManageTagsClicked = vm::onManageTagsSelected,
+            onTagsAssigned = vm::onUpdateCertificateTags
+        )
+    }
+
+    private fun showManageTagsDialog() {
+        val currentState = vm.viewState.value as? DetailsViewState.Normal ?: return
+        val availableTags = currentState.availableTags
+
+        certificateDialogs.showManageTagsDialog(
+            context = requireContext(),
+            availableTags = availableTags,
+            onEditTagClicked = { showEditTagDialog(it) },
+            onCreateTagClicked = { showCreateTagDialog() }
+        )
+    }
+
+    private fun showCreateTagDialog() {
+        certificateDialogs.showCreateTagDialog(
+            context = requireContext(),
+            onTagCreated = vm::onCreateTag,
+            onCancel = vm::onManageTagsSelected
+        )
+    }
+
+    private fun showEditTagDialog(tag: Tag) {
+        certificateDialogs.showEditTagDialog(
+            context = requireContext(),
+            tag = tag,
+            onTagRenamed = { id, name ->
+                vm.onRenameTag(id, name)
+            },
+            onDeleteTagClicked = {
+                showDeleteTagConfirmationDialog(tag)
+            },
+            onCancel = vm::onManageTagsSelected
+        )
+    }
+
+    private fun showDeleteTagConfirmationDialog(tag: Tag) {
+        certificateDialogs.showDeleteTagConfirmationDialog(
+            context = requireContext(),
+            tag = tag,
+            onDeleteTagConfirmed = { id ->
+                vm.onDeleteTag(id)
+            },
+            onCancel = { showEditTagDialog(tag) }
+        )
     }
 
     private fun updateMenuState(state: DetailsViewState) {
         menu?.apply {
             findItem(R.id.pro)?.isVisible = state.showGetProMenuItem
             findItem(R.id.toggleBarcodeSize)?.isVisible = state.showToggleBarcodeSizeMenuItem
+            findItem(R.id.manage_tags)?.isVisible = state.showManageTagMenuItem
         }
     }
 }

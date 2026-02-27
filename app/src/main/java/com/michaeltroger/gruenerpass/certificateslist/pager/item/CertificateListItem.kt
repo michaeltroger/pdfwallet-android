@@ -1,8 +1,11 @@
 package com.michaeltroger.gruenerpass.certificateslist.pager.item
 
 import android.view.View
+import androidx.core.view.isVisible
+import com.google.android.material.chip.Chip
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.databinding.ItemCertificateListBinding
+import com.michaeltroger.gruenerpass.db.Tag
 import com.xwray.groupie.Item
 import com.xwray.groupie.viewbinding.BindableItem
 import com.xwray.groupie.viewbinding.GroupieViewHolder
@@ -12,10 +15,12 @@ class CertificateListItem(
     private val fileName: String,
     private val documentName: String,
     private val searchBarcode: Boolean,
+    private val tags: List<Tag>,
     private val onDeleteCalled: () -> Unit,
     private val onOpenDetails: () -> Unit,
     private val onChangeDocumentNameClicked: () -> Unit,
     private val onShareCalled: () -> Unit,
+    private val onAssignTagsClicked: () -> Unit,
 ) : BindableItem<ItemCertificateListBinding>() {
 
     override fun initializeViewBinding(view: View): ItemCertificateListBinding = ItemCertificateListBinding.bind(view)
@@ -31,6 +36,17 @@ class CertificateListItem(
         super.bind(viewHolder, position, payloads)
         viewHolder.binding.apply {
             name.text = documentName
+            tagsChipGroup.removeAllViews()
+            tags.forEach { tag ->
+                val chip = Chip(root.context).apply {
+                    text = tag.name
+                    isCheckable = false
+                    isClickable = false
+                }
+                tagsChipGroup.addView(chip)
+            }
+            tagsScrollView.isVisible = tags.isNotEmpty()
+
             root.setOnClickListener {
                 onOpenDetails()
             }
@@ -43,6 +59,9 @@ class CertificateListItem(
             deleteIcon.setOnClickListener {
                 onDeleteCalled()
             }
+            tagIcon.setOnClickListener {
+                onAssignTagsClicked()
+            }
         }
     }
 
@@ -54,5 +73,6 @@ class CertificateListItem(
         return (other as? CertificateListItem)?.fileName == fileName
             && other.documentName == documentName
             && other.searchBarcode == searchBarcode
+            && other.tags == tags
     }
 }

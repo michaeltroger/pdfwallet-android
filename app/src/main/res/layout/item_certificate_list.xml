@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?colorOnPrimary"
     android:id="@+id/certificate_list_item_root"
+    android:layout_marginBottom="@dimen/space_small"
     android:paddingHorizontal="@dimen/space_medium">
 
     <TextView
@@ -19,8 +20,36 @@
         android:paddingVertical="@dimen/space_medium"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/editNameIcon"
+        app:layout_constraintEnd_toStartOf="@id/tagIcon"
         tools:text="Document name with very very very long text"/>
+
+    <HorizontalScrollView
+        android:id="@+id/tagsScrollView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:paddingBottom="@dimen/space_small"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/tagsChipGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true" />
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/tagIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:src="@drawable/tag_24"
+        android:paddingStart="@dimen/space_small"
+        android:paddingEnd="@dimen/space_small"
+        android:contentDescription="@string/dialog_assign_tags_title"
+        app:layout_constraintEnd_toStartOf="@id/editNameIcon"
+        app:layout_constraintTop_toTopOf="@id/name"
+        app:layout_constraintBottom_toBottomOf="@id/name"/>
 
     <ImageView
         android:id="@+id/editNameIcon"
