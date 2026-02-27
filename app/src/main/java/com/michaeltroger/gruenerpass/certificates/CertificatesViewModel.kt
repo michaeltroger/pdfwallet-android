@@ -186,8 +186,7 @@ class CertificatesViewModel @Inject constructor(
                 val matchesNameOrTag = if (filterSearchText.isEmpty()) {
                     true
                 } else {
-                    certWithTags.certificate.name.contains(filterSearchText, ignoreCase = true) ||
-                        certWithTags.tags.any { it.name.contains(filterSearchText, ignoreCase = true) }
+                    certWithTags.certificate.name.contains(filterSearchText, ignoreCase = true)
                 }
                 val matchesTags = if (filterTagIds.isEmpty()) {
                     true
