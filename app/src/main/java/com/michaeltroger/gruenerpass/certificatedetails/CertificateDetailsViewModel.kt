@@ -202,11 +202,19 @@ class CertificateDetailsViewModel @Inject constructor(
     }
 
     fun onAssignTagsSelected(certificateId: String) = viewModelScope.launch {
-        _viewEvent.emit(ViewEvent.ShowAssignTagsDialog(certificateId))
+        if (isProUnlocked()) {
+            _viewEvent.emit(ViewEvent.ShowAssignTagsDialog(certificateId))
+        } else {
+            _viewEvent.emit(ViewEvent.ShowGetPro)
+        }
     }
 
     fun onManageTagsSelected() = viewModelScope.launch {
-        _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+        if (isProUnlocked()) {
+            _viewEvent.emit(ViewEvent.ShowManageTagsDialog)
+        } else {
+            _viewEvent.emit(ViewEvent.ShowGetPro)
+        }
     }
 
     fun onUpdateCertificateTags(certificateId: String, tagIds: List<Long>) = viewModelScope.launch {
