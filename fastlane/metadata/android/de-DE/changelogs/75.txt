@@ -1,0 +1,6 @@
+- Tags Dokumenten zuweisen (erfordert In-App-Kauf)
+- Dokumente nach Tags filtern (erfordert In-App-Kauf)
+- Neue Ansicht für Suchergebnisse
+- Kontrast des Dunkelmodus verbessert
+- Fehler behoben: „Gefiltert löschen/exportieren“ im Menü verfügbar, auch wenn keine Suchergebnisse vorhanden sind
+- UI-Layout leicht verbessert
