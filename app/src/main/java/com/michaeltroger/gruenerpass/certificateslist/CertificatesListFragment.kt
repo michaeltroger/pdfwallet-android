@@ -11,7 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.withStarted
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.michaeltroger.gruenerpass.AddFile
@@ -74,13 +73,6 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates) {
             false
         )
         binding.certificates.adapter = adapter
-
-        binding.certificates.addItemDecoration(
-            DividerItemDecoration(
-                requireContext(),
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
         binding.addButton.setOnClickListener {
             vm.onAddFileSelected()
