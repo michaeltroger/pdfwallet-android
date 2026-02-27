@@ -77,6 +77,7 @@ class CertificatesViewModel @Inject constructor(
     private val filterSearchText = MutableStateFlow("")
     private val filterTags = MutableStateFlow<Set<Long>>(emptySet())
     private val filterTagType = MutableStateFlow(TagFilterType.AND)
+    private val isFilterExpanded = MutableStateFlow(true)
 
     private val _viewEvent = MutableSharedFlow<ViewEvent>(extraBufferCapacity = 1)
     val viewEvent: SharedFlow<ViewEvent> = _viewEvent
@@ -136,6 +137,7 @@ class CertificatesViewModel @Inject constructor(
                 getTagsUseCase(),
                 filterTags,
                 filterTagType,
+                isFilterExpanded,
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
                 updateState(
@@ -150,6 +152,7 @@ class CertificatesViewModel @Inject constructor(
                     availableTags = values[9] as List<Tag>,
                     filterTagIds = values[10] as Set<Long>,
                     tagFilterType = values[11] as TagFilterType,
+                    isFilterExpanded = values[12] as Boolean,
                 )
             }.collect()
         }
@@ -174,6 +177,7 @@ class CertificatesViewModel @Inject constructor(
         availableTags: List<Tag>,
         filterTagIds: Set<Long>,
         tagFilterType: TagFilterType,
+        isFilterExpanded: Boolean,
     ) {
         if (docs.isEmpty()) {
             _viewState.emit(
@@ -227,6 +231,7 @@ class CertificatesViewModel @Inject constructor(
                     generateNewBarcode = generateNewBarcode,
                     isFiltered = filterSearchText.isNotEmpty() || filterTagIds.isNotEmpty(),
                     tagFilterType = tagFilterType,
+                    isFilterExpanded = isFilterExpanded,
                 )
             )
         }
@@ -236,6 +241,7 @@ class CertificatesViewModel @Inject constructor(
         filterSearchText.value = ""
         filterTags.value = emptySet()
         filterTagType.value = TagFilterType.AND
+        isFilterExpanded.value = true
     }
 
     private suspend fun processPendingFile(password: String? = null) {
@@ -309,7 +315,11 @@ class CertificatesViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) = viewModelScope.launch {
-        filterSearchText.value = query.trim()
+        val newQuery = query.trim()
+        if (filterSearchText.value != newQuery) {
+            filterSearchText.value = newQuery
+            isFilterExpanded.value = true
+        }
     }
 
     fun onExportFilteredSelected() = viewModelScope.launch {
@@ -398,6 +408,11 @@ class CertificatesViewModel @Inject constructor(
         } else {
             filterTags.value = currentFilter + id
         }
+        isFilterExpanded.value = true
+    }
+
+    fun onToggleFilterExpanded() {
+        isFilterExpanded.value = !isFilterExpanded.value
     }
 
     fun onToggleTagFilterType() = viewModelScope.launch {

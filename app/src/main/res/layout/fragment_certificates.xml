@@ -27,44 +27,74 @@
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"
-        android:padding="@dimen/space_small"
+        android:paddingBottom="@dimen/space_small"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/filter_info_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"/>
-
         <LinearLayout
-            android:id="@+id/filter_tag_mode_wrapper"
-            android:layout_width="wrap_content"
+            android:id="@+id/filter_header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:padding="@dimen/space_small"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?selectableItemBackground">
+
             <TextView
+                android:id="@+id/filter_info_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:id="@+id/filter_expand_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/space_small"
-                android:text="@string/tag_filter_mode_description"/>
-            <Button
-                android:id="@+id/toggle_filter_type_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:src="@drawable/ic_expand_more_24"
+                android:contentDescription="@null"
+                app:tint="@color/white" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/filter_by_tags_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/filter_controls"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/filter_by_tags"/>
+            android:orientation="vertical"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/reset_filters_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reset_filters"/>
+            <LinearLayout
+                android:id="@+id/filter_tag_mode_wrapper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingEnd="@dimen/space_small"
+                    android:textColor="@color/white"
+                    android:text="@string/tag_filter_mode_description"/>
+                <Button
+                    android:id="@+id/toggle_filter_type_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/filter_by_tags_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/filter_by_tags"/>
+
+            <Button
+                android:id="@+id/reset_filters_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reset_filters"/>
+        </LinearLayout>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

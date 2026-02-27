@@ -98,6 +98,10 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates) {
             vm.onToggleTagFilterType()
         }
 
+        binding.filterHeader.setOnClickListener {
+            vm.onToggleFilterExpanded()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.viewState.collect {
@@ -248,6 +252,8 @@ class CertificatesListFragment : Fragment(R.layout.fragment_certificates) {
             binding?.toggleFilterTypeButton?.text = getString(
                 if (normalState.tagFilterType == TagFilterType.AND) R.string.filter_and else R.string.filter_or
             )
+            binding?.filterControls?.isVisible = normalState.isFilterExpanded
+            binding?.filterExpandIcon?.rotation = if (normalState.isFilterExpanded) 180f else 0f
         }
     }
 
