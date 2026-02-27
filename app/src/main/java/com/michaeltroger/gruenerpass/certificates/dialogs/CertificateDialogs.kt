@@ -280,11 +280,11 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
         val checkedItems = availableTags.map { it.id in activeTagIds }.toBooleanArray()
 
         val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.filter_by_tags)
+            .setTitle(R.string.dialog_filter_by_tags_title)
             .setMultiChoiceItems(tagNames, checkedItems) { _, which, isChecked ->
                 onTagFilterToggled(availableTags[which].id)
             }
-            .setNeutralButton(R.string.manage_tags) { _, _ ->
+            .setNeutralButton(R.string.manage_tags_dialog_text) { _, _ ->
                 onManageTagsClicked()
             }
             .setPositiveButton(R.string.ok, null)
@@ -309,7 +309,7 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
         val selectedTagIds = assignedTagIds.toMutableSet()
 
         val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.assign_tags)
+            .setTitle(R.string.dialog_assign_tags_title)
             .setMultiChoiceItems(tagNames, checkedItems) { _, which, isChecked ->
                 if (isChecked) {
                     selectedTagIds.add(availableTags[which].id)
@@ -317,7 +317,7 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
                     selectedTagIds.remove(availableTags[which].id)
                 }
             }
-            .setNeutralButton(R.string.manage_tags) { _, _ ->
+            .setNeutralButton(R.string.manage_tags_dialog_text) { _, _ ->
                 onManageTagsClicked()
             }
             .setPositiveButton(R.string.ok) { _, _ ->
@@ -341,11 +341,11 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
         val tagNames = availableTags.map { it.name }.toTypedArray()
 
         val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.manage_tags)
+            .setTitle(R.string.manage_tags_dialog_text)
             .setItems(tagNames) { _, which ->
                 onEditTagClicked(availableTags[which])
             }
-            .setPositiveButton(R.string.add_tag) { _, _ ->
+            .setPositiveButton(R.string.add_tag_dialog_text) { _, _ ->
                 onCreateTagClicked()
             }
             .setNegativeButton(R.string.ok, null)
@@ -372,11 +372,11 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
         params.leftMargin = margin
         params.rightMargin = margin
         input.layoutParams = params
-        input.hint = context.getString(R.string.tag_name_hint)
+        input.hint = context.getString(R.string.dialog_tag_name_hint)
         container.addView(input)
 
         val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.add_tag)
+            .setTitle(R.string.add_tag_dialog_text)
             .setView(container)
             .setPositiveButton(R.string.ok) { _, _ ->
                 val name = input.text.toString()
@@ -413,11 +413,11 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
         params.leftMargin = margin
         params.rightMargin = margin
         input.layoutParams = params
-        input.hint = context.getString(R.string.tag_name_hint)
+        input.hint = context.getString(R.string.dialog_tag_name_hint)
         container.addView(input)
 
         val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.rename_tag)
+            .setTitle(R.string.rename_tag_dialog_text)
             .setView(container)
             .setPositiveButton(R.string.ok) { _, _ ->
                 val name = input.text.toString()

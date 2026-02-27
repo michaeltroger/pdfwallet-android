@@ -46,7 +46,7 @@
         android:src="@drawable/tag_24"
         android:paddingStart="@dimen/space_small"
         android:paddingEnd="@dimen/space_small"
-        android:contentDescription="@string/assign_tags"
+        android:contentDescription="@string/dialog_assign_tags_title"
         app:layout_constraintEnd_toStartOf="@id/editNameIcon"
         app:layout_constraintTop_toTopOf="@id/name"
         app:layout_constraintBottom_toBottomOf="@id/name"/>

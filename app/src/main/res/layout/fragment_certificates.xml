@@ -107,7 +107,7 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/reset_filters"/>
+                    android:text="@string/search_results_reset_filters_cta"/>
             </LinearLayout>
 
         </LinearLayout>
