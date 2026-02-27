@@ -4,6 +4,9 @@ import com.michaeltroger.gruenerpass.db.CertificateWithTags
 import com.michaeltroger.gruenerpass.db.Tag
 import com.michaeltroger.gruenerpass.settings.BarcodeSearchMode
 
+/**
+ * used for persisting setting, be careful with renaming
+ */
 enum class TagFilterType {
     AND, OR
 }

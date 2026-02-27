@@ -76,7 +76,17 @@ class CertificatesViewModel @Inject constructor(
 
     private val filterSearchText = MutableStateFlow("")
     private val filterTags = MutableStateFlow<Set<Long>>(emptySet())
-    private val filterTagType = MutableStateFlow(TagFilterType.AND)
+    private val filterTagType =
+        sharedPrefs.getFlow(
+            app.getString(R.string.preference_tag_filter_type),
+            TagFilterType.AND.name
+        ) { value: String ->
+            try {
+                TagFilterType.valueOf(value)
+            } catch (e: IllegalArgumentException) {
+                TagFilterType.AND
+            }
+        }
     private val isFilterExpanded = MutableStateFlow(true)
 
     private val _viewEvent = MutableSharedFlow<ViewEvent>(extraBufferCapacity = 1)
@@ -240,7 +250,6 @@ class CertificatesViewModel @Inject constructor(
     fun onClearFilters() {
         filterSearchText.value = ""
         filterTags.value = emptySet()
-        filterTagType.value = TagFilterType.AND
         isFilterExpanded.value = true
     }
 
@@ -416,8 +425,11 @@ class CertificatesViewModel @Inject constructor(
     }
 
     fun onToggleTagFilterType() = viewModelScope.launch {
-        val current = filterTagType.value
-        filterTagType.value = if (current == TagFilterType.AND) TagFilterType.OR else TagFilterType.AND
+        val current = filterTagType.first()
+        val next = if (current == TagFilterType.AND) TagFilterType.OR else TagFilterType.AND
+        sharedPrefs.edit {
+            putString(getApplication<Application>().getString(R.string.preference_tag_filter_type), next.name)
+        }
     }
     
     fun onUpdateCertificateTags(certificateId: String, tagIds: List<Long>) = viewModelScope.launch {
