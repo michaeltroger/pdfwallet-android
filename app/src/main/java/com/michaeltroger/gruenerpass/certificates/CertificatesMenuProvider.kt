@@ -164,7 +164,7 @@ class CertificatesMenuProvider(
                     collapseActionView()
                 }
                 if (state is ViewState.Normal) {
-                    if (state.filterSearchText.isEmpty() && state.filterTagNames.isEmpty()) {
+                    if (state.filterSearchText.isEmpty()) {
                         collapseActionView()
                     }
                 }
