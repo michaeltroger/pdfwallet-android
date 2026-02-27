@@ -229,7 +229,7 @@ class CertificatesViewModel @Inject constructor(
                     showLockMenuItem = shouldAuthenticate,
                     showScrollToFirstMenuItem = filteredDocs.size > 1,
                     showScrollToLastMenuItem = filteredDocs.size > 1,
-                    showChangeOrderMenuItem = !areDocumentsFilteredOut && filterSearchText.isEmpty() && filterTagIds.isEmpty() && docs.size > 1,
+                    showChangeOrderMenuItem = !areDocumentsFilteredOut && docs.size > 1,
                     showSearchMenuItem = docs.size > 1,
                     filterSearchText = filterSearchText,
                     filterTagNames = filterTagNames,
