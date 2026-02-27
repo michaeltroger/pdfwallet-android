@@ -210,7 +210,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
             vm.toggleBarcodeSize()
             true
         }
-        R.id.tags -> {
+        R.id.manage_tags -> {
             vm.onManageTagsSelected()
             true
         }
@@ -281,7 +281,7 @@ class CertificateDetailsFragment : Fragment(R.layout.fragment_certificate_detail
         menu?.apply {
             findItem(R.id.pro)?.isVisible = state.showGetProMenuItem
             findItem(R.id.toggleBarcodeSize)?.isVisible = state.showToggleBarcodeSizeMenuItem
-            findItem(R.id.tags)?.isVisible = state.showTagMenuItem
+            findItem(R.id.manage_tags)?.isVisible = state.showManageTagMenuItem
         }
     }
 }

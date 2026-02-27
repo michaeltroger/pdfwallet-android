@@ -36,13 +36,6 @@
         tools:ignore="AlwaysShowAction" />
 
     <item
-        android:id="@+id/tags"
-        android:title="@string/tags"
-        android:visible="false"
-        tools:visible="true"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/openSettings"
         android:title="@string/settings"
         android:visible="false"
@@ -55,6 +48,20 @@
         android:visible="false"
         tools:visible="true"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/filter_by_tags"
+        android:title="@string/menu_item_filter_by_tags"
+        android:visible="false"
+        tools:visible="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/manage_tags"
+        android:title="@string/menu_item_manage_tags"
+        android:visible="false"
+        tools:visible="true"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/deleteFiltered"

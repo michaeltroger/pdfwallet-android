@@ -110,8 +110,13 @@ class CertificatesMenuProvider(
             true
         }
 
-        R.id.tags -> {
+        R.id.filter_by_tags -> {
             vm.onFilterTagsSelected()
+            true
+        }
+
+        R.id.manage_tags -> {
+            vm.onManageTagsSelected()
             true
         }
 
@@ -164,7 +169,8 @@ class CertificatesMenuProvider(
                     }
                 }
             }
-            findItem(R.id.tags)?.isVisible = state.showTagMenuItem
+            findItem(R.id.filter_by_tags)?.isVisible = state.showFilterByTagMenuItem
+            findItem(R.id.manage_tags)?.isVisible = state.showManageTagMenuItem
             findItem(R.id.openMore)?.isVisible = state.showMoreMenuItem
             findItem(R.id.switchLayout)?.isVisible = state.showSwitchLayoutMenuItem
             findItem(R.id.toggleBarcodeSize)?.isVisible = if (isListLayout) {
