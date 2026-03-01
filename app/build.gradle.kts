@@ -7,8 +7,8 @@ android {
 
     defaultConfig {
         applicationId = "com.michaeltroger.gruenerpass"
-        versionCode = 75
-        versionName = "5.1.0"
+        versionCode = 76
+        versionName = "5.1.1"
     }
 }
 

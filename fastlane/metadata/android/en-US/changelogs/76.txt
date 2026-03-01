@@ -1,0 +1,4 @@
+- Fixed tags being lost when reordering certificates.
+- Fixed tags being lost when inserting a document at the front (if the app is configured that way).
+- Fixed the “Up” button appearing in the reorder dialog when the item is already at the front.
+- Fixed the “Down” button appearing in the reorder dialog when the item is already at the end.

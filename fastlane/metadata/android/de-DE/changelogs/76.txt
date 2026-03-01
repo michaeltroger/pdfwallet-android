@@ -1,0 +1,4 @@
+- Behebung, dass Tags beim Umordnen von Zertifikaten verloren gingen.
+- Behebung, dass Tags beim Einfügen eines Dokuments am Anfang verloren gingen (wenn die App entsprechend konfiguriert ist).
+- Behebung, dass die „Nach oben“-Schaltfläche im Umordnen-Dialog angezeigt wurde, wenn der Eintrag bereits am Anfang steht.
+- Behebung, dass die „Nach unten“-Schaltfläche im Umordnen-Dialog angezeigt wurde, wenn der Eintrag bereits am Ende steht.
