@@ -6,6 +6,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
 
+@Suppress("TooManyFunctions")
 @Dao
 interface CertificateDao {
     @Query("SELECT * FROM certificates ORDER BY displayOrder ASC")

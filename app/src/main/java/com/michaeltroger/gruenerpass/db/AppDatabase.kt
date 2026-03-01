@@ -6,6 +6,7 @@ import androidx.room.RoomDatabase
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
+@Suppress("MagicNumber")
 @Database(entities = [Certificate::class, Tag::class, CertificateTagCrossRef::class], version = 3,
     autoMigrations = [
         AutoMigration(from = 1, to = 2)
