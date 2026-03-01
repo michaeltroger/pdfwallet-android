@@ -3,7 +3,6 @@ package com.michaeltroger.gruenerpass.db.usecase
 import com.michaeltroger.gruenerpass.db.Certificate
 import com.michaeltroger.gruenerpass.db.CertificateDao
 import javax.inject.Inject
-import kotlinx.coroutines.flow.first
 
 class InsertIntoDatabaseUseCase @Inject constructor(
     private val db: CertificateDao,
@@ -11,10 +10,16 @@ class InsertIntoDatabaseUseCase @Inject constructor(
     @Suppress("SpreadOperator")
     suspend operator fun invoke(certificate: Certificate, addDocumentInFront: Boolean) {
         if (addDocumentInFront) {
-            val all = listOf(certificate) + db.getAll().first()
-            db.replaceAll(*all.toTypedArray())
+            db.shiftAllOrders(1)
+            db.insertAll(certificate.copy(displayOrder = 0))
         } else {
-            db.insertAll(certificate)
+            val maxOrder = db.getMaxOrder()
+            val newOrder = if (maxOrder == null) {
+                0
+            } else {
+                maxOrder + 1
+            }
+            db.insertAll(certificate.copy(displayOrder = newOrder))
         }
     }
 }

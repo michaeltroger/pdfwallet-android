@@ -35,6 +35,8 @@ object DatabaseModule {
         return Room.databaseBuilder(
             context.applicationContext,
             AppDatabase::class.java, "greenpass"
-        ).build()
+        )
+            .addMigrations(AppDatabase.MIGRATION_2_3)
+            .build()
     }
 }

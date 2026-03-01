@@ -17,4 +17,9 @@ data class Certificate (
      * The user defined und user facing document name
      */
     @ColumnInfo(name = "name") val name: String,
+    /**
+     * The order in which the document is displayed.
+     * Lower values are displayed first.
+     */
+    @ColumnInfo(name = "displayOrder", defaultValue = "0") val displayOrder: Int = 0,
 ) : Parcelable
