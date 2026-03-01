@@ -230,10 +230,12 @@ class CertificateDialogsImpl @Inject constructor() : CertificateDialogs {
         dialog.show()
 
         listFlow.collect { list ->
-            val items = list.map { certificate ->
+            val items = list.mapIndexed { index, certificate ->
                 DocumentOrderItem(
                     fileName = certificate.id,
                     documentName = certificate.name,
+                    isUpEnabled = index > 0,
+                    isDownEnabled = index < list.lastIndex,
                     onDownClicked = ::onDownClicked,
                     onUpClicked = ::onUpClicked
                 )

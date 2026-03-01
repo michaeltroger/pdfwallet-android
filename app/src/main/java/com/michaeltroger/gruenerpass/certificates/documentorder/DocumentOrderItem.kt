@@ -10,6 +10,8 @@ import com.xwray.groupie.viewbinding.GroupieViewHolder
 class DocumentOrderItem(
     private val fileName: String,
     private val documentName: String,
+    private val isUpEnabled: Boolean,
+    private val isDownEnabled: Boolean,
     private val onUpClicked: (String) -> Unit,
     private val onDownClicked: (String) -> Unit,
 ) : BindableItem<ItemDocumentOrderBinding>() {
@@ -28,6 +30,8 @@ class DocumentOrderItem(
 
         viewHolder.binding.apply {
             documentNameTextField.text = documentName
+            up.isEnabled = isUpEnabled
+            down.isEnabled = isDownEnabled
             up.setOnClickListener {
                 onUpClicked(fileName)
             }
@@ -43,7 +47,10 @@ class DocumentOrderItem(
     }
 
     override fun hasSameContentAs(other: Item<*>): Boolean {
-        return (other as? DocumentOrderItem)?.fileName == fileName
-            && other.documentName == documentName
+        if (other !is DocumentOrderItem) return false
+        return other.fileName == fileName
+                && other.documentName == documentName
+                && other.isUpEnabled == isUpEnabled
+                && other.isDownEnabled == isDownEnabled
     }
 }
