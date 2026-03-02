@@ -99,6 +99,7 @@ sealed class ViewState {
         val isFiltered: Boolean,
         val tagFilterType: TagFilterType,
         val isFilterExpanded: Boolean,
+        val isListLayout: Boolean,
     ) : ViewState() {
         override val showSwitchLayoutMenuItem = true
         override val showToggleBarcodeSizeMenuItem = true

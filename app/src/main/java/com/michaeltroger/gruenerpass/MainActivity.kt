@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AddFile {
     private var navController: NavController? = null
     private val appBarConfiguration = AppBarConfiguration.Builder(
         R.id.certificatesFragment,
-        R.id.certificatesListFragment,
         R.id.lockFragment,
     )
 
