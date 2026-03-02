@@ -12,7 +12,7 @@ Instruction alternative
 
 Description
 Application très simple, qui ne fait rien d’autre que stocker et afficher commodément des certificats PDF. Vous pouvez l’utiliser pour des billets de transport, factures, contrats, certificats ou tout autre fichier PDF.
-Ensuite, le code-barres (s’il existe) est affiché en plein écran, ainsi que le document PDF lui-même. Et c’est tout.
+Le fichier PDF doit être importé dans l’application. Ensuite, le code-barres (s’il existe) est affiché en plein écran, ainsi que le document PDF lui-même. Et c’est tout.
 
 Formats de codes-barres actuellement pris en charge
 - Codes matriciels (2D) : QR, Aztec, DataMatrix et PDF417
