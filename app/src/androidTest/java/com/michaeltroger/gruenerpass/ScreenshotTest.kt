@@ -26,7 +26,7 @@ class ScreenshotTest {
 
     @Before
     fun startUp() {
-        PreferenceManager.getDefaultSharedPreferences(context).edit {
+        PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
             putBoolean(context.getString(R.string.key_preference_prevent_screenshots), false)
         }
         scenario = ActivityScenario.launch(MainActivity::class.java)

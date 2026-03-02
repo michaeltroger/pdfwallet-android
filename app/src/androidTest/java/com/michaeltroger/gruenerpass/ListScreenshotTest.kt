@@ -23,7 +23,7 @@ class ListScreenshotTest {
 
     @Before
     fun setUp() {
-        PreferenceManager.getDefaultSharedPreferences(context).edit {
+        PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
             putBoolean(context.getString(R.string.key_preference_prevent_screenshots), false)
             putBoolean(context.getString(R.string.key_preference_show_list_layout), true)
         }

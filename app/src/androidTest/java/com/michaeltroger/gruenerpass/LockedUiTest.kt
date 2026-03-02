@@ -18,7 +18,7 @@ class LockedUiTest {
     @Before
     fun setUp() {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        PreferenceManager.getDefaultSharedPreferences(context).edit {
+        PreferenceManager.getDefaultSharedPreferences(context).edit(commit = true) {
             putBoolean(context.getString(R.string.key_preference_biometric), true)
         }
     }
