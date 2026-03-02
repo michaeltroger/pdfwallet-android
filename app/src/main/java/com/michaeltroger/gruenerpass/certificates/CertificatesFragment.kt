@@ -335,6 +335,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         menuProvider.onPause()
     }
 
+    @Suppress("LongParameterList", "LongMethod")
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun showCertificateState(
         documents: List<CertificateWithTags>,

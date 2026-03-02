@@ -1,6 +1,5 @@
 package com.michaeltroger.gruenerpass.navigation
 
-import android.app.Application
 import android.content.SharedPreferences
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -13,9 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
-class GetAutoRedirectDestinationUseCase @Inject constructor(
-    app: Application
-) {
+class GetAutoRedirectDestinationUseCase @Inject constructor() {
 
     @Inject
     lateinit var lockedRepo: AppLockedRepo

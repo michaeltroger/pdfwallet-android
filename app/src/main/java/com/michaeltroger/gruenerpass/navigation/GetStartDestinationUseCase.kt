@@ -1,15 +1,12 @@
 package com.michaeltroger.gruenerpass.navigation;
 
-import android.app.Application
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.lock.AppLockedRepo
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class GetStartDestinationUseCase @Inject constructor(
-    app: Application
-) {
+class GetStartDestinationUseCase @Inject constructor() {
 
     @Inject
     lateinit var lockedRepo: AppLockedRepo
