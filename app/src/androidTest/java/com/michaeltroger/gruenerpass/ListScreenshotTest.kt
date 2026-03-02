@@ -45,8 +45,6 @@ class ListScreenshotTest {
             .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
             .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
 
-        Thread.sleep(5000)
-
         DetailViewRobot()
             .verifyDocumentLoaded(docName = "demo")
             .goBack()
@@ -84,8 +82,6 @@ class ListScreenshotTest {
             .selectFirstDocument()
             .goToPdfFolder(folderName = TestFolders.TEST_GENERIC)
             .openPdf(fileName = "demo.pdf", folderName = TestFolders.TEST_GENERIC)
-
-        Thread.sleep(5000)
 
         DetailViewRobot()
             .verifyDocumentLoaded(docName = "demo")

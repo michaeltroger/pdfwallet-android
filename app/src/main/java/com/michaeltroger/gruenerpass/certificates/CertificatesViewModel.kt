@@ -286,18 +286,21 @@ class CertificatesViewModel @Inject constructor(
 
     private suspend fun insertIntoDatabase(certificate: Certificate) {
         val addDocumentsInFront = addDocumentsInFront.first()
+        val isListLayout = isListLayout.first()
         insertIntoDatabaseUseCase(certificate, addDocumentsInFront)
         val event = if (addDocumentsInFront) {
             ViewEvent.GoToCertificate(
                 position = 0,
                 id = certificate.id,
                 isNewDocument = true,
+                isListLayout = isListLayout
             )
         } else {
             ViewEvent.GoToCertificate(
                 position = getCertificatesFlowUseCase().first().size - 1,
                 id = certificate.id,
                 isNewDocument = true,
+                isListLayout = isListLayout
             )
         }
         _viewEvent.emit(event)
@@ -369,23 +372,27 @@ class CertificatesViewModel @Inject constructor(
 
     fun onScrollToFirstSelected() = viewModelScope.launch {
         val docs = (viewState.value as? ViewState.Normal)?.documents ?: return@launch
+        val isListLayout = isListLayout.first()
         _viewEvent.emit(
             ViewEvent.GoToCertificate(
                 position = 0,
                 id = docs[0].certificate.id,
                 isNewDocument = false,
+                isListLayout = isListLayout
             )
         )
     }
 
     fun onScrollToLastSelected() = viewModelScope.launch {
         val docs = (viewState.value as? ViewState.Normal)?.documents ?: return@launch
+        val isListLayout = isListLayout.first()
         val indexLast = docs.size - 1
         _viewEvent.emit(
             ViewEvent.GoToCertificate(
                 position = indexLast,
                 id = docs[indexLast].certificate.id,
                 isNewDocument = false,
+                isListLayout = isListLayout
             )
         )
     }

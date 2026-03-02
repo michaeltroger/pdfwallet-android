@@ -11,6 +11,7 @@ sealed class ViewEvent {
         val position: Int,
         val id: String,
         val isNewDocument: Boolean,
+        val isListLayout: Boolean,
     ) : ViewEvent()
     data class Share(val certificate: Certificate) : ViewEvent()
     data class ShareMultiple(val list: List<Certificate>) : ViewEvent()
