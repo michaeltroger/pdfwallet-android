@@ -76,7 +76,6 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         val binding = binding!!
 
         snapHelper = PagerSnapHelper()
-        snapHelper?.attachToRecyclerView(binding.certificates)
 
         binding.root.setPaddingRelative(
             resources.getDimensionPixelSize(R.dimen.space_small),
@@ -92,11 +91,6 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
             touchSlopField.set(binding.certificates, touchSlop * TOUCH_SLOP_FACTOR)
         } catch (ignore: Exception) {}
 
-        binding.certificates.layoutManager = LinearLayoutManager(
-                requireContext(),
-                RecyclerView.HORIZONTAL,
-                false
-        )
         binding.certificates.adapter = adapter
 
         binding.addButton.setOnClickListener {
