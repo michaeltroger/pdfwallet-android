@@ -65,6 +65,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
     lateinit var barcodeRenderer: BarcodeRenderer
 
     private lateinit var menuProvider: CertificatesMenuProvider
+    private var originalTouchSlop: Int? = null
     private var snapHelper: PagerSnapHelper? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -76,14 +77,15 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         binding = FragmentCertificatesBinding.bind(view)
         val binding = binding!!
 
-        snapHelper = PagerSnapHelper()
+        val horizontalLayoutManager = LinearLayoutManager(
+            requireContext(),
+            RecyclerView.HORIZONTAL,
+            false
+        )
+        binding.certificates.layoutManager = horizontalLayoutManager
 
-        try { // reduce scroll sensitivity for horizontal scrolling to improve vertical scrolling
-            val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
-            touchSlopField.isAccessible = true
-            val touchSlop = touchSlopField.get(binding.certificates) as Int
-            touchSlopField.set(binding.certificates, touchSlop * TOUCH_SLOP_FACTOR)
-        } catch (ignore: Exception) {}
+        snapHelper = PagerSnapHelper()
+        snapHelper?.attachToRecyclerView(binding.certificates)
 
         binding.certificates.adapter = adapter
 
@@ -225,40 +227,37 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 adapter.clear()
             }
             is ViewState.Normal -> {
-                val isListLayout = state.isListLayout
-                val currentLayoutManager = binding?.certificates?.layoutManager as? LinearLayoutManager
-                val isCurrentlyHorizontal = currentLayoutManager?.orientation == RecyclerView.HORIZONTAL
+                val layoutManager = binding?.certificates?.layoutManager as? LinearLayoutManager
                 val layoutParams = binding?.certificates?.layoutParams as? ViewGroup.MarginLayoutParams
+                val isListLayout = state.isListLayout
 
-                if (isListLayout && (currentLayoutManager == null || isCurrentlyHorizontal)) {
-                    binding?.certificates?.layoutManager = LinearLayoutManager(
-                        requireContext(),
-                        RecyclerView.VERTICAL,
-                        false
-                    )
+                if (isListLayout) {
+                    layoutManager?.orientation = RecyclerView.VERTICAL
                     snapHelper?.attachToRecyclerView(null)
-
                     layoutParams?.setMargins(
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         0,
                     )
-                } else if (!isListLayout && (currentLayoutManager == null || !isCurrentlyHorizontal)) {
-                    binding?.certificates?.layoutManager = LinearLayoutManager(
-                        requireContext(),
-                        RecyclerView.HORIZONTAL,
-                        false
-                    )
+                    binding?.certificates?.let {
+                        restoreOriginalTouchSlop(it)
+                    }
+                } else {
+                    layoutManager?.orientation = RecyclerView.HORIZONTAL
                     snapHelper?.attachToRecyclerView(binding?.certificates)
-
                     layoutParams?.setMargins(
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         0,
                         0,
                     )
+                    binding?.certificates?.let {
+                        setHorizontalTouchSlop(it)
+                    }
                 }
+
+                binding?.certificates?.layoutParams = layoutParams
 
                 showCertificateState(
                     documents = state.documents,
@@ -270,6 +269,28 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 )
             }
         }
+    }
+
+    private fun setHorizontalTouchSlop(recyclerView: RecyclerView) {
+        try {
+            val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
+            touchSlopField.isAccessible = true
+            if (originalTouchSlop == null) {
+                originalTouchSlop = touchSlopField.get(recyclerView) as Int
+            }
+            val horizontalTouchSlop = originalTouchSlop!! * TOUCH_SLOP_FACTOR
+            touchSlopField.set(recyclerView, horizontalTouchSlop)
+        } catch (ignore: Exception) {}
+    }
+
+    private fun restoreOriginalTouchSlop(recyclerView: RecyclerView) {
+        try {
+            val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
+            touchSlopField.isAccessible = true
+            originalTouchSlop?.let {
+                touchSlopField.set(recyclerView, it)
+            }
+        } catch (ignore: Exception) {}
     }
 
     @Suppress("MagicNumber")
