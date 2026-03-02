@@ -2,6 +2,7 @@ package com.michaeltroger.gruenerpass.certificates
 
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -20,11 +21,11 @@ import com.michaeltroger.gruenerpass.barcode.BarcodeRenderer
 import com.michaeltroger.gruenerpass.certificates.dialogs.CertificateDialogs
 import com.michaeltroger.gruenerpass.certificates.dialogs.CertificateErrors
 import com.michaeltroger.gruenerpass.certificates.pager.item.CertificateItem
-import com.michaeltroger.gruenerpass.certificateslist.pager.item.CertificateListItem
 import com.michaeltroger.gruenerpass.certificates.sharing.PdfSharing
 import com.michaeltroger.gruenerpass.certificates.states.TagFilterType
 import com.michaeltroger.gruenerpass.certificates.states.ViewEvent
 import com.michaeltroger.gruenerpass.certificates.states.ViewState
+import com.michaeltroger.gruenerpass.certificateslist.pager.item.CertificateListItem
 import com.michaeltroger.gruenerpass.databinding.FragmentCertificatesBinding
 import com.michaeltroger.gruenerpass.db.CertificateWithTags
 import com.michaeltroger.gruenerpass.db.Tag
@@ -76,13 +77,6 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
         val binding = binding!!
 
         snapHelper = PagerSnapHelper()
-
-        binding.root.setPaddingRelative(
-            resources.getDimensionPixelSize(R.dimen.space_small),
-            resources.getDimensionPixelSize(R.dimen.space_small),
-            0,
-            0,
-        )
 
         try { // reduce scroll sensitivity for horizontal scrolling to improve vertical scrolling
             val touchSlopField = RecyclerView::class.java.getDeclaredField("mTouchSlop")
@@ -234,6 +228,7 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                 val isListLayout = state.isListLayout
                 val currentLayoutManager = binding?.certificates?.layoutManager as? LinearLayoutManager
                 val isCurrentlyHorizontal = currentLayoutManager?.orientation == RecyclerView.HORIZONTAL
+                val layoutParams = binding?.certificates?.layoutParams as? ViewGroup.MarginLayoutParams
 
                 if (isListLayout && (currentLayoutManager == null || isCurrentlyHorizontal)) {
                     binding?.certificates?.layoutManager = LinearLayoutManager(
@@ -242,7 +237,8 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                         false
                     )
                     snapHelper?.attachToRecyclerView(null)
-                    binding?.root?.setPaddingRelative(
+
+                    layoutParams?.setMargins(
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         resources.getDimensionPixelSize(R.dimen.space_small),
@@ -255,7 +251,8 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
                         false
                     )
                     snapHelper?.attachToRecyclerView(binding?.certificates)
-                    binding?.root?.setPaddingRelative(
+
+                    layoutParams?.setMargins(
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         resources.getDimensionPixelSize(R.dimen.space_small),
                         0,
