@@ -1,6 +1,5 @@
 package com.michaeltroger.gruenerpass.navigation
 
-import android.app.Application
 import android.content.SharedPreferences
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -9,14 +8,11 @@ import com.michaeltroger.gruenerpass.NavGraphDirections
 import com.michaeltroger.gruenerpass.R
 import com.michaeltroger.gruenerpass.lock.AppLockedRepo
 import com.michaeltroger.gruenerpass.pdfimporter.PdfImporter
-import com.michaeltroger.gruenerpass.settings.getBooleanFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
-class GetAutoRedirectDestinationUseCase @Inject constructor(
-    app: Application
-) {
+class GetAutoRedirectDestinationUseCase @Inject constructor() {
 
     @Inject
     lateinit var lockedRepo: AppLockedRepo
@@ -27,17 +23,9 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
     @Inject
     lateinit var sharedPrefs: SharedPreferences
 
-    private val showListLayout by lazy {
-        sharedPrefs.getBooleanFlow(
-            app.getString(R.string.key_preference_show_list_layout),
-            false
-        )
-    }
-
     operator fun invoke(navController: NavController): Flow<Result> {
         return combine(
             lockedRepo.isAppLocked(),
-            showListLayout,
             pdfImporter.hasPendingFile(),
             navController.currentBackStackEntryFlow,
             ::autoRedirect
@@ -47,7 +35,6 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
     @Suppress("ReturnCount", "CyclomaticComplexMethod")
     private fun autoRedirect(
         isAppLocked: Boolean,
-        showListLayout: Boolean,
         hasPendingFile: Boolean,
         navBackStackEntry: NavBackStackEntry
     ): Result {
@@ -63,11 +50,7 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
             }
             // unlocked:
             currentDestinationId == R.id.lockFragment -> {
-                if (showListLayout) {
-                    NavGraphDirections.actionGlobalCertificatesListFragmentClearedBackstack()
-                } else {
-                    NavGraphDirections.actionGlobalCertificatesFragmentClearedBackstack()
-                }
+                NavGraphDirections.actionGlobalCertificatesFragmentClearedBackstack()
             }
             currentDestinationId in listOf(
                 R.id.moreFragment,
@@ -87,12 +70,6 @@ class GetAutoRedirectDestinationUseCase @Inject constructor(
                 R.id.billingFragment,
             ) -> {
                 null
-            }
-            currentDestinationId == R.id.certificatesFragment && showListLayout-> {
-                NavGraphDirections.actionGlobalCertificatesListFragmentClearedBackstack()
-            }
-            currentDestinationId == R.id.certificatesListFragment && !showListLayout -> {
-                NavGraphDirections.actionGlobalCertificatesFragmentClearedBackstack()
             }
             else -> {
                 null // do nothing

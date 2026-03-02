@@ -132,6 +132,12 @@ class CertificatesViewModel @Inject constructor(
             false
         )
 
+    private val isListLayout =
+        sharedPrefs.getBooleanFlow(
+            app.getString(R.string.key_preference_show_list_layout),
+            false
+        )
+
     init {
         viewModelScope.launch {
             combine(
@@ -148,6 +154,7 @@ class CertificatesViewModel @Inject constructor(
                 filterTags,
                 filterTagType,
                 isFilterExpanded,
+                isListLayout,
             ) { values ->
                 @Suppress("UNCHECKED_CAST")
                 updateState(
@@ -163,6 +170,7 @@ class CertificatesViewModel @Inject constructor(
                     filterTagIds = values[10] as Set<Long>,
                     tagFilterType = values[11] as TagFilterType,
                     isFilterExpanded = values[12] as Boolean,
+                    isListLayout = values[13] as Boolean,
                 )
             }.collect()
         }
@@ -188,6 +196,7 @@ class CertificatesViewModel @Inject constructor(
         filterTagIds: Set<Long>,
         tagFilterType: TagFilterType,
         isFilterExpanded: Boolean,
+        isListLayout: Boolean,
     ) {
         if (docs.isEmpty()) {
             _viewState.emit(
@@ -242,6 +251,7 @@ class CertificatesViewModel @Inject constructor(
                     isFiltered = filterSearchText.isNotEmpty() || filterTagIds.isNotEmpty(),
                     tagFilterType = tagFilterType,
                     isFilterExpanded = isFilterExpanded,
+                    isListLayout = isListLayout,
                 )
             )
         }
