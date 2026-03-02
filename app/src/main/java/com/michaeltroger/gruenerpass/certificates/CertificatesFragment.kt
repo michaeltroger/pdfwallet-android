@@ -407,9 +407,8 @@ class CertificatesFragment : Fragment(R.layout.fragment_certificates) {
     }
 
     private fun goToCertificate(event: ViewEvent.GoToCertificate) {
-        val isListLayout = (vm.viewState.value as? ViewState.Normal)?.isListLayout == true
         lifecycleScope.launch {
-            if (isListLayout) {
+            if (event.isListLayout) {
                 withStarted {
                     binding?.certificates?.scrollToPosition(event.position)
                     findNavController().navigate(
