@@ -12,7 +12,7 @@ Instrucciones alternativas
 
 Descripción
 Aplicación muy sencilla que no hace más que almacenar y mostrar certificados PDF de manera práctica. Puedes usarla para billetes de transporte público, facturas, contratos, certificados o cualquier otro archivo PDF.
-Después, el código de barras se mostrará a pantalla completa, junto con el propio documento PDF. Eso es todo.
+El archivo PDF debe importarse a la aplicación. Después, el código de barras se mostrará a pantalla completa, junto con el propio documento PDF. Eso es todo.
 
 Formatos de código de barras compatibles actualmente:
 - Códigos matriciales (2D): QR, Aztec, DataMatrix y PDF417
