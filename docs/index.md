@@ -13,7 +13,7 @@ Simple PDF Wallet for your most important PDFs
 An app that is fully open source. This app is a simple to use PDF Wallet. It takes over the task of storing and displaying your most important PDF certificates. It includes a convenient fullscreen barcode rendering, if a barcode is present in the PDF.
 
 ## Download
-<a href='https://play.google.com/store/apps/details?id=com.michaeltroger.gruenerpass&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height='80' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
+<a href='https://play.google.com/store/apps/details?id=com.michaeltroger.gruenerpass&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height='100' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
 ## Features
 - **Open Source & Offline**: Values your privacy. No ads, no tracking.
