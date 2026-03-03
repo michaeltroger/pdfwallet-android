@@ -5,7 +5,7 @@ description: Einfaches PDF Wallet für Ihre wichtigsten PDFs
 lang: de-DE
 ---
 
-## [EN]({{ "/" | relative_url }}) | [DE]({{ "/de" | relative_url }})
+## [EN]({{ "/" | relative_url }}) | [DE]({{ "/de" | relative_url }}) | [ES]({{ "/es" | relative_url }}) | [FR]({{ "/fr" | relative_url }}) | [IT]({{ "/it" | relative_url }}) | [PT]({{ "/pt" | relative_url }})
 
 # PDF Wallet
 Einfaches PDF Wallet für Ihre wichtigsten PDFs
