@@ -33,10 +33,10 @@ Votre gestionnaire de certificats PDF pour Android
 
 ## Captures d'écran
 <div align="center">
-  <img src="{{ "/assets/images/1_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 1">
-  <img src="{{ "/assets/images/2_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 2">
-  <img src="{{ "/assets/images/3_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 3">
-  <img src="{{ "/assets/images/4_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 4">
+  <img src="{{ "/assets/images/1_fr-FR.jpeg" | relative_url }}" width="200" alt="Screenshot 1">
+  <img src="{{ "/assets/images/2_fr-FR.jpeg" | relative_url }}" width="200" alt="Screenshot 2">
+  <img src="{{ "/assets/images/3_fr-FR.jpeg" | relative_url }}" width="200" alt="Screenshot 3">
+  <img src="{{ "/assets/images/4_fr-FR.jpeg" | relative_url }}" width="200" alt="Screenshot 4">
 </div>
 
 ## Confidentialité

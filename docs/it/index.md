@@ -33,10 +33,10 @@ Il tuo gestore di certificati PDF per Android
 
 ## Screenshot
 <div align="center">
-  <img src="{{ "/assets/images/1_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 1">
-  <img src="{{ "/assets/images/2_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 2">
-  <img src="{{ "/assets/images/3_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 3">
-  <img src="{{ "/assets/images/4_en-US.jpeg" | relative_url }}" width="200" alt="Screenshot 4">
+  <img src="{{ "/assets/images/1_it-IT.jpeg" | relative_url }}" width="200" alt="Screenshot 1">
+  <img src="{{ "/assets/images/2_it-IT.jpeg" | relative_url }}" width="200" alt="Screenshot 2">
+  <img src="{{ "/assets/images/3_it-IT.jpeg" | relative_url }}" width="200" alt="Screenshot 3">
+  <img src="{{ "/assets/images/4_it-IT.jpeg" | relative_url }}" width="200" alt="Screenshot 4">
 </div>
 
 ## Privacy
