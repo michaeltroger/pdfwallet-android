@@ -1,18 +1,18 @@
 ---
 layout: default
 title: PDF Wallet
-description: Portafoglio PDF semplice per i tuoi PDF più importanti
+description: Portafoglio PDF semplice per i tuoi PDF più importanti su Android
 lang: it-IT
 ---
 
 ## [EN]({{ "/" | relative_url }}) | [DE]({{ "/de" | relative_url }}) | [ES]({{ "/es" | relative_url }}) | [FR]({{ "/fr" | relative_url }}) | [IT]({{ "/it" | relative_url }}) | [PT]({{ "/pt" | relative_url }})
 
-# PDF Wallet
-Portafoglio PDF semplice per i tuoi PDF più importanti
+# PDF Wallet – App Android Open Source
+Il tuo gestore di certificati PDF per Android
 
-Un’app completamente open source. Questa app è un semplice Portafoglio PDF. Pensato per memorizzare e visualizzare i tuoi certificati PDF più importanti. Include una comoda visualizzazione a schermo intero dei codici a barre, se presenti nel PDF.
+**PDF Wallet** è un'app Android gratuita e open source progettata per archiviare, organizzare e visualizzare i tuoi PDF più importanti. Se un PDF contiene un codice a barre, può mostrarlo a schermo intero per una scansione rapida.
 
-## Scarica
+## Scarica per Android
 <a href='https://play.google.com/store/apps/details?id=com.michaeltroger.gruenerpass&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Disponibile su Google Play' height='80' src='https://play.google.com/intl/en_us/badges/static/images/badges/it_badge_web_generic.png'/></a>
 
 ## Funzionalità
