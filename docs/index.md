@@ -10,7 +10,7 @@ lang: en-US
 # PDF Wallet – Open Source Android App
 Your Android PDF certificate manager
 
-**PDF Wallet** is a free, open-source Android app designed to store, organize, and display your most important PDFs. If a PDF contains a barcode, it can show it in fullscreen for quick scanning.
+**PDF Wallet** is an open-source Android app for storing, organizing, and displaying your most important PDFs. Most core features—like viewing PDFs, fullscreen barcode display, and basic sorting—are free. An optional in-app purchase unlocks all additional functionality.
 
 ## Download for Android
 <a href='https://play.google.com/store/apps/details?id=com.michaeltroger.gruenerpass&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' height='100' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
@@ -28,6 +28,8 @@ Your Android PDF certificate manager
   - Share PDFs from/to other apps
   - Dark Mode support
   - Password protected PDFs support
+- **Paid Feature**:
+  - Unlock all additional functionality with an in-app purchase
 
 ## Screenshots
 <div align="center">

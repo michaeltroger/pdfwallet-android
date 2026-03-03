@@ -10,7 +10,7 @@ lang: es-ES
 # PDF Wallet – App Android de Código Abierto
 Tu gestor de certificados PDF para Android
 
-**PDF Wallet** es una aplicación de Android gratuita y de código abierto diseñada para almacenar, organizar y mostrar sus archivos PDF más importantes. Si un PDF contiene un código de barras, puede mostrarlo en pantalla completa para un escaneo rápido.
+**PDF Wallet** es una aplicación de Android de código abierto para almacenar, organizar y mostrar tus PDFs más importantes. La mayoría de las funciones principales (como ver PDFs, mostrar códigos de barras a pantalla completa y ordenar básicamente) son gratuitas. Una compra opcional dentro de la aplicación desbloquea todas las funciones adicionales.
 
 ## Descargar para Android
 <a href='https://play.google.com/store/apps/details?id=com.michaeltroger.gruenerpass&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Disponible en Google Play' height='80' src='https://play.google.com/intl/en_us/badges/static/images/badges/es_badge_web_generic.png'/></a>
@@ -28,6 +28,8 @@ Tu gestor de certificados PDF para Android
   - Compartir PDFs desde/hacia otras apps
   - Soporte de Modo Oscuro
   - Soporte para PDFs protegidos con contraseña
+- **Función de pago**:
+  - Desbloquea todas las funciones adicionales con una compra dentro de la aplicación
 
 ## Capturas de pantalla
 <div align="center">
