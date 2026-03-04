@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screenshot_1">가장 중요한 PDF 인증서를 저장하고 표시하세요.</string>
+    <string name="screenshot_2">바코드가 있는 경우 추출되어 위에 확대되어 표시됩니다.</string>
+    <string name="screenshot_3">대체 레이아웃을 선택하세요.</string>
+    <string name="screenshot_4">작동 방식은 다음과 같습니다: PDF 가져오기. 완료.</string>
+</resources>
