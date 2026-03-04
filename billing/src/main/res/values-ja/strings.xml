@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_purchases_order_id">注文ID:</string>
+    <string name="billing_purchases_date">注文日:</string>
+    <string name="billing_purchases_processing">購入を確認しています… これには時間がかかる場合があります。</string>
+    <string name="billing_product_buy">購入</string>
+    <string name="billing_purchases_thanks">ありがとうございます！ ♥️</string>
+    <string name="billing_benefits_description">PDF Wallet Proを入手して、次の機能をロック解除します:</string>
+    <string name="billing_benefit_1">さまざまな画面で「Proを入手」バナーを削除</string>
+    <string name="billing_benefit_2">ダークモードでドキュメントの色を反転するオプション</string>
+    <string name="billing_benefit_3">システム設定を上書きしてダークまたはライトテーマを強制するオプション</string>
+    <string name="billing_benefit_4">バーコードを半分のサイズで表示するオプション</string>
+    <string name="billing_benefit_5">ドキュメントにタグを割り当て</string>
+    <string name="billing_benefit_6">タグでドキュメントをフィルタリング</string>
+    <string name="billing_hint_one_time_purchase">1回限りの購入。サブスクリプションではありません。</string>
+</resources>
