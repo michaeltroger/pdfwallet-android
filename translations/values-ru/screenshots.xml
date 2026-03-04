@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screenshot_1">Храните и просматривайте ваши самые важные PDF-сертификаты.</string>
+    <string name="screenshot_2">Если есть штрих-код, он извлекается и отображается сверху в увеличенном виде.</string>
+    <string name="screenshot_3">Выберите альтернативный макет.</string>
+    <string name="screenshot_4">Вот как это работает: импортируйте PDF. Готово.</string>
+</resources>
