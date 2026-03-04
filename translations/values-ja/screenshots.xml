@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="screenshot_1">最も重要なPDF証明書を保存して表示します。</string>
+    <string name="screenshot_2">バーコードがある場合、抽出されて上部に拡大表示されます。</string>
+    <string name="screenshot_3">別のレイアウトを選択してください。</string>
+    <string name="screenshot_4">使い方は簡単：PDFをインポートするだけ。完了。</string>
+</resources>
