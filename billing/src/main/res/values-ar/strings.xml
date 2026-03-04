@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_purchases_order_id">رقم الطلب:</string>
+    <string name="billing_purchases_date">تاريخ الطلب:</string>
+    <string name="billing_purchases_processing">جارٍ التحقق من الشراء… قد يستغرق ذلك بعض الوقت.</string>
+    <string name="billing_product_buy">شراء</string>
+    <string name="billing_purchases_thanks">شكرًا جزيلًا! ♥️</string>
+    <string name="billing_benefits_description">احصل على PDF Wallet Pro لفتح الميزات التالية:</string>
+    <string name="billing_benefit_1">إزالة لافتة \"احصل على Pro\" في شاشات مختلفة</string>
+    <string name="billing_benefit_2">خيار لعكس ألوان المستند في الوضع الداكن</string>
+    <string name="billing_benefit_3">خيار لفرض السمة الداكنة أو الفاتحة عن طريق تجاوز إعدادات النظام</string>
+    <string name="billing_benefit_4">خيار لعرض الرموز الشريطية بنصف الحجم</string>
+    <string name="billing_benefit_5">تعيين العلامات للمستندات</string>
+    <string name="billing_benefit_6">تصفية المستندات حسب العلامات</string>
+    <string name="billing_hint_one_time_purchase">شراء لمرة واحدة. لا اشتراك.</string>
+</resources>
