@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.hreflang %}
 
+  {% assign base = page.url
+      | remove: '/de'
+      | remove: '/es'
+      | remove: '/fr'
+      | remove: '/it'
+      | remove: '/pt' %}
+
+      <link rel="alternate" hreflang="en" href="{{ base | absolute_url }}" />
+      <link rel="alternate" hreflang="de" href="{{ base | append: '/de' | absolute_url }}" />
+      <link rel="alternate" hreflang="es" href="{{ base | append: '/es' | absolute_url }}" />
+      <link rel="alternate" hreflang="fr" href="{{ base | append: '/fr' | absolute_url }}" />
+      <link rel="alternate" hreflang="it" href="{{ base | append: '/it' | absolute_url }}" />
+      <link rel="alternate" hreflang="pt" href="{{ base | append: '/pt' | absolute_url }}" />
+
+      <link rel="alternate" hreflang="x-default" href="{{ base | absolute_url }}" />
+{% endif %}
 {% seo %}
     <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}

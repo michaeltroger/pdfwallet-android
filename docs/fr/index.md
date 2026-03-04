@@ -3,6 +3,7 @@ layout: default
 title: PDF Wallet
 description: Portefeuille PDF simple pour vos fichiers PDF les plus importants sur Android
 lang: fr-FR
+hreflang: true
 ---
 
 ## [EN]({{ "/" | relative_url }}) | [DE]({{ "/de" | relative_url }}) | [ES]({{ "/es" | relative_url }}) | [FR]({{ "/fr" | relative_url }}) | [IT]({{ "/it" | relative_url }}) | [PT]({{ "/pt" | relative_url }})
