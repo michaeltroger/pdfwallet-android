@@ -1,0 +1,15 @@
+<resources>
+    <string name="billing_purchases_order_id">주문 ID:</string>
+    <string name="billing_purchases_date">주문 날짜:</string>
+    <string name="billing_purchases_processing">구매 확인 중… 잠시 시간이 걸릴 수 있습니다.</string>
+    <string name="billing_product_buy">구매</string>
+    <string name="billing_purchases_thanks">정말 감사합니다! ♥️</string>
+    <string name="billing_benefits_description">PDF Wallet Pro를 구매하여 다음 기능을 잠금 해제하세요:</string>
+    <string name="billing_benefit_1">다양한 화면에서 \"Pro 받기\" 배너 제거</string>
+    <string name="billing_benefit_2">다크 모드에서 문서 색상 반전 옵션</string>
+    <string name="billing_benefit_3">시스템 설정을 무시하고 다크 또는 라이트 테마를 강제하는 옵션</string>
+    <string name="billing_benefit_4">바코드를 절반 크기로 표시하는 옵션</string>
+    <string name="billing_benefit_5">문서에 태그 할당</string>
+    <string name="billing_benefit_6">태그로 문서 필터링</string>
+    <string name="billing_hint_one_time_purchase">일회성 구매. 구독 아님.</string>
+</resources>
