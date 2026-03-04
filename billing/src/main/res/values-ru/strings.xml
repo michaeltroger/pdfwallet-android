@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="billing_purchases_order_id">Номер заказа:</string>
+    <string name="billing_purchases_date">Дата заказа:</string>
+    <string name="billing_purchases_processing">Проверка покупки… Это может занять некоторое время.</string>
+    <string name="billing_product_buy">Купить</string>
+    <string name="billing_purchases_thanks">Огромное спасибо! ♥️</string>
+    <string name="billing_benefits_description">Получите PDF Wallet Pro, чтобы разблокировать следующие функции:</string>
+    <string name="billing_benefit_1">Убирает баннер \"Купить Pro\" на различных экранах</string>
+    <string name="billing_benefit_2">Возможность инвертировать цвета документа в темном режиме</string>
+    <string name="billing_benefit_3">Возможность принудительно установить темную или светлую тему, игнорируя системные настройки</string>
+    <string name="billing_benefit_4">Возможность показывать штрихкоды в половину размера</string>
+    <string name="billing_benefit_5">Назначать теги документам</string>
+    <string name="billing_benefit_6">Фильтровать документы по тегам</string>
+    <string name="billing_hint_one_time_purchase">Разовая покупка. Не подписка.</string>
+</resources>
