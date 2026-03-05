@@ -76,9 +76,8 @@
         <intent android:action="android.intent.action.SENDTO"
             android:data="@string/contact_uri"/>
     </Preference>
-    <Preference
-        app:iconSpaceReserved="false"
-        android:key="@string/key_preference_version">
-    </Preference>
+    <com.michaeltroger.gruenerpass.more.FooterPreference
+        android:layout="@layout/preference_layout_footer_compose"
+        android:selectable="false"/>
 
 </PreferenceScreen>

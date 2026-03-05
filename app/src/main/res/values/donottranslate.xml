@@ -13,7 +13,6 @@
     <string name="key_preference_new_barcode_generation">newBarcodeGeneration</string>
     <string name="key_preference_show_list_layout">showListLayout</string>
     <string name="key_preference_show_on_locked_screen">showOnLockedScreen</string>
-    <string name="key_preference_version">version</string>
     <string name="licenses_uri">https://pdfwallet.troger.app/licenses/</string>
     <string name="pdf_file_provider_authority">com.michaeltroger.gruenerpass.pdffileprovider</string>
     <string name="changelog_uri">https://github.com/michaeltroger/pdfwallet-android/releases</string>

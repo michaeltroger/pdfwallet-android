@@ -23,6 +23,9 @@ internal val VersionCatalog.libDesugarJdkLibs: Provider<MinimalExternalModuleDep
 internal val VersionCatalog.libKotlinBom: Provider<MinimalExternalModuleDependency>
     get() = findLibraryOrThrow("org-jetbrains-kotlin-bom")
 
+internal val VersionCatalog.libComposeBom: Provider<MinimalExternalModuleDependency>
+    get() = findLibraryOrThrow("androidx-compose-bom")
+
 internal val VersionCatalog.libRoomCompiler: Provider<MinimalExternalModuleDependency>
     get() = findLibraryOrThrow("androidx-room-compiler")
 

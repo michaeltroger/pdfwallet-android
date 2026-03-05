@@ -119,4 +119,6 @@ dependencies {
 
     ksp(libs.libRoomCompiler)
     ksp(libs.libHiltCompiler)
+
+    implementation(platform(libs.libComposeBom))
 }

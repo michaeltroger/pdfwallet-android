@@ -102,4 +102,8 @@
         android:summary="@string/preference_invert_pdf_colors_description"
         android:icon="@drawable/invert_colors_24px"
         android:defaultValue="false"/>
+
+    <com.michaeltroger.gruenerpass.more.FooterPreference
+        android:layout="@layout/preference_layout_footer_compose"
+        android:selectable="false"/>
 </PreferenceScreen>

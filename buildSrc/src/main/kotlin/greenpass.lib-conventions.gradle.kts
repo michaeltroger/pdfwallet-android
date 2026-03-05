@@ -36,4 +36,6 @@ dependencies {
     coreLibraryDesugaring(libs.libDesugarJdkLibs)
     implementation(libs.libHiltAndroid)
     ksp(libs.libHiltCompiler)
+
+    implementation(platform(libs.libComposeBom))
 }
