@@ -17,6 +17,7 @@ import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Clock
 
+@Suppress("FunctionNaming")
 @Composable
 fun FooterComposable() {
     val year = remember {
@@ -46,6 +47,7 @@ fun FooterComposable() {
     }
 }
 
+@Suppress("FunctionNaming")
 @Preview
 @Composable
 private fun Preview() {
