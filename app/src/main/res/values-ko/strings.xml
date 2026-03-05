@@ -98,4 +98,5 @@
     <string name="filter_tag_and_mode">선택한 모든 태그 (AND)</string>
     <string name="filter_tag_or_mode">선택한 태그 중 하나라도 (OR)</string>
     <string name="tag_filter_mode_description">다음 조건과 일치하는 결과 표시:</string>
+    <string name="more_screen_footer_developed_in_eu">EU에서 개발됨 🇪🇺</string>
 </resources>

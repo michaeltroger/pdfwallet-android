@@ -98,4 +98,5 @@
     <string name="filter_tag_and_mode">選択したすべてのタグ (AND)</string>
     <string name="filter_tag_or_mode">選択したタグのいずれか (OR)</string>
     <string name="tag_filter_mode_description">以下に一致する結果を表示:</string>
+    <string name="more_screen_footer_developed_in_eu">EUで開発 🇪🇺</string>
 </resources>

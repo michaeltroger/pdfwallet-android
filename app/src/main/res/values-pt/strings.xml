@@ -83,4 +83,5 @@
     <string name="menu_toggle_barcode_size">Tamanho do código de barras</string>
     <string name="preference_barcode_generation">Criar novo código de barras</string>
     <string name="preference_barcode_generation_description">Quando desativado (recomendado), o app recorta o código de barras original, o que é melhor para a verificação de bilhetes. Quando ativado, o app cria um novo código de barras nítido.</string>
+    <string name="more_screen_footer_developed_in_eu">Desenvolvido na UE 🇪🇺</string>
 </resources>
