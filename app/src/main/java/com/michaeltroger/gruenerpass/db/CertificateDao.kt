@@ -2,6 +2,7 @@ package com.michaeltroger.gruenerpass.db
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +24,7 @@ interface CertificateDao {
     @Query("SELECT * FROM certificates WHERE id = :id")
     fun getWithTags(id: String): Flow<CertificateWithTags?>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(vararg certificates: Certificate)
 
     @Query("UPDATE certificates SET name = :name WHERE id = :id")
