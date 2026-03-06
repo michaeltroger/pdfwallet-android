@@ -1,0 +1,2 @@
+- Seltenen App-Absturz beim PDF-Import behoben
+- Neue Fußzeile zu den Bildschirmen „Mehr“ und „Einstellungen“ hinzugefügt

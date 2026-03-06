@@ -1,0 +1,2 @@
+- Fix rare app crash during PDF import
+- Add new footer to More and Settings screens
