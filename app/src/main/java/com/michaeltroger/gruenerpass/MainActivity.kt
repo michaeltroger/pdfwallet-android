@@ -126,6 +126,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), AddFile {
             ViewEvent.ShowParsingFileError -> {
                 certificateErrors.showFileErrorSnackbar(window.decorView.rootView)
             }
+
+            ViewEvent.GoToCertificates -> {
+                navController?.navigate(NavGraphDirections.actionGlobalCertificatesFragmentClearedBackstack())
+            }
         }
     }
 

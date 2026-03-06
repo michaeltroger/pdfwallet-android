@@ -29,6 +29,7 @@ class MainViewModel @Inject constructor(
         = getAutoRedirectDestinationUseCase(navController)
 
     fun setPendingFile(uri: Uri) = viewModelScope.launch {
+        _viewEvent.emit(ViewEvent.GoToCertificates)
         when (pdfImporter.preparePendingFile(uri)) {
             is PdfImportResult.ParsingError -> _viewEvent.emit(ViewEvent.ShowParsingFileError)
             else -> Unit
@@ -45,5 +46,6 @@ class MainViewModel @Inject constructor(
 }
 
 sealed class ViewEvent {
+    data object GoToCertificates : ViewEvent()
     data object ShowParsingFileError : ViewEvent()
 }
