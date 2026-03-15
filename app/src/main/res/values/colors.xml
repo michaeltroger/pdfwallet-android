@@ -4,6 +4,8 @@
     <!--suppress AndroidLintUnusedResources -->
     <color name="primaryLightColor">#53cb40</color>
     <color name="primaryDarkColor">#006900</color>
+    <color name="primary_container_light">#E4E4E4</color>
+    <color name="primary_container_dark">#2A2A2A</color>
     <color name="secondaryColor">#1b5e20</color>
     <!--suppress AndroidLintUnusedResources -->
     <color name="secondaryLightColor">#4c8c4a</color>
