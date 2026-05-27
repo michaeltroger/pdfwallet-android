@@ -33,7 +33,7 @@ io-kotest-assertions-core = "6.1.3"
 io-mockk = "1.14.9"
 kotlin = "2.3.10"
 kotlinxDatetime = "0.7.1"
-org-bouncycastle = "1.83"
+org-bouncycastle = "1.84"
 org-jetbrains-kotlinx-coroutines = "1.10.2"
 org-robolectric = "4.16.1"
 
